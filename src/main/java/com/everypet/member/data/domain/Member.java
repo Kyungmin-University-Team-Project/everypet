@@ -1,14 +1,84 @@
 package com.everypet.member.data.domain;
 
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-@Getter
-@Setter
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
+@Data
 @Builder
-@ToString
 @AllArgsConstructor
-public class Member {
-    private String member_id;
-    private String member_pwd;
-    private String member_name;
+@NoArgsConstructor
+public class Member implements UserDetails {
+
+    private String memberId;
+
+    private String memberPwd;
+
+    private List<GrantedAuthority> authorities = new ArrayList<>(
+            Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"))
+    );
+
+     public void setAuthorities(List<String> authList) {
+
+        List<GrantedAuthority> authorities = new ArrayList<>();
+
+        for (int i = 0; i < authList.size(); i++) {
+            authorities.add(new SimpleGrantedAuthority(authList.get(i)));
+        }
+
+        this.authorities = authorities;
+    }
+
+    @Override
+    // 권한
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    @Override
+    public String getUsername() {
+        return memberId;
+    }
+
+    @Override
+    public String getPassword() {
+        return memberPwd;
+    }
+
+    @Override
+    // 계정이 만료 되지 않았는가?
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    // 계정이 잠기지 않았는가?
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    // 패스워드가 만료되지 않았는가?
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    // 계정이 활성화 되었는가?
+    public boolean isEnabled() {
+        return true;
+    }
+
+    // 아이디 중복 체크
+    /*public void validateDuplicateMemberID(String id) {
+        if (id.equals(this.getMemberId())) {
+            throw new DuplicateMemberIDException(id);
+        }
+    }*/
 }

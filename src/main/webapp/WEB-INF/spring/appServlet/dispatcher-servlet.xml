@@ -10,6 +10,9 @@
     <!-- component-scan 설정 -->
     <context:component-scan base-package="com.everypet.*.controller"></context:component-scan>
 
+    <!-- 리소스 매핑 -->
+    <!--<mvc:resources location="resources/" mapping="/resources/**"/>-->
+
     <!-- JSP 사용할시 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>

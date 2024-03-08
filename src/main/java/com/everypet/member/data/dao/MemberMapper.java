@@ -4,9 +4,10 @@ import com.everypet.member.data.domain.Member;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface MemberMapper {
     List<Member> selectMemberAll();
-    Member selectMemberById(String member_id);
+    Optional<Member> selectMemberByMemberId(String memberId);
 }

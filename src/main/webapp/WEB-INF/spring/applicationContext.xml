@@ -5,5 +5,6 @@
 
     <!-- 통합 -->
     <import resource="classpath:WEB-INF/spring/database-context/databaseContext.xml"/>
+    <import resource="classpath:WEB-INF/spring/spring-security/springSecurityContext.xml"/>
 
 </beans>
