@@ -14,25 +14,14 @@ import javax.sql.DataSource;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:WEB-INF/spring/database-context/databaseContext.xml")
+@ContextConfiguration(locations = "classpath:WEB-INF/spring/applicationContext.xml")
 public class memberDaoTest {
 
     @Autowired
-    DataSource dataSource;
-
-    JdbcTemplate jdbcTemplate;
-
-    @Before
-    public void setUp() {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }
+    private MemberMapper memberMapper;
 
     @Test
-    public void add() {
-        String name = "햄스터";
-        int age = 50;
-
-        String sql = "INSERT INTO test(name, age) VALUES (?, ?)";
-        this.jdbcTemplate.update(sql, name, age);
+    public void selectMemberId() {
+        System.out.println(memberMapper.selectMemberByMemberId("user"));
     }
 }
