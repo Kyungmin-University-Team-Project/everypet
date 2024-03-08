@@ -3,12 +3,8 @@
 
 <mapper namespace="com.everypet.member.data.dao.MemberMapper">
 
-    <select id="selectMemberAll" resultType="Member">
-        SELECT * FROM test
-    </select>
-
-    <select id="selectMemberById" resultType="Member" parameterType="java.lang.String">
-        SELECT * FROM test where name = #{name}
+    <select id="selectMemberByMemberId" parameterType="String" resultType="Member">
+        SELECT * FROM TBL_MEMBER WHERE MEMBER_ID = #{memberId}
     </select>
 
 </mapper>
