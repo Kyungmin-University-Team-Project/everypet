@@ -1,4 +1,4 @@
-package com.everypet.member.domain;
+package com.everypet.member.data.domain;
 
 import lombok.*;
 

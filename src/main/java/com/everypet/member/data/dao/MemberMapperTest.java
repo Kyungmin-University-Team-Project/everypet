@@ -1,4 +1,4 @@
-package com.everypet.member.dao;
+package com.everypet.member.data.dao;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,14 +8,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.sql.DataSource;
-import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:WEB-INF/spring/database-context/databaseContext.xml")
+public class MemberMapperTest {
 
-public class MemberDaoTest {
     @Autowired
-    private MemberDao memberDao;
+    private MemberMapper memberMapper;
 
     private JdbcTemplate jdbcTemplate;
 
@@ -26,9 +25,9 @@ public class MemberDaoTest {
 
     @Test
     public void test1() {
-        System.out.println(memberDao.getMember("user1"));
+        System.out.println(memberMapper.selectMemberById("이용호"));
 
-        System.out.println(memberDao.getMemberAll());
+        System.out.println(memberMapper.selectMemberAll());
     }
 
 }
