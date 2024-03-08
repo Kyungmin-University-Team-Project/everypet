@@ -16,6 +16,7 @@
     </properties>
 
     <dependencies>
+
         <!-- 테스트 -->
         <dependency>
             <groupId>junit</groupId>
