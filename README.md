@@ -1,3 +1,1 @@
-# EveryPet
-# EveryPet
-# everypet
+# 🐶EveryPet (팀 프로젝트)
