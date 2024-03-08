@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.everypet.member.data.dao.MemberMapper">
+
+    <select id="selectMemberAll" resultType="Member">
+        SELECT * FROM test
+    </select>
+
+    <select id="selectMemberById" resultType="Member" parameterType="java.lang.String">
+        SELECT * FROM test where name = #{name}
+    </select>
+
+</mapper>
