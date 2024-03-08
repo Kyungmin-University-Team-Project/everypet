@@ -27,6 +27,8 @@ yarn-debug.log*
 yarn-error.log*
 
 ### IntelliJ IDEA ###
+database.properties
+
 .idea
 .ixdea/modules.xml
 .idea/jarRepositories.xml
