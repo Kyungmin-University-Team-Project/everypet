@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- Camel Case, Snake Case로만 다를 경우 resultMap을 안 써도 이 코드 쓰면 알아서 바꿔줌 -->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias type="com.everypet.member.data.domain.Member" alias="Member"></typeAlias>
+    </typeAliases>
+</configuration>

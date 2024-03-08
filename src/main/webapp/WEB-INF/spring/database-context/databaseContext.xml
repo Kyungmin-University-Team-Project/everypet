@@ -6,9 +6,8 @@
 
     <context:property-placeholder location="classpath:database.properties"/>
 
-    <!-- component-scan 설정 -->
-    <context:component-scan base-package="com.everypet.*"></context:component-scan>
-
+    <!--&lt;!&ndash; component-scan 설정 &ndash;&gt;
+    <context:component-scan base-package="com.everypet.*.data.dao"></context:component-scan>-->
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
         <property name="driverClass" value= "${db.driverClass}"/>
@@ -17,14 +16,19 @@
         <property name="password" value="${db.password}"/>
     </bean>
 
+    <!-- mybatis -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
-        <property name="mapperLocations" value="classpath:mybatis/mappers/*.xml" />
+        <property name="configLocation" value="classpath:mybatis/mybatis-context.xml" />
+        <property name="mapperLocations" value="classpath:mybatis/mybatis-mapper/*.xml" />
     </bean>
 
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg ref="sqlSessionFactory" />
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.everypet.*.data.dao"/>
     </bean>
 
 </beans>
