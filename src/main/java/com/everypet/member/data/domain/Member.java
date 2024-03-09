@@ -28,9 +28,9 @@ public class Member implements UserDetails {
 
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-        for (int i = 0; i < authList.size(); i++) {
-            authorities.add(new SimpleGrantedAuthority(authList.get(i)));
-        }
+         for (String s : authList) {
+             authorities.add(new SimpleGrantedAuthority(s));
+         }
 
         this.authorities = authorities;
     }
