@@ -2,12 +2,12 @@ package com.everypet.home.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class ExampleController {
-
-    @GetMapping("/example")
-    public String example() {
-        return "example";
+    @GetMapping("/api/test")
+    public String hello() {
+        return "zzzzzzzz";
     }
 }
