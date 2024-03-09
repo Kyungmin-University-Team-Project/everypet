@@ -24,7 +24,7 @@ public class UserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String memberId) {
-        // 사용자 정보 select
+
         Member member = memberMapper.selectMemberByMemberId(memberId).orElseThrow(() -> new MemberIdNotFoundException(memberId));
 
         // 사용자 권한 select해서 받아온 List<String> 객체 주입
