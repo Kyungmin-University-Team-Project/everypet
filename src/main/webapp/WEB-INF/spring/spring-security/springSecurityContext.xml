@@ -14,8 +14,8 @@
     <s:http auto-config="true" use-expressions="true">
 
         <!-- csrf 비활성화 -->
-        <!--<s:csrf disabled="true"/>-->
-        <s:csrf/>
+        <s:csrf disabled="true"/>
+        <!--<s:csrf/>-->
 
         <!-- 정적 리소스는 모두 접근 허용 -->
         <s:intercept-url pattern="/resources/**" access="permitAll"/>
@@ -42,8 +42,7 @@
                 login-processing-url="/signin"
                 login-page="/signin"
                 default-target-url="/"
-                authentication-failure-url="/signin"/>
-                <!--authentication-failure-handler-ref="userLoginFailHandler"-->
+                authentication-failure-handler-ref="userLoginFailHandler"/>
 
         <!-- 로그아웃 설정 -->
         <s:logout
