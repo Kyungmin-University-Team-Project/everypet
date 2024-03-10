@@ -39,7 +39,7 @@
         <s:form-login
                 username-parameter="member_id"
                 password-parameter="member_pwd"
-                login-processing-url="/api/signin"
+                login-processing-url="/signin"
                 login-page="/"
                 default-target-url="/success"
                 authentication-failure-handler-ref="userLoginFailHandler"/>
