@@ -1,5 +1,8 @@
 # 🐶EveryPet (팀 프로젝트)
-simple.properties 파일 이름을 database.properties로 변경하여 사용해주세요. 
-database.prperties 올바른 데이터베이스 정보를 입력해주세요.
+src/main/resources/database.properties 파일을 생성해주세요. </br>
+simple.properties 파일을 참조하여 database.properties 올바른 데이터베이스 정보를 입력해주세요. </br>
 
-![poster](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSihpF4j0Z3ZteB9PjnsvGnXUUickvOrfdBZQ&usqp=CAU)
+docs 폴더에 data.sql 쿼리문을 실행해주세요. </br>
+</br>
+
+![poster](https://pbs.twimg.com/media/Fj7XSQ2VsAA44eJ?format=jpg&name=medium)

@@ -9,10 +9,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LoginViewController {
-    @GetMapping("/signin")
-    public String loginAndFailMsg(@RequestParam(name = "error", required = false) String error, Model model) {
-        model.addAttribute("errorMessage", error);
-        return "member/signin";
-    }
 
 }
