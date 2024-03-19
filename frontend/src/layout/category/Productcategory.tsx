@@ -13,9 +13,6 @@ const Productcategory = () => {
       <Link to='/page3'>
         <button>Go to My Page 3</button>
       </Link>
-      <Link to='/login'>
-        <button>Go to login page</button>
-      </Link>
     </div>
   );
 };
