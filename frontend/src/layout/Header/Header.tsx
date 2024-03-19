@@ -1,23 +1,17 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import styles from './Header.module.css';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
-    return (
-        <header>
-            <Link to="/">
-                <button>Go to My Page 1</button>
-            </Link>
-            <Link to="/page2">
-                <button>Go to My Page 2</button>
-            </Link>
-            <Link to="/page3">
-                <button>Go to My Page 3</button>
-            </Link>
-            <Link to="/login">
-                <button>Go to login page</button>
-            </Link>
-        </header>
-    );
+  return (
+    <header className={styles.container}>
+      <div className={styles.inner}>
+        <Link to='/' className={styles.title}>
+          <a>에브리펫</a>
+        </Link>
+      </div>
+    </header>
+  );
 };
 
 export default Header;

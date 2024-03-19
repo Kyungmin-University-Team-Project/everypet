@@ -1,14 +1,16 @@
 import React from 'react';
-import Header from "../../layout/Header/Header";
-import {Outlet} from "react-router-dom";
+import Header from '../../layout/header/Header';
+import { Outlet } from 'react-router-dom';
+import Productcategory from '../../layout/category/Productcategory';
 
 const Home = () => {
-    return (
-        <>
-            <Header/>
-            <Outlet/>
-        </>
-    );
+  return (
+    <>
+      <Header />
+      <Productcategory />
+      <Outlet />
+    </>
+  );
 };
 
 export default Home;
