@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
-import Searchinput from './searchinput/Searchinput';
-import Realtimekeyword from './realtimekeyword/Realtimekeyword';
+import Searchinput from './Searchinput';
+import Realtimekeyword from './Realtimekeyword';
+import Cart from './Cart';
 
 const Header = () => {
   return (
@@ -16,9 +17,11 @@ const Header = () => {
 
         <Realtimekeyword />
 
-        <Link to='/login'>
-          <button className={styles.login__btn}>로그인</button>
+        <Link to='/login' className={styles.login__btn}>
+          <a>로그인</a>
         </Link>
+
+        <Cart />
       </div>
     </header>
   );

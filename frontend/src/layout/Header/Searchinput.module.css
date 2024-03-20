@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+
+  width: 25vw;
+
+  /* background-color: aqua; */
+  border-bottom: 1px solid black;
+
+  margin-left: 2rem;
+}
+
+.search__input {
+  width: 90%;
+
+  padding: 10px;
+
+  border: none;
+  outline: none;
+
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.search__input::placeholder {
+  color: rgb(165, 165, 165);
+  font-weight: bold;
+}
+
+.search__btn {
+  background: none;
+  border: none;
+
+  font-size: 1.5rem;
+
+  cursor: pointer;
+}
