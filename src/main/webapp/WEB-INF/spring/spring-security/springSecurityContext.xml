@@ -35,6 +35,14 @@
         <!-- 모두 접근 허용 -->
         <s:intercept-url pattern="/**" access="permitAll()"/>
 
+        <!--<s:intercept-url pattern="/swagger-ui.html/**" access="permitAll" />
+        <s:intercept-url pattern="/configuration/**" access="permitAll" />
+        <s:intercept-url pattern="/swagger-resources/**" access="permitAll" />
+        <s:intercept-url pattern="/v2/api-docs" access="permitAll" />
+        <s:intercept-url pattern="/webjars/**" access="permitAll" />
+        <s:intercept-url pattern="/webjars/springfox-swagger-ui/**" access="permitAll" />-->
+
+
         <!-- 로그인 설정 -->
         <s:form-login
                 username-parameter="member_id"
