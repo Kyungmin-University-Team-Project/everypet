@@ -1,3 +1,6 @@
+:root {
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +13,14 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@font-face {
+  font-family: 'WAGURI';
+  font-weight: normal;
+  src: url('./assets/font/WAGURI_TTF.ttf') format('truetype');
+}
+
+body {
+  font-family: 'GowunDodum-Regular';
 }

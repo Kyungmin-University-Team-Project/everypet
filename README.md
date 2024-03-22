@@ -21,4 +21,16 @@ docker-compose up
 docker-compose up --build
 ```
 
-![poster](https://mblogthumb-phinf.pstatic.net/MjAxODA5MTRfMTE3/MDAxNTM2ODgxNDA1MTQ2.pge2UDI1lKTiMmpwunNcGrerhJFVP5UCDBWZ88SZVVAg.DIg5hdPmHJXf7cXuh885kTk4G7QX--CvYxBwrfBFh1og.PNG.catlovercat/22007849_190714384838511_7968490264047866407_n.png?type=w800)
+컨테이너를 종료하려면 다음 명령어를 실행해주세요.
+
+```bash
+docker-compose down
+```
+
+## 🧬 스웨거
+
+[스웨거 링크](http://localhost:8080/swagger-ui.html)
+
+![poster](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL_T3PIaxqoEFJSu8rgRNoI-twN5XEWfvliQ&usqp=CAU)
+
+## 🍔 새우버거 세트 주세요
