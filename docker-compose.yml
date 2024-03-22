@@ -1,20 +1,19 @@
 version: '3'
 
 services:
-
   tomcat:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - '8080:8080'
     depends_on:
       - mysql
     environment:
-        db.driverClass: "com.mysql.jdbc.Driver"
-        db.url: "jdbc:mysql://mysql:3306/every-pet"
-        db.username: "root"
-        db.password: "root"
+      db.driverClass: 'com.mysql.jdbc.Driver'
+      db.url: 'jdbc:mysql://mysql:3306/every-pet'
+      db.username: 'root'
+      db.password: 'root'
     networks:
       - network
 
@@ -24,7 +23,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: every-pet
     ports:
-      - "3306:3306"
+      - '3306:3306'
     volumes:
       - ./docs/data.sql:/docker-entrypoint-initdb.d/data.sql
     networks:

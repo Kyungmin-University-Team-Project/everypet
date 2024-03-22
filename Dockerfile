@@ -15,4 +15,4 @@ FROM tomcat:9.0.56-jdk8-openjdk-slim
 COPY --from=build /app/target/everypet.war /usr/local/tomcat/webapps/ROOT.war
 
 # 8080 포트로웹 애플리케이션 노출
-EXPOSE 8080
+# EXPOSE 8080
