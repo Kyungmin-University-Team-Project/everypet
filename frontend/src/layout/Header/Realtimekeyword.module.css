@@ -1,7 +1,37 @@
 .container {
+  display: flex;
+
+  width: 20vw;
   margin-left: 2rem;
+  /* background-color: aqua; */
+
+  align-items: center;
+  justify-content: space-between;
 }
 
-.keyword {
+.rank__container {
+  display: flex;
+  gap: 8px;
+
   font-size: 1.5rem;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.keyword:hover {
+  color: red;
+}
+
+.open {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1536px) {
+  .container {
+    width: 12vw;
+  }
+  .rank__container {
+    font-size: 1rem;
+  }
 }
