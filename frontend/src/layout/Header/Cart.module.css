@@ -7,3 +7,9 @@
 
   cursor: pointer;
 }
+
+@media screen and (max-width: 1536px) {
+  .container {
+    font-size: 1.5rem;
+  }
+}

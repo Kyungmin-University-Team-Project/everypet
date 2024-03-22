@@ -1,7 +1,28 @@
 .container {
+  display: flex;
+
+  width: 20vw;
   margin-left: 2rem;
+  /* background-color: aqua; */
+
+  align-items: center;
+  justify-content: space-between;
 }
 
 .keyword {
   font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.open {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1536px) {
+  .container {
+    width: 12vw;
+  }
+  .keyword {
+    font-size: 1rem;
+  }
 }

@@ -12,8 +12,6 @@
 .search__input {
   width: 90%;
 
-  padding: 10px;
-
   border: none;
   outline: none;
 
@@ -33,4 +31,14 @@
   font-size: 1.5rem;
 
   cursor: pointer;
+}
+
+@media screen and (max-width: 1536px) {
+  .container {
+    width: 22vw;
+    margin-left: 0.5rem;
+  }
+  .search__btn {
+    font-size: 1.3rem;
+  }
 }
