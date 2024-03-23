@@ -2,21 +2,25 @@
   display: flex;
 
   width: 100%;
-  height: 3.5vw;
+  height: 60px;
   /* background-color: aqua; */
 
   justify-content: center;
   align-items: center;
+
+  border-bottom: 1px solid black;
+
+  font-weight: 'Pretendard-Regular';
 }
 
 .categorybar {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   background: white;
   border: none;
   border-radius: 100%;
 
-  font-size: 2rem;
+  font-size: 1.3rem;
 
   cursor: pointer;
 
@@ -26,10 +30,6 @@
 }
 
 .category__menu {
-  width: 55%;
-  height: 2rem;
-  /* background-color: aqua; */
-
   display: flex;
   align-items: center;
   margin-left: 2rem;
@@ -38,22 +38,50 @@
 }
 
 .category {
+  position: relative;
+  height: 60px;
+
   border: none;
   background: none;
 
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: bold;
 
   cursor: pointer;
 }
 
+.category:hover {
+  color: #4a8cf0;
+}
+
+.category::after {
+  content: ''; /* 가상 요소로 보더를 생성하기 위해 */
+  position: absolute; /* 절대 위치로 요소를 배치하기 위해 */
+  left: 50%; /* 부모 요소 중앙으로부터 가로로 50% 위치에 배치 */
+  bottom: 0; /* 부모 요소 하단에 배치 */
+  transform: translateX(-50%); /* 가로로 -50%만큼 이동하여 중앙에 정렬 */
+  width: 0; /* 보더의 초기 너비는 0 */
+  height: 3px; /* 보더의 두께 */
+  background-color: #4a8cf0; /* 보더의 색상 */
+  transition: width 0.3s ease; /* 너비에 트랜지션 효과 적용 */
+}
+
+.category:hover::after {
+  width: calc(
+    100%
+  ); /* 마우스 호버시 보더 너비를 부모 요소 너비에서 30px 뺀 값으로 변경 */
+}
+
 @media screen and (max-width: 1536px) {
   .categorybar {
-    width: 40px;
-    height: 40px;
-    font-size: 1.5rem;
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
   }
   .category {
     font-size: 1.2rem;
+  }
+  .category__menu {
+    gap: 2rem;
   }
 }

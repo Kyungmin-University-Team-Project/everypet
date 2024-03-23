@@ -13,6 +13,7 @@ const Productcategory = () => {
 
       <div className={styles.category__menu}>
         {/* 나중에 컴포넌트로 따로 뺄지 고민 */}
+
         <Link to='/page2'>
           <button className={styles.category}>쿠폰/기획전</button>
         </Link>
