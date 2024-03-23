@@ -67,9 +67,7 @@
 }
 
 .category:hover::after {
-  width: calc(
-    100%
-  ); /* 마우스 호버시 보더 너비를 부모 요소 너비에서 30px 뺀 값으로 변경 */
+  width: calc(100%);
 }
 
 @media screen and (max-width: 1536px) {

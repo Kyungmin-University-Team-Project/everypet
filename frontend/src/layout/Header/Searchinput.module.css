@@ -1,12 +1,12 @@
 .container {
   display: flex;
 
-  width: 25vw;
+  width: 20vw;
 
   /* background-color: aqua; */
   border-bottom: 1px solid black;
 
-  margin-left: 2rem;
+  margin-left: 1rem;
 }
 
 .search__input {
