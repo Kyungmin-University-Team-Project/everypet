@@ -10,5 +10,6 @@
     <typeAliases>
         <typeAlias type="com.everypet.member.data.domain.Member" alias="Member"></typeAlias>
         <typeAlias type="com.everypet.member.data.domain.Role" alias="Role"></typeAlias>
+        <typeAlias type="com.everypet.member.data.dto.MemberDTO" alias="MemberDTO"></typeAlias>
     </typeAliases>
 </configuration>
