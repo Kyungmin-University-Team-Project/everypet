@@ -31,7 +31,7 @@ public class UserDetailService implements UserDetailsService {
         member.setAuthorities(roleMapper.selectAuthByMemberId(memberId));
 
         // 비밀번호를 암호화하여 저장
-        member.setMemberPwd(passwordEncoder.encode(member.getPassword()));
+        /*member.setMemberPwd(passwordEncoder.encode(member.getPassword()));*/
 
         return member;
     }
