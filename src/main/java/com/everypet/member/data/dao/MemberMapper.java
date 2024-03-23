@@ -10,5 +10,7 @@ import java.util.Optional;
 @Mapper
 public interface MemberMapper {
     List<Member> selectMemberAll();
+    int insertMember(MemberDTO member);
     Optional<Member> selectMemberByMemberId(String memberId);
+    Boolean existsByMemberId(String memberId);
 }
