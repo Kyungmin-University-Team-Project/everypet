@@ -50,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http
                 .csrf().disable() // CSRF 보안 설정
                 .authorizeRequests() // 요청에 대한 보안 설정
@@ -100,6 +101,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         return configuration;
                     }
                 })));
+
+        // 로그인 필터 추가
+        LoginFilter loginFilter = new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil);
+        loginFilter.setFilterProcessesUrl("/signin"); // 실제 로그인을 처리할 URL을 입력
+
+        http
+                .addFilterAt(loginFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
 }

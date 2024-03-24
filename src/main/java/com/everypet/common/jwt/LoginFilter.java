@@ -1,18 +1,23 @@
 package com.everypet.common.jwt;
 
 import com.everypet.member.data.domain.Member;
+import com.everypet.member.data.dto.MemberDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.util.StreamUtils;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -22,14 +27,12 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     private final JWTUtil jwtUtil;
 
     public LoginFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
-        // URL 패턴을 "/signin"으로 설정
-        setFilterProcessesUrl("/signin");
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
     }
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-
+        
         // 클라이언트 요청에서 username, password 추출
         String username = obtainUsername(request);
         String password = obtainPassword(request);
