@@ -55,7 +55,6 @@ public class JWTFilter extends OncePerRequestFilter {
         List<String> role = new ArrayList<>(
                 Arrays.asList(jwtUtil.getRole(token))
         );
-        /*String role = jwtUtil.getRole(token);*/
 
         //Member를 생성하여 값 set
         Member member = new Member();
