@@ -56,7 +56,7 @@ const Login = () => {
               <Link to="/login/forgot-password">아이디/비밀번호 찾기</Link> |
               <Link to="/login/signup">회원가입</Link>
             </p>
-            <p>구글 카카오 등 로그인</p>
+            <p>구글 카카오 등 로그인!</p>
           </form>
         )}
       </section>
