@@ -43,7 +43,7 @@ const Realtimekeyword = () => {
         {currentRanking && (
           <>
             <span className={styles.rank}>{currentRanking.rank}</span>
-            <a className={styles.keyword}>{currentRanking.keyword}</a>
+            <span className={styles.keyword}>{currentRanking.keyword}</span>
           </>
         )}
       </span>

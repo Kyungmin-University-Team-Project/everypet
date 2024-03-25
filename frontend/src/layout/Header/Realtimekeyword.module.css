@@ -1,7 +1,7 @@
 .container {
   display: flex;
 
-  width: 20vw;
+  width: 12vw;
   margin-left: 2rem;
   /* background-color: aqua; */
 
@@ -13,7 +13,7 @@
   display: flex;
   gap: 8px;
 
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: bold;
 
   cursor: pointer;
@@ -24,13 +24,12 @@
 }
 
 .open {
+  font-size: 0.8rem;
+
   cursor: pointer;
 }
 
 @media screen and (max-width: 1536px) {
-  .container {
-    width: 12vw;
-  }
   .rank__container {
     font-size: 1rem;
   }
