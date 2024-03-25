@@ -34,42 +34,9 @@
   align-items: center;
   margin-left: 2rem;
 
+  list-style-type: none; /* 점 없애기 */
+
   gap: 3rem;
-}
-
-.category {
-  position: relative;
-  height: 60px;
-
-  border: none;
-  background: none;
-
-  font-size: 1.4rem;
-  font-weight: bold;
-
-  cursor: pointer;
-}
-
-.category:hover,
-.active {
-  color: #4a8cf0;
-}
-
-.category::after {
-  content: ''; /* 가상 요소로 보더를 생성하기 위해 */
-  position: absolute; /* 절대 위치로 요소를 배치하기 위해 */
-  left: 50%; /* 부모 요소 중앙으로부터 가로로 50% 위치에 배치 */
-  bottom: 0; /* 부모 요소 하단에 배치 */
-  transform: translateX(-50%); /* 가로로 -50%만큼 이동하여 중앙에 정렬 */
-  width: 0; /* 보더의 초기 너비는 0 */
-  height: 3px; /* 보더의 두께 */
-  background-color: #4a8cf0; /* 보더의 색상 */
-  transition: width 0.3s ease; /* 너비에 트랜지션 효과 적용 */
-}
-
-.category:hover::after,
-.active {
-  width: calc(100%);
 }
 
 @media screen and (max-width: 1536px) {
@@ -82,6 +49,7 @@
     font-size: 1.2rem;
   }
   .category__menu {
-    gap: 2.5rem;
+    gap: 1rem;
+    margin-left: 0;
   }
 }
