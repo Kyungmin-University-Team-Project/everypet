@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
+import Searchinput from './Searchinput';
 import Realtimekeyword from './Realtimekeyword';
 import Cart from './Cart';
-import Searchinput from './Searchinput';
 import Orderview from './Orderview';
 
 const Header = () => {
@@ -21,7 +21,6 @@ const Header = () => {
         <Link to='/login' className={styles.login__btn}>
           로그인
         </Link>
-
         <Cart />
 
         <Orderview />
