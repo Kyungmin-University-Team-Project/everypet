@@ -21,6 +21,12 @@ code {
   src: url('./assets/font/WAGURI_TTF.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'pretendard-regular';
+  font-weight: normal;
+  src: url('./assets/font/Pretendard-Regular.woff') format('truetype');
+}
+
 body {
-  font-family: 'GowunDodum-Regular';
+  font-family: 'pretendard-regular';
 }
