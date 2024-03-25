@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  height: 8vh;
+  height: 80px;
 
   /* background-color: aqua; */
 
@@ -23,7 +23,7 @@
 .title {
   /* background-color: blanchedalmond; */
 
-  font-size: 2.2rem;
+  font-size: 2rem;
   color: #75acff;
 
   font-family: 'WAGURI';
@@ -49,7 +49,7 @@
 @media screen and (max-width: 1536px) {
   .title {
     /* background-color: blue; */
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   .login__btn {
     font-size: 1.2rem;

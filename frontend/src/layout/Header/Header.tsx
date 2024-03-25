@@ -8,24 +8,26 @@ import Orderview from './Orderview';
 
 const Header = () => {
   return (
-    <header className={styles.container}>
-      <div className={styles.inner}>
-        <Link to='/' className={styles.title}>
-          에브리펫
-        </Link>
+    <>
+      <header className={styles.container}>
+        <div className={styles.inner}>
+          <Link to='/' className={styles.title}>
+            에브리펫
+          </Link>
 
-        <Searchinput />
+          <Searchinput />
 
-        <Realtimekeyword />
+          <Realtimekeyword />
 
-        <Link to='/login' className={styles.login__btn}>
-          로그인
-        </Link>
-        <Cart />
+          <Link to='/login' className={styles.login__btn}>
+            로그인
+          </Link>
+          <Cart />
 
-        <Orderview />
-      </div>
-    </header>
+          <Orderview />
+        </div>
+      </header>
+    </>
   );
 };
 
