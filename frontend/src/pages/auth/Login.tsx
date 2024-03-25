@@ -48,7 +48,7 @@ const Login = () => {
             <label htmlFor="checkbox">
               <div>
                 <input type="checkbox" id="checkbox" />
-                <span>로그인 상태 유지</span>
+                <span>로그인 상태 유지!</span>
               </div>
             </label>
             <button>로그인</button>
