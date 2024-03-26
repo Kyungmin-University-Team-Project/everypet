@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import ProductcategoryItem from './ProductcategoryItem';
 import styles from './Productcategory.module.css';
+import CategorySidebar from './Categorysidebar';
 
 const categories = [
   { name: '쿠폰/기획전', link: '/page1' },
@@ -50,6 +51,7 @@ const Productcategory = () => {
           />
         ))}
       </ul>
+      <CategorySidebar />
     </div>
   );
 };
