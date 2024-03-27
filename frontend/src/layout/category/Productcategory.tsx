@@ -8,6 +8,7 @@ import styles from './Productcategory.module.css';
 import { setClickedCategory } from '../../redux/features/categorySlice';
 import { RootState } from '../../redux/store/rootReducer';
 import CategorySidebar from './Categorysidebar';
+import { closeSidebar, openSidebar } from '../../redux/features/sidebarSlice';
 
 const categories = [
   { name: '쿠폰/기획전', link: '/page1' },
@@ -24,6 +25,8 @@ const Productcategory = () => {
   const clickedCategory = useSelector(
     (state: RootState) => state.category.clickedCategory
   );
+  const isOpen = useSelector((state: RootState) => state.sidebar.isOpen);
+
   const location = useLocation();
 
   useEffect(() => {
@@ -40,10 +43,18 @@ const Productcategory = () => {
     }
   };
 
+  const toggleSidebar = () => {
+    if (isOpen) {
+      dispatch(closeSidebar());
+    } else {
+      dispatch(openSidebar());
+    }
+  };
+
   return (
     <div className={styles.container}>
       <button className={styles.categorybar}>
-        <FontAwesomeIcon icon={faBars} />
+        <FontAwesomeIcon icon={faBars} onClick={toggleSidebar} />
       </button>
 
       <ul className={styles.category__menu}>
@@ -57,7 +68,7 @@ const Productcategory = () => {
           />
         ))}
       </ul>
-      <CategorySidebar />
+      <CategorySidebar isOpen={isOpen} />
     </div>
   );
 };
