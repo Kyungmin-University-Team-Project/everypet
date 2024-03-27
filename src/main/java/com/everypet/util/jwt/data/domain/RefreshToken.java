@@ -1,4 +1,4 @@
-package com.everypet.member.data.dto;
+package com.everypet.util.jwt.data.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberDTO {
+public class RefreshToken {
+
+    private Long id;
+
     private String memberId;
-    private String memberPwd;
-    private String name;
-    private String role;
+
+    private String refreshToken;
+
+    private String expirationDate;
 }

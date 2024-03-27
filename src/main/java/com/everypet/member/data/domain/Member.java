@@ -20,6 +20,8 @@ public class Member implements UserDetails {
 
     private String memberPwd;
 
+    private String name;
+
     private List<GrantedAuthority> authorities = new ArrayList<>(
             Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"))
     );
