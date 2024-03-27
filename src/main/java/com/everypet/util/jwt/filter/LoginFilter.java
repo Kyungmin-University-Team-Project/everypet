@@ -1,8 +1,10 @@
 package com.everypet.util.jwt.filter;
 
+import com.everypet.member.data.dto.MemberDTO;
 import com.everypet.util.jwt.data.dao.RefreshTokenMapper;
 import com.everypet.util.jwt.data.domain.RefreshToken;
 import com.everypet.util.jwt.factory.JWTFactory;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,13 +13,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.util.StreamUtils;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
@@ -31,13 +36,23 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        
-        // 클라이언트 요청에서 username, password 추출
-        String username = obtainUsername(request);
-        String password = obtainPassword(request);
 
-        // 스프링 시큐리티에서 username과 password를 검증하기 위해서는 token에 담아야 함
-        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password, null);
+        MemberDTO memberDTO = new MemberDTO();
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            ServletInputStream inputStream = request.getInputStream();
+            String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+            memberDTO = objectMapper.readValue(messageBody, MemberDTO.class);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        String memberId = memberDTO.getMemberId();
+        String memberPwd = memberDTO.getMemberPwd();
+
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(memberId, memberPwd);
 
         return authenticationManager.authenticate(authToken);
     }
