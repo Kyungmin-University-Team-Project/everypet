@@ -23,6 +23,13 @@ public class HomeController {
         GrantedAuthority auth = iter.next();
         String role = auth.getAuthority();
 
+        System.out.println("Main Controller : " + name + " : " + role);
+
         return "Main Controller : " + name + " : " + role;
+    }
+
+    @GetMapping("/home")
+    public String home() {
+        return "home";
     }
 }
