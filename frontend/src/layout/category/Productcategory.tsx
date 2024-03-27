@@ -53,8 +53,8 @@ const Productcategory = () => {
 
   return (
     <div className={styles.container}>
-      <button className={styles.categorybar}>
-        <FontAwesomeIcon icon={faBars} onClick={toggleSidebar} />
+      <button className={styles.categorybar} onClick={toggleSidebar}>
+        <FontAwesomeIcon icon={faBars} />
       </button>
 
       <ul className={styles.category__menu}>
