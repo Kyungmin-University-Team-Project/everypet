@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector } from 'react-redux';
 import ProductcategoryItem from './ProductcategoryItem';
 import styles from './Productcategory.module.css';
+import { setClickedCategory } from '../../redux/features/categorySlice';
+import { RootState } from '../../redux/store/rootReducer';
+import CategorySidebar from './Categorysidebar';
 
 const categories = [
   { name: '쿠폰/기획전', link: '/page1' },
@@ -16,20 +20,23 @@ const categories = [
 ];
 
 const Productcategory = () => {
-  const [clickedCategory, setClickedCategory] = useState('');
+  const dispatch = useDispatch();
+  const clickedCategory = useSelector(
+    (state: RootState) => state.category.clickedCategory
+  );
   const location = useLocation();
 
   useEffect(() => {
     if (location.pathname === '/') {
-      setClickedCategory('');
+      dispatch(setClickedCategory(''));
     }
-  }, [location.pathname]);
+  }, [location.pathname, dispatch]);
 
   const handleClick = (category: string) => {
     if (clickedCategory === category) {
       return;
     } else {
-      setClickedCategory(category);
+      dispatch(setClickedCategory(category));
     }
   };
 
@@ -50,6 +57,7 @@ const Productcategory = () => {
           />
         ))}
       </ul>
+      <CategorySidebar />
     </div>
   );
 };

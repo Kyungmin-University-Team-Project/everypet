@@ -1,0 +1,37 @@
+/* Style for sidebar */
+.sidebar {
+  height: 100%;
+  width: 300px; /* 너비를 200px로 조정 */
+  position: fixed; /* absolute 대신 fixed로 변경하여 화면을 스크롤해도 사이드바가 고정됨 */
+  top: 0;
+  left: 0;
+  background-color: #19d768; /* 백그라운드 컬러를 회색으로 설정 */
+  padding-top: 20px;
+}
+
+/* Sidebar header */
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Sidebar links */
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 8px 16px;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+}
+
+.sidebar ul li a.active {
+  font-weight: bold;
+  color: #4a8cf0;
+}
