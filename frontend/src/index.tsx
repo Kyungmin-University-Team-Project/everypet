@@ -1,7 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux'; // Redux의 Provider import
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Pages1 from './pages/category/Pages1';
 import Home from './pages/home/Home';
@@ -14,6 +15,7 @@ import Pages7 from './pages/category/Pages7';
 import Pages6 from './pages/category/Pages6';
 import Pages5 from './pages/category/Pages5';
 import Pages4 from './pages/category/Pages4';
+import store from './redux/store/store';
 
 const router = createBrowserRouter([
   {
@@ -39,13 +41,13 @@ const router = createBrowserRouter([
   },
 ]);
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
+ReactDOM.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
 
 reportWebVitals();
