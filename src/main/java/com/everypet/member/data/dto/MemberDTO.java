@@ -12,4 +12,6 @@ import lombok.NoArgsConstructor;
 public class MemberDTO {
     private String memberId;
     private String memberPwd;
+    private String name;
+    private String role;
 }

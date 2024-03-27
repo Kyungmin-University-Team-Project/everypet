@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Productcategory from '../../layout/category/Productcategory';
 import Header from '../../layout/Header/Header';

@@ -1,12 +1,12 @@
 .container {
   display: flex;
 
-  width: 25vw;
+  width: 400px;
 
   /* background-color: aqua; */
   border-bottom: 1px solid black;
 
-  margin-left: 2rem;
+  margin-left: 1rem;
 }
 
 .search__input {
@@ -35,7 +35,7 @@
 
 @media screen and (max-width: 1536px) {
   .container {
-    width: 22vw;
+    width: 300px;
     margin-left: 0.5rem;
   }
   .search__btn {

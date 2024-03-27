@@ -1,0 +1,142 @@
+a {
+    text-decoration: none;
+    color: #333333;
+}
+/* div box */
+.login_box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.login_section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.login_mainText {
+    color: #75acff;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.input_label {
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.login_text {
+    margin-bottom: 0.5rem;
+}
+/* input */
+.input_field {
+    position: relative;
+}
+
+.input_icon {
+    position: absolute;
+    left: 0.5rem;
+    top: 35%;
+    transform: translateY(-50%);
+    color: #4a8cf0;
+    font-size: 1.2rem;
+    z-index: 1;
+}
+
+.input_input {
+    padding-left: 2.5rem;
+    width: 100%;
+    height: 2.5rem;
+    box-sizing: border-box;
+    z-index: 0;
+}
+
+.input_input:focus {
+    outline: none;
+    border-color: #75acff;
+}
+
+.login_input input{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    margin-bottom: 1rem;
+    width: 20rem;
+    color: #333333;
+}
+
+
+/* input checkbox */
+.checkbox_label {
+    text-align: center;
+}
+
+.circle {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #999; /* 회색 테두리 */
+    box-sizing: border-box;
+    border-radius: 10px;
+    position: relative;
+    top: 4px;
+    cursor: pointer;
+}
+
+.circle:after {
+    content: '\2714';
+    font-size: 25px; /* 아이콘 크기 조정 */
+    color: #4a8cf0; /* 회색 아이콘 */
+    position: absolute;
+    top: -15px; /* 아이콘 상단 위치 조정 */
+    left: 1px; /* 아이콘 좌측 위치 조정 */
+    opacity: 0;
+    transition: 0.2s;
+}
+
+.login_checkbox:checked + .circle:after {
+    opacity: 1;
+
+}
+
+.login_checkbox {
+    position: absolute;
+    left: -999em;
+}
+
+/* login btn */
+.login_btn {
+    text-align: center;
+    width: 100%;
+    margin-top: 1rem;
+    border-radius: 5px;
+    color: white;
+    height: 2.5rem;
+    background-color: #75acff;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    box-shadow: 1px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.login_btn:hover {
+    background-color: #5e90ff;
+}
+
+/* login link */
+.login_link {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.login_api {
+    margin-top: 1rem;
+    text-align: center;
+}
