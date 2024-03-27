@@ -73,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/").permitAll()
                     .antMatchers("/admin").hasRole("ADMIN")
                     .antMatchers("/reissue").permitAll()
-                    .anyRequest().authenticated();
+                    .anyRequest().permitAll();
 
         http // 필터 위치
                 .addFilterBefore(jwtFilter, LoginFilter.class)
