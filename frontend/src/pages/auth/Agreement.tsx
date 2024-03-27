@@ -2,8 +2,14 @@ import React, { useState, MouseEvent, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Agreement = () => {
+  interface agreement {
+    name: string;
+    value: string;
+    children: string;
+    checked: boolean;
+  }
   const [allIsChecked, setAllIsChecked] = useState(false);
-  const [agreement, setAgreement] = useState([
+  const [agreement, setAgreement] = useState<agreement[]>([
     {
       name: "agreement",
       value: "check1",
