@@ -91,10 +91,10 @@ a {
 
 .circle:after {
     content: '\2714';
-    font-size: 16px; /* 아이콘 크기 조정 */
-    color: #999; /* 회색 아이콘 */
+    font-size: 25px; /* 아이콘 크기 조정 */
+    color: #4a8cf0; /* 회색 아이콘 */
     position: absolute;
-    top: -4px; /* 아이콘 상단 위치 조정 */
+    top: -15px; /* 아이콘 상단 위치 조정 */
     left: 1px; /* 아이콘 좌측 위치 조정 */
     opacity: 0;
     transition: 0.2s;

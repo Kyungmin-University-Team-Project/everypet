@@ -4,6 +4,7 @@ import styles from "./Login.module.css";
 import Signup from "./Signup";
 import Findauth from "./Findauth";
 import "@fortawesome/fontawesome-free/css/all.css";
+import Agreement from "./Agreement";
 
 const Login = () => {
   const location = useLocation();
@@ -13,7 +14,8 @@ const Login = () => {
   useEffect(() => {
     if (
       location.pathname === "/login/signup" ||
-      location.pathname === "/login/forgot-password"
+      location.pathname === "/login/forgot-password" ||
+      location.pathname === "/login/agreement"
     ) {
       setShowLoginForm(false);
     } else {
@@ -71,7 +73,7 @@ const Login = () => {
             </Link>
             <p className={styles.login_link}>
               <Link to="/login/forgot-password">아이디/비밀번호 찾기 |</Link>
-              <Link to="/login/signup">회원가입</Link>
+              <Link to="/login/agreement">회원가입</Link>
             </p>
             <p className={styles.login_api}>구글 카카오 등 로그인!</p>
           </form>
@@ -79,6 +81,7 @@ const Login = () => {
       </section>
       {location.pathname === "/login/signup" ? <Signup /> : null}
       {location.pathname === "/login/forgot-password" ? <Findauth /> : null}
+      {location.pathname === "/login/agreement" ? <Agreement /> : null}
     </div>
   );
 };
