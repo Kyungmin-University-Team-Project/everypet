@@ -24,25 +24,12 @@ const CategorySidebar = ({ isOpen }: { isOpen: boolean }) => {
   );
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(isOpen);
-
-    const handleClickOutside = (event: any) => {
-      const sidebar = document.querySelector(`.${styles.container}`);
-      if (sidebar && !sidebar.contains(event.target)) {
-        dispatch(toggleSidebar()); // 토글 액션 디스패치
-      }
-    };
-
-    document.addEventListener('click', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [dispatch]);
-
   const handleClick = (category: string) => {
     dispatch(setClickedCategory(category));
+  };
+
+  const handleSidebarClose = () => {
+    dispatch(closeSidebar());
   };
 
   return (
@@ -53,7 +40,7 @@ const CategorySidebar = ({ isOpen }: { isOpen: boolean }) => {
           <FontAwesomeIcon
             icon={faX}
             className={styles.close__btn}
-            onClick={() => dispatch(closeSidebar())}
+            onClick={handleSidebarClose}
           />
         </header>
         <ul className={styles.ul}>

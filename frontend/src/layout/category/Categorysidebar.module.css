@@ -9,6 +9,8 @@
   background-color: #ffffff;
 
   border-right: 1px solid rgb(186, 186, 186);
+
+  transition: transform 0.3s ease; /* transform 속성에만 애니메이션 적용 */
 }
 
 .containerOpen {
