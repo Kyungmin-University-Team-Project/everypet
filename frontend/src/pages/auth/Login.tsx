@@ -62,10 +62,13 @@ const Login = () => {
                   id="checkbox"
                 />
                 <i className={styles.circle}></i>
-                <span> 로그인 상태 유지</span>
+                <span> 로그인 상태 유지!</span>
               </label>
             </div>
             <button className={styles.login_btn}>로그인</button>
+            <Link to="/">
+              <button className={styles.login_btn}>홈으로 가기</button>
+            </Link>
             <p className={styles.login_link}>
               <Link to="/login/forgot-password">아이디/비밀번호 찾기 |</Link>
               <Link to="/login/signup">회원가입</Link>
@@ -76,9 +79,6 @@ const Login = () => {
       </section>
       {location.pathname === "/login/signup" ? <Signup /> : null}
       {location.pathname === "/login/forgot-password" ? <Findauth /> : null}
-      <Link to="/">
-        <button>홈으로 가기</button>
-      </Link>
     </div>
   );
 };
