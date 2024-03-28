@@ -22,6 +22,7 @@ const categories = [
 
 const Productcategory = () => {
   const dispatch = useDispatch();
+
   const clickedCategory = useSelector(
     (state: RootState) => state.category.clickedCategory
   );
@@ -68,7 +69,7 @@ const Productcategory = () => {
           />
         ))}
       </ul>
-      <CategorySidebar isOpen={isOpen} />
+      <CategorySidebar />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './Categorysidebar.module.css';
@@ -18,11 +18,16 @@ const categories = [
   { name: '파충류', link: '/page7' },
 ];
 
-const CategorySidebar = ({ isOpen }: { isOpen: boolean }) => {
+const CategorySidebar = () => {
+  const dispatch = useDispatch();
+  // 여기서 타입의 뜻은 HTMLDivElement의 DOM 요소만 참조한다느 뜻
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
   const clickedCategory = useSelector(
     (state: RootState) => state.category.clickedCategory
   );
-  const dispatch = useDispatch();
+
+  const isOpen = useSelector((state: RootState) => state.sidebar.isOpen);
 
   const handleClick = (category: string) => {
     dispatch(setClickedCategory(category));
@@ -32,9 +37,22 @@ const CategorySidebar = ({ isOpen }: { isOpen: boolean }) => {
     dispatch(closeSidebar());
   };
 
+  const handleOverlayClick = () => {
+    dispatch(closeSidebar());
+  };
+
   return (
-    <div className={isOpen ? styles.containerOpen : styles.containerClosed}>
-      <div className={styles.container}>
+    <div>
+      <div
+        className={`${styles.overlay} ${isOpen ? styles.overlayOpen : ''}`}
+        onClick={handleOverlayClick}
+      />
+      <div
+        className={`${styles.container} ${
+          isOpen ? styles.containerOpen : styles.containerClosed
+        }`}
+        ref={sidebarRef}
+      >
         <header className={styles.header}>
           <span className={styles.logo}>카테고리</span>
           <FontAwesomeIcon
