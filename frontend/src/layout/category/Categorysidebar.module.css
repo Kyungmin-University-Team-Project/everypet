@@ -47,7 +47,7 @@
   align-items: center;
   justify-content: space-between;
 
-  padding: 40px 30px 10px 30px;
+  padding: 40px 30px 10px 15px;
 
   /* background-color: #4a8cf0; */
 }
@@ -62,6 +62,12 @@
   font-size: 20px;
 
   cursor: pointer;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.close__btn:hover {
+  color: red;
 }
 
 /* Sidebar links */
@@ -73,16 +79,16 @@
 }
 
 .li {
-  padding: 8px 16px;
+  padding: 10px 15px;
 }
 
-.container ul li a {
+.li a {
   text-decoration: none;
   color: #333;
   display: block;
 }
 
-.container ul li a.active {
+.li a.active {
   font-weight: bold;
   color: #4a8cf0;
 }

@@ -36,7 +36,7 @@
 @media screen and (max-width: 1536px) {
   .container {
     width: 300px;
-    margin-left: 0.5rem;
+    margin-left: 2rem;
   }
   .search__btn {
     font-size: 1.3rem;
