@@ -1,8 +1,15 @@
 import React, { useState, MouseEvent, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Agreement = () => {
+  interface agreement {
+    name: string;
+    value: string;
+    children: string;
+    checked: boolean;
+  }
   const [allIsChecked, setAllIsChecked] = useState(false);
-  const [agreement, setAgreement] = useState([
+  const [agreement, setAgreement] = useState<agreement[]>([
     {
       name: "agreement",
       value: "check1",
@@ -88,7 +95,9 @@ const Agreement = () => {
           </div>
         ))}
         <p>만 14세 이상 회원 가입 가능합니다.</p>
-        <button>동의하고 진행하기</button>
+        <Link to="/login/signup">
+          <button>동의하고 진행하기</button>
+        </Link>
       </form>
     </div>
   );
