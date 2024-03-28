@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Join } from "../../typings/signup";
 
 const Signup = () => {
-  interface join {
-    memberId: string;
-    memberPw: string;
-  }
-
-  const [user, setUser] = useState<join>({ memberId: "", memberPw: "" });
+  const [user, setUser] = useState<Join>({ memberId: "", memberPw: "" });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

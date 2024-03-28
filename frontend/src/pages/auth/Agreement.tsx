@@ -1,15 +1,10 @@
 import React, { useState, MouseEvent, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { AgreementJoin } from "../../typings/agreement";
 
 const Agreement = () => {
-  interface agreement {
-    name: string;
-    value: string;
-    children: string;
-    checked: boolean;
-  }
   const [allIsChecked, setAllIsChecked] = useState(false);
-  const [agreement, setAgreement] = useState<agreement[]>([
+  const [agreement, setAgreement] = useState<AgreementJoin[]>([
     {
       name: "agreement",
       value: "check1",
