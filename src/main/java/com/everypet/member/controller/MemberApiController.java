@@ -5,6 +5,7 @@ import com.everypet.member.service.serviceInterface.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -16,7 +17,7 @@ public class MemberApiController {
         this.memberService = memberService;
     }
     @PostMapping("/signup")
-    public String signUp(MemberDTO member) {
+    public String signUp(@RequestBody  MemberDTO member) {
         System.out.println(member.getMemberId());
         memberService.register(member);
         return "ok";
