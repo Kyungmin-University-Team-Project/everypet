@@ -9,14 +9,14 @@
 
     <display-name>Archetype Created Web Application</display-name>
 
-    <context-param>
+    <!--<context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>WEB-INF/spring/applicationContext.xml</param-value>
-    </context-param>
+    </context-param>-->
 
-    <listener>
+    <!--<listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+    </listener>-->
 
     <servlet>
         <servlet-name>dispatcher</servlet-name>
@@ -27,7 +27,9 @@
         </init-param>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>com.everypet.common.config.MvcConfig</param-value>
+            <param-value>
+                com.everypet.common.config.AppConfig
+            </param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
