@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -8,7 +8,6 @@ import styles from './Productcategory.module.css';
 import { setClickedCategory } from '../../redux/features/categorySlice';
 import { RootState } from '../../redux/store/rootReducer';
 import CategorySidebar from './Categorysidebar';
-import { closeSidebar, openSidebar } from '../../redux/features/sidebarSlice';
 
 const categories = [
   { name: '쿠폰/기획전', link: '/page1' },
@@ -26,7 +25,8 @@ const Productcategory = () => {
   const clickedCategory = useSelector(
     (state: RootState) => state.category.clickedCategory
   );
-  const isOpen = useSelector((state: RootState) => state.sidebar.isOpen);
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const location = useLocation();
 
@@ -46,9 +46,9 @@ const Productcategory = () => {
 
   const toggleSidebar = () => {
     if (isOpen) {
-      dispatch(closeSidebar());
+      setIsOpen(false);
     } else {
-      dispatch(openSidebar());
+      setIsOpen(true);
     }
   };
 
@@ -69,7 +69,7 @@ const Productcategory = () => {
           />
         ))}
       </ul>
-      <CategorySidebar />
+      <CategorySidebar isOpen={isOpen} toggle={toggleSidebar} />
     </div>
   );
 };
