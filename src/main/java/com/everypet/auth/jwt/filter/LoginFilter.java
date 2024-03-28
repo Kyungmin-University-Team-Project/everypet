@@ -1,9 +1,9 @@
-package com.everypet.util.jwt.filter;
+package com.everypet.auth.jwt.filter;
 
+import com.everypet.auth.jwt.data.dao.RefreshTokenMapper;
+import com.everypet.auth.jwt.util.CookieFactory;
+import com.everypet.auth.jwt.util.JWTManager;
 import com.everypet.member.data.dto.MemberDTO;
-import com.everypet.util.jwt.data.dao.RefreshTokenMapper;
-import com.everypet.util.jwt.data.domain.RefreshToken;
-import com.everypet.util.jwt.factory.JWTFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,21 +18,20 @@ import org.springframework.util.StreamUtils;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Iterator;
 
 @RequiredArgsConstructor
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
-    private final JWTFactory jwtFactory;
+    private final JWTManager jwtManager;
     private final RefreshTokenMapper refreshTokenMapper;
+    private final CookieFactory cookieFactory;
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
@@ -72,15 +71,15 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         refreshTokenMapper.deleteByMemberId(memberId);
 
         // 토큰 생성
-        String access = jwtFactory.createJwt("access", memberId, role, 600000L);
-        String refresh = jwtFactory.createJwt("refresh", memberId, role, 86400000L);
+        String access = jwtManager.createJwt("access", memberId, role, 600000L);
+        String refresh = jwtManager.createJwt("refresh", memberId, role, 86400000L);
 
         // Refresh token 저장
-        addRefreshToken(memberId, refresh, 86400000L);
+        jwtManager.addRefreshToken(memberId, refresh, 86400000L);
 
         // 응답 설정
         response.setHeader("access", access);
-        response.addCookie(createCookie("refresh", refresh));
+        response.addCookie(cookieFactory.createCookie("refresh", refresh));
         response.setStatus(HttpStatus.OK.value());
     }
 
@@ -88,28 +87,5 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
         response.setStatus(401);
-    }
-
-    private void addRefreshToken(String memberId, String refreshToken, Long expiredMs) {
-        Date data = new Date(System.currentTimeMillis() + expiredMs);
-
-        RefreshToken token = RefreshToken.builder()
-                        .memberId(memberId)
-                        .refreshToken(refreshToken)
-                        .expirationDate(data.toString())
-                        .build();
-
-        refreshTokenMapper.insertRefreshToken(token);
-    }
-
-    private Cookie createCookie(String key, String value) {
-
-        Cookie cookie = new Cookie(key, value);
-        cookie.setMaxAge(24*60*60);
-        //cookie.setSecure(true);
-        //cookie.setPath("/");
-        cookie.setHttpOnly(true);
-
-        return cookie;
     }
 }

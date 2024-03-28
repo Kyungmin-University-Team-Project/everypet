@@ -1,6 +1,6 @@
-package com.everypet.util.oauth2.dto;
+package com.everypet.auth.oauth2.dto;
 
-import com.everypet.util.oauth2.dto.dtoInterface.OAuth2Response;
+import com.everypet.auth.oauth2.dto.dtoInterface.OAuth2Response;
 
 import java.util.Map;
 

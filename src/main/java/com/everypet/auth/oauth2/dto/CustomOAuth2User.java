@@ -1,4 +1,4 @@
-package com.everypet.util.oauth2.dto;
+package com.everypet.auth.oauth2.dto;
 
 import com.everypet.member.data.dto.MemberDTO;
 import org.springframework.security.core.GrantedAuthority;

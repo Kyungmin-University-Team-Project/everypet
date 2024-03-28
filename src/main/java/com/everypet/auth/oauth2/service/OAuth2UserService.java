@@ -1,14 +1,14 @@
-package com.everypet.util.oauth2.service;
+package com.everypet.auth.oauth2.service;
 
+import com.everypet.auth.oauth2.dto.CustomOAuth2User;
+import com.everypet.auth.oauth2.dto.GoogleResponse;
+import com.everypet.auth.oauth2.dto.NaverResponse;
+import com.everypet.auth.oauth2.dto.dtoInterface.OAuth2Response;
 import com.everypet.member.data.dao.MemberMapper;
 import com.everypet.member.data.dao.RoleMapper;
 import com.everypet.member.data.domain.Member;
 import com.everypet.member.data.domain.Role;
 import com.everypet.member.data.dto.MemberDTO;
-import com.everypet.util.oauth2.dto.CustomOAuth2User;
-import com.everypet.util.oauth2.dto.GoogleResponse;
-import com.everypet.util.oauth2.dto.NaverResponse;
-import com.everypet.util.oauth2.dto.dtoInterface.OAuth2Response;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;

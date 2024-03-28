@@ -1,4 +1,4 @@
-package com.everypet.util.jwt.data.domain;
+package com.everypet.auth.jwt.data.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,4 +18,5 @@ public class RefreshToken {
     private String refreshToken;
 
     private String expirationDate;
+
 }

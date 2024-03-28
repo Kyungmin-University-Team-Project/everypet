@@ -1,4 +1,4 @@
-package com.everypet.common.config;
+package com.everypet.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,8 +9,9 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.everypet.*.controller", "com.everypet.*.config"})
+@ComponentScan(basePackages = {"com.everypet.*.controller", "com.everypet.config"})
 public class MvcConfig implements WebMvcConfigurer {
+
     @Bean
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();

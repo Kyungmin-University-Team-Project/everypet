@@ -1,28 +1,26 @@
-package com.everypet.util.jwt.controller;
+package com.everypet.auth.jwt.service;
 
-import com.everypet.util.jwt.data.dao.RefreshTokenMapper;
-import com.everypet.util.jwt.data.domain.RefreshToken;
-import com.everypet.util.jwt.factory.JWTFactory;
+import com.everypet.auth.jwt.data.dao.RefreshTokenMapper;
+import com.everypet.auth.jwt.util.CookieFactory;
+import com.everypet.auth.jwt.util.JWTManager;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 
-@RestController
+@Service
 @RequiredArgsConstructor
-public class ReissueController {
+public class ReissueService {
 
-    private final JWTFactory jwtFactory;
+    private final JWTManager jwtManager;
     private final RefreshTokenMapper refreshTokenMapper;
-    @PostMapping("/reissue")
-    public ResponseEntity<?> reissue(HttpServletRequest request, HttpServletResponse response) {
+    private final CookieFactory cookieFactory;
+    public ResponseEntity<?> reissueAccessToken(HttpServletRequest request, HttpServletResponse response) {
         //get refresh token
         String refresh = null;
         Cookie[] cookies = request.getCookies();
@@ -42,7 +40,7 @@ public class ReissueController {
 
         //expired check
         try {
-            jwtFactory.isExpired(refresh);
+            jwtManager.isExpired(refresh);
         } catch (ExpiredJwtException e) {
 
             //response status code
@@ -50,7 +48,7 @@ public class ReissueController {
         }
 
         // 토큰이 refresh인지 확인 (발급시 페이로드에 명시)
-        String category = jwtFactory.getCategory(refresh);
+        String category = jwtManager.getCategory(refresh);
 
         if (!category.equals("refresh")) {
 
@@ -66,42 +64,21 @@ public class ReissueController {
             return new ResponseEntity<>("invalid refresh token", HttpStatus.BAD_REQUEST);
         }
 
-        String username = jwtFactory.getUsername(refresh);
-        String role = jwtFactory.getRole(refresh);
+        String memberId = jwtManager.getUsername(refresh);
+        String role = jwtManager.getRole(refresh);
 
         //make new JWT
-        String newAccess = jwtFactory.createJwt("access", username, role, 600000L);
-        String newRefresh = jwtFactory.createJwt("refresh", username, role, 86400000L);
+        String newAccess = jwtManager.createJwt("access", memberId, role, 600000L);
+        String newRefresh = jwtManager.createJwt("refresh", memberId, role, 86400000L);
 
         //Refresh 토큰 저장 DB에 기존의 Refresh 토큰 삭제 후 새 Refresh 토큰 저장
         refreshTokenMapper.deleteByRefreshToken(refresh);
-        addRefreshToken(username, newRefresh, 86400000L);
+        jwtManager.addRefreshToken(memberId, newRefresh, 86400000L);
 
         //response
         response.setHeader("access", newAccess);
-        response.addCookie(createCookie("refresh", newRefresh));
+        response.addCookie(cookieFactory.createCookie("refresh", newRefresh));
 
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-    private void addRefreshToken(String memberId, String refreshToken, Long expiredMs) {
-        Date data = new Date(System.currentTimeMillis() + expiredMs);
-
-        RefreshToken token = RefreshToken.builder()
-                .memberId(memberId)
-                .refreshToken(refreshToken)
-                .expirationDate(data.toString())
-                .build();
-
-        refreshTokenMapper.insertRefreshToken(token);
-    }
-    private Cookie createCookie(String key, String value) {
-
-        Cookie cookie = new Cookie(key, value);
-        cookie.setMaxAge(24*60*60);
-        //cookie.setSecure(true);
-        //cookie.setPath("/");
-        cookie.setHttpOnly(true);
-
-        return cookie;
     }
 }

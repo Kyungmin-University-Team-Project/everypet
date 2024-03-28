@@ -1,4 +1,4 @@
-package com.everypet.common.config;
+package com.everypet.config;
 
 import com.mysql.jdbc.Driver;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-@MapperScan(basePackages = {"com.everypet.*.data.dao", "com.everypet.util.*.data.dao"})
+@MapperScan(basePackages = {"com.everypet.*.data.dao", "com.everypet.*.*.data.dao"})
 @PropertySource("classpath:database.properties")
 public class DatabaseConfig {
 

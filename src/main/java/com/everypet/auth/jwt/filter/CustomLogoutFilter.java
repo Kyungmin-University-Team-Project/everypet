@@ -1,7 +1,7 @@
-package com.everypet.util.jwt.filter;
+package com.everypet.auth.jwt.filter;
 
-import com.everypet.util.jwt.data.dao.RefreshTokenMapper;
-import com.everypet.util.jwt.factory.JWTFactory;
+import com.everypet.auth.jwt.data.dao.RefreshTokenMapper;
+import com.everypet.auth.jwt.util.JWTManager;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.filter.GenericFilterBean;
@@ -18,7 +18,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class CustomLogoutFilter extends GenericFilterBean {
 
-    private final JWTFactory jwtFactory;
+    private final JWTManager jwtManager;
     private final RefreshTokenMapper refreshTokenMapper;
 
     @Override
@@ -63,7 +63,7 @@ public class CustomLogoutFilter extends GenericFilterBean {
 
         //expired check
         try {
-            jwtFactory.isExpired(refresh);
+            jwtManager.isExpired(refresh);
         } catch (ExpiredJwtException e) {
 
             //response status code
@@ -72,7 +72,7 @@ public class CustomLogoutFilter extends GenericFilterBean {
         }
 
         // 토큰이 refresh인지 확인 (발급시 페이로드에 명시)
-        String category = jwtFactory.getCategory(refresh);
+        String category = jwtManager.getCategory(refresh);
         if (!category.equals("refresh")) {
 
             //response status code

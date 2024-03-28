@@ -1,14 +1,14 @@
-package com.everypet.common.config;
+package com.everypet.config;
 
-import com.everypet.util.jwt.data.dao.RefreshTokenMapper;
-import com.everypet.util.jwt.filter.CustomLogoutFilter;
-import com.everypet.util.jwt.filter.JWTFilter;
-import com.everypet.util.jwt.factory.JWTFactory;
-import com.everypet.util.jwt.filter.LoginFilter;
+import com.everypet.auth.jwt.data.dao.RefreshTokenMapper;
+import com.everypet.auth.jwt.filter.CustomLogoutFilter;
+import com.everypet.auth.jwt.filter.JWTFilter;
+import com.everypet.auth.jwt.util.CookieFactory;
+import com.everypet.auth.jwt.util.JWTManager;
+import com.everypet.auth.jwt.filter.LoginFilter;
 import com.everypet.member.service.UserLoginFailHandler;
-import com.everypet.util.oauth2.CustomSuccessHandler;
+import com.everypet.auth.oauth2.CustomSuccessHandler;
 import lombok.RequiredArgsConstructor;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +24,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.filter.DelegatingFilterProxy;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
@@ -36,11 +35,12 @@ import java.util.Collections;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AuthenticationConfiguration authenticationConfiguration;
-    private final JWTFactory jwtFactory;
+    private final JWTManager jwtManager;
     //private final OAuth2UserService OAuth2UserService;
     private final CustomSuccessHandler customSuccessHandler;
     private final JWTFilter jwtFilter;
     private final RefreshTokenMapper refreshTokenMapper;
+    private final CookieFactory cookieFactory;
 
     @Bean
     public UserLoginFailHandler userLoginFailHandler() {
@@ -61,8 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         // 로그인 필터 추가
-        LoginFilter loginFilter = new LoginFilter(authenticationManager(authenticationConfiguration), jwtFactory,
-                refreshTokenMapper );
+        LoginFilter loginFilter = new LoginFilter(authenticationManager(authenticationConfiguration), jwtManager,
+                refreshTokenMapper, cookieFactory);
         loginFilter.setFilterProcessesUrl("/signin"); // 실제 로그인을 처리할 URL을 입력
 
         http
@@ -77,8 +77,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http // 필터 위치
                 .addFilterBefore(jwtFilter, LoginFilter.class)
-                .addFilterBefore(new CustomLogoutFilter(jwtFactory, refreshTokenMapper), LogoutFilter.class)
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtFactory, refreshTokenMapper),
+                .addFilterBefore(new CustomLogoutFilter(jwtManager, refreshTokenMapper), LogoutFilter.class)
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtManager,
+                                refreshTokenMapper, cookieFactory),
                             UsernamePasswordAuthenticationFilter.class)
                 .addFilterAt(loginFilter, UsernamePasswordAuthenticationFilter.class);
 

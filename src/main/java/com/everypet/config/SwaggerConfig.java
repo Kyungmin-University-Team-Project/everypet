@@ -1,4 +1,4 @@
-package com.everypet.common.config;
+package com.everypet.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

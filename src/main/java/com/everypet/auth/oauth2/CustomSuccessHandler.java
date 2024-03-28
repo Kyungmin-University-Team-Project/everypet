@@ -1,7 +1,7 @@
-package com.everypet.util.oauth2;
+package com.everypet.auth.oauth2;
 
-import com.everypet.util.jwt.factory.JWTFactory;
-import com.everypet.util.oauth2.dto.CustomOAuth2User;
+import com.everypet.auth.jwt.util.JWTManager;
+import com.everypet.auth.oauth2.dto.CustomOAuth2User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -18,9 +18,9 @@ import java.util.Iterator;
 @Component
 public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    private final JWTFactory jwtFactory;
-    public CustomSuccessHandler(JWTFactory jwtFactory) {
-        this.jwtFactory = jwtFactory;
+    private final JWTManager jwtManager;
+    public CustomSuccessHandler(JWTManager jwtManager) {
+        this.jwtManager = jwtManager;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         GrantedAuthority auth = iterator.next();
         String role = auth.getAuthority();
 
-        String token = jwtFactory.createJwt("refresh", username, role, 86400000L);
+        String token = jwtManager.createJwt("refresh", username, role, 86400000L);
 
         response.addCookie(createCookie("Authorization", token));
         response.sendRedirect("http://localhost:3000/");
