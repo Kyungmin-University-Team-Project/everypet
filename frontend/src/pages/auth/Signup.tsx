@@ -1,12 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { Join } from "../../typings/signup";
 
 const Signup = () => {
+  const [user, setUser] = useState<Join>({ memberId: "", memberPw: "" });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("여기에 주소를 입력해주세요.", user);
+      setUser(response.data);
+    } catch (e: any) {
+      setUser(e);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
   return (
-    <div>
-      <h1>dssdsdds</h1>
-      여기는 회원가입 페sdsdsdsd이지asasasasㄹㄴㅇ111
-      <p>adsdas</p>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="memberId">
+          <input
+            value={user.memberId}
+            name="memberId"
+            id="memberId"
+            onChange={handleChange}
+          />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="memberPwd">
+          <input
+            type="password"
+            value={user.memberPw}
+            name="memberPwd"
+            id="memberPwd"
+            onChange={handleChange}
+          />
+        </label>
+      </div>
+      <button type="submit">가입하기</button>
+    </form>
   );
 };
 
