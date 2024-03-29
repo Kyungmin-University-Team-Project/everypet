@@ -11,6 +11,6 @@
         <typeAlias type="com.everypet.member.data.domain.Member" alias="Member"></typeAlias>
         <typeAlias type="com.everypet.member.data.domain.Role" alias="Role"></typeAlias>
         <typeAlias type="com.everypet.member.data.dto.MemberDTO" alias="MemberDTO"></typeAlias>
-        <typeAlias type="com.everypet.util.jwt.data.domain.RefreshToken" alias="RefreshToken"></typeAlias>
+        <typeAlias type="com.everypet.auth.jwt.data.domain.RefreshToken" alias="RefreshToken"></typeAlias>
     </typeAliases>
 </configuration>

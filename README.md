@@ -1,5 +1,14 @@
 # 🐶EveryPet (팀 프로젝트)
 
+##  👥 팀원
+
+
+### 🔥 <span style="color:#3CB371; font-family: 'Comic Sans MS', cursive, sans-serif;">심연의 소환사 이용호</span>
+### ☀️ <span style="color:#FFA500; font-family: 'Comic Sans MS', cursive, sans-serif;">태양의 정복자 노희철</span>
+### 🌑 <span style="color:#9400D3; font-family: 'Comic Sans MS', cursive, sans-serif;">어둠의 사냥꾼 이관용</span>
+### ⚡️ <span style="color:#FF6347; font-family: 'Comic Sans MS', cursive, sans-serif;">폭풍의 용사 박민규</span>
+
+
 ## 🚀 프로젝트 실행 방법
 
 src/main/resources/database.properties 파일을 생성해주세요. </br>
@@ -48,8 +57,7 @@ docker-compose down
 ## 📋 해야할것
 1.  refreshToken 을 위한 redis 구축?
 2. OAuth2 수정
-3. ReissueController 리팩토링
 
-## 🧅 양파는 맛이 없다
+## 🗽 偉大な飛躍 偉大な行進
 
-![image](https://thumb.ac-illust.com/d1/d1a14057b5e8c71955830bbf60b4b227_t.jpeg)
+![image](https://cdn.fanzeel.com/rep/302/5e54bdfc654e1.jpg)
