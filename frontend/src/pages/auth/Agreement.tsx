@@ -1,35 +1,11 @@
 import React, { useState, MouseEvent, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AgreementJoin } from "../../typings/agreement";
+import styles from "./Agreement.module.css";
 
 const Agreement = () => {
   const [allIsChecked, setAllIsChecked] = useState(false);
-  const [agreement, setAgreement] = useState<AgreementJoin[]>([
-    {
-      name: "agreement",
-      value: "check1",
-      children: "[필수] 만 14세 이상입니다.",
-      checked: false,
-    },
-    {
-      name: "agreement",
-      value: "check2",
-      children: "[필수] 에브리펫 서비스 이용약관 동의",
-      checked: false,
-    },
-    {
-      name: "agreement",
-      value: "check3",
-      children: "[필수] 개인정보 수집 및 이용 동의",
-      checked: false,
-    },
-    {
-      name: "agreement",
-      value: "check4",
-      children: "[선택] 마케팅 정보 수신에 대한 동의",
-      checked: false,
-    },
-  ]);
+  const [agreement, setAgreement] = useState<AgreementJoin[]>([]);
 
   const onSingleCheck = (e: MouseEvent<HTMLInputElement>) => {
     const targetValue = (e.target as HTMLInputElement).value;
@@ -42,9 +18,20 @@ const Agreement = () => {
     );
   };
 
+  // Json 이용역관 및 가져오기
   useEffect(() => {
-    setAllIsChecked(agreement.every((item) => item.checked));
-  }, [agreement]);
+    fetch("/mock/agreements.json") // 절대 경로로 파일을 불러옴
+      .then((response) => response.json())
+      .then((data) => {
+        setAgreement(
+          data.map((agreement: any) => ({
+            ...agreement,
+            checked: false,
+          })),
+        );
+      })
+      .catch((error) => console.error("Error fetching agreements:", error));
+  }, []);
 
   const onAllCheck = (e: MouseEvent<HTMLInputElement>) => {
     setAllIsChecked((prev) => !prev);
@@ -58,7 +45,6 @@ const Agreement = () => {
   return (
     <div>
       <h2>회원가입</h2>
-      <p>-------------</p>
       <p>환영합니다! 에브리펫 서비스에 이용약관에 동의해주세요.</p>
       <form>
         <div>
@@ -69,11 +55,15 @@ const Agreement = () => {
               checked={allIsChecked}
               value="all"
               name="agreement"
+              className={styles.input_checkbox}
             />
             모두 동의합니다.
           </label>
+          <p className={styles.text}>
+            실명 인증된 아이디로 가입, 위치기반서비스 이용약관(선택), 이벤트・
+            <br /> 혜택 정보 수신(선택) 동의를 포함합니다.
+          </p>
         </div>
-        <p>-------------</p>
         {agreement.map((item) => (
           <div key={item.value}>
             <label>
@@ -84,14 +74,20 @@ const Agreement = () => {
                 value={item.value}
                 checked={item.checked}
                 name={item.name}
+                className={styles.input_checkbox}
               />
-              {item.children}
+              <span className={styles.requiredText}>{"[필수] "}</span>
+              {item.children.replace("[필수] ", "")}
+              <div className={styles.textarea_container}>
+                <textarea rows={10} cols={50} className={styles.textarea}>
+                  {item.text}
+                </textarea>
+              </div>
             </label>
           </div>
         ))}
-        <p>만 14세 이상 회원 가입 가능합니다.</p>
         <Link to="/login/signup">
-          <button>동의하고 진행하기</button>
+          <button className={styles.agreement_btn}>동의하고 진행하기</button>
         </Link>
       </form>
     </div>
