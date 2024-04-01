@@ -43,9 +43,7 @@ const Agreement = () => {
     }
   };
   return (
-    <div>
-      <h2>회원가입</h2>
-      <p>환영합니다! 에브리펫 서비스에 이용약관에 동의해주세요.</p>
+    <div className={styles.form_container}>
       <form>
         <div>
           <label>
