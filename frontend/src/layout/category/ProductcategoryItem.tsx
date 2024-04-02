@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './ProductcategoryItem.module.css';
-import { ProductcategoryItemProps } from '../../typings/header';
+import { ProductcategoryItemProps } from '../../typings/layout';
 
 const ProductcategoryItem = ({
   category,
