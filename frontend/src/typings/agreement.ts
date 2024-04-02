@@ -3,4 +3,5 @@ export interface AgreementJoin {
   value: string;
   children: string;
   checked: boolean;
+  text: string;
 }
