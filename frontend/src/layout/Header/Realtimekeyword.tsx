@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './Realtimekeyword.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { Ranking } from '../../typings/header';
+import { Ranking } from '../../typings/layout';
 
 const Realtimekeyword = () => {
   const [rankings, setRankings] = useState<Ranking[]>([]);

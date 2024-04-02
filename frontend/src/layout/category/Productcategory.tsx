@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -21,9 +21,13 @@ const categories = [
 
 const Productcategory = () => {
   const dispatch = useDispatch();
+
   const clickedCategory = useSelector(
     (state: RootState) => state.category.clickedCategory
   );
+
+  const [isOpen, setIsOpen] = useState(false);
+
   const location = useLocation();
 
   useEffect(() => {
@@ -40,9 +44,17 @@ const Productcategory = () => {
     }
   };
 
+  const toggleSidebar = () => {
+    if (isOpen) {
+      setIsOpen(false);
+    } else {
+      setIsOpen(true);
+    }
+  };
+
   return (
-    <div className={styles.container}>
-      <button className={styles.categorybar}>
+    <nav className={styles.container}>
+      <button className={styles.categorybar} onClick={toggleSidebar}>
         <FontAwesomeIcon icon={faBars} />
       </button>
 
@@ -57,8 +69,8 @@ const Productcategory = () => {
           />
         ))}
       </ul>
-      <CategorySidebar />
-    </div>
+      <CategorySidebar isOpen={isOpen} toggle={toggleSidebar} />
+    </nav>
   );
 };
 

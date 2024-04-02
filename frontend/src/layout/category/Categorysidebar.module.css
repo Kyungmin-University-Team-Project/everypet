@@ -1,37 +1,132 @@
 /* Style for sidebar */
-.sidebar {
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
   height: 100%;
-  width: 300px; /* 너비를 200px로 조정 */
+  background-color: rgba(0, 0, 0, 0); /* 초기 상태는 완전히 투명 */
+  opacity: 0; /* 초기 상태는 완전히 투명 */
+  z-index: 999; /* 사이드바와 동일한 z-index 설정 */
+
+  transition: width 0.1s ease-in-out, opacity 0.5s ease-in-out; /* 너비와 투명도 변화에 대한 애니메이션 설정 */
+}
+
+.overlayOpen {
+  width: 100%; /* 너비를 100%로 설정하여 화면에 나타나도록 함 */
+  opacity: 0.1; /* 투명도를 조절하여 반투명한 효과를 부여함 */
+  background-color: black;
+}
+
+.container {
+  height: 100%;
+  width: 350px; /* 너비를 200px로 조정 */
   position: fixed; /* absolute 대신 fixed로 변경하여 화면을 스크롤해도 사이드바가 고정됨 */
   top: 0;
   left: 0;
-  background-color: #19d768; /* 백그라운드 컬러를 회색으로 설정 */
-  padding-top: 20px;
+  background-color: #ffffff;
+
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out; /* transform 속성에 대한 애니메이션 설정 */
+
+  z-index: 9999; /* 다른 요소 위에 나타나도록 설정 */
 }
 
-/* Sidebar header */
-.sidebar h2 {
-  text-align: center;
-  margin-bottom: 20px;
+.containerOpen {
+  transform: translateX(0);
 }
 
-/* Sidebar links */
-.sidebar ul {
+.containerClosed {
+  transform: translateX(-100%);
+}
+
+.header {
+  display: flex;
+
+  height: 80px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  /* background-color: #4a8cf0; */
+
+  padding: 0 20px 0 20px;
+}
+
+.login__btn {
+  display: flex;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+.login__btn :hover {
+  text-decoration: underline;
+  text-decoration-color: black;
+}
+
+.sidebar__group {
+  /* background-color: #4a8cf0; */
+
+  margin-top: 20px;
+}
+
+.sidebar__title {
+  font-size: 20px;
+  font-weight: bold;
+
+  margin-left: 15px;
+}
+
+.close__btn {
+  font-size: 30px;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.ul {
   list-style-type: none;
   padding: 0;
+
+  font-size: 20px;
 }
 
-.sidebar ul li {
-  padding: 8px 16px;
+.li {
+  height: 40px;
 }
 
-.sidebar ul li a {
+.li a {
   text-decoration: none;
   color: #333;
   display: block;
 }
 
-.sidebar ul li a.active {
+.li a.active,
+.li a:hover {
   font-weight: bold;
-  color: #4a8cf0;
+  color: white;
+
+  background-color: #4a8cf0;
+}
+.subCategories {
+  position: absolute;
+  height: 100vh; /* 화면의 최대 높이로 설정 */
+  width: 200px;
+  transform: translateX(300px);
+  background-color: aqua;
+}
+
+@media screen and (max-width: 1536px) {
+  .container {
+    width: 300px;
+  }
 }
