@@ -53,7 +53,7 @@ const Productcategory = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <nav className={styles.container}>
       <button className={styles.categorybar} onClick={toggleSidebar}>
         <FontAwesomeIcon icon={faBars} />
       </button>
@@ -70,7 +70,7 @@ const Productcategory = () => {
         ))}
       </ul>
       <CategorySidebar isOpen={isOpen} toggle={toggleSidebar} />
-    </div>
+    </nav>
   );
 };
 

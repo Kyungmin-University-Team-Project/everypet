@@ -1,40 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import styles from './Categorysidebar.module.css';
-import { RootState } from '../../redux/store/rootReducer';
-import { setClickedCategory } from '../../redux/features/categorySlice';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faX } from '@fortawesome/free-solid-svg-icons';
+import { SidebarProps } from '../../typings/layout';
+import { CiLock } from 'react-icons/ci';
+import { IoCloseOutline } from 'react-icons/io5';
 
 const categories = [
-  { name: '쿠폰/기획전', link: '/page1' },
-  { name: '타임딜', link: '/page2' },
-  { name: '강아지', link: '/page3' },
-  { name: '고양이', link: '/page4' },
-  { name: '설치류', link: '/page5' },
-  { name: '조류', link: '/page6' },
-  { name: '파충류', link: '/page7' },
+  {
+    name: '쿠폰/기획전',
+    link: '/page1',
+    subCategories: ['카테고리1', '카테고리2', '카테고리3'],
+  },
+  {
+    name: '타임딜',
+    link: '/page2',
+    subCategories: ['카테고리4', '카테고리5', '카테고리6'],
+  },
+  {
+    name: '강아지',
+    link: '/page3',
+    subCategories: ['카테고리7', '카테고리8', '카테고리9'],
+  },
+  {
+    name: '고양이',
+    link: '/page4',
+    subCategories: ['카테고리10', '카테고리11', '카테고리12'],
+  },
+  {
+    name: '설치류',
+    link: '/page5',
+    subCategories: ['카테고리13', '카테고리14', '카테고리15'],
+  },
+  {
+    name: '조류',
+    link: '/page6',
+    subCategories: ['카테고리16', '카테고리17', '카테고리18'],
+  },
+  {
+    name: '파충류',
+    link: '/page7',
+    subCategories: ['카테고리19', '카테고리20', '카테고리21'],
+  },
 ];
 
-interface SidebarProps {
-  isOpen: boolean;
-  toggle: () => void;
-}
-
 const CategorySidebar = ({ isOpen, toggle }: SidebarProps) => {
-  const dispatch = useDispatch();
-
-  const clickedCategory = useSelector(
-    (state: RootState) => state.category.clickedCategory
-  );
+  const [clickedCategory, setClickedCategory] = useState<string | null>(null);
 
   const handleClick = (category: string) => {
-    dispatch(setClickedCategory(category));
+    setClickedCategory(category);
   };
 
   const handleSidebarClose = () => {
     toggle();
+    setClickedCategory(null);
   };
 
   return (
@@ -49,28 +67,47 @@ const CategorySidebar = ({ isOpen, toggle }: SidebarProps) => {
         }`}
       >
         <header className={styles.header}>
-          <span className={styles.logo}>카테고리</span>
-          <FontAwesomeIcon
-            icon={faX}
+          <Link to='/login' className={styles.login__btn}>
+            <CiLock />
+            <a>로그인</a>
+          </Link>
+          <IoCloseOutline
             className={styles.close__btn}
             onClick={handleSidebarClose}
           />
         </header>
-        <ul className={styles.ul}>
-          {categories.map((category, index) => (
-            <li className={styles.li} key={index}>
-              <Link
-                to={category.link}
-                className={
-                  clickedCategory === category.name ? styles.active : ''
-                }
-                onClick={() => handleClick(category.name)}
-              >
-                {category.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
+
+        <div className={styles.sidebar__group}>
+          <span className={styles.sidebar__title}>카테고리</span>
+          <ul className={styles.ul}>
+            {categories.map((category, index) => (
+              <li className={styles.li} key={index}>
+                <Link
+                  to={category.link}
+                  className={
+                    clickedCategory === category.name ? styles.active : ''
+                  }
+                  onMouseEnter={() => handleClick(category.name)}
+                >
+                  {category.name}
+                </Link>
+                {clickedCategory === category.name && (
+                  <div className={styles.subCategories}>
+                    asd
+                    {/* {category.subCategories.map((subCategory, subIndex) => (
+                        <Link
+                          key={subIndex}
+                          to={`${category.link}/${subIndex}`}
+                        >
+                          {subCategory}
+                        </Link>
+                      ))} */}
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

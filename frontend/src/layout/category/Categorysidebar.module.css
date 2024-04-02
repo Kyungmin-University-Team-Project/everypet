@@ -44,33 +44,55 @@
 .header {
   display: flex;
 
+  height: 80px;
+
+  display: flex;
+
   align-items: center;
   justify-content: space-between;
 
-  padding: 40px 30px 10px 15px;
-
   /* background-color: #4a8cf0; */
+
+  padding: 0 20px 0 20px;
 }
 
-/* Sidebar header */
-.logo {
-  font-size: 30px;
+.login__btn {
+  display: flex;
+
+  font-size: 20px;
   font-weight: bold;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+.login__btn :hover {
+  text-decoration: underline;
+  text-decoration-color: black;
+}
+
+.sidebar__group {
+  /* background-color: #4a8cf0; */
+
+  margin-top: 20px;
+}
+
+.sidebar__title {
+  font-size: 20px;
+  font-weight: bold;
+
+  margin-left: 15px;
 }
 
 .close__btn {
-  font-size: 20px;
+  font-size: 30px;
 
   cursor: pointer;
 
   transition: all 0.2s ease-in-out;
 }
 
-.close__btn:hover {
-  color: red;
-}
-
-/* Sidebar links */
 .ul {
   list-style-type: none;
   padding: 0;
@@ -79,7 +101,7 @@
 }
 
 .li {
-  padding: 10px 15px;
+  height: 40px;
 }
 
 .li a {
@@ -88,9 +110,19 @@
   display: block;
 }
 
-.li a.active {
+.li a.active,
+.li a:hover {
   font-weight: bold;
-  color: #4a8cf0;
+  color: white;
+
+  background-color: #4a8cf0;
+}
+.subCategories {
+  position: absolute;
+  height: 100vh; /* 화면의 최대 높이로 설정 */
+  width: 200px;
+  transform: translateX(300px);
+  background-color: aqua;
 }
 
 @media screen and (max-width: 1536px) {
