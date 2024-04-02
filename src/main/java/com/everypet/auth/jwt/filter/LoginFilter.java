@@ -1,8 +1,8 @@
 package com.everypet.auth.jwt.filter;
 
 import com.everypet.auth.jwt.data.dao.RefreshTokenMapper;
-import com.everypet.auth.jwt.util.CookieFactory;
-import com.everypet.auth.jwt.util.JWTManager;
+import com.everypet.auth.util.CookieFactory;
+import com.everypet.auth.util.JWTManager;
 import com.everypet.member.data.dto.MemberDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

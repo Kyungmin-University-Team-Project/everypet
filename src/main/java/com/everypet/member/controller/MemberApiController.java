@@ -1,7 +1,7 @@
 package com.everypet.member.controller;
 
 import com.everypet.member.data.dto.MemberDTO;
-import com.everypet.member.service.serviceInterface.MemberService;
+import com.everypet.member.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;

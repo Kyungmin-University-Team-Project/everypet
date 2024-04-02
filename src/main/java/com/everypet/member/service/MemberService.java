@@ -1,4 +1,4 @@
-package com.everypet.member.service.serviceInterface;
+package com.everypet.member.service;
 
 import com.everypet.member.data.dto.MemberDTO;
 

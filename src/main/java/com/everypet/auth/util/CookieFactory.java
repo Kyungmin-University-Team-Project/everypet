@@ -1,4 +1,4 @@
-package com.everypet.auth.jwt.util;
+package com.everypet.auth.util;
 
 import org.springframework.stereotype.Component;
 
