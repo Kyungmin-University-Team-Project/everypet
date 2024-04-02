@@ -3,17 +3,13 @@
 ## 👥 팀원
 
 ### 🔥 <span style="color:#3CB371; font-family: 'Comic Sans MS', cursive, sans-serif;">심연의 소환사 이용호</span>
-
 ### ☀️ <span style="color:#FFA500; font-family: 'Comic Sans MS', cursive, sans-serif;">태양의 정복자 노희철</span>
-
 ### 🌑 <span style="color:#9400D3; font-family: 'Comic Sans MS', cursive, sans-serif;">어둠의 사냥꾼 이관용</span>
-
 ### ⚡️ <span style="color:#FF6347; font-family: 'Comic Sans MS', cursive, sans-serif;">폭풍의 용사 박민규</span>
 
 ## 🚀 프로젝트 실행 방법
 
 database.properties 올바른 데이터베이스 정보를 입력해주세요. </br>
-
 docs 폴더에 data.sql 쿼리문을 실행해주세요.
 
 ## 🐳 Docker로 실행하기
