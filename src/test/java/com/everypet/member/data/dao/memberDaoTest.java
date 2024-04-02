@@ -1,5 +1,6 @@
 package com.everypet.member.data.dao;
 
+import com.everypet.config.DatabaseConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {com.everypet.common.config.DatabaseConfig.class})
-//@ContextConfiguration(locations = "classpath:WEB-INF/spring/applicationContext.xml")
-public class memberDaoTest {
+@ContextConfiguration(classes = {DatabaseConfig.class})
+public class MemberDaoTest {
 
     @Autowired
     private MemberMapper memberMapper;

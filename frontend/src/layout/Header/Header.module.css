@@ -9,7 +9,7 @@
   justify-content: center; /* 수평 가운데 정렬 */
   align-items: center; /* 수직 가운데 정렬 */
 
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #e6e6e6;
 }
 
 .inner {
@@ -47,10 +47,6 @@
 }
 
 @media screen and (max-width: 1536px) {
-  .title {
-    /* background-color: blue; */
-    font-size: 1.8rem;
-  }
   .login__btn {
     font-size: 1.2rem;
   }
