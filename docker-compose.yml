@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '8083:8080'
+      - '8080:8080'
     depends_on:
       - mysql
     environment:
@@ -23,7 +23,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: every-pet
     ports:
-      - '3308:3306'
+      - '3306:3306'
     volumes:
       - ./docs/data.sql:/docker-entrypoint-initdb.d/data.sql
     networks:
