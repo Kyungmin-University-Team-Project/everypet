@@ -63,7 +63,7 @@ const Agreement = () => {
           </p>
         </div>
         {agreement.map((item) => (
-          <div key={item.value}>
+          <div key={item.value} className={styles.label_container}>
             <label>
               <input
                 type="checkbox"
@@ -74,8 +74,10 @@ const Agreement = () => {
                 name={item.name}
                 className={styles.input_checkbox}
               />
-              <span className={styles.requiredText}>{"[필수] "}</span>
-              {item.children.replace("[필수] ", "")}
+              <span className={styles.requiredText}>
+                {item.children.includes("[필수]") ? "[필수] " : "[선택]"}
+              </span>
+              {item.children.replace("[필수] ", "").replace("[선택] ", "")}
               <div className={styles.textarea_container}>
                 <textarea rows={10} cols={50} className={styles.textarea}>
                   {item.text}
