@@ -63,7 +63,7 @@ const Agreement = () => {
           </p>
         </div>
         {agreement.map((item) => (
-          <div key={item.value}>
+          <div key={item.value} className={styles.label_container}>
             <label>
               <input
                 type="checkbox"
