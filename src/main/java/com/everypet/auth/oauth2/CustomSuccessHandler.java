@@ -1,6 +1,6 @@
 package com.everypet.auth.oauth2;
 
-import com.everypet.auth.jwt.util.JWTManager;
+import com.everypet.auth.util.JWTManager;
 import com.everypet.auth.oauth2.dto.CustomOAuth2User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

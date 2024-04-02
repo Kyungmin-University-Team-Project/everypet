@@ -1,7 +1,7 @@
 package com.everypet.auth.jwt.filter;
 
 import com.everypet.auth.jwt.data.dao.RefreshTokenMapper;
-import com.everypet.auth.jwt.util.JWTManager;
+import com.everypet.auth.util.JWTManager;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.filter.GenericFilterBean;

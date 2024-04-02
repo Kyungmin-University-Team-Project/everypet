@@ -82,6 +82,19 @@
             <version>2.0.6</version>
         </dependency>
 
+        <!-- Redis -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>2.3.9.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.lettuce</groupId>
+            <artifactId>lettuce-core</artifactId>
+            <version>6.1.5.RELEASE</version>
+        </dependency>
+
         <!-- Spring Security -->
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -212,7 +225,6 @@
             <artifactId>jjwt-jackson</artifactId>
             <version>0.12.3</version>
         </dependency>
-
 
     </dependencies>
 

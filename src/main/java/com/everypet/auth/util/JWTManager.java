@@ -1,4 +1,4 @@
-package com.everypet.auth.jwt.util;
+package com.everypet.auth.util;
 
 import com.everypet.auth.jwt.data.dao.RefreshTokenMapper;
 import com.everypet.auth.jwt.data.domain.RefreshToken;
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import javax.servlet.http.Cookie;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
@@ -53,17 +52,6 @@ public class JWTManager {
                 .signWith(secretKey)
                 .compact();
     }
-    public Cookie createCookie(String key, String value) {
-
-        Cookie cookie = new Cookie(key, value);
-        cookie.setMaxAge(24*60*60);
-        //cookie.setSecure(true);
-        //cookie.setPath("/");
-        cookie.setHttpOnly(true);
-
-        return cookie;
-    }
-
     public void addRefreshToken(String memberId, String refreshToken, Long expiredMs) {
         Date data = new Date(System.currentTimeMillis() + expiredMs);
 

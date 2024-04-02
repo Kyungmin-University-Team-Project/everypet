@@ -1,11 +1,11 @@
-package com.everypet.member.service;
+package com.everypet.member.service.impl;
 
 import com.everypet.member.data.dao.MemberMapper;
 import com.everypet.member.data.dao.RoleMapper;
 import com.everypet.member.data.domain.Role;
 import com.everypet.member.data.dto.MemberDTO;
 import com.everypet.member.exception.DuplicateMemberException;
-import com.everypet.member.service.serviceInterface.MemberService;
+import com.everypet.member.service.MemberService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
