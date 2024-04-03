@@ -69,7 +69,7 @@ const CategorySidebar = ({ isOpen, toggle }: SidebarProps) => {
         <header className={styles.header}>
           <Link to='/login' className={styles.login__btn}>
             <CiLock/>
-            <a>로그인</a>
+            <a>로그인!</a>
           </Link>
           <div className={styles.close__btn} onClick={handleSidebarClose}>
             <IoCloseOutline/>
