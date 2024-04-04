@@ -11,44 +11,51 @@
   font-weight: 'Pretendard-Regular';
 
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+
+  gap: 20px;
 }
 
 .categorybar {
-  width: 40px;
-  height: 40px;
-  background: white;
+  display: flex;
+
+  width: 100px;
+  height: 30px;
+  /* background: rgb(95, 144, 188); */
   border: none;
-  border-radius: 100%;
 
   font-size: 1.3rem;
 
   cursor: pointer;
 
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
 }
 
 .category__menu {
   display: flex;
   align-items: center;
-  margin-left: 2rem;
 
   list-style-type: none; /* 점 없애기 */
 
-  gap: 3rem;
+  margin-left: 40px;
+
+  gap: 48px;
 }
 
 @media screen and (max-width: 1536px) {
   .categorybar {
-    width: 35px;
-    height: 35px;
+    width: 100px;
+    height: 30px;
     font-size: 1.2rem;
+    margin-left: 20px;
   }
   .category {
     font-size: 1.2rem;
   }
   .category__menu {
-    gap: 2rem;
-    margin-left: 0;
+    gap: 32px;
+    margin-left: 80px;
   }
 }

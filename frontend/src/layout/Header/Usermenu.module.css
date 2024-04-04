@@ -1,0 +1,32 @@
+.container {
+  width: 160px;
+  /* background-color: aqua; */
+}
+
+.links {
+  display: flex;
+  margin-top: 8px;
+  margin-left: 8px;
+
+  font-size: 14px;
+
+  gap: 8px;
+}
+
+.user {
+  display: flex;
+
+  list-style-type: none;
+
+  padding: 0;
+
+  align-items: center;
+  justify-content: space-between;
+}
+
+.my,
+.order,
+.cart {
+  font-size: 36px;
+  cursor: pointer;
+}

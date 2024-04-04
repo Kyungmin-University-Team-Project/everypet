@@ -8,6 +8,7 @@ import styles from './Productcategory.module.css';
 import { setClickedCategory } from '../../redux/features/categorySlice';
 import { RootState } from '../../redux/store/rootReducer';
 import CategorySidebar from './Categorysidebar';
+import Realtimekeyword from '../Header/Realtimekeyword';
 
 const categories = [
   { name: '쿠폰/기획전', link: '/page1' },
@@ -54,9 +55,10 @@ const Productcategory = () => {
 
   return (
     <nav className={styles.container}>
-      <button className={styles.categorybar} onClick={toggleSidebar}>
+      <div className={styles.categorybar} onClick={toggleSidebar}>
         <FontAwesomeIcon icon={faBars} />
-      </button>
+        <span>전체상품</span>
+      </div>
 
       <ul className={styles.category__menu}>
         {categories.map((category, index) => (
@@ -69,6 +71,8 @@ const Productcategory = () => {
           />
         ))}
       </ul>
+      <Realtimekeyword />
+
       <CategorySidebar isOpen={isOpen} toggle={toggleSidebar} />
     </nav>
   );

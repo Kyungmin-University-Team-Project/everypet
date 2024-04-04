@@ -68,20 +68,19 @@ const CategorySidebar = ({ isOpen, toggle }: SidebarProps) => {
       >
         <header className={styles.header}>
           <Link to='/login' className={styles.login__btn}>
-            <CiLock/>
-            <a>로그인!</a>
+            <CiLock />
+            <a>로그인</a>
           </Link>
           <div className={styles.close__btn} onClick={handleSidebarClose}>
-            <IoCloseOutline/>
+            <IoCloseOutline />
           </div>
         </header>
-
 
         <div className={styles.sidebar__group}>
           <span className={styles.sidebar__title}>카테고리</span>
           <ul className={styles.ul}>
             {categories.map((category, index) => (
-                <li className={styles.li} key={index}>
+              <li className={styles.li} key={index}>
                 <Link
                   to={category.link}
                   className={
