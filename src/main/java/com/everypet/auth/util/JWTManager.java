@@ -1,7 +1,7 @@
 package com.everypet.auth.util;
 
-import com.everypet.auth.jwt.data.dao.RefreshTokenMapper;
 import com.everypet.auth.jwt.data.domain.RefreshToken;
+import com.everypet.auth.jwt.repository.RefreshTokenRepository;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -9,16 +9,18 @@ import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Component
 public class JWTManager {
     private SecretKey secretKey;
-    private final RefreshTokenMapper refreshTokenMapper;
+    private final RefreshTokenRepository refreshTokenRepository;
 
-    public JWTManager(@Value("${spring.jwt.secret}")String secret, RefreshTokenMapper refreshTokenMapper) {
+    public JWTManager(@Value("${spring.jwt.secret}")String secret, RefreshTokenRepository refreshTokenRepository) {
         this.secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
-        this.refreshTokenMapper = refreshTokenMapper;
+        this.refreshTokenRepository = refreshTokenRepository;
     }
 
     public String getUsername(String token) {
@@ -51,16 +53,24 @@ public class JWTManager {
                 .expiration(new Date(System.currentTimeMillis() + expiredMs))
                 .signWith(secretKey)
                 .compact();
+
     }
     public void addRefreshToken(String memberId, String refreshToken, Long expiredMs) {
-        Date data = new Date(System.currentTimeMillis() + expiredMs);
+
+        // 한국 시간대로 설정
+        TimeZone timeZone = TimeZone.getTimeZone("Asia/Seoul");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년MM월dd일 HH:mm:ss");
+        dateFormat.setTimeZone(timeZone);
+
+        Date date = new Date(System.currentTimeMillis() + expiredMs);
+        String formattedDate = dateFormat.format(date);
 
         RefreshToken token = RefreshToken.builder()
-                .memberId(memberId)
+                .memberId(memberId + ":" + formattedDate)
                 .refreshToken(refreshToken)
-                .expirationDate(data.toString())
+                .expirationDate(expiredMs/1000)
                 .build();
 
-        refreshTokenMapper.insertRefreshToken(token);
+        refreshTokenRepository.save(token);
     }
 }
