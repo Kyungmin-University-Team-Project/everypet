@@ -1,14 +1,14 @@
 .container {
-  width: 160px;
+  width: 220px;
   /* background-color: aqua; */
 }
 
 .links {
   display: flex;
-  margin-top: 8px;
-  margin-left: 8px;
+  margin-top: 15px;
+  margin-left: 15px;
 
-  font-size: 14px;
+  font-size: 12px;
 
   gap: 8px;
 }
@@ -27,6 +27,19 @@
 .my,
 .order,
 .cart {
+  display: flex;
+  flex-direction: column; /* 세로 방향으로 요소 정렬 */
+
   font-size: 36px;
   cursor: pointer;
+
+  align-items: center;
+  justify-content: center;
+}
+.tag {
+  display: flex;
+
+  font-size: 12px;
+
+  margin-top: 5px;
 }

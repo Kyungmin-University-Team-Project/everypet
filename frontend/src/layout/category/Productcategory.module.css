@@ -21,9 +21,8 @@
   width: 100px;
   height: 30px;
   /* background: rgb(95, 144, 188); */
-  border: none;
 
-  font-size: 1.3rem;
+  font-size: 20px;
 
   cursor: pointer;
 
@@ -48,11 +47,10 @@
   .categorybar {
     width: 100px;
     height: 30px;
-    font-size: 1.2rem;
-    margin-left: 20px;
+    font-size: 18px;
   }
   .category {
-    font-size: 1.2rem;
+    font-size: 18px;
   }
   .category__menu {
     gap: 32px;

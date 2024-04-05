@@ -16,12 +16,15 @@ const Usermenu = () => {
       <ul className={styles.user}>
         <li className={styles.my}>
           <AiOutlineUser />
+          <span className={styles.tag}>마이페이지</span>
         </li>
         <li className={styles.order}>
           <LiaShippingFastSolid />
+          <span className={styles.tag}>배송조회</span>
         </li>
         <li className={styles.cart}>
           <BsCart />
+          <span className={styles.tag}>장바구니</span>
         </li>
       </ul>
     </div>
