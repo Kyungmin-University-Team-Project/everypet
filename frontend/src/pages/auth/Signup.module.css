@@ -25,7 +25,7 @@
 
 .i {
     position: absolute;
-    top: 25px;
+    top: 20px;
     left: 7px;
     transform: translateY(-50%);
     color: #888;
@@ -35,7 +35,7 @@
 
 .code_i {
     position: absolute;
-    top: 10px;
+    top: 8px;
     left: 7px;
     transform: translateY(-50%);
     color: #888;
