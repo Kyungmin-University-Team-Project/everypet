@@ -1,8 +1,8 @@
 package com.everypet.auth.jwt.filter;
 
-import com.everypet.auth.jwt.data.dao.RefreshTokenMapper;
-import com.everypet.auth.util.CookieFactory;
+import com.everypet.auth.util.CookieManager;
 import com.everypet.auth.util.JWTManager;
+import com.everypet.auth.util.TokenExpirationTime;
 import com.everypet.member.data.dto.MemberDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +30,13 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
     private final JWTManager jwtManager;
-    private final RefreshTokenMapper refreshTokenMapper;
-    private final CookieFactory cookieFactory;
+    private final CookieManager cookieManager;
+
+    // access 토큰 만료시간
+    private Long accessTime = TokenExpirationTime.ACCESS_TIME;
+
+    // refresh 토큰 만료시간
+    private Long refreshTime = TokenExpirationTime.REFRESH_TIME;
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
@@ -68,18 +73,16 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         GrantedAuthority auth = iterator.next();
         String role = auth.getAuthority();
 
-        refreshTokenMapper.deleteByMemberId(memberId);
-
         // 토큰 생성
-        String access = jwtManager.createJwt("access", memberId, role, 600000L);
-        String refresh = jwtManager.createJwt("refresh", memberId, role, 86400000L);
+        String access = jwtManager.createJwt("access", memberId, role, accessTime);
+        String refresh = jwtManager.createJwt("refresh", memberId, role, refreshTime);
 
         // Refresh token 저장
-        jwtManager.addRefreshToken(memberId, refresh, 86400000L);
+        jwtManager.addRefreshToken(memberId, refresh, refreshTime);
 
         // 응답 설정
         response.setHeader("access", access);
-        response.addCookie(cookieFactory.createCookie("refresh", refresh));
+        response.addCookie(cookieManager.createCookie("refresh", refresh));
         response.setStatus(HttpStatus.OK.value());
     }
 

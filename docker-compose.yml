@@ -6,14 +6,17 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '8080:8080'
+      - '8082:8080'
     depends_on:
       - mysql
+      - redis
     environment:
       db.driverClass: 'com.mysql.jdbc.Driver'
       db.url: 'jdbc:mysql://mysql:3306/every-pet'
       db.username: 'root'
       db.password: 'root'
+      redis.host: 'redis'
+      redis.port: '6379'
     networks:
       - network
 
@@ -23,17 +26,16 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: every-pet
     ports:
-      - '3306:3306'
+      - '3308:3306'
     volumes:
       - ./docs/data.sql:/docker-entrypoint-initdb.d/data.sql
     networks:
       - network
 
   redis:
-    image: redis:7.0.0
-    restart: always
+    image: redis
     ports:
-      - '6379:6379'
+      - '6382:6379'
     networks:
       - network
 
