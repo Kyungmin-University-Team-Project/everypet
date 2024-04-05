@@ -1,0 +1,102 @@
+/* 회원가입 폼 스타일링 */
+.form_container{
+    display: flex;
+    flex-direction: column;
+}
+
+.label_container {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.input_value {
+    border-radius: 4px;
+    outline: none;
+    border: 1px solid #999999;
+    font-size: 14px;
+    text-decoration: none;
+    width: 100%;
+    padding: 13px 11px;
+}
+
+.input_value {
+    padding-left: 2rem;
+}
+
+.i {
+    position: absolute;
+    top: 25px;
+    left: 7px;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.code_i {
+    position: absolute;
+    top: 10px;
+    left: 7px;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.button_input {
+    position: absolute;
+    top: 22px;
+    width: 35%;
+    right: -40px;
+    transform: translateY(-50%);
+    border-radius: 5px;
+    padding: 0.3rem;
+    cursor: pointer;
+    border: 1px solid #888888;
+    background: none;
+    outline: none;
+}
+
+.code_btn {
+    position: absolute;
+    top: 10px;
+    width: 35%;
+    right: -40px;
+    transform: translateY(-50%);
+    border-radius: 5px;
+    padding: 0.4rem;
+    border: 1px solid #888888;
+    background: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.code_input {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    width: 40%;
+}
+
+.join_btn {
+    text-align: center;
+    border-radius: 5px;
+    padding: 0.8rem; /* 입력박스와 동일한 padding 적용 */
+    background: #4a8cf0;
+    color: white;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    box-shadow: 1px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.join_btn {
+    width: 117%;
+}
+
+.join_btn:hover {
+    background-color: #5e90ff;
+}
+
