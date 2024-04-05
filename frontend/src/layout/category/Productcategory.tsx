@@ -1,3 +1,4 @@
+// Productcategory.tsx
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +8,8 @@ import { setClickedCategory } from '../../redux/features/categorySlice';
 import { RootState } from '../../redux/store/rootReducer';
 import Realtimekeyword from '../Header/Realtimekeyword';
 import Categorymodal from './Categorymodal';
-import { RxHamburgerMenu } from 'react-icons/rx';
+import Categorybarbtn from '../../components/category/Categorybarbtn';
+import useToggle from '../../utils/category/ToggleUtil';
 
 const categories = [
   { name: '쿠폰/기획전', link: '/page1' },
@@ -26,7 +28,7 @@ const Productcategory = () => {
     (state: RootState) => state.category.clickedCategory
   );
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, toggleSidebar] = useToggle(false); // ToggleUtil 사용
 
   const location = useLocation();
 
@@ -44,22 +46,10 @@ const Productcategory = () => {
     }
   };
 
-  const toggleSidebar = () => {
-    if (isOpen) {
-      setIsOpen(false);
-    } else {
-      setIsOpen(true);
-    }
-  };
-
   return (
     <div>
       <nav className={styles.container}>
-        <div className={styles.categorybar} onClick={toggleSidebar}>
-          <RxHamburgerMenu />
-          <span>전체상품</span>
-        </div>
-
+        <Categorybarbtn toggle={toggleSidebar} />
         <ul className={styles.category__menu}>
           {categories.map((category, index) => (
             <ProductcategoryItem

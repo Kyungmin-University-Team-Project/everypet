@@ -1,0 +1,24 @@
+.categorybar {
+  display: flex;
+
+  width: 100px;
+  height: 30px;
+  /* background: rgb(95, 144, 188); */
+
+  font-size: 20px;
+
+  cursor: pointer;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+}
+
+@media screen and (max-width: 1536px) {
+  .categorybar {
+    width: 100px;
+    height: 30px;
+    font-size: 18px;
+  }
+}
