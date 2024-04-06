@@ -5,11 +5,14 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.Cookie;
 
 @Component
-public class CookieFactory {
+public class CookieManager {
+
     public Cookie createCookie(String key, String value) {
 
+        int time = Math.toIntExact(TokenExpirationTime.REFRESH_TIME);
+
         Cookie cookie = new Cookie(key, value);
-        cookie.setMaxAge(24*60*60);
+        cookie.setMaxAge(time);
         //cookie.setSecure(true);
         //cookie.setPath("/");
         cookie.setHttpOnly(true);
