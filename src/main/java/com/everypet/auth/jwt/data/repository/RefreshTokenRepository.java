@@ -1,4 +1,4 @@
-package com.everypet.auth.jwt.repository;
+package com.everypet.auth.jwt.data.repository;
 
 import com.everypet.auth.jwt.data.domain.RefreshToken;
 import org.springframework.data.repository.CrudRepository;
