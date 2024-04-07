@@ -83,32 +83,32 @@ const Categorymodal = ({ isOpen, toggle }: SidebarProps) => {
       className={isOpen ? styles.modal__open : styles.modal__close}
       onMouseLeave={handleMouseLeave} // 모달 영역을 벗어날 때 호출
     >
-      <div className={scrollY < 200 ? styles.modal__fixed : ''}>
-        <div className={styles.modal__content}>
-          {isOpen && (
-            <div className={styles.categories__container}>
-              {categories.map((category, index) => (
-                <div key={index} className={styles.category}>
-                  <div className={styles.category__content}>
-                    <span className={styles.category__title}>
-                      {category.name}
-                    </span>
+      <div
+        className={scrollY > 200 ? styles.modal__fixed : styles.modal__content}
+      >
+        {isOpen && (
+          <div className={styles.categories__container}>
+            {categories.map((category, index) => (
+              <div key={index} className={styles.category}>
+                <div className={styles.category__content}>
+                  <span className={styles.category__title}>
+                    {category.name}
+                  </span>
 
-                    <div className={styles.ul__wrap}>
-                      <div className={styles.ul__line__bg}></div>
-                      <div className={styles.ul__line}></div>
-                      <ul>
-                        {category.subCategories.map((subCategory, subIndex) => (
-                          <li key={subIndex}>{subCategory}</li>
-                        ))}
-                      </ul>
-                    </div>
+                  <div className={styles.ul__wrap}>
+                    <div className={styles.ul__line__bg}></div>
+                    <div className={styles.ul__line}></div>
+                    <ul>
+                      {category.subCategories.map((subCategory, subIndex) => (
+                        <li key={subIndex}>{subCategory}</li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
-              ))}
-            </div>
-          )}
-        </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
