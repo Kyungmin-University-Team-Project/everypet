@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SidebarProps } from '../../typings/layout';
 import styles from './Categorymodal.module.css';
+
 const categories = [
   {
     name: '강아지',
@@ -56,6 +57,22 @@ const categories = [
 ];
 
 const Categorymodal = ({ isOpen, toggle }: SidebarProps) => {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY); // 스크롤 Y 값을 업데이트
+
+      console.log(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   // 마우스가 모달 영역을 벗어날 때 모달 열림 상태를 false로 설정
   const handleMouseLeave = () => {
     toggle();
@@ -66,30 +83,32 @@ const Categorymodal = ({ isOpen, toggle }: SidebarProps) => {
       className={isOpen ? styles.modal__open : styles.modal__close}
       onMouseLeave={handleMouseLeave} // 모달 영역을 벗어날 때 호출
     >
-      <div className={styles.modal__content}>
-        {isOpen && (
-          <div className={styles.categories__container}>
-            {categories.map((category, index) => (
-              <div key={index} className={styles.category}>
-                <div className={styles.category__content}>
-                  <span className={styles.category__title}>
-                    {category.name}
-                  </span>
+      <div className={scrollY < 200 ? styles.modal__fixed : ''}>
+        <div className={styles.modal__content}>
+          {isOpen && (
+            <div className={styles.categories__container}>
+              {categories.map((category, index) => (
+                <div key={index} className={styles.category}>
+                  <div className={styles.category__content}>
+                    <span className={styles.category__title}>
+                      {category.name}
+                    </span>
 
-                  <div className={styles.ul__wrap}>
-                    <div className={styles.ul__line__bg}></div>
-                    <div className={styles.ul__line}></div>
-                    <ul>
-                      {category.subCategories.map((subCategory, subIndex) => (
-                        <li key={subIndex}>{subCategory}</li>
-                      ))}
-                    </ul>
+                    <div className={styles.ul__wrap}>
+                      <div className={styles.ul__line__bg}></div>
+                      <div className={styles.ul__line}></div>
+                      <ul>
+                        {category.subCategories.map((subCategory, subIndex) => (
+                          <li key={subIndex}>{subCategory}</li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

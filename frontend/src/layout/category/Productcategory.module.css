@@ -15,23 +15,6 @@
   gap: 20px;
 }
 
-.categorybar {
-  display: flex;
-
-  width: 100px;
-  height: 30px;
-  /* background: rgb(95, 144, 188); */
-
-  font-size: 20px;
-
-  cursor: pointer;
-
-  align-items: center;
-  justify-content: center;
-
-  gap: 10px;
-}
-
 .category__menu {
   display: flex;
   align-items: center;
@@ -44,14 +27,6 @@
 }
 
 @media screen and (max-width: 1536px) {
-  .categorybar {
-    width: 100px;
-    height: 30px;
-    font-size: 18px;
-  }
-  .category {
-    font-size: 18px;
-  }
   .category__menu {
     gap: 32px;
     margin-left: 80px;

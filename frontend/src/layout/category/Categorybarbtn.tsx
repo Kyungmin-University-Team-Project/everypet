@@ -6,7 +6,7 @@ const Categorybarbtn = ({ active = true, toggle }: any) => {
   // 기본값을 true로 설정
   return (
     <div className={styles.categorybar} onClick={toggle}>
-      <RxHamburgerMenu />
+      <RxHamburgerMenu size={28} />
       {active ? <span>전체상품</span> : ''}
     </div>
   );

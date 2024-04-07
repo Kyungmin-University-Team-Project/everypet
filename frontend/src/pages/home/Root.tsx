@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Productcategory from '../../layout/category/Productcategory';
-import Header from '../../layout/Header/Header';
 import Home from './Home';
+import Header from '../../layout/header/Header';
 
 const Root = () => {
   const location = useLocation();

@@ -1,23 +1,21 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
-import Searchinput from './Searchinput';
-import Usermenu from './Usermenu';
 import useToggle from '../../utils/category/ToggleUtil';
 import Categorymodal from '../category/Categorymodal';
-import Categorybarbtn from '../../components/category/Categorybarbtn';
+import Categorybarbtn from '../category/Categorybarbtn';
+import Searchinput from './Searchinput';
+import Usermenu from './Usermenu';
 
 const Header = () => {
-  const headerRef = useRef<HTMLDivElement>(null);
-
-  const [isOpen, toggleSidebar] = useToggle(false); // ToggleUtil 사용
+  const [isOpen, toggleSidebar] = useToggle(false);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (headerRef.current) {
-        const headerY = headerRef.current.getBoundingClientRect().top;
-        console.log('Header Y Position:', headerY);
-      }
+      setScrollY(window.scrollY); // 스크롤 Y 값을 업데이트
+
+      console.log(window.scrollY);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -29,16 +27,25 @@ const Header = () => {
 
   return (
     <>
-      <header ref={headerRef} className={styles.container}>
+      <header
+        className={scrollY < 200 ? styles.container : styles.container__fixed}
+      >
         <div className={styles.inner}>
-          <div className={styles.logo__wrap}>
-            <Categorybarbtn active={false} toggle={toggleSidebar} />
+          {scrollY < 200 ? (
             <Link to='/' className={styles.title}>
               에브리펫
             </Link>
-          </div>
+          ) : (
+            <div className={styles.logo__wrap}>
+              <Categorybarbtn active={false} toggle={toggleSidebar} />
+              <Link to='/' className={styles.title}>
+                에브리펫
+              </Link>
+            </div>
+          )}
 
           <Searchinput />
+
           <Usermenu />
         </div>
       </header>

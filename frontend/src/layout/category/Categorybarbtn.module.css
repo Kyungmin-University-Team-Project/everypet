@@ -1,8 +1,6 @@
 .categorybar {
   display: flex;
 
-  width: 100px;
-  height: 30px;
   /* background: rgb(95, 144, 188); */
 
   font-size: 20px;

@@ -6,10 +6,10 @@ import ProductcategoryItem from './ProductcategoryItem';
 import styles from './Productcategory.module.css';
 import { setClickedCategory } from '../../redux/features/categorySlice';
 import { RootState } from '../../redux/store/rootReducer';
-import Realtimekeyword from '../Header/Realtimekeyword';
 import Categorymodal from './Categorymodal';
-import Categorybarbtn from '../../components/category/Categorybarbtn';
 import useToggle from '../../utils/category/ToggleUtil';
+import Realtimekeyword from '../header/Realtimekeyword';
+import Categorybarbtn from './Categorybarbtn';
 
 const categories = [
   { name: '쿠폰/기획전', link: '/page1' },
