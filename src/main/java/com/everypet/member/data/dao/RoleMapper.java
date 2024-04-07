@@ -7,6 +7,6 @@ import java.util.List;
 
 @Mapper
 public interface RoleMapper {
-    int insertRole(Role role);
+    Integer insertRole(Role role);
     List<String> selectAuthByMemberId(String memberId);
 }
