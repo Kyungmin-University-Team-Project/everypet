@@ -54,6 +54,11 @@ docker-compose down
 
 1. OAuth2 수정
 
-## 😾 나는 나 너는 너
+## 📖 문제가 많은 ERD
+   ![img](https://i.ibb.co/k9MYN9h/Every-Pet-2.png)
 
-![image](https://lh3.googleusercontent.com/proxy/rqdfnQCtEgeDQk9kiBb60gbl3JMk4rDm3-HwlZqrw4tWz_6cWisYdVtUB8rpOO1fgZKEdEE327XD3vkJvtCD7RJjZszcsZYhhkbkqyai82M4X549t0TPZoJL_jbhaLGGRmHhluY32G71lzrKT7y3mKw07W1f70t1Uk-BWOI8G_GTqsFaGrwsimXxjXxfKtC-J9r9liXKZc2S2S75pn3QrjFlTemp4dL5Vp8)
+## 🥷🏾 너의 프로젝트는 망했다
+
+![image](https://i.namu.wiki/i/TdB8qb-v90wkA6tuddfb7TU_TFrgda6YAvOHR-lsT_GoqcfR5KJxT8PJoPuAZPWgtKPU0DeYPTVRQs_FbHG1TMY1tMbeu934JL9sSH2Q-Ln5ikeHTeWmbSM4yq46uH602__xG4DXs9I5rEKM-UL0Sg.webp)
+
+### 이제부터 여긴 맨체스터 유나이티드 영토다
