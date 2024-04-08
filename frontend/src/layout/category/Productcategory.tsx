@@ -1,13 +1,15 @@
+// Productcategory.tsx
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductcategoryItem from './ProductcategoryItem';
 import styles from './Productcategory.module.css';
 import { setClickedCategory } from '../../redux/features/categorySlice';
 import { RootState } from '../../redux/store/rootReducer';
-import CategorySidebar from './Categorysidebar';
+import Categorymodal from './Categorymodal';
+import useToggle from '../../utils/category/ToggleUtil';
+import Categorybarbtn from './Categorybarbtn';
+import Realtimekeyword from '../Header/Realtimekeyword';
 
 const categories = [
   { name: '쿠폰/기획전', link: '/page1' },
@@ -26,7 +28,7 @@ const Productcategory = () => {
     (state: RootState) => state.category.clickedCategory
   );
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, toggleSidebar] = useToggle(false); // ToggleUtil 사용
 
   const location = useLocation();
 
@@ -44,33 +46,25 @@ const Productcategory = () => {
     }
   };
 
-  const toggleSidebar = () => {
-    if (isOpen) {
-      setIsOpen(false);
-    } else {
-      setIsOpen(true);
-    }
-  };
-
   return (
-    <nav className={styles.container}>
-      <button className={styles.categorybar} onClick={toggleSidebar}>
-        <FontAwesomeIcon icon={faBars} />
-      </button>
-
-      <ul className={styles.category__menu}>
-        {categories.map((category, index) => (
-          <ProductcategoryItem
-            key={index}
-            category={category.name}
-            isActive={clickedCategory === category.name}
-            onClick={handleClick}
-            link={category.link}
-          />
-        ))}
-      </ul>
-      <CategorySidebar isOpen={isOpen} toggle={toggleSidebar} />
-    </nav>
+    <div>
+      <nav className={styles.container}>
+        <Categorybarbtn toggle={toggleSidebar} />
+        <ul className={styles.category__menu}>
+          {categories.map((category, index) => (
+            <ProductcategoryItem
+              key={index}
+              category={category.name}
+              isActive={clickedCategory === category.name}
+              onClick={handleClick}
+              link={category.link}
+            />
+          ))}
+        </ul>
+        <Realtimekeyword />
+      </nav>
+      <Categorymodal isOpen={isOpen} toggle={toggleSidebar} />
+    </div>
   );
 };
 
