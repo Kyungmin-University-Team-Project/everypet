@@ -52,9 +52,8 @@ docker-compose down
 
 ## 📋 해야할것
 
-1.  refreshToken 을 위한 redis 구축?
-2.  OAuth2 수정
+1. OAuth2 수정
 
-## 🐥 世界は可愛く作られた。
+## 😾 나는 나 너는 너
 
-![image](https://pbs.twimg.com/media/GHDLgZrXUAA_fun?format=jpg&name=4096x4096)
+![image](https://lh3.googleusercontent.com/proxy/rqdfnQCtEgeDQk9kiBb60gbl3JMk4rDm3-HwlZqrw4tWz_6cWisYdVtUB8rpOO1fgZKEdEE327XD3vkJvtCD7RJjZszcsZYhhkbkqyai82M4X549t0TPZoJL_jbhaLGGRmHhluY32G71lzrKT7y3mKw07W1f70t1Uk-BWOI8G_GTqsFaGrwsimXxjXxfKtC-J9r9liXKZc2S2S75pn3QrjFlTemp4dL5Vp8)

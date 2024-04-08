@@ -1,6 +1,7 @@
 package com.everypet.auth.jwt.filter;
 
-import com.everypet.auth.jwt.data.dao.RefreshTokenMapper;
+import com.everypet.auth.jwt.data.domain.RefreshToken;
+import com.everypet.auth.jwt.repository.RefreshTokenRepository;
 import com.everypet.auth.util.JWTManager;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ import java.io.IOException;
 public class CustomLogoutFilter extends GenericFilterBean {
 
     private final JWTManager jwtManager;
-    private final RefreshTokenMapper refreshTokenMapper;
+    private final RefreshTokenRepository refreshTokenRepository;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -80,9 +81,11 @@ public class CustomLogoutFilter extends GenericFilterBean {
             return;
         }
 
-        //DB에 저장되어 있는지 확인
-        Boolean isExist = refreshTokenMapper.existsByRefreshToken(refresh);
-        if (!isExist) {
+        // DB에서 해당 refresh 토큰을 찾습니다.
+        RefreshToken refreshToken = refreshTokenRepository.findByRefreshToken(refresh);
+
+        // 만약 토큰이 존재하지 않는 경우
+        if (refreshToken == null) {
 
             //response status code
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -91,7 +94,7 @@ public class CustomLogoutFilter extends GenericFilterBean {
 
         //로그아웃 진행
         //Refresh 토큰 DB에서 제거
-        refreshTokenMapper.deleteByRefreshToken(refresh);
+        refreshTokenRepository.delete(refreshToken);
 
         //Refresh 토큰 Cookie 값 0
         Cookie cookie = new Cookie("refresh", null);

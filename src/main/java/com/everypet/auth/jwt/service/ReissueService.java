@@ -1,8 +1,10 @@
 package com.everypet.auth.jwt.service;
 
-import com.everypet.auth.jwt.data.dao.RefreshTokenMapper;
-import com.everypet.auth.util.CookieFactory;
+import com.everypet.auth.jwt.data.domain.RefreshToken;
+import com.everypet.auth.jwt.repository.RefreshTokenRepository;
+import com.everypet.auth.util.CookieManager;
 import com.everypet.auth.util.JWTManager;
+import com.everypet.auth.util.TokenExpirationTime;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,8 +20,15 @@ import javax.servlet.http.HttpServletResponse;
 public class ReissueService {
 
     private final JWTManager jwtManager;
-    private final RefreshTokenMapper refreshTokenMapper;
-    private final CookieFactory cookieFactory;
+    private final RefreshTokenRepository refreshTokenRepository;
+    private final CookieManager cookieManager;
+
+    // access 토큰 만료시간
+    private Long accessTime = TokenExpirationTime.ACCESS_TIME;
+
+    // refresh 토큰 만료시간
+    private Long refreshTime = TokenExpirationTime.REFRESH_TIME;
+
     public ResponseEntity<?> reissueAccessToken(HttpServletRequest request, HttpServletResponse response) {
         //get refresh token
         String refresh = null;
@@ -56,9 +65,11 @@ public class ReissueService {
             return new ResponseEntity<>("invalid refresh token", HttpStatus.BAD_REQUEST);
         }
 
-        // DB에 저장되어 있는지 확인
-        Boolean isExist = refreshTokenMapper.existsByRefreshToken(refresh);
-        if (!isExist) {
+        // DB에서 해당 refresh 토큰을 찾습니다.
+        RefreshToken refreshToken = refreshTokenRepository.findByRefreshToken(refresh);
+
+        // 만약 토큰이 존재하지 않는 경우
+        if (refreshToken == null) {
 
             //response status code
             return new ResponseEntity<>("invalid refresh token", HttpStatus.BAD_REQUEST);
@@ -68,16 +79,16 @@ public class ReissueService {
         String role = jwtManager.getRole(refresh);
 
         //make new JWT
-        String newAccess = jwtManager.createJwt("access", memberId, role, 600000L);
-        String newRefresh = jwtManager.createJwt("refresh", memberId, role, 86400000L);
+        String newAccess = jwtManager.createJwt("access", memberId, role, accessTime);
+        String newRefresh = jwtManager.createJwt("refresh", memberId, role, refreshTime);
 
         //Refresh 토큰 저장 DB에 기존의 Refresh 토큰 삭제 후 새 Refresh 토큰 저장
-        refreshTokenMapper.deleteByRefreshToken(refresh);
-        jwtManager.addRefreshToken(memberId, newRefresh, 86400000L);
+        refreshTokenRepository.delete(refreshToken);
+        jwtManager.addRefreshToken(memberId, newRefresh, refreshTime);
 
         //response
         response.setHeader("access", newAccess);
-        response.addCookie(cookieFactory.createCookie("refresh", newRefresh));
+        response.addCookie(cookieManager.createCookie("refresh", newRefresh));
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
