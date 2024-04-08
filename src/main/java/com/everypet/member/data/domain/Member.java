@@ -1,12 +1,14 @@
 package com.everypet.member.data.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -22,17 +24,15 @@ public class Member implements UserDetails {
 
     private String name;
 
-    private List<GrantedAuthority> authorities = new ArrayList<>(
-            Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"))
-    );
+    private List<GrantedAuthority> authorities;
 
-     public void setAuthorities(List<String> authList) {
+    public void setAuthorities(List<String> authList) {
 
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-         for (String s : authList) {
-             authorities.add(new SimpleGrantedAuthority(s));
-         }
+        for (String s : authList) {
+            authorities.add(new SimpleGrantedAuthority(s));
+        }
 
         this.authorities = authorities;
     }

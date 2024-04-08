@@ -1,4 +1,4 @@
-package com.everypet.auth.oauth2.dto.dtoInterface;
+package com.everypet.auth.oauth2.data.dto.response;
 
 public interface OAuth2Response {
     //제공자 (Ex. naver, google, ...)
