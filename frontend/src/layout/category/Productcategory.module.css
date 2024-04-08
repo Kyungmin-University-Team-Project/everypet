@@ -11,44 +11,23 @@
   font-weight: 'Pretendard-Regular';
 
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
-}
 
-.categorybar {
-  width: 40px;
-  height: 40px;
-  background: white;
-  border: none;
-  border-radius: 100%;
-
-  font-size: 1.3rem;
-
-  cursor: pointer;
-
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  gap: 20px;
 }
 
 .category__menu {
   display: flex;
   align-items: center;
-  margin-left: 2rem;
 
   list-style-type: none; /* 점 없애기 */
 
-  gap: 3rem;
+  margin-left: 40px;
+
+  gap: 48px;
 }
 
 @media screen and (max-width: 1536px) {
-  .categorybar {
-    width: 35px;
-    height: 35px;
-    font-size: 1.2rem;
-  }
-  .category {
-    font-size: 1.2rem;
-  }
   .category__menu {
-    gap: 2rem;
-    margin-left: 0;
+    gap: 24px;
   }
 }

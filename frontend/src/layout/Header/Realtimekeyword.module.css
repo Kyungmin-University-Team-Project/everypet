@@ -1,12 +1,18 @@
 .container {
   display: flex;
 
-  width: 12vw;
-  margin-left: 2rem;
+  width: 180px;
+  margin-left: 40px;
   /* background-color: aqua; */
 
   align-items: center;
   justify-content: space-between;
+
+  border-bottom: solid 2px #4a8cf0;
+
+  /* border-radius: 20px; */
+
+  padding: 5px 20px 5px 20px;
 }
 
 .rank__container {
@@ -14,13 +20,12 @@
   gap: 8px;
 
   font-size: 1rem;
-  font-weight: bold;
 
   cursor: pointer;
 }
 
 .keyword:hover {
-  color: red;
+  font-weight: bold;
 }
 
 .open {
@@ -30,7 +35,11 @@
 }
 
 @media screen and (max-width: 1536px) {
+  .container {
+    width: 180px;
+    margin-left: 80px;
+  }
   .rank__container {
-    font-size: 1rem;
+    font-size: 16px;
   }
 }

@@ -19,7 +19,7 @@
     "@types/react-dom": "^18.2.19",
     "@types/react-modal": "^3.16.3",
     "@types/react-redux": "^7.1.33",
-    "axios": "^1.6.7",
+    "axios": "^1.6.8",
     "debug": "^4.3.4",
     "detect-port-alt": "^1.1.6",
     "http-proxy-middleware": "^2.0.6",
@@ -32,6 +32,8 @@
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.22.3",
     "react-scripts": "^5.0.1",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -68,5 +70,9 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react-modal": "^3.16.3",
+    "@types/react-slick": "^0.23.13"
+  }
 }
