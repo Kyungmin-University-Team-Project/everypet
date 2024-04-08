@@ -1,4 +1,4 @@
-package com.everypet.auth.oauth2.dto;
+package com.everypet.auth.oauth2.data.dto;
 
 import com.everypet.member.data.dto.MemberDTO;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,6 +15,7 @@ public class CustomOAuth2User implements OAuth2User {
     public CustomOAuth2User(MemberDTO memberDTO) {
         this.memberDTO = memberDTO;
     }
+
     @Override
     public Map<String, Object> getAttributes() {
         return null;
@@ -25,12 +26,7 @@ public class CustomOAuth2User implements OAuth2User {
 
         Collection<GrantedAuthority> collection = new ArrayList<>();
 
-        collection.add(new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                return memberDTO.getRole();
-            }
-        });
+        collection.add((GrantedAuthority) () -> memberDTO.getRole());
 
         return collection;
     }
@@ -43,4 +39,5 @@ public class CustomOAuth2User implements OAuth2User {
     public String getMemberId() {
         return memberDTO.getMemberId();
     }
+
 }

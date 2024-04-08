@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.everypet.auth.oauth2.data.dao.OAuth2MemberMapper">
+
+    <select id="selectOAuth2MemberByMemberId" parameterType="String" resultType="OAuth2Member">
+        SELECT * FROM TBL_OAUTH2_MEMBER WHERE MEMBER_ID = #{memberId}
+    </select>
+
+    <insert id="insertOAuth2Member" parameterType="OAuth2Member">
+        INSERT INTO TBL_OAUTH2_MEMBER(MEMBER_ID, NAME, EMAIL) VALUES (#{memberId}, #{name}, #{email})
+    </insert>
+
+    <update id="updateOAuth2Member" parameterType="OAuth2Member">
+        UPDATE TBL_OAUTH2_MEMBER SET NAME = #{name}, EMAIL = #{email} WHERE MEMBER_ID = #{memberId}
+    </update>
+
+</mapper>
