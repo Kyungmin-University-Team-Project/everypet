@@ -8,8 +8,8 @@ import { setClickedCategory } from '../../redux/features/categorySlice';
 import { RootState } from '../../redux/store/rootReducer';
 import Categorymodal from './Categorymodal';
 import useToggle from '../../utils/category/ToggleUtil';
-import Realtimekeyword from '../header/Realtimekeyword';
 import Categorybarbtn from './Categorybarbtn';
+import Realtimekeyword from '../Header/Realtimekeyword';
 
 const categories = [
   { name: '쿠폰/기획전', link: '/page1' },

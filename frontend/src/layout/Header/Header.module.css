@@ -25,6 +25,8 @@
   align-items: center; /* 수직 가운데 정렬 */
 
   border-bottom: 1px solid #e6e6e6;
+
+  z-index: 9999;
 }
 
 .inner {
@@ -62,4 +64,15 @@
 }
 
 @media screen and (max-width: 1536px) {
+  .inner {
+    width: 1100px;
+  }
+
+  .logo__wrap {
+    width: 150px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
 }

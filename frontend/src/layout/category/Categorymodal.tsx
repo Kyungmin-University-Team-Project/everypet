@@ -84,7 +84,7 @@ const Categorymodal = ({ isOpen, toggle }: SidebarProps) => {
       onMouseLeave={handleMouseLeave} // 모달 영역을 벗어날 때 호출
     >
       <div
-        className={scrollY > 200 ? styles.modal__fixed : styles.modal__content}
+        className={scrollY >= 200 ? styles.modal__fixed : styles.modal__content}
       >
         {isOpen && (
           <div className={styles.categories__container}>

@@ -8,14 +8,12 @@
   cursor: pointer;
 
   align-items: center;
-  justify-content: center;
 
   gap: 10px;
 }
 
 @media screen and (max-width: 1536px) {
   .categorybar {
-    width: 100px;
     height: 30px;
     font-size: 18px;
   }
