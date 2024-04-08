@@ -1,7 +1,7 @@
 package com.everypet.auth.jwt.filter;
 
 import com.everypet.auth.jwt.data.domain.RefreshToken;
-import com.everypet.auth.jwt.repository.RefreshTokenRepository;
+import com.everypet.auth.jwt.data.repository.RefreshTokenRepository;
 import com.everypet.auth.util.JWTManager;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;

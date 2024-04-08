@@ -1,10 +1,12 @@
 package com.everypet.config;
 
+import com.everypet.auth.jwt.data.repository.RefreshTokenRepository;
 import com.everypet.auth.jwt.filter.CustomLogoutFilter;
 import com.everypet.auth.jwt.filter.JWTFilter;
 import com.everypet.auth.jwt.filter.LoginFilter;
-import com.everypet.auth.jwt.repository.RefreshTokenRepository;
-import com.everypet.auth.oauth2.CustomSuccessHandler;
+import com.everypet.auth.oauth2.handler.CustomSuccessHandler;
+import com.everypet.auth.oauth2.config.CustomClientRegistrationRepo;
+import com.everypet.auth.oauth2.service.CustomOAuth2UserService;
 import com.everypet.auth.util.CookieManager;
 import com.everypet.auth.util.JWTManager;
 import com.everypet.member.service.UserLoginFailHandler;
@@ -30,13 +32,14 @@ import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan(basePackages = {"com.everypet.*"})
+@ComponentScan(basePackages = "com.everypet.auth.*")
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AuthenticationConfiguration authenticationConfiguration;
     private final JWTManager jwtManager;
-    //private final OAuth2UserService OAuth2UserService;
+    private final CustomOAuth2UserService customOAuth2UserService;
+    private final CustomClientRegistrationRepo customClientRegistrationRepo;
     private final CustomSuccessHandler customSuccessHandler;
     private final JWTFilter jwtFilter;
     private final RefreshTokenRepository refreshTokenRepository;
@@ -125,51 +128,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 })));
 
         // oauth2
-        /*http
-                .oauth2Login()
-                .userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig
-                        .userService(OAuth2UserService))
-                .successHandler(customSuccessHandler);*/
+        http
+                .oauth2Login((oauth2) -> oauth2
+                        .userInfoEndpoint((userInfoEndpointConfig -> userInfoEndpointConfig.userService(customOAuth2UserService)))
+                        .clientRegistrationRepository(customClientRegistrationRepo.clientRegistrationRepository())
+                        .successHandler(customSuccessHandler)
+                );
 
     }
-
-    /*@Bean
-    public ClientRegistrationRepository clientRegistrationRepository() {
-        return new InMemoryClientRegistrationRepository(
-                naverClientRegistration(),
-                googleClientRegistration()
-        );
-    }
-
-    // 네이버 클라이언트 등록 정보
-    private ClientRegistration naverClientRegistration() {
-        return ClientRegistration.withRegistrationId("naver")
-                .clientId("AQK44hOl5QLAU8J2AAY9")
-                .clientSecret("2OuROg65tX")
-                .redirectUriTemplate("http://localhost:8080/login/oauth2/code/naver")
-                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .scope("name", "email")
-                .authorizationUri("https://nid.naver.com/oauth2.0/authorize")
-                .tokenUri("https://nid.naver.com/oauth2.0/token")
-                .userInfoUri("https://openapi.naver.com/v1/nid/me")
-                .userNameAttributeName("response")
-                .clientName("naver")
-                .build();
-    }
-
-    // 구글 클라이언트 등록 정보
-    private ClientRegistration googleClientRegistration() {
-        return ClientRegistration.withRegistrationId("google")
-                .clientId("1004346528421-nlco24abaalsmfiv8mnda2scast1iafk.apps.googleusercontent.com")
-                .clientSecret("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")
-                .redirectUriTemplate("http://localhost:8080/login/oauth2/code/google")
-                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .scope("profile", "email")
-                .authorizationUri("https://accounts.google.com/o/oauth2/auth")
-                .tokenUri("https://accounts.google.com/o/oauth2/token")
-                .userInfoUri("https://www.googleapis.com/oauth2/v3/userinfo")
-                .userNameAttributeName(IdTokenClaimNames.SUB)
-                .clientName("google")
-                .build();
-    }*/
 }
