@@ -98,6 +98,14 @@ const Signup = () => {
           className={styles.input_value}
         />
       </label>
+      <label className={styles.label_container}>
+        <i className={`fa-regular fa-calendar-days ${styles.i}`}></i>
+        <input
+          placeholder="핸드폰 번호(-)금지"
+          required
+          className={styles.input_value}
+        />
+      </label>
 
       <Postcode />
 
