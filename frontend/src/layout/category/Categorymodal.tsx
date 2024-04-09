@@ -62,8 +62,6 @@ const Categorymodal = ({ isOpen, toggle }: SidebarProps) => {
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY); // 스크롤 Y 값을 업데이트
-
-      console.log(window.scrollY);
     };
 
     window.addEventListener('scroll', handleScroll);
