@@ -8,15 +8,15 @@ const Maincarousel = () => {
   // 이미지는 나중에 서버에서 받아외
 
   const bannerUrls = [
-    require('../../assets/img/banner/banner_1.jpg'),
-    require('../../assets/img/banner/banner_2.jpg'),
-    require('../../assets/img/banner/banner_3.jpg'),
-    require('../../assets/img/banner/banner_4.jpg'),
-    require('../../assets/img/banner/banner_5.jpg'),
-    require('../../assets/img/banner/banner_6.jpg'),
-    require('../../assets/img/banner/banner_7.png'),
-    require('../../assets/img/banner/banner_8.png'),
-    require('../../assets/img/banner/banner_9.png'),
+    require('../../../assets/img/banner/banner_1.jpg'),
+    require('../../../assets/img/banner/banner_2.jpg'),
+    require('../../../assets/img/banner/banner_3.jpg'),
+    require('../../../assets/img/banner/banner_4.jpg'),
+    require('../../../assets/img/banner/banner_5.jpg'),
+    require('../../../assets/img/banner/banner_6.jpg'),
+    require('../../../assets/img/banner/banner_7.png'),
+    require('../../../assets/img/banner/banner_8.png'),
+    require('../../../assets/img/banner/banner_9.png'),
   ];
 
   const settings = {
