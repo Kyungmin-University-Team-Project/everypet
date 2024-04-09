@@ -4,20 +4,36 @@
 
   width: 100%;
 
-  background-color: aqua;
+  /* background-color: aqua; */
 }
 
 .quick__nav {
   display: flex;
   justify-content: space-between;
   width: 1000px; /* 네비게이션 전체 너비 설정 */
-  background-color: antiquewhite;
+  /* background-color: antiquewhite; */
 }
 
 .quick__nav__item {
-  width: 60px; /* 네비게이션 아이템 너비 설정 */
-  height: 60px; /* 네비게이션 아이템 높이 설정 */
-  background-color: blue; /* 아이템 배경색 */
-  border-radius: 50%; /* 아이템을 원형으로 만듦 */
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  /* background-color: blue;  */
   margin-bottom: 10px;
+
+  cursor: pointer;
+}
+
+.img {
+  max-width: 60px;
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 1536px) {
+  .quick__nav {
+    width: 800px;
+  }
 }

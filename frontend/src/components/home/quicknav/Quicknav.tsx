@@ -1,17 +1,19 @@
 import React from 'react';
 import styles from './Quicknav.module.css';
 
-// 서버에서 데이터 받아와서 바꾸기
-// 클라이언트의
-
 const categories = [
-  '카테고리1',
-  '카테고리2',
-  '카테고리3',
-  '카테고리4',
-  '카테고리5',
-  '카테고리6',
-  '카테고리7',
+  { name: '핫딜', image: require('../../../assets/img/quicknav/hot.png') },
+  {
+    name: '기간세일',
+    image: require('../../../assets/img/quicknav/imminent.png'),
+  },
+  { name: '신상품', image: require('../../../assets/img/quicknav/new.png') },
+  { name: '강아지', image: require('../../../assets/img/quicknav/dog.png') },
+  { name: '고양이', image: require('../../../assets/img/quicknav/cat.png') },
+  {
+    name: '설치류',
+    image: require('../../../assets/img/quicknav/hamster.png'),
+  },
 ];
 
 const Quicknav = () => {
@@ -19,9 +21,13 @@ const Quicknav = () => {
     <div className={styles.quick__nav__container}>
       <nav className={styles.quick__nav}>
         {categories.map((category, index) => (
-          <div key={index}>
-            <div className={styles.quick__nav__item}></div>
-            <span>{category}</span>
+          <div key={index} className={styles.quick__nav__item}>
+            <img
+              className={styles.img}
+              src={category.image}
+              alt={category.name}
+            />
+            <span>{category.name}</span>
           </div>
         ))}
       </nav>

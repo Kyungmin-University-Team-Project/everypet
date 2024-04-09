@@ -8,6 +8,15 @@ const Home = () => {
     <div>
       <Maincarousel />
       <Quicknav />
+      <div className={styles.box} />
+      <div className={styles.box} />
+      <div className={styles.box} />
+      <div className={styles.box} />
+      <div className={styles.box} />
+      <div className={styles.box} />
+      <div className={styles.box} />
+      <div className={styles.box} />
+      <div className={styles.box} />
     </div>
   );
 };
