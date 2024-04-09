@@ -1,19 +1,13 @@
 import React from 'react';
 import styles from './Home.module.css';
-import Maincarousel from '../../components/home/Maincarousel';
+import Maincarousel from '../../components/home/banner/Maincarousel';
+import Quicknav from '../../components/home/quicknav/Quicknav';
 
 const Home = () => {
   return (
     <div>
       <Maincarousel />
-      <div className={styles.box}></div>
-      <div className={styles.box}></div>
-      <div className={styles.box}></div>
-      <div className={styles.box}></div>
-      <div className={styles.box}></div>
-      <div className={styles.box}></div>
-      <div className={styles.box}></div>
-      <div className={styles.box}></div>
+      <Quicknav />
     </div>
   );
 };
