@@ -1,26 +1,47 @@
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Login.module.css";
 import Signup from "./Signup";
 import Findauth from "./Findauth";
-import "@fortawesome/fontawesome-free/css/all.css";
 import Agreement from "./Agreement";
+import { login } from "./AuthAPI";
 
 const Login = () => {
+  interface LoginData {
+    memberId: string;
+    memberPwd: string;
+  }
+
   const location = useLocation();
   const [showLoginForm, setShowLoginForm] = useState(true);
+  const [values, setValues] = useState<LoginData>({
+    memberId: "",
+    memberPwd: "",
+  });
 
-  // 뒤로가기 눌렀을 떄 로그인 폼 보이기
-  useEffect(() => {
-    if (
-      location.pathname === "/login/signup" ||
-      location.pathname === "/login/forgot-password" ||
-      location.pathname === "/login/agreement"
-    ) {
-      setShowLoginForm(false);
-    } else {
-      setShowLoginForm(true);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValues({ ...values, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await login(values);
+      // 서버로부터 받은 토큰을 로컬 스토리지에 저장
+      localStorage.setItem("tokenType", response.token);
+      localStorage.setItem("accessToken", response.access);
+    } catch (error) {
+      console.log(error);
     }
+  };
+
+  // Show login form based on current location
+  useEffect(() => {
+    setShowLoginForm(
+      !["/login/signup", "/login/forgot-password", "/login/agreement"].includes(
+        location.pathname,
+      ),
+    );
   }, [location.pathname]);
 
   return (
@@ -28,30 +49,34 @@ const Login = () => {
       <section className={styles.login_section}>
         <h1 className={styles.login_mainText}>에브리펫</h1>
         {showLoginForm && (
-          <form className={styles.login_input}>
-            <label htmlFor="username" className={styles.input_label}>
+          <form className={styles.login_input} onSubmit={handleSubmit}>
+            <label htmlFor="memberId" className={styles.input_label}>
               <p className={styles.login_text}>아이디</p>
               <div className={styles.input_field}>
                 <i className={`${styles.input_icon} fas fa-user`} />
                 <input
                   placeholder="아이디를 입력해주세요."
-                  id="username"
-                  name="username"
+                  id="memberId"
+                  name="memberId"
+                  value={values.memberId}
+                  onChange={handleChange}
                   className={styles.input_input}
                 />
               </div>
             </label>
 
-            <label htmlFor="password" className={styles.input_label}>
+            <label htmlFor="memberPwd" className={styles.input_label}>
               <p className={styles.login_text}>비밀번호</p>
               <div className={styles.input_field}>
                 <i className={`${styles.input_icon} fas fa-lock`} />
                 <input
                   type="password"
                   placeholder="비밀번호를 입력해주세요."
-                  id="password"
-                  name="password"
+                  id="memberPwd"
+                  name="memberPwd"
                   className={styles.input_input}
+                  value={values.memberPwd}
+                  onChange={handleChange}
                 />
               </div>
             </label>
