@@ -69,32 +69,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests() // 요청에 대한 보안 설정
-                    .antMatchers("/resources/**").permitAll()
-                    .antMatchers("/signin").anonymous()
-                    .antMatchers("/signup").anonymous()
-                    .antMatchers("/").permitAll()
-                    .antMatchers("/admin").hasRole("ADMIN")
-                    .antMatchers("/reissue").permitAll()
-                    .anyRequest().permitAll();
+                .antMatchers("/resources/**").permitAll()
+                .antMatchers("/signin").anonymous()
+                .antMatchers("/signup").anonymous()
+                .antMatchers("/").permitAll()
+                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/user").hasRole("USER")
+                .antMatchers("/reissue").permitAll()
+                .anyRequest().permitAll();
 
         http // 필터 위치
                 .addFilterBefore(jwtFilter, LoginFilter.class)
                 .addFilterBefore(new CustomLogoutFilter(jwtManager, refreshTokenRepository), LogoutFilter.class)
                 .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtManager, cookieManager),
-                            UsernamePasswordAuthenticationFilter.class)
+                        UsernamePasswordAuthenticationFilter.class)
                 .addFilterAt(loginFilter, UsernamePasswordAuthenticationFilter.class);
 
         http // disable 설정
                 .httpBasic().disable()  //http basic 인증 방식 disable
                 .formLogin().disable()
                 .csrf().disable()
-                    /*.loginPage("/")
-                    .loginProcessingUrl("/signin")
-                    .usernameParameter("member_id")
-                    .passwordParameter("member_pwd")
-                    .defaultSuccessUrl("/success")
-                    .failureHandler(userLoginFailHandler())
-                    .and */
+                /*.loginPage("/")
+                .loginProcessingUrl("/signin")
+                .usernameParameter("member_id")
+                .passwordParameter("member_pwd")
+                .defaultSuccessUrl("/success")
+                .failureHandler(userLoginFailHandler())
+                .and */
                 .logout().disable();
                     /*.logoutUrl("/logout")
                     .logoutSuccessUrl("/")
@@ -103,10 +104,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()*/
         http
                 .exceptionHandling() // 예외 처리
-                    .accessDeniedPage("/");
+                .accessDeniedPage("/");
         http
                 .sessionManagement() // 세션 관리
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http // cors 설정
                 .cors((corsCustomizer -> corsCustomizer.configurationSource(new CorsConfigurationSource() {
 
@@ -115,13 +116,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                         CorsConfiguration configuration = new CorsConfiguration();
 
-                        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
-                        configuration.setAllowedMethods(Collections.singletonList("*"));
-                        configuration.setAllowCredentials(true);
-                        configuration.setAllowedHeaders(Collections.singletonList("*"));
-                        configuration.setMaxAge(3600L);
+                        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));  // 해당 IP에 응답을 허용
+                        configuration.setAllowedMethods(Collections.singletonList("*")); // 모든 post, get, put, delete, patch 요청을 허용
+                        configuration.setAllowCredentials(true);    // 내 서버에 json응답을 자바스크립가 처리할수 있게 설정
+                        configuration.setAllowedHeaders(Collections.singletonList("*")); // 모든 header에 응답을 허용
+                        //configuration.addAllowedHeader("*");        // 모든 header에 응답을 허용
+                        //configuration.addAllowedMethod("*");        // 모든 post, get, put, delete, patch 요청을 허용
+                        configuration.setMaxAge(3600L);             // 3600초 동안 캐싱
 
-                        configuration.setExposedHeaders(Collections.singletonList("Authorization"));
+                        //configuration.addExposedHeader("*");
+
+                        configuration.setExposedHeaders(Collections.singletonList("Set-Cookie"));
+                        configuration.setExposedHeaders(Collections.singletonList("access"));
 
                         return configuration;
                     }
