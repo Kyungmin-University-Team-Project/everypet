@@ -33,4 +33,9 @@ public class MemberApiController {
     public ResponseEntity<String> admin() {
         return ResponseEntity.status(HttpStatus.OK).body("ok");
     }
+
+    @GetMapping("/user")
+    public ResponseEntity<String> user() {
+        return ResponseEntity.status(HttpStatus.OK).body("ok");
+    }
 }
