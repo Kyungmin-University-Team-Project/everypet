@@ -3,7 +3,7 @@ import { Join } from "../../typings/signup";
 import Postcode from "./Postcode";
 import styles from "./Signup.module.css";
 import { signUpLogin } from "../../typings/AuthAPI";
-
+import "@fortawesome/fontawesome-free/css/all.css";
 const Signup = () => {
   const [user, setUser] = useState<Join>({ memberId: "", memberPwd: "" });
   const [disableButton, setDisableButton] = useState(true);

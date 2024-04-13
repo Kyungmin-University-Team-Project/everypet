@@ -6,6 +6,7 @@ import Findauth from "./Findauth";
 import Agreement from "./Agreement";
 import { login } from "../../typings/AuthAPI";
 import { LoginData } from "../../typings/Login";
+import "@fortawesome/fontawesome-free/css/all.css";
 
 const Login = () => {
   const location = useLocation();
