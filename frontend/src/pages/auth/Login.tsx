@@ -4,14 +4,11 @@ import styles from "./Login.module.css";
 import Signup from "./Signup";
 import Findauth from "./Findauth";
 import Agreement from "./Agreement";
-import { login } from "./AuthAPI";
+import { login } from "../../typings/AuthAPI";
+import { LoginData } from "../../typings/Login";
+import "@fortawesome/fontawesome-free/css/all.css";
 
 const Login = () => {
-  interface LoginData {
-    memberId: string;
-    memberPwd: string;
-  }
-
   const location = useLocation();
   const [showLoginForm, setShowLoginForm] = useState(true);
   const [values, setValues] = useState<LoginData>({
@@ -28,8 +25,7 @@ const Login = () => {
     try {
       const response = await login(values);
       // 서버로부터 받은 토큰을 로컬 스토리지에 저장
-      localStorage.setItem("tokenType", response.token);
-      localStorage.setItem("accessToken", response.access);
+      localStorage.setItem("access", response.access);
     } catch (error) {
       console.log(error);
     }
