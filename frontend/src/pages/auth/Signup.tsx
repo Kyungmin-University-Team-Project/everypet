@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Join } from "../../typings/signup";
 import Postcode from "./Postcode";
 import styles from "./Signup.module.css";
-import { signUpLogin } from "./AuthAPI";
+import { signUpLogin } from "../../typings/AuthAPI";
 
 const Signup = () => {
   const [user, setUser] = useState<Join>({ memberId: "", memberPwd: "" });
@@ -36,7 +36,7 @@ const Signup = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form_container}>
+    <form className={styles.form_container} onSubmit={handleSubmit}>
       <label htmlFor="memberId" className={styles.label_container}>
         <i className={`fa-regular fa-user ${styles.i}`}></i>
         <input
