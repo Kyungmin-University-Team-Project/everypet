@@ -23,7 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
-import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
@@ -68,14 +69,15 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         // 유저 정보
         String memberId = authentication.getName();
 
+        // 권한 정보 추출
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
-        GrantedAuthority auth = iterator.next();
-        String role = auth.getAuthority();
+        List<String> roles = authorities.stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
 
         // 토큰 생성
-        String access = jwtManager.createJwt("access", memberId, role, accessTime);
-        String refresh = jwtManager.createJwt("refresh", memberId, role, refreshTime);
+        String access = jwtManager.createJwt("access", memberId, roles, accessTime);
+        String refresh = jwtManager.createJwt("refresh", memberId, roles, refreshTime);
 
         // Refresh token 저장
         jwtManager.addRefreshToken(memberId, refresh, refreshTime);

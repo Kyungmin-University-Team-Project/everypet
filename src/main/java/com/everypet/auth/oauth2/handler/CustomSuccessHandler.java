@@ -15,7 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -38,13 +39,13 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String username = customUserDetails.getMemberId();
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
-        GrantedAuthority auth = iterator.next();
-        String role = auth.getAuthority();
+        List<String> roles = authorities.stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
 
         // 토큰 생성
-        String access = jwtManager.createJwt("access", username, role, accessTime);
-        String refresh = jwtManager.createJwt("refresh", username, role, refreshTime);
+        String access = jwtManager.createJwt("access", username, roles, accessTime);
+        String refresh = jwtManager.createJwt("refresh", username, roles, refreshTime);
 
         // Refresh token 저장
         jwtManager.addRefreshToken(username, refresh, refreshTime);

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -76,11 +77,11 @@ public class ReissueService {
         }
 
         String memberId = jwtManager.getUsername(refresh);
-        String role = jwtManager.getRole(refresh);
+        List<String> roles = jwtManager.getRoles(refresh);
 
         //make new JWT
-        String newAccess = jwtManager.createJwt("access", memberId, role, accessTime);
-        String newRefresh = jwtManager.createJwt("refresh", memberId, role, refreshTime);
+        String newAccess = jwtManager.createJwt("access", memberId, roles, accessTime);
+        String newRefresh = jwtManager.createJwt("refresh", memberId, roles, refreshTime);
 
         //Refresh 토큰 저장 DB에 기존의 Refresh 토큰 삭제 후 새 Refresh 토큰 저장
         refreshTokenRepository.delete(refreshToken);

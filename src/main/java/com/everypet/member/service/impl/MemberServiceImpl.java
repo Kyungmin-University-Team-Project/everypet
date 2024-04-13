@@ -2,10 +2,14 @@ package com.everypet.member.service.impl;
 
 import com.everypet.member.data.dao.MemberMapper;
 import com.everypet.member.data.dao.RoleMapper;
+import com.everypet.member.data.domain.Member;
 import com.everypet.member.data.domain.Role;
 import com.everypet.member.data.dto.MemberDTO;
 import com.everypet.member.exception.DuplicateMemberException;
+import com.everypet.member.exception.MemberIdNotFoundException;
 import com.everypet.member.service.MemberService;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -43,5 +47,16 @@ public class MemberServiceImpl implements MemberService {
                 .memberId(member.getMemberId())
                 .authorities("ROLE_USER")
                 .build());
+    }
+
+
+    @Override
+    public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
+        Member member = memberMapper.selectMemberByMemberId(memberId).orElseThrow(() -> new MemberIdNotFoundException(memberId));
+
+        // 사용자 권한 select해서 받아온 List<String> 객체 주입
+        member.setAuthorities(roleMapper.selectAuthByMemberId(memberId));
+
+        return member;
     }
 }

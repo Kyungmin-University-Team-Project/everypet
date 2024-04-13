@@ -10,7 +10,9 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 @Component
@@ -18,7 +20,7 @@ public class JWTManager {
     private SecretKey secretKey;
     private final RefreshTokenRepository refreshTokenRepository;
 
-    public JWTManager(@Value("${spring.jwt.secret}")String secret, RefreshTokenRepository refreshTokenRepository) {
+    public JWTManager(@Value("${spring.jwt.secret}") String secret, RefreshTokenRepository refreshTokenRepository) {
         this.secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
         this.refreshTokenRepository = refreshTokenRepository;
     }
@@ -28,9 +30,9 @@ public class JWTManager {
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("username", String.class);
     }
 
-    public String getRole(String token) {
-
-        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("role", String.class);
+    public List<String> getRoles(String token) {
+        String rolesStr = Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("roles", String.class);
+        return Arrays.asList(rolesStr.split(","));
     }
 
     public String getCategory(String token) {
@@ -43,18 +45,21 @@ public class JWTManager {
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().getExpiration().before(new Date());
     }
 
-    public String createJwt(String category, String username, String role, Long expiredMs) {
+    public String createJwt(String category, String username, List<String> roles, Long expiredMs) {
+
+        String rolesStr = String.join(",", roles);
 
         return Jwts.builder()
                 .claim("category", category)
                 .claim("username", username)
-                .claim("role", role)
+                .claim("roles", rolesStr)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expiredMs))
                 .signWith(secretKey)
                 .compact();
 
     }
+
     public void addRefreshToken(String memberId, String refreshToken, Long expiredMs) {
 
         // 한국 시간대로 설정
@@ -68,7 +73,7 @@ public class JWTManager {
         RefreshToken token = RefreshToken.builder()
                 .memberId(memberId + ":" + formattedDate)
                 .refreshToken(refreshToken)
-                .expirationDate(expiredMs/1000)
+                .expirationDate(expiredMs / 1000)
                 .build();
 
         refreshTokenRepository.save(token);
