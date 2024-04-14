@@ -26,9 +26,10 @@ export const login = async ({
       console.log("Invalid response data received from server");
     }
 
-    return responseData;
+    return responseData; // 정상적인 경우 반환
   } catch (error) {
     console.error("Error in login:", error);
+    throw error; // 오류가 발생한 경우 오류를 throw
   }
 };
 
@@ -44,5 +45,3 @@ export const signUpLogin = async ({
   const response = await axios.post("http://localhost:8080/signup", data);
   return response.data;
 };
-
-/*export default AuthAPI;*/
