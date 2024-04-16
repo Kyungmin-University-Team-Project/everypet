@@ -1,24 +1,8 @@
-import axios, { AxiosInstance } from "axios";
-
-const ACCESS_TOKEN = localStorage.getItem("access");
+import axios from "axios";
 
 interface ResponseData {
   access: string;
 }
-
-export const createAuthApi = (baseURL: string): AxiosInstance => {
-  const instance = axios.create({
-    baseURL,
-    headers: {
-      "Content-Type": "application/json",
-      access: `${ACCESS_TOKEN}`,
-    },
-  });
-
-  return instance;
-};
-
-const AuthAPI: AxiosInstance = createAuthApi("http://localhost:8080");
 
 export const login = async ({
   memberId,
@@ -29,7 +13,7 @@ export const login = async ({
 }): Promise<ResponseData> => {
   const data = { memberId, memberPwd };
   try {
-    const response = await AuthAPI.post("/signin", data);
+    const response = await axios.post("http://localhost:8080/signin", data);
     const responseData: ResponseData = {
       access: response.headers.access,
     };
@@ -39,13 +23,13 @@ export const login = async ({
 
     // 토큰이 올바르게 추출되었는지 확인
     if (!responseData.access) {
-      throw new Error("Invalid response data received from server");
+      console.log("Invalid response data received from server");
     }
 
-    return responseData;
+    return responseData; // 정상적인 경우 반환
   } catch (error) {
     console.error("Error in login:", error);
-    throw error;
+    throw error; // 오류가 발생한 경우 오류를 throw
   }
 };
 
@@ -58,8 +42,6 @@ export const signUpLogin = async ({
   memberPwd: string;
 }): Promise<ResponseData> => {
   const data = { memberId, memberPwd };
-  const response = await AuthAPI.post("/signup", data);
+  const response = await axios.post("http://localhost:8080/signup", data);
   return response.data;
 };
-
-/*export default AuthAPI;*/
