@@ -4,16 +4,27 @@
 <mapper namespace="com.everypet.member.data.dao.MemberMapper">
 
     <select id="selectMemberByMemberId" parameterType="String" resultType="Member">
-        SELECT * FROM TBL_MEMBER WHERE MEMBER_ID = #{memberId}
+        SELECT *
+        FROM TBL_MEMBER
+        WHERE MEMBER_ID = #{memberId}
     </select>
 
     <select id="existsByMemberId" parameterType="String" resultType="boolean">
-        SELECT COUNT(*) FROM TBL_MEMBER WHERE MEMBER_ID = #{memberId}
+        SELECT COUNT(*)
+        FROM TBL_MEMBER
+        WHERE MEMBER_ID = #{memberId}
     </select>
 
     <insert id="insertMember" parameterType="MemberDTO">
-        INSERT INTO TBL_MEMBER(MEMBER_ID, MEMBER_PWD)
-        VALUES (#{memberId}, #{memberPwd})
+        INSERT INTO TBL_MEMBER(
+            MEMBER_ID, MEMBER_PWD, NAME, EMAIL, PHONE, AGREE_MARKETING_YN)
+        VALUES (
+            #{memberId}, #{memberPwd}, #{name}, #{email}, #{phone}, #{agreeMarketingYn})
+    </insert>
+
+    <insert id="insertAddress" useGeneratedKeys="true" keyProperty="addressNo" parameterType="Address">
+        INSERT INTO TBL_ADDRESS(MEMBER_ID, ADDRESS, RECEIVER, PHONE, REQUEST, DEFAULT_YN)
+        VALUES (#{memberId}, #{address}, #{receiver}, #{phone}, #{request}, #{defaultYn})
     </insert>
 
 </mapper>
