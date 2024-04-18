@@ -2,10 +2,10 @@
 
 ## 👥 팀원
 
-### 🔥 <span style="color:#3CB371; font-family: 'Comic Sans MS', cursive, sans-serif;">심연의 소환사 이용호</span>
-### ☀️ <span style="color:#FFA500; font-family: 'Comic Sans MS', cursive, sans-serif;">태양의 정복자 노희철</span>
-### 🌑 <span style="color:#9400D3; font-family: 'Comic Sans MS', cursive, sans-serif;">어둠의 사냥꾼 이관용</span>
-### ⚡️ <span style="color:#FF6347; font-family: 'Comic Sans MS', cursive, sans-serif;">폭풍의 용사 박민규</span>
+### 🔥 <span style="color:#3CB371; font-family: 'Comic Sans MS', cursive, sans-serif;">엔젤릭버스터 이용호</span>
+### ☀️ <span style="color:#FFA500; font-family: 'Comic Sans MS', cursive, sans-serif;">친박연대 총장 노희철</span>
+### 🌑 <span style="color:#9400D3; font-family: 'Comic Sans MS', cursive, sans-serif;">일간베스트 총괄 이관용</span>
+### ⚡️ <span style="color:#FF6347; font-family: 'Comic Sans MS', cursive, sans-serif;">남성 페미니스트 대표 박민규</span>
 
 ## 🚀 프로젝트 실행 방법
 
@@ -50,6 +50,20 @@ docker-compose down
 | Server     | ![Apache Tomcat](https://img.shields.io/badge/Apache_Tomcat-F8DC75?style=for-the-badge&logo=apache-tomcat&logoColor=black)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | Tool       | ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white) ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white) ![Storybook](https://img.shields.io/badge/Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white)                                                                                                                                                                                                                                                                                                                |
 
+## 🎯서비스 핵심기능
+```
+👨‍👨‍👧 회원 : 로그인 | 회원가입 |
+```
+
+<details>
+<summary>핵심기능 #1. 로그인 JWT</summary>
+<div markdown="1">
+
+>>>>>>>>>>>>> <p style="color:black">뭘봐</p>
+
+</div>
+</details>
+
 ## 📋 해야할것
 
 1. OAuth2 수정
@@ -57,6 +71,6 @@ docker-compose down
 ## 📖 문제가 많은 ERD
    ![img](https://i.ibb.co/k9MYN9h/Every-Pet-2.png)
 
-## 🥷🏾 자르반 (84세)
+## ✉️ 手紙を受け取る
 
-![image](https://storage.enuri.info/pic_upload/knowbox2/202210/02092555720221011800ff471-4210-41a9-853f-3220d9b9a312.jpg)
+![image](https://e0.pxfuel.com/wallpapers/562/794/desktop-wallpaper-kiki-s-delivery-service-and-background.jpg)
