@@ -2,7 +2,7 @@ package com.everypet.auth.oauth2.handler;
 
 import com.everypet.auth.oauth2.data.dto.CustomOAuth2User;
 import com.everypet.auth.util.CookieManager;
-import com.everypet.auth.util.JWTManager;
+import com.everypet.auth.jwt.util.JWTManager;
 import com.everypet.auth.util.TokenExpirationTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;

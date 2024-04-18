@@ -68,8 +68,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
             MemberDTO memberDTO = MemberDTO.builder()
                     .memberId(username)
-                    .name(oAuth2Response.getName())
-                    .role("ROLE_USER").build();
+                    .name(oAuth2Response.getName()).build();
 
             return new CustomOAuth2User(memberDTO);
         }
@@ -82,8 +81,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         MemberDTO memberDTO = MemberDTO.builder()
                 .memberId(existData.getMemberId())
-                .name(oAuth2Response.getName())
-                .role("ROLE_USER").build();
+                .name(oAuth2Response.getName()).build();
 
         return new CustomOAuth2User(memberDTO);
     }

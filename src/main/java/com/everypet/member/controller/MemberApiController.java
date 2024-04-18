@@ -1,5 +1,6 @@
 package com.everypet.member.controller;
 
+import com.everypet.member.data.dto.AddressDTO;
 import com.everypet.member.data.dto.MemberDTO;
 import com.everypet.member.service.MemberService;
 import io.swagger.annotations.Api;
@@ -23,12 +24,21 @@ public class MemberApiController {
 
     @ApiOperation(value = "회원 가입", notes = "새로운 회원을 등록합니다.")
     @PostMapping("/signup")
-    public ResponseEntity<String> signUp(@RequestBody  MemberDTO member) {
+    public ResponseEntity<String> signUp(@RequestBody MemberDTO member) {
         memberService.register(member);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")
                 .body("회원 가입 완료");
     }
+
+    @PostMapping("/address")
+    public ResponseEntity<String> addressRegister(@RequestBody AddressDTO addressDTO) {
+        memberService.addressRegister(addressDTO);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")
+                .body("주소 등록 완료");
+    }
+
     @GetMapping("/admin")
     public ResponseEntity<String> admin() {
         return ResponseEntity.status(HttpStatus.OK).body("ok");

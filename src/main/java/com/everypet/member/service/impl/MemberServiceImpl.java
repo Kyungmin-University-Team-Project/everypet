@@ -2,29 +2,27 @@ package com.everypet.member.service.impl;
 
 import com.everypet.member.data.dao.MemberMapper;
 import com.everypet.member.data.dao.RoleMapper;
+import com.everypet.member.data.domain.Address;
 import com.everypet.member.data.domain.Member;
 import com.everypet.member.data.domain.Role;
+import com.everypet.member.data.dto.AddressDTO;
 import com.everypet.member.data.dto.MemberDTO;
 import com.everypet.member.exception.DuplicateMemberException;
 import com.everypet.member.exception.MemberIdNotFoundException;
 import com.everypet.member.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
     private final MemberMapper memberMapper;
     private final RoleMapper roleMapper;
     private final PasswordEncoder passwordEncoder;
-
-    public MemberServiceImpl(MemberMapper memberMapper, RoleMapper roleMapper, PasswordEncoder passwordEncoder) {
-        this.memberMapper = memberMapper;
-        this.roleMapper = roleMapper;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @Override
     public void register(MemberDTO member) {
@@ -43,10 +41,26 @@ public class MemberServiceImpl implements MemberService {
         member.setMemberPwd(passwordEncoder.encode(memberPwd));
 
         memberMapper.insertMember(member);
+
         roleMapper.insertRole(Role.builder()
                 .memberId(member.getMemberId())
                 .authorities("ROLE_USER")
                 .build());
+    }
+
+    @Override
+    public void addressRegister(AddressDTO addressDTO) {
+
+        Address address = Address.builder()
+                .memberId(addressDTO.getMemberId())
+                .address(addressDTO.getAddress())
+                .receiver(addressDTO.getReceiver())
+                .phone(addressDTO.getPhone())
+                .request(addressDTO.getRequest())
+                .defaultYn(addressDTO.getDefaultYn())
+                .build();
+
+        memberMapper.insertAddress(address);
     }
 
 

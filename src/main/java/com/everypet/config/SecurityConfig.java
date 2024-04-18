@@ -8,7 +8,7 @@ import com.everypet.auth.oauth2.handler.CustomSuccessHandler;
 import com.everypet.auth.oauth2.config.CustomClientRegistrationRepo;
 import com.everypet.auth.oauth2.service.CustomOAuth2UserService;
 import com.everypet.auth.util.CookieManager;
-import com.everypet.auth.util.JWTManager;
+import com.everypet.auth.jwt.util.JWTManager;
 import com.everypet.member.service.UserLoginFailHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

@@ -1,6 +1,6 @@
 package com.everypet.auth.jwt.filter;
 
-import com.everypet.auth.util.JWTManager;
+import com.everypet.auth.jwt.util.JWTManager;
 import com.everypet.member.data.domain.Member;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
