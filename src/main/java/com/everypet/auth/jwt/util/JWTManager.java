@@ -1,4 +1,4 @@
-package com.everypet.auth.util;
+package com.everypet.auth.jwt.util;
 
 import com.everypet.auth.jwt.data.domain.RefreshToken;
 import com.everypet.auth.jwt.data.repository.RefreshTokenRepository;

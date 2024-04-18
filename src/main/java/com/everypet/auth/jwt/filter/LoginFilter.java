@@ -1,7 +1,7 @@
 package com.everypet.auth.jwt.filter;
 
 import com.everypet.auth.util.CookieManager;
-import com.everypet.auth.util.JWTManager;
+import com.everypet.auth.jwt.util.JWTManager;
 import com.everypet.auth.util.TokenExpirationTime;
 import com.everypet.member.data.dto.MemberDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
