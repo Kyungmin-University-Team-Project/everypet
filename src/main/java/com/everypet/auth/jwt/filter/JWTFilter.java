@@ -1,11 +1,13 @@
 package com.everypet.auth.jwt.filter;
 
-import com.everypet.auth.util.JWTManager;
+import com.everypet.auth.jwt.util.JWTManager;
 import com.everypet.member.data.domain.Member;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -17,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -65,14 +66,16 @@ public class JWTFilter extends OncePerRequestFilter {
 
         // username, role 값을 획득
         String username = jwtManager.getUsername(accessToken);
-        List<String> role = new ArrayList<>(
-                Arrays.asList(jwtManager.getRole(accessToken))
-        );
+        List<String> roles = jwtManager.getRoles(accessToken);
 
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        for (String s : roles) {
+            authorities.add(new SimpleGrantedAuthority(s));
+        }
 
         Member member = new Member();
         member.setMemberId(username);
-        member.setAuthorities(role);
+        member.setAuthorities(roles);
 
         Authentication authToken = new UsernamePasswordAuthenticationToken(member, null, member.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authToken);

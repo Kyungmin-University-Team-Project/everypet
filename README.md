@@ -2,6 +2,7 @@
 
 ## 👥 팀원
 
+<<<<<<< HEAD
 ### 🔥 <span style="color:#3CB371; font-family: 'Comic Sans MS', cursive, sans-serif;">심연의 소환사 이용호</span>
 
 ### ☀️ <span style="color:#FFA500; font-family: 'Comic Sans MS', cursive, sans-serif;">태양의 정복자 노희철</span>
@@ -9,6 +10,12 @@
 ### 🌑 <span style="color:#9400D3; font-family: 'Comic Sans MS', cursive, sans-serif;">어둠의 사냥꾼 이관용</span>
 
 ### ⚡️ <span style="color:#FF6347; font-family: 'Comic Sans MS', cursive, sans-serif;">폭풍의 용사 박민규</span>
+=======
+### 🔥 <span style="color:#3CB371; font-family: 'Comic Sans MS', cursive, sans-serif;">엔젤릭버스터 이용호</span>
+### ☀️ <span style="color:#FFA500; font-family: 'Comic Sans MS', cursive, sans-serif;">친박연대 총장 노희철</span>
+### 🌑 <span style="color:#9400D3; font-family: 'Comic Sans MS', cursive, sans-serif;">일간베스트 총괄 이관용</span>
+### ⚡️ <span style="color:#FF6347; font-family: 'Comic Sans MS', cursive, sans-serif;">남성 페미니스트 대표 박민규</span>
+>>>>>>> 108b0a994928ac494946832c06b26c334e3edb45
 
 ## 🚀 프로젝트 실행 방법
 
@@ -53,6 +60,20 @@ docker-compose down
 | Server     | ![Apache Tomcat](https://img.shields.io/badge/Apache_Tomcat-F8DC75?style=for-the-badge&logo=apache-tomcat&logoColor=black)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | Tool       | ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white) ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white) ![Storybook](https://img.shields.io/badge/Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white)                                                                                                                                                                                                                                                                                                                |
 
+## 🎯서비스 핵심기능
+```
+👨‍👨‍👧 회원 : 로그인 | 회원가입 |
+```
+
+<details>
+<summary>핵심기능 #1. 로그인 JWT</summary>
+<div markdown="1">
+
+>>>>>>>>>>>>> <p style="color:black">뭘봐</p>
+
+</div>
+</details>
+
 ## 📋 해야할것
 
 1. OAuth2 수정
@@ -61,8 +82,12 @@ docker-compose down
 
 ![img](https://i.ibb.co/k9MYN9h/Every-Pet-2.png)
 
-## 🥷🏾 너의 프로젝트는 망했다
+## ✉️ 手紙を受け取る
 
+<<<<<<< HEAD
 ![image](https://i.namu.wiki/i/TdB8qb-v90wkA6tuddfb7TU_TFrgda6YAvOHR-lsT_GoqcfR5KJxT8PJoPuAZPWgtKPU0DeYPTVRQs_FbHG1TMY1tMbeu934JL9sSH2Q-Ln5ikeHTeWmbSM4yq46uH602__xG4DXs9I5rEKM-UL0Sg.webp)
 
 ### 이제부터 여긴 맨체스터 유나이티드 영토다
+=======
+![image](https://e0.pxfuel.com/wallpapers/562/794/desktop-wallpaper-kiki-s-delivery-service-and-background.jpg)
+>>>>>>> 108b0a994928ac494946832c06b26c334e3edb45

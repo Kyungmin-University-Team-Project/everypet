@@ -1,4 +1,4 @@
-export interface Join {
+export interface LoginData {
   memberId: string;
   memberPwd: string;
 }

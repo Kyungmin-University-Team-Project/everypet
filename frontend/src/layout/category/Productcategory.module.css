@@ -23,7 +23,9 @@
 
   margin-left: 40px;
 
-  gap: 48px;
+  gap: 52px;
+
+  /* background-color: aqua; */
 }
 
 @media screen and (max-width: 1536px) {

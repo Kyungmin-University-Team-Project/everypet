@@ -5,24 +5,9 @@ import useToggle from '../../utils/category/ToggleUtil';
 import Categorymodal from '../category/Categorymodal';
 import Searchinput from './Searchinput';
 import Usermenu from './Usermenu';
-import Fixedheader from './Fixedheader';
 
 const Header = () => {
-  const [isOpen, toggleSidebar] = useToggle(false);
-
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY); // 스크롤 Y 값을 업데이트
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  const [isOpen, toggleOn, toggleOff] = useToggle(false);
 
   return (
     <>
@@ -38,7 +23,7 @@ const Header = () => {
         </div>
       </header>
 
-      <Categorymodal isOpen={isOpen} toggle={toggleSidebar} />
+      <Categorymodal isOpen={isOpen} setOpen={toggleOn} setClose={toggleOff} />
     </>
   );
 };

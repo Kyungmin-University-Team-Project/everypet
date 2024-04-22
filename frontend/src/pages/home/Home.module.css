@@ -4,3 +4,52 @@
   background-color: aqua;
   margin: 30px 0 30px 0;
 }
+
+.container {
+  display: flex;
+  width: 100%;
+  /* background-color: rgb(211, 211, 248); */
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.inner {
+  width: 1250px;
+
+  /* background-color: aqua; */
+}
+
+.title {
+  display: block;
+
+  font-size: 28px;
+  font-weight: bold;
+
+  margin-bottom: 30px;
+}
+
+.main__img__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  /* background-color: aqua; */
+}
+
+.main__img {
+  width: 1250px;
+  max-height: 100%; /* 이미지 최대 높이를 부모 요소에 맞게 조절 */
+  object-fit: cover; /* 이미지가 부모 요소에 맞게 늘어나며 가운데 정렬되도록 설정 */
+}
+
+@media screen and (min-width: 1536px) {
+  .inner {
+    width: 990px;
+  }
+  .main__img {
+    width: 990px;
+  }
+}
