@@ -1,0 +1,41 @@
+.quick__nav__container {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+
+  /* background-color: aqua; */
+
+  margin-bottom: 80px;
+}
+
+.quick__nav {
+  display: flex;
+  justify-content: space-between;
+  width: 1000px; /* 네비게이션 전체 너비 설정 */
+  /* background-color: antiquewhite; */
+}
+
+.quick__nav__item {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  /* background-color: blue;  */
+  margin-bottom: 10px;
+
+  cursor: pointer;
+}
+
+.img {
+  max-width: 60px;
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 1536px) {
+  .quick__nav {
+    width: 800px;
+  }
+}

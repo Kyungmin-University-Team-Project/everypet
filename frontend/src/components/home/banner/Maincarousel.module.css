@@ -3,6 +3,9 @@
   /* background-color: antiquewhite; */
 
   justify-content: center;
+
+  margin-top: 20px;
+  margin-bottom: 100px;
 }
 
 .item1,
@@ -19,6 +22,6 @@
 
 .img {
   width: 100%; /* 이미지가 부모 요소인 .item에 꽉 차게 설정 */
-  height: 400px; /* 이미지가 부모 요소인 .item에 꽉 차게 설정 */
+  height: 400px;
   object-fit: cover; /* 이미지가 부모 요소에 맞게 늘어나며 가운데 정렬되도록 설정 */
 }

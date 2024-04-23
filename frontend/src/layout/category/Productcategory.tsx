@@ -28,14 +28,31 @@ const Productcategory = () => {
     (state: RootState) => state.category.clickedCategory
   );
 
-  const [isOpen, toggleSidebar] = useToggle(false); // ToggleUtil 사용
+  const [isOpen, toggleOn, toggleOff] = useToggle(false);
 
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isOpen) {
+        toggleOff(); // 스크롤 시 모달이 열려있으면 닫기
+        console.log('성공');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isOpen, toggleOff]);
 
   useEffect(() => {
     if (location.pathname === '/') {
       dispatch(setClickedCategory(''));
     }
+
+    console.log(isOpen);
   }, [location.pathname, dispatch]);
 
   const handleClick = (category: string) => {
@@ -49,7 +66,11 @@ const Productcategory = () => {
   return (
     <div>
       <nav className={styles.container}>
-        <Categorybarbtn toggle={toggleSidebar} />
+        <Categorybarbtn
+          isOpen={isOpen}
+          setOpen={toggleOn}
+          setClose={toggleOff}
+        />
         <ul className={styles.category__menu}>
           {categories.map((category, index) => (
             <ProductcategoryItem
@@ -63,7 +84,7 @@ const Productcategory = () => {
         </ul>
         <Realtimekeyword />
       </nav>
-      <Categorymodal isOpen={isOpen} toggle={toggleSidebar} />
+      <Categorymodal isOpen={isOpen} setOpen={toggleOn} setClose={toggleOff} />
     </div>
   );
 };

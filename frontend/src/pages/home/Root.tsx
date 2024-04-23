@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Productcategory from '../../layout/category/Productcategory';
 import Home from './Home';
 import Header from '../../layout/Header/Header';
+import Fixedheader from '../../layout/Header/Fixedheader';
 
 const Root = () => {
   const location = useLocation();
@@ -29,6 +30,7 @@ const Root = () => {
 
   return (
     <>
+      <Fixedheader />
       <Header />
       <Productcategory />
       {location.pathname === '/' ? <Home /> : <Outlet />}

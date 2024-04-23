@@ -1,10 +1,14 @@
-// ToggleUtil.tsx
 import { useState } from 'react';
 
-const useToggle = (initialValue: boolean): [boolean, () => void] => {
-  const [value, setValue] = useState<boolean>(initialValue);
-  const toggle = () => setValue((prevValue) => !prevValue);
-  return [value, toggle];
+const useToggle = (
+  initialValue: boolean
+): [boolean, () => void, () => void] => {
+  const [isOpen, seIsOpen] = useState<boolean>(initialValue);
+
+  const toggleOn = () => seIsOpen(true);
+  const toggleOff = () => seIsOpen(false);
+
+  return [isOpen, toggleOn, toggleOff];
 };
 
 export default useToggle;

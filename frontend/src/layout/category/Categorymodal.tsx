@@ -56,14 +56,12 @@ const categories = [
   },
 ];
 
-const Categorymodal = ({ isOpen, toggle }: SidebarProps) => {
+const Categorymodal = ({ isOpen, setOpen, setClose }: SidebarProps) => {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY); // 스크롤 Y 값을 업데이트
-
-      console.log(window.scrollY);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -75,7 +73,7 @@ const Categorymodal = ({ isOpen, toggle }: SidebarProps) => {
 
   // 마우스가 모달 영역을 벗어날 때 모달 열림 상태를 false로 설정
   const handleMouseLeave = () => {
-    toggle();
+    setClose();
   };
 
   return (

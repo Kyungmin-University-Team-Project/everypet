@@ -44,7 +44,7 @@
   display: flex;
   flex-wrap: wrap;
 
-  margin-left: 28%;
+  margin-left: 29.5%;
 
   gap: 70px;
 }
@@ -85,7 +85,7 @@
 .ul__line {
   width: 2px; /* 세로선의 너비 설정 */
   height: 0; /* 초기에는 높이를 0으로 설정 */
-  background-color: #4a8cf0; /* 세로선의 색상 설정 */
+  background-color: #4a8cf0;
   position: absolute; /* 절대 위치 설정 */
 
   transition: all 0.5s ease; /* 높이에 대한 트랜지션 설정 */
@@ -130,6 +130,6 @@
   .categories__container {
     margin-left: 28%;
 
-    gap: 50px;
+    gap: 36px;
   }
 }

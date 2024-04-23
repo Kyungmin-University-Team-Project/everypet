@@ -12,8 +12,8 @@ export interface ProductcategoryItemProps {
   link: string;
 }
 
-// 사이드바 온오프
 export interface SidebarProps {
   isOpen: boolean;
-  toggle: () => void;
+  setOpen: () => void;
+  setClose: () => void;
 }
