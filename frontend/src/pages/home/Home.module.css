@@ -24,32 +24,46 @@
 .title {
   display: block;
 
-  font-size: 28px;
+  font-size: 36px;
   font-weight: bold;
 
   margin-bottom: 30px;
 }
 
-.main__img__container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-  /* background-color: aqua; */
-}
-
 .main__img {
-  width: 1250px;
-  max-height: 100%; /* 이미지 최대 높이를 부모 요소에 맞게 조절 */
-  object-fit: cover; /* 이미지가 부모 요소에 맞게 늘어나며 가운데 정렬되도록 설정 */
+  width: 100%;
+  object-fit: cover;
 }
 
-@media screen and (min-width: 1536px) {
+.rightAlign {
+  display: flex; /* Use flexbox for alignment */
+  justify-content: flex-end; /* Align to the right end */
+  margin: 10px 0; /* Margin for spacing */
+}
+
+.view__all {
+  padding: 8px 16px; /* Button padding */
+  background-color: #007bff; /* Primary button color, e.g., Bootstrap blue */
+  color: white; /* Text color */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 16px; /* Text size */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.view__all:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+@media screen and (max-width: 1536px) {
   .inner {
-    width: 990px;
+    width: 1000px;
   }
-  .main__img {
-    width: 990px;
+  .container {
+    padding: 10px;
+  }
+  .title {
+    font-size: 28px;
   }
 }
