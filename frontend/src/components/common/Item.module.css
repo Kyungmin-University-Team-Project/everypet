@@ -1,0 +1,55 @@
+.item {
+  border: 1px solid #ddd;
+  padding: 16px;
+  background-color: white;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease;
+
+  cursor: pointer;
+}
+.img {
+  transform: scale(0.8);
+  transition: transform 0.3s ease;
+}
+
+.item:hover .img {
+  transform: scale(0.9);
+}
+
+.title {
+  color: #333; /* Dark grey color for text */
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.price {
+  color: #888; /* Medium grey for the price */
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+.recommendation {
+  color: green; /* Green color for recommended items */
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.notRecommended {
+  color: red; /* Red color for not recommended items */
+}
+
+.reviewCount {
+  color: #555; /* Darker grey for review count */
+  font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+  .item {
+    margin: 10px auto; /* Center items on smaller screens */
+  }
+}

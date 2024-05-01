@@ -12,7 +12,7 @@
 .quick__nav {
   display: flex;
   justify-content: space-between;
-  width: 1000px; /* 네비게이션 전체 너비 설정 */
+  width: 1250px; /* 네비게이션 전체 너비 설정 */
   /* background-color: antiquewhite; */
 }
 
@@ -34,8 +34,8 @@
   margin-bottom: 20px;
 }
 
-@media screen and (min-width: 1536px) {
+@media screen and (max-width: 1536px) {
   .quick__nav {
-    width: 800px;
+    width: 1000px;
   }
 }

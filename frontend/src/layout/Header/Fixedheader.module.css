@@ -22,7 +22,7 @@
   justify-content: center; /* 수평 가운데 정렬 */
   align-items: center; /* 수직 가운데 정렬 */
 
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: solid 1px rgb(205, 205, 205);
 
   z-index: 9999;
 }
