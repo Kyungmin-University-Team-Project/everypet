@@ -1,6 +1,7 @@
+/* Item.module.css */
 .item {
   border: 1px solid #ddd;
-  padding: 16px;
+  padding: 0 8px 0 8px;
   background-color: white;
   margin: 10px 0;
   border-radius: 8px;
@@ -9,9 +10,10 @@
   flex-direction: column;
   justify-content: space-between;
   transition: transform 0.3s ease;
-
   cursor: pointer;
+  position: relative; /* Needed for absolute positioning of icons */
 }
+
 .img {
   transform: scale(0.8);
   transition: transform 0.3s ease;
@@ -22,34 +24,98 @@
 }
 
 .title {
-  color: #333; /* Dark grey color for text */
-  font-size: 1.2em;
-  margin-bottom: 5px;
+  color: #333;
+  font-size: 1em;
+  font-weight: bold;
+
+  transition: all 0.2s ease-in;
+}
+
+.item:hover .title {
+  color: #75acff;
+}
+
+.item__info {
+  display: flex;
+  flex-direction: column;
+
+  padding: 10px 0;
+  gap: 8px;
+}
+
+.price__wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.discount {
+  color: rgb(253, 111, 111);
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .price {
-  color: #888; /* Medium grey for the price */
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+
   font-size: 1.1em;
-  margin-bottom: 10px;
 }
 
-.recommendation {
-  color: green; /* Green color for recommended items */
-  font-size: 1em;
-  margin-bottom: 10px;
+.tagAndIcons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  padding-bottom: 10px;
+
+  border-bottom: solid rgb(199, 199, 199) 1px;
 }
 
-.notRecommended {
-  color: red; /* Red color for not recommended items */
+.cartIcon,
+.likeIcon {
+  font-size: 24px;
+  margin-right: 10px;
+
+  color: #8f8f8f;
+
+  transition: all 0.2s ease;
+}
+
+.cartIcon:hover {
+  color: black;
+}
+
+.likeIcon:hover {
+  color: rgb(255, 55, 55);
+}
+
+.tag {
+  background-color: #ff8a00;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.recommendationAndReviews {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stars {
+  color: #ff8a00;
 }
 
 .reviewCount {
-  color: #555; /* Darker grey for review count */
-  font-size: 0.9em;
+  color: rgb(122, 122, 122);
+  font-size: 13px;
 }
 
 @media (max-width: 768px) {
   .item {
-    margin: 10px auto; /* Center items on smaller screens */
+    margin: 10px auto;
   }
 }
