@@ -4,17 +4,13 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'; // Redux의 Provider import
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Pages1 from './pages/category/Pages1';
+import ProductPage from './pages/category/ProductPage';
 import Root from './pages/home/Root';
-import Pages3 from './pages/category/Pages3';
-import Pages2 from './pages/category/Pages2';
+
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 import Findauth from './pages/auth/Findauth';
-import Pages7 from './pages/category/Pages7';
-import Pages6 from './pages/category/Pages6';
-import Pages5 from './pages/category/Pages5';
-import Pages4 from './pages/category/Pages4';
+
 import store from './redux/store/store';
 import Agreement from './pages/auth/Agreement';
 
@@ -22,15 +18,34 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
-    children: [
-      { path: 'page1', element: <Pages1 /> },
-      { path: 'page2', element: <Pages2 /> },
-      { path: 'page3', element: <Pages3 /> },
-      { path: 'page4', element: <Pages4 /> },
-      { path: 'page5', element: <Pages5 /> },
-      { path: 'page6', element: <Pages6 /> },
-      { path: 'page7', element: <Pages7 /> },
-    ],
+  },
+  {
+    path: '/coupon',
+    element: <ProductPage category={'coupon'} />,
+  },
+  {
+    path: '/timesale',
+    element: <ProductPage category={'timesale'} />,
+  },
+  {
+    path: '/dog',
+    element: <ProductPage category={'dog'} />,
+  },
+  {
+    path: '/cat',
+    element: <ProductPage category={'cat'} />,
+  },
+  {
+    path: '/rat',
+    element: <ProductPage category={'rat'} />,
+  },
+  {
+    path: '/bird',
+    element: <ProductPage category={'bird'} />,
+  },
+  {
+    path: '/reptiles',
+    element: <ProductPage category={'reptiles'} />,
   },
   {
     path: '/login',

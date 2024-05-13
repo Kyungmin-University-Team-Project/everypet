@@ -9,7 +9,7 @@ import img1 from '../../assets/img/main_img/add1.jpg';
 import img2 from '../../assets/img/main_img/add2.jpg';
 import img3 from '../../assets/img/main_img/add3.jpg';
 import img4 from '../../assets/img/main_img/add4.jpg';
-import HomeAd from './HomeAd';
+import HomeAd from '../../components/home/HomeAd';
 
 const adsData = [
   {
