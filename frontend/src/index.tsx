@@ -13,6 +13,8 @@ import Findauth from './pages/auth/Findauth';
 
 import store from './redux/store/store';
 import Agreement from './pages/auth/Agreement';
+import Cupon from './pages/category/Cupon';
+import TimeDeal from './pages/category/TimeDeal';
 
 const router = createBrowserRouter([
   {
@@ -21,11 +23,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/coupon',
-    element: <ProductPage category={'coupon'} />,
+    element: <Cupon category={'coupon'} />,
   },
   {
     path: '/timesale',
-    element: <ProductPage category={'timesale'} />,
+    element: <TimeDeal category={'timesale'} />,
   },
   {
     path: '/dog',
