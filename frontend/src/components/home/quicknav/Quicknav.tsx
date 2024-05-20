@@ -14,6 +14,14 @@ const categories = [
     name: '설치류',
     image: require('../../../assets/img/quicknav/hamster.png'),
   },
+  {
+    name: '설치류',
+    image: require('../../../assets/img/quicknav/hamster.png'),
+  },
+  {
+    name: '설치류',
+    image: require('../../../assets/img/quicknav/hamster.png'),
+  },
 ];
 
 const Quicknav = () => {

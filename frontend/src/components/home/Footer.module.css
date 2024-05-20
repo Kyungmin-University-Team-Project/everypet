@@ -1,0 +1,30 @@
+.footer {
+  background-color: #f5f5f5;
+  color: #333;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 20px;
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.githubLink {
+  display: flex;
+  align-items: center;
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.githubLink:hover {
+  color: #555;
+}
+
+.footerText {
+  font-size: 14px;
+}

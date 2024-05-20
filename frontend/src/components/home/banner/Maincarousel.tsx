@@ -5,7 +5,8 @@ import './slick-theme.css';
 import './slick.css';
 
 const Maincarousel = () => {
-  // 이미지는 나중에 서버에서 받아외
+  // 이미지는 나중에 서버에서 받아오기
+  // 배너링크도 포함하기
 
   const bannerUrls = [
     require('../../../assets/img/banner/banner_1.jpg'),
@@ -28,18 +29,22 @@ const Maincarousel = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
-    draggable: false,
+  };
+
+  const moveBannerLink = (e: any) => {
+    console.log(e.target);
   };
 
   return (
     <div className={styles.container}>
       <Slider {...settings}>
         {bannerUrls.map((bannerUrl, index) => (
-          <div key={index} className={styles[`item${index + 1}`]}>
+          <div key={index} className={styles.itme}>
             <img
               className={styles.img}
               src={bannerUrl}
               alt={`Banner ${index + 1}`}
+              onClick={moveBannerLink}
             />
           </div>
         ))}
