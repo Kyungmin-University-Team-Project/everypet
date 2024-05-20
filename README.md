@@ -69,7 +69,7 @@ docker-compose down
 
 ## 📖 문제가 많은 ERD
 
-![img](https://i.ibb.co/k9MYN9h/Every-Pet-2.png)
+🚧 공사중
 
 ## 👊 우리 프로젝트는 이렇게 만들어졌습니다.
 
