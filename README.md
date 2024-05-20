@@ -12,8 +12,7 @@
 
 ## 🚀 프로젝트 실행 방법
 
-database.properties 올바른 데이터베이스 정보를 입력해주세요. </br>
-docs 폴더에 data.sql 쿼리문을 실행해주세요.
+알아서 실행하세요
 
 ## 🐳 Docker로 실행하기
 
@@ -42,8 +41,7 @@ docker-compose down
 ## 🛠️ 기술스택
 
 | Category   | Technologies and Tools                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OS         | Windows 10 / MAC                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ---------- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Language   | ![Java](https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white) ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white) ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white) |
 | IDE        | ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-000000?style=for-the-badge&logo=intellij-idea&logoColor=white) ![Visual Studio Code](https://img.shields.io/badge/Visual_Studio_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)                                                                                                                                                                                                                                                                                                                                                                      |
 | Framework  | ![Spring Framework](https://img.shields.io/badge/Spring_Framework-6DB33F?style=for-the-badge&logo=spring&logoColor=white) ![MyBatis](https://img.shields.io/badge/MyBatis-339933?style=for-the-badge&logo=mybatis&logoColor=white)                                                                                                                                                                                                                                                                                                                                                                                                        |
@@ -52,7 +50,7 @@ docker-compose down
 | Frontend   | ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white) ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)                                                                                                 |
 | Library    | ![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white) ![Spring Security](https://img.shields.io/badge/Spring_Security-6DB33F?style=for-the-badge&logo=spring-security&logoColor=white) ![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black) ![OAuth2](https://img.shields.io/badge/OAuth2-2E86C1?style=for-the-badge&logo=oauth&logoColor=white) ![Redux](https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white)                                                                            |
 | Server     | ![Apache Tomcat](https://img.shields.io/badge/Apache_Tomcat-F8DC75?style=for-the-badge&logo=apache-tomcat&logoColor=black)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| Tool       | ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white) ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white) ![Storybook](https://img.shields.io/badge/Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white)                                                                                                                                                                                                                                                                                                                |
+| Tool       | ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white) ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white) ![Storybook](https://img.shields.io/badge/Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white) ![Google Cloud](https://img.shields.io/badge/Google_Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white) ![Asana](https://img.shields.io/badge/Asana-27384D?style=for-the-badge&logo=asana&logoColor=white)                                                                                                                                                                                       |
 
 ## 🎯서비스 핵심기능
 
@@ -69,14 +67,10 @@ docker-compose down
 </div>
 </details>
 
-## 📋 해야할것
-
-1. OAuth2 수정
-
 ## 📖 문제가 많은 ERD
 
 ![img](https://i.ibb.co/k9MYN9h/Every-Pet-2.png)
 
-## ✉️ 手紙を受け取る
+## 👊 우리 프로젝트는 이렇게 만들어졌습니다.
 
-![image](https://e0.pxfuel.com/wallpapers/562/794/desktop-wallpaper-kiki-s-delivery-service-and-background.jpg)
+![image](https://www.0db.co.kr/files/attach/images/200/357/173/003/4347df2a13a2d629ff6b6b4fee51e352.gif)
