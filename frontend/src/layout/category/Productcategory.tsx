@@ -12,15 +12,14 @@ import Categorybarbtn from './Categorybarbtn';
 import Realtimekeyword from '../Header/Realtimekeyword';
 
 const categories = [
-  { name: '쿠폰/기획전', link: '/page1' },
-  { name: '타임딜', link: '/page2' },
-  { name: '강아지', link: '/page3' },
-  { name: '고양이', link: '/page4' },
-  { name: '설치류', link: '/page5' },
-  { name: '조류', link: '/page6' },
-  { name: '파충류', link: '/page7' },
+  { name: '쿠폰/기획전', link: '/coupon' },
+  { name: '타임딜', link: '/timesale' },
+  { name: '강아지', link: '/dog' },
+  { name: '고양이', link: '/cat' },
+  { name: '설치류', link: '/rat' },
+  { name: '조류', link: '/bird' },
+  { name: '파충류', link: '/reptiles' },
 ];
-
 const Productcategory = () => {
   const dispatch = useDispatch();
 

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { SidebarProps } from '../../typings/layout';
 import styles from './Categorymodal.module.css';
+import { Link } from 'react-router-dom';
 
 const categories = [
   {
     name: '강아지',
-    link: '/page3',
+    link: '/dog',
     subCategories: [
       '카테고리7',
       '카테고리8',
@@ -19,7 +20,7 @@ const categories = [
   },
   {
     name: '고양이',
-    link: '/page4',
+    link: '/cat',
     subCategories: [
       '카테고리10',
       '카테고리11',
@@ -31,7 +32,7 @@ const categories = [
   },
   {
     name: '설치류',
-    link: '/page5',
+    link: '/rat',
     subCategories: [
       '카테고리13',
       '카테고리14',
@@ -46,12 +47,12 @@ const categories = [
   },
   {
     name: '조류',
-    link: '/page6',
+    link: '/bird',
     subCategories: ['카테고리16', '카테고리17'],
   },
   {
     name: '파충류',
-    link: '/page7',
+    link: '/reptiles',
     subCategories: ['카테고리19', '카테고리20', '카테고리21', '카테고리42'],
   },
 ];
@@ -89,9 +90,11 @@ const Categorymodal = ({ isOpen, setOpen, setClose }: SidebarProps) => {
             {categories.map((category, index) => (
               <div key={index} className={styles.category}>
                 <div className={styles.category__content}>
-                  <span className={styles.category__title}>
-                    {category.name}
-                  </span>
+                  <Link to={category.link} className={styles.category__link}>
+                    <span className={styles.category__title}>
+                      {category.name}
+                    </span>
+                  </Link>
 
                   <div className={styles.ul__wrap}>
                     <div className={styles.ul__line__bg}></div>
