@@ -66,3 +66,4 @@ build/
 /src/main/java/com/everypet/auth/oauth2/config/SocialClientRegistration.java
 application.properties
 every-pet-418208-be0b25df67a9.json
+GoogleCloudStorageConfig.java
