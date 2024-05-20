@@ -11,8 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Address {
 
-    private Long addressNo;
-
     private String memberId;    // 회원 아이디
 
     private String address;     // 주소
