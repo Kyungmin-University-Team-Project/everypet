@@ -1,12 +1,22 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* Creates 5 columns of equal width */
-  padding: 10px; /* Padding around the grid */
+
+  gap: 1px;
+
+  margin-bottom: 40px;
 }
 
 .gridItem {
-  background-color: #f0f0f0; /* Light grey background for visibility */
+  background-color: #ffffff; /* Light grey background for visibility */
   border: 1px solid #ccc; /* Border for grid items */
   padding: 20px; /* Padding inside grid items */
   text-align: center; /* Center text inside grid items */
+
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.gridItem:hover {
+  background-color: #a2dcff;
 }

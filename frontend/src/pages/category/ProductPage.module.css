@@ -3,7 +3,7 @@
   flex-direction: column;
   width: 100%;
 
-  background-color: aqua;
+  /* background-color: aqua; */
 
   align-items: center;
   justify-content: center;
@@ -13,4 +13,6 @@
   width: 1250px;
 
   /* background-color: aqua; */
+
+  margin: 40px 0 40px 0;
 }

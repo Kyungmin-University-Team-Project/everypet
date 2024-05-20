@@ -16,9 +16,9 @@ const ProductPage = ({ category }: any) => {
 
   const fetchCategoryDetails = async () => {
     try {
-      const response = await fetch(
-        `/public/mock/${category}_detail_categories.json`
-      );
+      const response = await fetch(`/mock/${category}_detail_categories.json`);
+
+      console.log(category);
       if (!response.ok) throw new Error('Network response was not ok');
       const data = await response.json();
       setCategoryDetails(data.detailedCategories);
@@ -38,9 +38,6 @@ const ProductPage = ({ category }: any) => {
           {/* DetailedCategory component now receives categoryDetails as a prop */}
           <DetailedCategory details={categoryDetails} />
 
-          <div>asdad</div>
-          <div>asdad</div>
-          <div>asdad</div>
           <ItemList />
         </div>
       </div>

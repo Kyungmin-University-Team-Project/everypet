@@ -5,6 +5,16 @@ import Fixedheader from '../../layout/Header/Fixedheader';
 import Productcategory from '../../layout/category/Productcategory';
 import ItemList from '../../components/common/ItemList';
 import DetailedCategory from '../../components/common/DetailedCategory';
+import HomeAd from '../../components/home/HomeAd';
+
+import img1 from '../../assets/img/main_img/add1.jpg';
+
+const adsData = [
+  {
+    title: '이달의 브랜드 미즈, 우리 강아지 최애간식 1번',
+    imageUrl: img1,
+  },
+];
 
 const Cupon = ({ category }: any) => {
   useEffect(() => {
@@ -21,11 +31,6 @@ const Cupon = ({ category }: any) => {
 
       <div className={styles.container}>
         <div className={styles.inner}>
-          {/* 아이템 리스트에 아이템 정보 넣기 */}
-
-          <div>asdad</div>
-          <div>asdad</div>
-          <div>asdad</div>
           <ItemList />
         </div>
       </div>
