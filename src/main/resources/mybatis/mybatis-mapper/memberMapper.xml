@@ -15,14 +15,14 @@
         WHERE MEMBER_ID = #{memberId}
     </select>
 
-    <insert id="insertMember" parameterType="MemberDTO">
+    <insert id="insertMember" parameterType="Member">
         INSERT INTO TBL_MEMBER(
             MEMBER_ID, MEMBER_PWD, NAME, EMAIL, PHONE, AGREE_MARKETING_YN)
         VALUES (
             #{memberId}, #{memberPwd}, #{name}, #{email}, #{phone}, #{agreeMarketingYn})
     </insert>
 
-    <insert id="insertAddress" useGeneratedKeys="true" keyProperty="addressNo" parameterType="Address">
+    <insert id="insertAddress" parameterType="Address">
         INSERT INTO TBL_ADDRESS(MEMBER_ID, ADDRESS, RECEIVER, PHONE, REQUEST, DEFAULT_YN)
         VALUES (#{memberId}, #{address}, #{receiver}, #{phone}, #{request}, #{defaultYn})
     </insert>
