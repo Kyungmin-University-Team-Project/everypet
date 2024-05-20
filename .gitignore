@@ -67,3 +67,4 @@ build/
 application.properties
 every-pet-418208-be0b25df67a9.json
 GoogleCloudStorageConfig.java
+database.properties
