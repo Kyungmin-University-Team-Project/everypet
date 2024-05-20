@@ -4,11 +4,11 @@ import com.everypet.auth.jwt.data.repository.RefreshTokenRepository;
 import com.everypet.auth.jwt.filter.CustomLogoutFilter;
 import com.everypet.auth.jwt.filter.JWTFilter;
 import com.everypet.auth.jwt.filter.LoginFilter;
-import com.everypet.auth.oauth2.handler.CustomSuccessHandler;
+import com.everypet.auth.util.JWTManager;
 import com.everypet.auth.oauth2.config.CustomClientRegistrationRepo;
+import com.everypet.auth.oauth2.handler.CustomSuccessHandler;
 import com.everypet.auth.oauth2.service.CustomOAuth2UserService;
 import com.everypet.auth.util.CookieManager;
-import com.everypet.auth.jwt.util.JWTManager;
 import com.everypet.member.service.UserLoginFailHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -81,8 +81,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http // 필터 위치
                 .addFilterBefore(jwtFilter, LoginFilter.class)
                 .addFilterBefore(new CustomLogoutFilter(jwtManager, refreshTokenRepository), LogoutFilter.class)
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtManager, cookieManager),
-                        UsernamePasswordAuthenticationFilter.class)
                 .addFilterAt(loginFilter, UsernamePasswordAuthenticationFilter.class);
 
         http // disable 설정
@@ -102,13 +100,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .invalidateHttpSession(true)
                     .deleteCookies("JSESSIONID")
                     .and()*/
+
+        // 예외처리
         http
-                .exceptionHandling() // 예외 처리
+                .exceptionHandling()
                 .accessDeniedPage("/");
+
+        // 세션 설정
         http
-                .sessionManagement() // 세션 관리
+                .sessionManagement() 
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http // cors 설정
+        
+        // cors 설정
+        http 
                 .cors((corsCustomizer -> corsCustomizer.configurationSource(new CorsConfigurationSource() {
 
                     @Override
