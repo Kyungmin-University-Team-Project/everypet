@@ -1,0 +1,22 @@
+package com.everypet.global.config;
+
+import org.springframework.context.annotation.*;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+
+//@ComponentScan(basePackages = {"com.everypet.*.service","com.everypet.global.*.*.service", "com.everypet.global.config"})
+//@Import({DatabaseConfig.class, MvcConfig.class, SecurityConfig.class, SwaggerConfig.class})
+@Configuration
+@ComponentScan(basePackages = {"com.everypet"})
+@PropertySource("classpath:application.properties")
+public class AppConfig {
+
+    // 파일 업로드 설정
+    @Bean
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+        commonsMultipartResolver.setMaxUploadSize(100000000);
+        commonsMultipartResolver.setMaxInMemorySize(100000000);
+        return commonsMultipartResolver;
+    }
+
+}
