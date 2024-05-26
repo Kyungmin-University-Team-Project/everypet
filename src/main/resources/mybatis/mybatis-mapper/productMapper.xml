@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.everypet.product.data.dao.ProductMapper">
+
+    <!--    상품 등록   -->
+    <insert id="insertProduct" useGeneratedKeys="true" keyProperty="prodId" parameterType="ProductInsertDTO">
+        INSERT INTO TBL_PRODUCT(PRODUCT_ID, MEMBER_ID, PRODUCT_NAME, PRODUCT_PRICE,PRODUCT_SALES_STATUS_YN, PRODUCT_DISCOUNT_RATE, NUMBER_OF_PRODUCT, PRODUCT_CATEGORY)
+        values (#{productId}, #{memberId}, #{productName}, #{productPrice}, #{productSalesStatusYN}, #{productDiscountRate}, #{numberOfProduct}, #{productCategory})
+    </insert>
+
+    <!--    상품 삭제   -->
+    <delete id="deleteProductByProductId" parameterType="String">
+        DELETE FROM TBL_PRODUCT
+        WHERE PRODUCT_ID = #{productId}
+    </delete>
+
+    <!--    상품 목록 조회   -->
+    <select id="selectProduct" resultType="Product" parameterType="SelectProductDTO">
+        SELECT * FROM TBL_PRODUCT
+        WHERE PRODUCT_SALES_STATUS_YN = 'Y'
+        AND PRODUCT_CATEGORY LIKE #{productCategory}
+        ORDER BY ${orderBy}
+        LIMIT #{pageStart}, #{pageSize}
+    </select>
+
+    <!--    상품 조회   -->
+    <select id="selectProductByProductId" resultType="Product">
+        SELECT * FROM TBL_PRODUCT
+        WHERE PRODUCT_SALES_STATUS_YN = 'Y'
+          AND PRODUCT_ID = #{productId}
+    </select>
+
+    <!--    상품 관리자 검색   -->
+    <select id="selectMemberIdByProductId" resultType="String">
+        SELECT MEMBER_ID FROM TBL_PRODUCT
+        WHERE PRODUCT_ID = #{productId}
+    </select>
+
+    <!--    상품 수정   -->
+    <update id="updateProduct" parameterType="ProductUpdateDTO">
+        UPDATE TBL_PRODUCT
+        SET
+            PRODUCT_NAME = #{productName},
+            PRODUCT_PRICE = #{productPrice},
+            PRODUCT_CHANGED_DATE = #{productChangedDate},
+            PRODUCT_SALES_STATUS_YN = #{productSalesStatusYN},
+            PRODUCT_DISCOUNT_RATE = #{productDiscountRate},
+            NUMBER_OF_PRODUCT = #{numberOfProduct},
+            PRODUCT_CATEGORY = #{productCategory},
+            PRODUCT_CHANGED_DATE = #{productChangedDate}
+        WHERE PRODUCT_ID = #{productId}
+    </update>
+
+    <!--    상품 조회수 증가   -->
+    <update id="incrementProductViews" parameterType="String">
+        UPDATE TBL_PRODUCT
+        SET PRODUCT_VIEWS = PRODUCT_VIEWS + 1
+        WHERE PRODUCT_ID = #{productId}
+    </update>
+
+</mapper>
