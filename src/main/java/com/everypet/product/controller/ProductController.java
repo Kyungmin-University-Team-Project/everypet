@@ -13,10 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class ProductController {
     private final ProductService productService;
 
     @ApiOperation(value = "상품 추가", notes = "새로운 상품을 추가합니다.")
-    @PostMapping("/insert-product")
+    @PostMapping("/create-product")
     public ResponseEntity<String> insertProductInfo(ProductCreateDTO productDTO) throws UnsupportedEncodingException {
 
         productDTO.setProductCategory(new String(productDTO.getProductCategory().getBytes("8859_1"), "UTF-8"));
@@ -72,19 +71,13 @@ public class ProductController {
     }
 
     @ApiOperation(value = "상품 리스트 출력", notes = "orderBy, page, pageSize, productCategory 만 넣기, 상품 리스를을 출력합니다.")
-    @PostMapping("/product-list")
-    public List<Product> selectProduct(@RequestBody SelectProductDTO selectProductDTO){
-
-        System.out.println(selectProductDTO.getProductCategory());
-        System.out.println(selectProductDTO.getOrderBy());
-        System.out.println(selectProductDTO.getPage());
-        System.out.println(selectProductDTO.getPageSize());
-
+    @GetMapping("/product-list")
+    public List<Product> selectProduct(@Valid @ModelAttribute SelectProductDTO selectProductDTO){
         return productService.selectProductList(selectProductDTO);
     }
 
     @ApiOperation(value = "상품 출력", notes = "productId 넣기, 상품을 출력합니다.")
-    @PostMapping("/product")
+    @GetMapping("/product")
     public Product selectProductByProductId(String productId){
         return productService.selectProductByProductId(productId);
     }

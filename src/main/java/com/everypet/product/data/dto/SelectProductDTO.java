@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
 
 @Getter
 @Setter
@@ -33,15 +34,14 @@ public class SelectProductDTO {
             "예시 : 강아지의 모든 물품 검색 => 강아지% ,강아지 사료를 검색 => 강아지 사료")
     private String productCategory;
 
-    @NotBlank
+    @Positive
     @ApiModelProperty(example = "1", notes = "페이지 번호")
     private int page;
 
-    @NotBlank
+    @Positive
     @ApiModelProperty(example = "2", notes = "페이지 사이즈, 한 페이지의 상품 수를 설정하세요")
     private int pageSize;
 
-    @NotBlank
     @ApiModelProperty(example = "pageStart는 보내지 마세요 ", notes = "삭제하세요")
     private int pageStart;
 
