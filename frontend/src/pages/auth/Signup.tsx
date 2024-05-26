@@ -20,12 +20,16 @@ const Signup = () => {
   };
 
   const handleEmailButton = async (e: React.MouseEvent<HTMLButtonElement>) => {
+
       const data = {
           email: user.email
       };
       try {
-          const response = await axios.post('http://localhost:8080/email');
-
+          const response = await axios.post('http://localhost:8080/email', data, {
+              headers: {
+                  "Content-Type": "application/json"
+              }
+          });
           if (response.data.success) {
               alert('이메일을 보냈어요!');
           } else {
