@@ -18,7 +18,7 @@ const Login = () => {
     memberId: "",
     memberPwd: "",
   });
-  const [userName, setUserName] = useState("");
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [e.target.id]: e.target.value });
@@ -28,6 +28,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await login(values);
+      // 토큰 AES 암호화
       const encryptedAccess = cryptoJs.AES.encrypt(response.access, "secret-key").toString();
       // 서버로부터 받은 토큰을 로컬 스토리지에 저장
       localStorage.setItem("access", encryptedAccess);
