@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import styles from "./Login.module.css";
 import Signup from "./Signup";
@@ -9,6 +9,7 @@ import { LoginData } from "../../typings/Login";
 import "@fortawesome/fontawesome-free/css/all.css";
 
 const Login = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const [showLoginForm, setShowLoginForm] = useState(true);
   const [values, setValues] = useState<LoginData>({
@@ -26,7 +27,7 @@ const Login = () => {
       const response = await login(values);
       // 서버로부터 받은 토큰을 로컬 스토리지에 저장
       localStorage.setItem("access", response.access);
-
+      navigate('/')
     } catch (error) {
       console.log(error);
     }
