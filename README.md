@@ -4,7 +4,7 @@
 
 ### 🔥 <span style="color:#3CB371; font-family: 'Comic Sans MS', cursive, sans-serif;">엔젤릭버스터 이용호</span>
 
-### ☀️ <span style="color:#FFA500; font-family: 'Comic Sans MS', cursive, sans-serif;">친박연대 총장 노희철</span>
+### 🏳️‍🌈 <span style="color:#FFA500; font-family: 'Comic Sans MS', cursive, sans-serif;">성소수자 노희철</span>
 
 ### 🌑 <span style="color:#9400D3; font-family: 'Comic Sans MS', cursive, sans-serif;">일간베스트 총괄 이관용</span>
 
@@ -55,14 +55,25 @@ docker-compose down
 ## 🎯서비스 핵심기능
 
 ```
-👨‍👨‍👧 회원 : 로그인 | 회원가입 |
+👨‍👨‍👧 회원 : 로그인 | 회원가입 | 메일 인증
 ```
 
 <details>
 <summary>핵심기능 #1. 로그인 JWT</summary>
 <div markdown="1">
 
-> > > > > > > > > > > > > <p style="color:black">뭘봐</p>
+>  <p style="color:black">뭘봐</p>
+
+</div>
+</details>
+
+<p>
+
+<details>
+<summary>핵심기능 #2. 메일 인증</summary>
+<div markdown="1">
+
+> dd
 
 </div>
 </details>
@@ -71,6 +82,6 @@ docker-compose down
 
 🚧 공사중
 
-## 👊 우리 프로젝트는 이렇게 만들어졌습니다.
+## 🐏 우리 프로젝트는 이렇게 만들어졌어요
 
-![image](https://www.0db.co.kr/files/attach/images/200/357/173/003/4347df2a13a2d629ff6b6b4fee51e352.gif)
+![image](https://image.fmkorea.com/files/attach/new3/20231201/191505828/1355679914/6457622111/c4726da609a181bc397f164c21f51047.png)

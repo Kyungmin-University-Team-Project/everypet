@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.everypet.auth.oauth2.data.dao.OAuth2RoleMapper">
+<mapper namespace="com.everypet.global.auth.oauth2.data.dao.OAuth2RoleMapper">
 
     <insert id="insertRole" parameterType="String">
         INSERT INTO TBL_OAUTH2_ROLE(MEMBER_ID, AUTHORITIES) values (#{memberId}, #{authorities})

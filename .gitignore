@@ -63,8 +63,7 @@ build/
 .DS_Store
 
 ### 제외 ###
-/src/main/java/com/everypet/auth/oauth2/config/SocialClientRegistration.java
+/src/main/java/com/everypet/global/auth/oauth2/config/SocialClientRegistration.java
 application.properties
 every-pet-418208-be0b25df67a9.json
-GoogleCloudStorageConfig.java
 database.properties

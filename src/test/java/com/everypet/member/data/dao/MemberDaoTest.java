@@ -1,6 +1,6 @@
 package com.everypet.member.data.dao;
 
-import com.everypet.config.DatabaseConfig;
+import com.everypet.global.config.DatabaseConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
