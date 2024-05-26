@@ -1,14 +1,21 @@
 .container {
-  width: 220px;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  gap: 16px;
+
   /* background-color: aqua; */
+  height: 100%;
 }
 
 .links {
   display: flex;
-  margin-top: 15px;
-  margin-left: 15px;
 
   font-size: 12px;
+
+  justify-content: end;
 
   gap: 16px;
 }
@@ -18,10 +25,11 @@
 
   list-style-type: none;
 
-  padding: 0;
+  justify-content: end;
+  gap: 16px;
 
-  align-items: center;
-  justify-content: space-between;
+  margin: 0;
+  padding: 0;
 }
 
 .my,
@@ -30,16 +38,19 @@
   display: flex;
   flex-direction: column; /* 세로 방향으로 요소 정렬 */
 
-  font-size: 36px;
+  font-size: 40px;
   cursor: pointer;
 
   align-items: center;
   justify-content: center;
+
+  /* background-color: aquamarine; */
 }
 .tag {
   display: flex;
 
-  font-size: 12px;
+  font-size: 14px;
+  color: gray;
 
   margin-top: 5px;
 }
