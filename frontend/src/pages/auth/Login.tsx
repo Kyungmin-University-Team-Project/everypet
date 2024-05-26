@@ -7,6 +7,8 @@ import Agreement from "./Agreement";
 import {login} from "../../typings/AuthAPI";
 import { LoginData } from "../../typings/Login";
 import "@fortawesome/fontawesome-free/css/all.css";
+import cryptoJs from 'crypto-js';
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -16,6 +18,7 @@ const Login = () => {
     memberId: "",
     memberPwd: "",
   });
+  const [userName, setUserName] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [e.target.id]: e.target.value });
@@ -25,8 +28,9 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await login(values);
+      const encryptedAccess = cryptoJs.AES.encrypt(response.access, "secret-key").toString();
       // 서버로부터 받은 토큰을 로컬 스토리지에 저장
-      localStorage.setItem("access", response.access);
+      localStorage.setItem("access", encryptedAccess);
       navigate('/')
     } catch (error) {
       console.log(error);
@@ -112,3 +116,6 @@ const Login = () => {
 };
 
 export default Login;
+
+
+
