@@ -1,56 +1,36 @@
 .container {
   display: flex;
   flex-direction: column;
-
   justify-content: center;
-
   gap: 16px;
-
-  /* background-color: aqua; */
   height: 100%;
-}
-
-.links {
-  display: flex;
-
-  font-size: 12px;
-
-  justify-content: end;
-
-  gap: 16px;
 }
 
 .user {
   display: flex;
-
   list-style-type: none;
-
   justify-content: end;
-  gap: 16px;
-
+  gap: 30px;
   margin: 0;
   padding: 0;
 }
 
-.my,
-.order,
-.cart {
+.user__li {
   display: flex;
-  flex-direction: column; /* 세로 방향으로 요소 정렬 */
-
+  flex-direction: column;
   font-size: 40px;
   cursor: pointer;
-
   align-items: center;
   justify-content: center;
-
-  /* background-color: aquamarine; */
 }
+
+.user__li:hover .tag {
+  font-weight: bold;
+}
+
 .tag {
   display: flex;
-
   font-size: 14px;
   color: gray;
-
   margin-top: 5px;
 }
