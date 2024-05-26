@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  width: 100%;
+  height: 30px;
+
+  /* background-color: rgb(247, 247, 247); */
+}
+
+.links {
+  display: flex;
+  margin: auto;
+
+  width: 1250px;
+  height: 100%;
+
+  font-size: 14px;
+  align-items: center;
+  justify-content: end;
+  gap: 24px;
+}
+
+.links a {
+  position: relative;
+}
+
+.links a:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -12px; /* 링크와 구분선 간격 */
+  top: 50%;
+  transform: translateY(-50%);
+  height: 16px; /* 구분선 길이 */
+  width: 1px; /* 구분선 두께 */
+  background-color: #ccc; /* 구분선 색상 */
+}
