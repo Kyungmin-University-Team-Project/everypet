@@ -66,15 +66,19 @@ export const login = async ({
   }
 };
 
+
+
 // Function to sign up and login
 export const signUpLogin = async ({
   memberId,
   memberPwd,
+                                    email,
 }: {
   memberId: string;
   memberPwd: string;
+  email: string;
 }): Promise<ResponseData> => {
-  const data = { memberId, memberPwd };
+  const data = { memberId, memberPwd, email };
   const response = await axios.post('http://localhost:8080/signup', data);
   return response.data;
 };
