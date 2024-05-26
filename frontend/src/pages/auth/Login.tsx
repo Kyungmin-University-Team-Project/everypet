@@ -4,7 +4,7 @@ import styles from "./Login.module.css";
 import Signup from "./Signup";
 import Findauth from "./Findauth";
 import Agreement from "./Agreement";
-import { login } from "../../typings/AuthAPI";
+import {login} from "../../typings/AuthAPI";
 import { LoginData } from "../../typings/Login";
 import "@fortawesome/fontawesome-free/css/all.css";
 
@@ -26,6 +26,7 @@ const Login = () => {
       const response = await login(values);
       // 서버로부터 받은 토큰을 로컬 스토리지에 저장
       localStorage.setItem("access", response.access);
+
     } catch (error) {
       console.log(error);
     }
@@ -38,6 +39,8 @@ const Login = () => {
         location.pathname,
       ),
     );
+
+
   }, [location.pathname]);
 
   return (
