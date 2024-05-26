@@ -80,14 +80,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> selectProductList(SelectProductDTO selectProductDTO) {
 
-        System.out.println(selectProductDTO.getProductCategory());
-        System.out.println(selectProductDTO.getOrderBy());
-        System.out.println(selectProductDTO.getPage());
-        System.out.println(selectProductDTO.getPageSize());
-
         // 페이지 번호와 페이지 크기를 이용하여 페이지의 시작 인덱스를 계산
         int pageStart = (selectProductDTO.getPage() - 1) * selectProductDTO.getPageSize();
-        System.out.println(pageStart);
+
         selectProductDTO.setPageStart(pageStart);
 
         return productMapper.selectProduct(selectProductDTO);
