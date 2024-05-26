@@ -5,41 +5,35 @@ import styles from "./Signup.module.css";
 import { signUpLogin } from "../../typings/AuthAPI";
 import "@fortawesome/fontawesome-free/css/all.css";
 import axios from "axios";
+
 const Signup = () => {
-  const [user, setUser] = useState<Join>({ memberId: "", memberPwd: "", email: "" });
+
+    const [user, setUser] = useState<Join>({ memberId: "", memberPwd: "", email: "" });
   const [disableButton, setDisableButton] = useState(true);
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await signUpLogin(user);
-      console.log(response);
+        console.log(response);
+        const emailResponse = await axios.post('http://localhost:8080/email', {email: user.email}, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        if (emailResponse.data.success) {
+            alert('이메일을 보냈어요!');
+        } else {
+            alert('이메일을 보내는데 실패했어요');
+        }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleEmailButton = async (e: React.MouseEvent<HTMLButtonElement>) => {
 
-      const data = {
-          email: user.email
-      };
-      try {
-          const response = await axios.post('http://localhost:8080/email', data, {
-              headers: {
-                  "Content-Type": "application/json"
-              }
-          });
-          if (response.data.success) {
-              alert('이메일을 보냈어요!');
-          } else {
-              alert('이메일을 보내는데 실패했어요');
-          }
-      }catch (e) {
-          console.error(e);
-          alert('오류로 인해서 이메일을 보낼수가 없어요!');
-      }
-  }
+
 
   const hi = (e: React.FocusEvent<HTMLInputElement>) => {
     const inputValue = e.target.value.trim();
@@ -88,17 +82,18 @@ const Signup = () => {
         />
       </label>
 
-      <label className={styles.label_container}>
+      <label className={styles.label_container} htmlFor='email'>
         <i className={`fa-regular fa-envelope ${styles.i}`}></i>
         <input
           type="email"
+          name='email'
           placeholder="이메일"
           className={styles.input_value}
           value={user.email}
           onChange={handleChange}
 
         />
-        <button type="button" className={styles.button_input} onClick={handleEmailButton}>
+        <button type="button" className={styles.button_input}>
           코드발송
         </button>
       </label>
