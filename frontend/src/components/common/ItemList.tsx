@@ -3,8 +3,9 @@ import Item from './Item';
 import styles from './ItemList.module.css';
 
 const ItemList = () => {
-  // 아이템 리스트도 mock 데이터로 만들어서 패치해서 가져오기
-  //
+  // 아이템 리스트 props로 받기, 해당 데이터는 서버에서 받아옴
+
+  // 아래는 mock 데이터
   const items = [
     {
       name: '[잘먹잘싸 봄맞이 할인] 소형견 사료',
