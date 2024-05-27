@@ -5,4 +5,5 @@ export interface dogMoreInformation {
     reviewCount: number;
     discount: number;
     imageUrl: string;
+    alt: string;
 }
