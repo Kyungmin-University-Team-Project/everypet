@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux'; // Redux의 Provider import
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {Provider} from 'react-redux'; // Redux의 Provider import
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import ProductPage from './pages/category/ProductPage';
 import Root from './pages/home/Root';
 
@@ -16,6 +16,7 @@ import Agreement from './pages/auth/Agreement';
 import Cupon from './pages/category/Cupon';
 import TimeDeal from './pages/category/TimeDeal';
 import CustomerService from './pages/usermenu/CustomerService';
+import MoreInformation from "./pages/moreInformation/MoreInformation";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
   {
     path: '/reptiles',
     element: <ProductPage category={'reptiles'} />,
+  },
+  {
+    path: '/moreInformation',
+    element: <MoreInformation/>,
   },
   {
     path: '/login',
