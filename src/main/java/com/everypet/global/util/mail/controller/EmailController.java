@@ -39,6 +39,7 @@ public class EmailController {
     public ResponseEntity sendJoinMail(@RequestBody String email) {
         String token = emailService.createToken();
         ValueOperations<String, String> valueOps = redisTemplate.opsForValue();
+
         valueOps.set(token, email, Duration.ofMinutes(5)); // 5분간 유효
 
         EmailMessageDTO emailMessage = EmailMessageDTO.builder()
@@ -46,7 +47,7 @@ public class EmailController {
                 .subject("[Pornhub] 이메일 인증을 위한 인증 코드 발송")
                 .build();
 
-        emailService.joinSendMail(emailMessage, token, "email");
+        emailService.joinSendMail(emailMessage, token);
 
         return response(HttpStatus.OK, "이메일이 발송되었습니다.");
     }
