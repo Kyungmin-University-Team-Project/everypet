@@ -66,15 +66,37 @@ export const login = async ({
   }
 };
 
+
+
 // Function to sign up and login
 export const signUpLogin = async ({
   memberId,
   memberPwd,
+
 }: {
   memberId: string;
   memberPwd: string;
 }): Promise<ResponseData> => {
   const data = { memberId, memberPwd };
-  const response = await axios.post('http://localhost:8080/signup', data);
+  const response = await axios.post('http://localhost:8080/signup', data, {
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  });
   return response.data;
 };
+
+export const sendVerificationEmail  = async ({
+  email,
+}: {
+  email: string;
+}): Promise<{success: boolean}> => {
+  const data = {email};
+  const response = await axios.post('http://localhost:8080/api/send-verification-email', data, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  return response.data;
+}

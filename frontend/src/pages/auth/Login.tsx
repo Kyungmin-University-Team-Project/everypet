@@ -1,20 +1,24 @@
-import { Link, useLocation } from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import styles from "./Login.module.css";
 import Signup from "./Signup";
 import Findauth from "./Findauth";
 import Agreement from "./Agreement";
-import { login } from "../../typings/AuthAPI";
+import {login} from "../../typings/AuthAPI";
 import { LoginData } from "../../typings/Login";
 import "@fortawesome/fontawesome-free/css/all.css";
+import cryptoJs from 'crypto-js';
+
 
 const Login = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const [showLoginForm, setShowLoginForm] = useState(true);
   const [values, setValues] = useState<LoginData>({
     memberId: "",
     memberPwd: "",
   });
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [e.target.id]: e.target.value });
@@ -24,8 +28,11 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await login(values);
+      // 토큰 AES 암호화
+      const encryptedAccess = cryptoJs.AES.encrypt(response.access, "secret-key").toString();
       // 서버로부터 받은 토큰을 로컬 스토리지에 저장
-      localStorage.setItem("access", response.access);
+      localStorage.setItem("access", encryptedAccess);
+      navigate('/')
     } catch (error) {
       console.log(error);
     }
@@ -38,6 +45,8 @@ const Login = () => {
         location.pathname,
       ),
     );
+
+
   }, [location.pathname]);
 
   return (
@@ -108,3 +117,6 @@ const Login = () => {
 };
 
 export default Login;
+
+
+
