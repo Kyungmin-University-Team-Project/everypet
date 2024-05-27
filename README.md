@@ -1,5 +1,9 @@
 # 🐶EveryPet (팀 프로젝트)
 
+## ✉️ 커밋 메시지 규칙
+
+https://velog.io/@jiheon/Git-Commit-message-규칙
+
 ## 👥 팀원
 
 ### 🔥 <span style="color:#3CB371; font-family: 'Comic Sans MS', cursive, sans-serif;">엔젤릭버스터 이용호</span>
