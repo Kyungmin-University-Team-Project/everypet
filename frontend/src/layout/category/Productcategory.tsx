@@ -49,9 +49,9 @@ const Productcategory = () => {
   useEffect(() => {
     if (location.pathname === '/') {
       dispatch(setClickedCategory(''));
-    }
 
-    console.log(isOpen);
+      window.scroll(0, 0);
+    }
   }, [location.pathname, dispatch]);
 
   const handleClick = (category: string) => {

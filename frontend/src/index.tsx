@@ -15,6 +15,7 @@ import store from './redux/store/store';
 import Agreement from './pages/auth/Agreement';
 import Cupon from './pages/category/Cupon';
 import TimeDeal from './pages/category/TimeDeal';
+import CustomerService from './pages/usermenu/CustomerService';
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,11 @@ const router = createBrowserRouter([
       { path: 'signup', element: <Signup /> },
       { path: 'forgot-password', element: <Findauth /> },
     ],
+  },
+
+  {
+    path: '/customer-services',
+    element: <CustomerService />,
   },
 ]);
 

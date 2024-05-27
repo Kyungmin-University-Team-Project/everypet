@@ -2,7 +2,7 @@
 .slick-slider {
   position: relative;
 
-  width: 65%;
+  width: 100%;
   /* background-color: aqua; */
 
   display: block;
@@ -24,7 +24,6 @@
   display: flex;
 
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  border-radius: 10px;
 
   position: relative;
 
