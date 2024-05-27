@@ -6,7 +6,7 @@
 
 .close {
   position: relative;
-  top: -100px;
+  top: -101px;
   transition: top 0.1s ease; /* 클로즈 상태일 때 애니메이션 효과 추가 */
 }
 
@@ -24,7 +24,7 @@
 
   border-bottom: solid 1px rgb(205, 205, 205);
 
-  z-index: 9999;
+  z-index: 998;
 }
 
 .inner {

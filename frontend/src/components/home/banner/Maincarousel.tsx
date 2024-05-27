@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Slider from 'react-slick';
+import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import styles from './Maincarousel.module.css';
 import './slick-theme.css';
 import './slick.css';
 
 const Maincarousel = () => {
-  // 이미지는 나중에 서버에서 받아오기
-  // 배너링크도 포함하기
+  const sliderRef = useRef<any>(null);
 
   const bannerUrls = [
     require('../../../assets/img/banner/banner_1.jpg'),
@@ -22,7 +22,7 @@ const Maincarousel = () => {
 
   const settings = {
     dots: true,
-    arrows: true,
+    arrows: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -31,24 +31,33 @@ const Maincarousel = () => {
     autoplaySpeed: 3000,
   };
 
-  const moveBannerLink = (e: any) => {
-    console.log(e.target);
-  };
-
   return (
     <div className={styles.container}>
-      <Slider {...settings}>
+      <Slider ref={sliderRef} {...settings}>
         {bannerUrls.map((bannerUrl, index) => (
-          <div key={index} className={styles.itme}>
+          <div key={index} className={styles.item}>
             <img
               className={styles.img}
               src={bannerUrl}
               alt={`Banner ${index + 1}`}
-              onClick={moveBannerLink}
             />
           </div>
         ))}
       </Slider>
+      <div className={styles.controls}>
+        <button
+          onClick={() => sliderRef.current.slickPrev()}
+          className={styles.left__arrow}
+        >
+          <AiOutlineLeft size={30} />
+        </button>
+        <button
+          onClick={() => sliderRef.current.slickNext()}
+          className={styles.right__arrow}
+        >
+          <AiOutlineRight size={30} />
+        </button>
+      </div>
     </div>
   );
 };
