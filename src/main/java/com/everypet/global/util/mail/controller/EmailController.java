@@ -36,7 +36,7 @@ public class EmailController {
 
     // 회원가입 이메일 인증
     @PostMapping("/email")
-    public ResponseEntity sendJoinMail(@RequestParam String email) {
+    public ResponseEntity sendJoinMail(@RequestBody String email) {
         String token = emailService.createToken();
         ValueOperations<String, String> valueOps = redisTemplate.opsForValue();
         valueOps.set(token, email, Duration.ofMinutes(5)); // 5분간 유효
