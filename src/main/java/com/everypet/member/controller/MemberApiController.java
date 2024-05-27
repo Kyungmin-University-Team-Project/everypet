@@ -33,35 +33,35 @@ public class MemberApiController {
 
         if(bindingResult.hasErrors()) {
             //log.error("회원 가입 실패");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")
-                    .body("회원 가입 실패");
+            return response(HttpStatus.BAD_REQUEST, "회원 가입 실패");
         }
 
         memberService.register(member);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")
-                .body("회원 가입 완료");
+        return response(HttpStatus.CREATED, "회원 가입 완료");
     }
 
     @ApiOperation(value = "주소 추가", notes = "회원의 주소를 추가합니다.")
     @PostMapping("/address/register")
     public ResponseEntity<String> addressRegister(@RequestBody Address address) {
         memberService.addressRegister(address);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")
-                .body("주소 등록 완료");
+        return response(HttpStatus.CREATED, "주소 추가 완료");
     }
 
     @ApiModelProperty(value = "관리자 페이지", notes = "관리자 페이지입니다.")
     @GetMapping("/admin")
     public ResponseEntity<String> admin() {
-        return ResponseEntity.status(HttpStatus.OK).body("ok");
+        return response(HttpStatus.OK, "ok");
     }
 
     @ApiModelProperty(value = "사용자 페이지", notes = "사용자 페이지입니다.")
     @GetMapping("/user")
     public ResponseEntity<String> user() {
-        return ResponseEntity.status(HttpStatus.OK).body("ok");
+        return response(HttpStatus.OK, "ok");
+    }
+
+    public ResponseEntity<String> response(HttpStatus httpStatus, String message) {
+        return ResponseEntity.status(httpStatus)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")
+                .body(message);
     }
 }
