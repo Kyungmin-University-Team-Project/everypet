@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaStar, FaRegStar, FaHeart, FaShoppingCart } from 'react-icons/fa';
 import styles from './Item.module.css';
+import {useNavigate} from "react-router-dom";
 
 const Item = ({
   name,
@@ -10,8 +11,10 @@ const Item = ({
   reviewCount,
   imageUrl,
 }: any) => {
+  const navigate = useNavigate();
   const handleViewDetails = () => {
     console.log(name, ': 해당상품 페이지로 이동');
+    navigate('/moreInformation', { state: { item: { name, price, discount, recommended, reviewCount, imageUrl } } });
   };
 
   // Function to render stars based on recommendation
