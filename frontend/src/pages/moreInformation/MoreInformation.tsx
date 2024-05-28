@@ -11,19 +11,10 @@ import { FaBolt } from "react-icons/fa";
 import { IoMoon } from "react-icons/io5";
 import { TbTruckDelivery } from "react-icons/tb";
 
-interface LocationState {
-    item: {
-        imageUrl: string;
-        name: string;
-        price: string;
-        discount: number;
-        recommended: number;
-    };
-}
 
 const MoreInformation: React.FC = () => {
     const location = useLocation();
-    const { item } = location.state as LocationState;
+    const { item } = location.state;
 
     const [quantity, setQuantity] = useState<number>(1);
     const [discountedPrice, setDiscountedPrice] = useState<number>(0);
