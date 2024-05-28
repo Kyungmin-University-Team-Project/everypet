@@ -1,0 +1,58 @@
+.section_box {
+    margin-top: 3rem;
+}
+
+.article_moreInformation {
+    max-width: 1080px;
+    margin: auto;
+}
+
+.box_moreInformation {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.moreInformation_img {
+    width: 50%;
+}
+
+.star {
+    color: #FFD700;
+}
+
+.sealText {
+    color: red;
+    font-size: 2rem;
+}
+
+.sealText_price {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.sealText_priceOne {
+    font-size: 1.5rem;
+}
+
+.headingText {
+    padding:5px 25px 5px 25px;
+    border-radius: 40%;
+    border: 1.5px solid #8f8f8f;
+    margin-right: 20px;
+}
+
+.price {
+    text-decoration: line-through;
+    color: #8f8f8f;
+}
+
+.icon {
+    vertical-align: middle;
+    margin-bottom: 3px;
+    color: #8f8f8f;
+}
+
+.score_text {
+    color: #4a8cf0;
+}
