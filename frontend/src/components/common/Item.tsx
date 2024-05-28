@@ -14,7 +14,7 @@ const Item = ({
   const navigate = useNavigate();
   const handleViewDetails = () => {
     console.log(name, ': 해당상품 페이지로 이동');
-    navigate('/moreInformation');
+    navigate('/moreInformation', { state: { item: { name, price, discount, recommended, reviewCount, imageUrl } } });
   };
 
   // Function to render stars based on recommendation
