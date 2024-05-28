@@ -12,6 +12,7 @@ const Item = ({
 }: any) => {
   const handleViewDetails = () => {
     console.log(name, ': 해당상품 페이지로 이동');
+    navigate('/moreInformation');
   };
 
   // Function to render stars based on recommendation
