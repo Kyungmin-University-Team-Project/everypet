@@ -26,9 +26,8 @@ public class EmailServiceImpl implements EmailService {
     /** 회원가입 이메일 인증 메서드
      * @param email 이메일 정보
      * @param token 인증 토큰
-     * @param type 이메일 타입
      */
-    public void joinSendMail(EmailMessageDTO email, String token, String type) {
+    public void joinSendMail(EmailMessageDTO email, String token) {
         
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 
@@ -50,7 +49,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     // 이메일 전송 메서드
-    public String sendMail(EmailMessageDTO emailMessageDTO, String type) {
+    public String sendMail(EmailMessageDTO emailMessageDTO) {
         String authNum = createCode();
 
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
