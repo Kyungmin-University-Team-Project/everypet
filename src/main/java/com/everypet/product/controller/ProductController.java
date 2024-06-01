@@ -27,7 +27,7 @@ public class ProductController {
     private final ProductService productService;
 
     @ApiOperation(value = "상품 추가", notes = "새로운 상품을 추가합니다.")
-    @PostMapping("/create-product")
+    @PostMapping("/insert-product")
     public ResponseEntity<String> insertProductInfo(ProductCreateDTO productDTO) throws UnsupportedEncodingException {
 
         productDTO.setProductCategory(new String(productDTO.getProductCategory().getBytes("8859_1"), "UTF-8"));
