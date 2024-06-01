@@ -16,5 +16,9 @@
         <typeAlias type="com.everypet.product.data.dto.ProductInsertDTO" alias="ProductInsertDTO"></typeAlias>
         <typeAlias type="com.everypet.product.data.dto.SelectProductDTO" alias="SelectProductDTO"></typeAlias>
         <typeAlias type="com.everypet.product.data.dto.ProductUpdateDTO" alias="ProductUpdateDTO"></typeAlias>
+
+        <typeAlias type="com.everypet.product.data.domain.Advertisement" alias="Advertisement"></typeAlias>
+        <typeAlias type="com.everypet.product.data.dto.AdvertisementDTO" alias="AdvertisementDTO"></typeAlias>
+        <typeAlias type="com.everypet.product.data.dto.InsertAdvertisementDTO" alias="InsertAdvertisementDto"></typeAlias>
     </typeAliases>
 </configuration>

@@ -130,7 +130,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     // 이미지 업로드
-    private BlobInfo uploadImageToCloudStorage(String productId, MultipartFile image) {
+    private void uploadImageToCloudStorage(String productId, MultipartFile image) {
         try {
             // Cloud에 이미지 업로드
             BlobInfo blobInfo = storage.create(
@@ -139,7 +139,6 @@ public class ProductServiceImpl implements ProductService {
                             .build(),
                     image.getInputStream()
             );
-            return blobInfo;
         }catch (IOException e) {
             throw new RuntimeException("클라우드에 이미지 업로드 실패");
         }
