@@ -1,9 +1,9 @@
 .timeItemList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 
-  margin: 50px 0 50px;
+    margin: 50px 0 50px;
 
-  gap: 100px;
+    gap: 80px;
 }
