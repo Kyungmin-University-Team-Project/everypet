@@ -93,8 +93,10 @@
     transition: background-color 0.3s ease;
 }
 
-.agreement_btn:hover {
-    background-color: #7FA8FF;
+.agreement_btn.active {
+    background-color: #4a8cf0;
+    color: white;
+    cursor: pointer;
 }
 
 .requiredText {
