@@ -16,6 +16,10 @@ import java.time.LocalDateTime;
 public class ProductCreateDTO {
 
     @NotBlank
+    @ApiModelProperty(example = "user", notes = "임시 회원의 아이디")
+    private String memberId; // 임시 회원 아이디
+
+    @NotBlank
     @ApiModelProperty(example = "uuid", notes = "상품의 아이디")
     private String productId; // 상품 아이디
 
