@@ -5,7 +5,7 @@
     "recommended": 4,
     "reviewCount": 150,
     "discount": 12,
-    "imageUrl": "dog_food_1.jpg"
+    "imageUrl": "dog_food_1.png"
   },
   {
     "name": "[DOG FOOD] 연어맛 강아지 사료",
@@ -13,7 +13,7 @@
     "recommended": 2,
     "reviewCount": 85,
     "discount": 36,
-    "imageUrl": "dog_food_2.jpg"
+    "imageUrl": "dog_food_2.png"
   },
   {
     "name": "DERMA 강아지 사료",
@@ -21,7 +21,7 @@
     "recommended": 5,
     "reviewCount": 200,
     "discount": 40,
-    "imageUrl": "dog_food_3.jpg"
+    "imageUrl": "dog_food_3.png"
   },
   {
     "name": "[DOG FOOD] 치킨맛 강아지 사료",
@@ -29,7 +29,7 @@
     "recommended": 5,
     "reviewCount": 300,
     "discount": 38,
-    "imageUrl": "dog_food_4.jpg"
+    "imageUrl": "dog_food_4.png"
   },
   {
     "name": "[잘먹잘싸 봄맞이 할인] 대형견 사료",
@@ -37,7 +37,7 @@
     "recommended": 3,
     "reviewCount": 100,
     "discount": 51,
-    "imageUrl": "dog_food_5.jpg"
+    "imageUrl": "dog_food_5.png"
   },
   {
     "name": "강아지 사료 6",
@@ -45,7 +45,7 @@
     "recommended": 1,
     "reviewCount": 120,
     "discount": 78,
-    "imageUrl": "dog_food_6.jpg"
+    "imageUrl": "dog_food_6.png"
   },
   {
     "name": "강아지 사료 6",
@@ -53,7 +53,7 @@
     "recommended": 1,
     "reviewCount": 120,
     "discount": 8,
-    "imageUrl": "dog_food_6.jpg"
+    "imageUrl": "dog_food_6.png"
   },
   {
     "name": "강아지 사료 6",
@@ -61,6 +61,6 @@
     "recommended": 1,
     "reviewCount": 120,
     "discount": 3,
-    "imageUrl": "dog_food_6.jpg"
+    "imageUrl": "dog_food_6.png"
   }
 ]
