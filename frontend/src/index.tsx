@@ -15,8 +15,9 @@ import store from './redux/store/store';
 import Agreement from './pages/auth/Agreement';
 import Cupon from './pages/category/Cupon';
 import TimeDeal from './pages/category/TimeDeal';
-import CustomerService from './pages/deliveryInquiry/CustomerService';
+import CustomerService from './pages/userService/CustomerService';
 import MoreInformation from "./pages/moreInformation/MoreInformation";
+import DeliveryInquiry from "./pages/userService/DeliveryInquiry";
 
 const router = createBrowserRouter([
     {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
     {
         path: '/moreInformation',
         element: <MoreInformation/>,
+    },
+    {
+        path: '/deliveryInquiry',
+        element: <DeliveryInquiry/>,
     },
     {
         path: '/login',
