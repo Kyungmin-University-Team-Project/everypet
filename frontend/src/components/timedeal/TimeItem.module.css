@@ -1,103 +1,134 @@
 .timeItem {
-  border: 1px solid #ddd;
-  width: 1250px;
-  font-family: Arial, sans-serif;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
-  background-color: #fff;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
+    border: 1px solid #ddd;
+    width: 1250px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
 }
 
 .timeItem:hover .image img {
-  transform: scale(1.2);
+    transform: scale(1.2);
 }
 
 .body {
-  display: flex;
-  width: 100%;
+    display: flex;
+    width: 100%;
+    align-items: center;
 }
 
 .image {
-  display: flex;
-  width: 50%;
-  height: 300px;
-  background-color: rgb(237, 237, 237);
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    width: 50%;
+    height: 300px;
+    background-color: rgb(237, 237, 237);
+    justify-content: center;
+    align-items: center;
 }
 
 .image img {
-  object-fit: cover;
-  border-radius: 10px;
-  transition: transform 0.3s ease-in-out;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
 }
 
 .info {
-  display: flex;
-  flex: 1;
-  padding: 20px;
-  flex-direction: column;
+    display: flex;
+    flex: 1;
+    padding: 20px;
+    flex-direction: column;
 }
 
 .countdown {
-  overflow: hidden;
-  height: 56px; /* Adjust based on font size */
+    overflow: hidden;
+    height: 56px; /* Adjust based on font size */
 }
 
 .countdownText {
-  color: rgb(255, 0, 0);
-  font-size: 56px;
-  margin: 0 0 10px;
+    color: rgb(255, 41, 41);
+    font-size: 36px;
+    margin: 0 0 10px;
+    font-weight: bold;
 }
 
 .seconds {
-  display: inline-block;
-  animation: digitChange 1s infinite;
+    display: inline-block;
+    animation: digitChange 1s infinite;
+}
+
+.description {
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .price {
-  margin: 10px 0;
+    margin: 10px 0;
 }
 
-.price .discountedPrice {
-  font-size: 24px;
-  color: #f00;
-  margin-right: 10px;
-  font-weight: bold;
+.priceTitle {
+    color: #ff1b58;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 10px;
 }
 
-.price .originalPrice {
-  text-decoration: line-through;
-  color: #999;
-  font-size: 20px;
+.discountedPrice {
+    font-size: 24px;
+    color: black;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.originalPrice {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 20px;
 }
 
 .details p {
-  margin: 5px 0;
-  color: #333;
-  font-size: 16px;
+    margin: 5px 0;
+    color: #333;
+    font-size: 16px;
 }
 
 .rating {
-  display: flex;
-  align-items: center;
-  margin: 5px 0;
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
 }
 
 .star {
-  color: gold;
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
+    color: gold;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
 }
 
-.coupon {
-  margin-top: 10px;
-  padding: 5px;
-  background-color: #ffeb3b;
-  border-radius: 5px;
-  font-weight: bold;
-  display: inline-block;
+.grayStar {
+    color: lightgray;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
 }
+
+
+.reviews {
+    color: gray;
+}
+
+
+.coupon {
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #5a62ff;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+
+    color: white;
+}
+
