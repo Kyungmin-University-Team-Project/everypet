@@ -4,4 +4,5 @@ export interface AgreementJoin {
   children: string;
   checked: boolean;
   text: string;
+  agreement?: AgreementJoin[];
 }
