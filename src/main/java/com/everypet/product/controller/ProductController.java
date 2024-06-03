@@ -36,10 +36,10 @@ public class ProductController {
         HttpStatus httpStatus;
         String result;
 
-        String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
+        //String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
 
         try {
-            productService.insertProduct(productDTO, memberId);
+            productService.insertProduct(productDTO, productDTO.getMemberId());
             httpStatus = HttpStatus.OK;
             result = "상품 등록 완료";
         }catch (RuntimeException e){
