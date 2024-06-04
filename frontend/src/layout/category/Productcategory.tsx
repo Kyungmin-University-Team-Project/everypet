@@ -1,5 +1,5 @@
 // Productcategory.tsx
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import ProductcategoryItem from './ProductcategoryItem';
