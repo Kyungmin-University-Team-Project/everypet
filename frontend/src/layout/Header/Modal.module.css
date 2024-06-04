@@ -1,60 +1,60 @@
 /* Modal.module.css */
 .modal {
-  position: absolute;
-  top: -30px;
-  left: -20px;
-  right: 20px;
-  background: white;
-  border: 1px solid #ccc;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-  margin-top: 10px;
-  border-radius: 8px;
-  padding: 16px;
-  -webkit-user-drag: none; /* Prevent dragging the modal */
-  -webkit-user-select: none; /* Prevent text selection */
-  user-select: none;
+    position: absolute;
+    top: -30px;
+    left: -20px;
+    right: 20px;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 800;
+    margin-top: 10px;
+    border-radius: 8px;
+    padding: 16px;
+    -webkit-user-drag: none; /* Prevent dragging the modal */
+    -webkit-user-select: none; /* Prevent text selection */
+    user-select: none;
 }
 
 .modalContent {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .closeButton {
-  background: none;
-  border: none;
-  font-size: 18px;
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  cursor: pointer;
-  color: #000000;
+    background: none;
+    border: none;
+    font-size: 18px;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    color: #000000;
 }
 
 .closeButton:hover {
-  color: #333;
+    color: #333;
 }
 
 .modalHeader {
-  font-size: 1.2em;
-  font-weight: bold;
-  margin-top: 20px;
-  margin-bottom: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .modalList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .modalListItem {
-  padding: 8px 0;
-  border-bottom: 1px solid #eee;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
 }
 
 .modalListItem:last-child {
-  border-bottom: none;
+    border-bottom: none;
 }

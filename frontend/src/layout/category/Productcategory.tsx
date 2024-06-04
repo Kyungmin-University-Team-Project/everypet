@@ -52,7 +52,7 @@ const Productcategory = () => {
             window.scroll(0, 0);
         }
     }, [location.pathname, dispatch]);
-    
+
     const handleClick = (category: string) => {
         if (clickedCategory === category) {
             return;
@@ -64,23 +64,26 @@ const Productcategory = () => {
     return (
         <div>
             <nav className={styles.container}>
-                <Categorybarbtn
-                    isOpen={isOpen}
-                    setOpen={toggleOn}
-                    setClose={toggleOff}
-                />
-                <ul className={styles.category__menu}>
-                    {categories.map((category, index) => (
-                        <ProductcategoryItem
-                            key={index}
-                            category={category.name}
-                            isActive={clickedCategory === category.name}
-                            onClick={handleClick}
-                            link={category.link}
-                        />
-                    ))}
-                </ul>
-                <Realtimekeyword/>
+                <div className={styles.inner}>
+
+                    <Categorybarbtn
+                        isOpen={isOpen}
+                        setOpen={toggleOn}
+                        setClose={toggleOff}
+                    />
+                    <ul className={styles.category__menu}>
+                        {categories.map((category, index) => (
+                            <ProductcategoryItem
+                                key={index}
+                                category={category.name}
+                                isActive={clickedCategory === category.name}
+                                onClick={handleClick}
+                                link={category.link}
+                            />
+                        ))}
+                    </ul>
+                    <Realtimekeyword/>
+                </div>
             </nav>
             <Categorymodal isOpen={isOpen} setOpen={toggleOn} setClose={toggleOff}/>
         </div>
