@@ -27,7 +27,7 @@ const adsData = [
 
 const Home = () => {
     return (
-        <div>
+        <div className={styles.container}>
             <Maincarousel/>
             <Quicknav/>
             <div className={styles.brand__ad}>

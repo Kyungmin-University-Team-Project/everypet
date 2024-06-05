@@ -1,18 +1,14 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 16px;
-    height: 100%;
-}
 
 .user {
     display: flex;
+
     list-style-type: none;
     justify-content: end;
-    gap: 30px;
+    gap: 20px;
     margin: 0;
     padding: 0;
+
+    /*background-color: #28a745;*/
 }
 
 .user__li {

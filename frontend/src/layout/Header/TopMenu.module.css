@@ -32,4 +32,11 @@
     height: 16px; /* 구분선 길이 */
     width: 1px; /* 구분선 두께 */
     background-color: #ccc; /* 구분선 색상 */
+
+}
+
+@media screen and (max-width: 1536px) {
+    .links {
+        width: 1100px;
+    }
 }

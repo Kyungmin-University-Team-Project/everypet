@@ -1,5 +1,4 @@
-// Productcategory.tsx
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import ProductcategoryItem from './ProductcategoryItem';
@@ -20,6 +19,7 @@ const categories = [
     {name: '조류', link: '/bird'},
     {name: '파충류', link: '/reptiles'},
 ];
+
 const Productcategory = () => {
     const dispatch = useDispatch();
 
@@ -46,13 +46,13 @@ const Productcategory = () => {
     }, [isOpen, toggleOff]);
 
     useEffect(() => {
-        if (location.pathname === '/') {
+        const categoryLinks = categories.map(category => category.link);
+        if (!categoryLinks.includes(location.pathname)) {
             dispatch(setClickedCategory(''));
-
             window.scroll(0, 0);
         }
     }, [location.pathname, dispatch]);
-    
+
     const handleClick = (category: string) => {
         if (clickedCategory === category) {
             return;
@@ -64,23 +64,25 @@ const Productcategory = () => {
     return (
         <div>
             <nav className={styles.container}>
-                <Categorybarbtn
-                    isOpen={isOpen}
-                    setOpen={toggleOn}
-                    setClose={toggleOff}
-                />
-                <ul className={styles.category__menu}>
-                    {categories.map((category, index) => (
-                        <ProductcategoryItem
-                            key={index}
-                            category={category.name}
-                            isActive={clickedCategory === category.name}
-                            onClick={handleClick}
-                            link={category.link}
-                        />
-                    ))}
-                </ul>
-                <Realtimekeyword/>
+                <div className={styles.inner}>
+                    <Categorybarbtn
+                        isOpen={isOpen}
+                        setOpen={toggleOn}
+                        setClose={toggleOff}
+                    />
+                    <ul className={styles.category__menu}>
+                        {categories.map((category, index) => (
+                            <ProductcategoryItem
+                                key={index}
+                                category={category.name}
+                                isActive={clickedCategory === category.name}
+                                onClick={handleClick}
+                                link={category.link}
+                            />
+                        ))}
+                    </ul>
+                    <Realtimekeyword/>
+                </div>
             </nav>
             <Categorymodal isOpen={isOpen} setOpen={toggleOn} setClose={toggleOff}/>
         </div>

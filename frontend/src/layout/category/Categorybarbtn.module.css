@@ -1,20 +1,21 @@
 .categorybar {
-  display: flex;
+    display: flex;
 
-  /* background: rgb(95, 144, 188); */
+    /* background: rgb(95, 144, 188); */
 
-  font-size: 20px;
+    font-size: 20px;
 
-  cursor: pointer;
+    cursor: pointer;
 
-  align-items: center;
+    align-items: center;
 
-  gap: 10px;
+    gap: 10px;
+
 }
 
 @media screen and (max-width: 1536px) {
-  .categorybar {
-    height: 30px;
-    font-size: 18px;
-  }
+    .categorybar {
+        height: 30px;
+        font-size: 18px;
+    }
 }

@@ -1,25 +1,27 @@
 .box {
-  width: 100px;
-  height: 400px;
-  background-color: aqua;
-  margin: 30px 0 30px 0;
+    width: 100px;
+    height: 400px;
+    background-color: aqua;
+    margin: 30px 0 30px 0;
 }
 
 .brand__ad {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-  gap: 200px;
+    gap: 200px;
 }
 
 @media screen and (max-width: 1536px) {
-  .inner {
-    width: 1000px;
-  }
-  .container {
-    padding: 10px;
-  }
-  .title {
-    font-size: 28px;
-  }
+    .inner {
+        width: 1000px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .title {
+        font-size: 28px;
+    }
 }
