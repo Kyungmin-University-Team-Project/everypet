@@ -161,6 +161,29 @@ h2 {
     color: #4a8cf0;
 }
 
+.information {
+    max-width: 1080px;
+    margin: auto;
+}
+
+.information_box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    border-top: 1px solid black;
+    border-left: 1px solid #8f8f8f;
+    border-right: 1px solid #8f8f8f;
+    border-bottom: 1px solid #8f8f8f;
+}
+
+.tab_btn {
+    padding: 15px 20px;
+    cursor: pointer;
+    width: 100%;
+    border-right: 1px solid #8f8f8f;
+}
+
 @media (max-width: 768px) {
     .box_moreInformation {
         flex-direction: column;
