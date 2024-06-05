@@ -69,7 +69,7 @@ const categories = [
     },
 ];
 
-const Categorymodal = ({isOpen, setOpen, setClose}: SidebarProps) => {
+const Categorymodal = ({isOpen, setClose}: SidebarProps) => {
     const [scrollY, setScrollY] = useState(0);
 
     useEffect(() => {

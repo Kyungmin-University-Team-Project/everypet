@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './LoadingSpinner.module.css';
-import Fixedheader from "../../layout/Header/Fixedheader";
 import Header from "../../layout/Header/Header";
 
 const LoadingSpinner: React.FC = () => {
