@@ -2,22 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {Provider} from 'react-redux'; // Redux의 Provider import
+import {Provider} from 'react-redux';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import {QueryClient, QueryClientProvider} from 'react-query'; // React Query import
 import ProductPage from './pages/category/ProductPage';
 import Root from './pages/home/Root';
-
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 import Findauth from './pages/auth/Findauth';
-
 import store from './redux/store/store';
 import Agreement from './pages/auth/Agreement';
 import Cupon from './pages/category/Cupon';
 import TimeDeal from './pages/category/TimeDeal';
 import CustomerService from './pages/userService/CustomerService';
-import MoreInformation from "./pages/moreInformation/MoreInformation";
-import DeliveryInquiry from "./pages/userService/DeliveryInquiry";
+import MoreInformation from './pages/moreInformation/MoreInformation';
+import DeliveryInquiry from './pages/userService/DeliveryInquiry';
 
 const router = createBrowserRouter([
     {
@@ -69,17 +68,20 @@ const router = createBrowserRouter([
             {path: 'forgot-password', element: <Findauth/>},
         ],
     },
-
     {
         path: '/customer-services',
         element: <CustomerService/>,
     },
 ]);
 
+const queryClient = new QueryClient();
+
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-            <RouterProvider router={router}/>
+            <QueryClientProvider client={queryClient}>
+                <RouterProvider router={router}/>
+            </QueryClientProvider>
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')
