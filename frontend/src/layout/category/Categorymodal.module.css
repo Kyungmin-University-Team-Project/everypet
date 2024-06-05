@@ -11,11 +11,15 @@
 
 .modal__fixed {
     position: fixed;
+    display: flex;
     width: 100%;
 
     top: 100px;
 
     background-color: white;
+    /*background-color: #28a745;*/
+
+    margin: auto;
 
     border-top: 1px solid #ccc; /* 상단 보더만 추가 */
     border-bottom: 1px solid #ccc; /* 하단 보더만 추가 */
@@ -27,6 +31,8 @@
 }
 
 .modal__content {
+    display: flex;
+
     position: absolute;
     width: 100%;
 
@@ -45,9 +51,9 @@
     display: flex;
     flex-wrap: wrap;
 
-    margin-left: 29.5%;
+    margin: auto;
 
-    gap: 70px;
+    gap: 60px;
 }
 
 .category {
@@ -58,6 +64,10 @@
 
 .category__content {
     user-select: none;
+
+    /*background-color: #5e90ff;*/
+
+    width: 8rem;
 }
 
 .category__title {
@@ -128,10 +138,9 @@
     color: #4a8cf0;
 }
 
-@media screen and (max-width: 1536px) {
-    .categories__container {
-        margin-left: 28%;
+@media screen and (min-width: 1536px) {
+    .category__content {
 
-        gap: 36px;
+        /*background-color: #28a745;*/
     }
 }

@@ -3,9 +3,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 180px;
+    width: 170px;
     margin-left: 40px;
-    padding: 5px 20px;
+    padding: 5px 20px 5px 10px;
     border-bottom: solid 2px #4a8cf0;
     position: relative;
 
@@ -41,11 +41,5 @@
 
 /* Responsive styling */
 @media screen and (max-width: 1536px) {
-    .container {
-        width: 180px;
-    }
 
-    .rank__container {
-        font-size: 16px;
-    }
 }
