@@ -171,14 +171,17 @@ h2 {
     align-items: center;
     justify-content: space-between;
     text-align: center;
+    border-top: 1px solid black;
+    border-left: 1px solid #8f8f8f;
+    border-right: 1px solid #8f8f8f;
+    border-bottom: 1px solid #8f8f8f;
 }
 
 .tab_btn {
-    text-align: center;
-    /* Center-align text inside buttons */
-    display: inline-block;
-    padding: 10px 20px; /* Adjust padding as needed */
+    padding: 15px 20px;
     cursor: pointer;
+    width: 100%;
+    border-right: 1px solid #8f8f8f;
 }
 
 @media (max-width: 768px) {

@@ -1,9 +1,10 @@
 import React from 'react';
+import styles from "./Information.module.css";
 
 const Information = () => {
     return (
         <div>
-            <p>dasdasd</p>
+            <p className={styles.text}>dasdasd</p>
         </div>
     );
 };
