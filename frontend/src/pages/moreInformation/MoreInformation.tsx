@@ -10,21 +10,22 @@ import { FcHome } from "react-icons/fc";
 import { FaBolt } from "react-icons/fa";
 import { IoMoon } from "react-icons/io5";
 import { TbTruckDelivery } from "react-icons/tb";
-
+import TabInformationBtn from "../../components/moreInformation/TabInformationBtn";
 
 const MoreInformation: React.FC = () => {
     const location = useLocation();
-    const { item } = location.state;
-
+    const item = location.state?.item
     const [quantity, setQuantity] = useState<number>(1);
     const [discountedPrice, setDiscountedPrice] = useState<number>(0);
     const [totalPrice, setTotalPrice] = useState<number>(0);
 
     useEffect(() => {
-        const originalPrice = parseFloat(item.price.replace(/,/g, ''));
-        const calculatedDiscountedPrice = originalPrice - (originalPrice * (item.discount / 100));
-        setDiscountedPrice(Math.floor(calculatedDiscountedPrice));
-    }, [item, quantity]);
+        if (item) {
+            const originalPrice = parseFloat(item.price.replace(/,/g, ''));
+            const calculatedDiscountedPrice = originalPrice - (originalPrice * (item.discount / 100));
+            setDiscountedPrice(Math.floor(calculatedDiscountedPrice));
+        }
+    }, [item]);
 
     useEffect(() => {
         setTotalPrice(discountedPrice * quantity);
@@ -75,10 +76,9 @@ const MoreInformation: React.FC = () => {
                             <p className={styles.dynamic_price}>
                                 <strong className={styles.discount_info}>
                                     {item.discount}%
-                                    {' '}
                                 </strong>
                                 <span className={styles.discount_percentage}>
-                                {totalPrice.toLocaleString()}
+                                    {totalPrice.toLocaleString()}
                                 </span>
                                 <span className={styles.discount_info_one}>
                                     원
@@ -134,13 +134,14 @@ const MoreInformation: React.FC = () => {
                                     <input type="text" value={quantity} readOnly className={styles.quantity_input} />
                                     <button className={styles.increment} onClick={handleIncrement}>+</button>
                                 </div>
-
-                                <button className={styles.cart_button}>장바구니</button>
+                                <button  className={styles.cart_button}>장바구니</button>
                                 <button className={styles.purchase_button}>구매하기</button>
                             </div>
                         </div>
                     </div>
                 </article>
+                {/*상품정보, 리뷰 등 btn*/}
+                <TabInformationBtn/>
             </section>
         </div>
     );
