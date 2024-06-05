@@ -15,8 +15,16 @@ import Agreement from './pages/auth/Agreement';
 import Cupon from './pages/category/Cupon';
 import TimeDeal from './pages/category/TimeDeal';
 import CustomerService from './pages/userService/CustomerService';
-import MoreInformation from './pages/moreInformation/MoreInformation';
-import DeliveryInquiry from './pages/userService/DeliveryInquiry';
+
+import MoreInformation from "./pages/moreInformation/MoreInformation";
+import DeliveryInquiry from "./pages/userService/DeliveryInquiry";
+import Information from "./pages/moreInformation/Information";
+import Review from "./pages/moreInformation/review";
+import ProductInquiry from "./pages/moreInformation/ProductInquiry";
+import SellerInformation from "./pages/moreInformation/SellerInformation";
+
+
+
 
 const router = createBrowserRouter([
     {
@@ -54,7 +62,14 @@ const router = createBrowserRouter([
     {
         path: '/moreInformation',
         element: <MoreInformation/>,
+        children: [
+            {path: 'information', element: <Information/>},
+            {path: 'review', element: <Review/>},
+            {path: 'product-inquiry', element: <ProductInquiry/>},
+            {path: 'seller-information', element: <SellerInformation/>},
+        ]
     },
+
     {
         path: '/deliveryInquiry',
         element: <DeliveryInquiry/>,

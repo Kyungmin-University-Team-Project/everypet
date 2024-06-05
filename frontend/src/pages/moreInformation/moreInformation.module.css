@@ -164,25 +164,49 @@ h2 {
 .information {
     max-width: 1080px;
     margin: auto;
+    padding: 1rem;
 }
 
 .information_box {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    text-align: center;
+    margin-top: 3rem;
     border-top: 1px solid black;
-    border-left: 1px solid #8f8f8f;
-    border-right: 1px solid #8f8f8f;
-    border-bottom: 1px solid #8f8f8f;
+    background-color: white;
 }
 
 .tab_btn {
-    padding: 15px 20px;
+    display: inline-block;
     cursor: pointer;
-    width: 100%;
-    border-right: 1px solid #8f8f8f;
+    padding: 15px 20px;
+    outline: none;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: none;
+    background-color: #fafafa;
+    color: #555;
+    text-align: center;
+    flex: 1;
 }
+
+.tab_btn:first-child {
+    border-left: none;
+}
+
+.tab_btn:last-child {
+    border-right: none;
+}
+
+.tab_btn:hover {
+    background-color: white;
+}
+
+.tab_btn:focus {
+    outline: none;
+    background-color: white;
+}
+
 
 @media (max-width: 768px) {
     .box_moreInformation {

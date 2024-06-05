@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from "../../layout/Header/Header";
 import Fixedheader from "../../layout/Header/Fixedheader";
 import Productcategory from "../../layout/category/Productcategory";
-import { useLocation } from "react-router-dom";
+import {Link, Outlet, useLocation, useNavigate} from "react-router-dom";
 import { FaStar, FaRegStar, FaAngleRight } from "react-icons/fa";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import styles from "./moreInformation.module.css";
@@ -10,11 +10,12 @@ import { FcHome } from "react-icons/fc";
 import { FaBolt } from "react-icons/fa";
 import { IoMoon } from "react-icons/io5";
 import { TbTruckDelivery } from "react-icons/tb";
-import TabInformationBtn from "../../components/moreInformation/TabInformationBtn";
+
 
 const MoreInformation: React.FC = () => {
     const location = useLocation();
     const item = location.state?.item
+    const navigate = useNavigate();
     const [quantity, setQuantity] = useState<number>(1);
     const [discountedPrice, setDiscountedPrice] = useState<number>(0);
     const [totalPrice, setTotalPrice] = useState<number>(0);
@@ -49,6 +50,10 @@ const MoreInformation: React.FC = () => {
         }
     };
 
+    const navigateWithItem = (path: string) => {
+        navigate(path, { state: { item } });
+    };
+
     return (
         <div>
             <Fixedheader />
@@ -57,12 +62,12 @@ const MoreInformation: React.FC = () => {
             <section className={styles.section_box}>
                 <article className={styles.article_moreInformation}>
                     <div className={styles.box_moreInformation}>
-                        <img src={item.imageUrl} className={styles.moreInformation_img} alt={item.name} />
+                        <img src={item.imageUrl} className={styles.moreInformation_img} alt={item.name}/>
                         <div className={styles.info_container}>
                             <div className={styles.breadcrumb}>
                                 <span className={styles.headingText}>강아지</span>
                                 <strong>놀자멍뭉</strong>
-                                <FaAngleRight className={styles.icon} />
+                                <FaAngleRight className={styles.icon}/>
                             </div>
                             <h2>{item.name}</h2>
                             <div className={styles.reviews}>
@@ -70,7 +75,7 @@ const MoreInformation: React.FC = () => {
                                 <span className={styles.review_count}>
                                     <strong>20,586</strong> 리뷰 보기
                                 </span>
-                                <FaAngleRight className={styles.icon} />
+                                <FaAngleRight className={styles.icon}/>
                             </div>
                             <p className={styles.price_original}>{item.price}원</p>
                             <p className={styles.dynamic_price}>
@@ -91,10 +96,10 @@ const MoreInformation: React.FC = () => {
                             </p>
                             <p>
                                 <strong>배송정보</strong>
-                                <IoIosInformationCircleOutline className={styles.icon} />
+                                <IoIosInformationCircleOutline className={styles.icon}/>
                                 &nbsp;
                                 배송비 3,000원(30,000원 이상 무료배송)
-                                <br />
+                                <br/>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -104,7 +109,7 @@ const MoreInformation: React.FC = () => {
                             <div className={styles.delivery_options}>
                                 <p className={styles.delivery}>
                                     <span>
-                                        <FcHome />
+                                        <FcHome/>
                                         {' '}
                                         <strong className={styles.delivery_options_text}>
                                             가장 빠른배송
@@ -113,17 +118,17 @@ const MoreInformation: React.FC = () => {
                                     </span>
                                 </p>
                                 <p>
-                                    <FaBolt className={styles.fabolt} />
+                                    <FaBolt className={styles.fabolt}/>
                                     {' '}
                                     당일배송: 오늘(3/13) 밤 12시 도착
                                 </p>
                                 <p>
-                                    <IoMoon className={styles.iomoon} />
+                                    <IoMoon className={styles.iomoon}/>
                                     {' '}
                                     새벽배송: 내일(3/14) 새벽 7시 이전 도착
                                 </p>
                                 <p>
-                                    <TbTruckDelivery />
+                                    <TbTruckDelivery/>
                                     {' '}
                                     GS전달배송: 다음날 도착예정
                                 </p>
@@ -131,17 +136,23 @@ const MoreInformation: React.FC = () => {
                             <div className={styles.purchase_options}>
                                 <div className={styles.quantity_control}>
                                     <button className={styles.decrement} onClick={handleDecrement}>-</button>
-                                    <input type="text" value={quantity} readOnly className={styles.quantity_input} />
+                                    <input type="text" value={quantity} readOnly className={styles.quantity_input}/>
                                     <button className={styles.increment} onClick={handleIncrement}>+</button>
                                 </div>
-                                <button  className={styles.cart_button}>장바구니</button>
+                                <button className={styles.cart_button}>장바구니</button>
                                 <button className={styles.purchase_button}>구매하기</button>
                             </div>
                         </div>
                     </div>
                 </article>
                 {/*상품정보, 리뷰 등 btn*/}
-                <TabInformationBtn/>
+                <article>
+                    <button onClick={() => navigateWithItem('information')}>1</button>
+                    <button onClick={() => navigateWithItem('review')}>1</button>
+                    <button onClick={() => navigateWithItem('product-inquiry')}>1</button>
+                    <button onClick={() => navigateWithItem('seller-information')}>1</button>
+                    <Outlet/>
+                </article>
             </section>
         </div>
     );
