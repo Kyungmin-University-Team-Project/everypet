@@ -1,11 +1,10 @@
 import React from 'react';
-import {useQuery} from 'react-query';
+import { useQuery } from 'react-query';
 import Item from './Item';
 import styles from './ItemList.module.css';
-import {dogMoreInformation} from '../../typings/dog_more_information';
+import { dogMoreInformation } from '../../typings/dog_more_information';
 import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
 import ErrorComponent from "../../utils/reactQuery/ErrorComponent";
-
 
 const fetchItems = async (): Promise<dogMoreInformation[]> => {
     const response = await fetch('/mock/dog_more_information.json');
@@ -14,7 +13,7 @@ const fetchItems = async (): Promise<dogMoreInformation[]> => {
 };
 
 const ItemList = () => {
-    const {data, error, isLoading} = useQuery<dogMoreInformation[], Error>('dogMoreInformation', fetchItems);
+    const { data, error, isLoading } = useQuery<dogMoreInformation[], Error>('dogMoreInformation', fetchItems);
 
     const getImageUrl = (imageUrl: string) => {
         try {
@@ -26,19 +25,19 @@ const ItemList = () => {
     };
 
     if (isLoading) {
-        return <LoadingSpinner/>;
+        return <LoadingSpinner />;
     }
 
     if (error) {
-        return <ErrorComponent message={error.message}/>;
+        return <ErrorComponent message={error.message} />;
     }
 
     return (
         <div className={styles.container}>
             {
-                data && data.map((item, index) => (
+                data?.map((item) => (
                     <Item
-                        key={index}
+                        key={item.name}
                         name={item.name}
                         price={item.price}
                         discount={item.discount}
