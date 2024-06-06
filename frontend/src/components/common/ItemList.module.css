@@ -3,7 +3,6 @@
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
 
-  /* background-color: aqua; */
 }
 
 /* Medium screens (greater than 800px) */

@@ -121,7 +121,7 @@
 
 .slick-dots {
     position: absolute;
-    bottom: 15px;
+    bottom: -30px;
     width: 100%;
     display: flex !important;
     justify-content: center;
@@ -174,39 +174,4 @@
 .slick-dots li.slick-active button:before {
     opacity: 0.75;
     color: black;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .slick-dots {
-        bottom: 10px; /* 조정된 위치 */
-    }
-
-    .slick-prev,
-    .slick-next {
-        width: 25px;
-        height: 25px;
-    }
-
-    .slick-prev:before,
-    .slick-next:before {
-        font-size: 18px;
-    }
-}
-
-@media (max-width: 480px) {
-    .slick-dots {
-        bottom: 5px; /* 조정된 위치 */
-    }
-
-    .slick-prev,
-    .slick-next {
-        width: 20px;
-        height: 20px;
-    }
-
-    .slick-prev:before,
-    .slick-next:before {
-        font-size: 16px;
-    }
 }

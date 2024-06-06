@@ -31,8 +31,8 @@ const Home = () => {
             <Maincarousel/>
             <Quicknav/>
             <div className={styles.brand__ad}>
-                {adsData.map((ad, index) => (
-                    <HomeAd key={index} title={ad.title} imageUrl={ad.imageUrl}/>
+                {adsData.map((ad) => (
+                    <HomeAd key={ad.title} title={ad.title} imageUrl={ad.imageUrl}/>
                 ))}
             </div>
 

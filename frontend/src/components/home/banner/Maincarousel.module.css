@@ -2,18 +2,16 @@
     position: relative;
     width: 100%;
     height: 500px; /* 높이를 500px로 고정 */
-    overflow: hidden; /* 컨테이너를 벗어나는 내용을 숨깁니다 */
-    margin-bottom: 80px;
+    margin-bottom: 100px;
 }
 
 .item {
-    width: 100%;
-    height: 100%; /* 높이를 부모 요소에 맞추기 */
+    outline: none;
+    cursor: pointer;
 }
 
 .img {
     display: flex;
-
     margin: auto;
 }
 
@@ -31,7 +29,6 @@
 .left__arrow,
 .right__arrow {
     pointer-events: auto; /* 컨트롤은 클릭 가능하게 설정 */
-    background: none;
     border: none;
     cursor: pointer;
     color: white;

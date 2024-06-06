@@ -3,7 +3,6 @@
   position: relative;
 
   width: 100%;
-  /* background-color: aqua; */
 
   display: block;
   box-sizing: border-box;
@@ -14,38 +13,28 @@
   user-select: none;
 
   -webkit-touch-callout: none;
-  -khtml-user-select: none;
   -ms-touch-action: pan-y;
   touch-action: pan-y;
   -webkit-tap-highlight-color: transparent;
 }
 
 .slick-list {
-  display: flex;
-
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  display: block;
 
   position: relative;
 
-  display: block;
   overflow: hidden;
 
-  margin-bottom: 20px;
+  border: none;
 }
 .slick-list:focus {
   outline: none;
 }
-.slick-list.dragging {
-  cursor: pointer;
-  cursor: hand;
-}
 
 .slick-slider .slick-track,
 .slick-slider .slick-list {
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
+
   -ms-transform: translate3d(0, 0, 0);
-  -o-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
 
