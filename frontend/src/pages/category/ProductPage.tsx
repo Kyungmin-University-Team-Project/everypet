@@ -1,14 +1,10 @@
-import React from 'react';
-import {useQuery} from 'react-query';
+import React, { useEffect, useState } from 'react';
 import styles from './ProductPage.module.css';
 import Header from '../../layout/Header/Header';
 import Fixedheader from '../../layout/Header/Fixedheader';
 import Productcategory from '../../layout/category/Productcategory';
 import ItemList from '../../components/common/ItemList';
 import DetailedCategory from '../../components/common/DetailedCategory';
-import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
-import ErrorComponent from "../../utils/reactQuery/ErrorComponent";
-
 
 interface DetailedCategory {
     id: number;
@@ -22,36 +18,39 @@ const fetchCategoryDetails = async (category: string): Promise<{ detailedCategor
     return response.json();
 };
 
-const ProductPage = ({category}: { category: string }) => {
-    const {data, error, isLoading} = useQuery<{ detailedCategories: DetailedCategory[] }, Error>(
-        ['categoryDetails', category],
-        () => fetchCategoryDetails(category)
-    );
+const ProductPage = ({ category }: { category: string }) => {
+    const [data, setData] = useState<{ detailedCategories: DetailedCategory[] } | null>(null);
 
-    React.useEffect(() => {
+    useEffect(() => {
+        const getCategoryDetails = async () => {
+            try {
+                const result = await fetchCategoryDetails(category);
+                setData(result);
+            } catch (error) {
+                console.error('Failed to fetch category details:', error);
+            }
+        };
+
+        // 비동기 함수를 즉시 실행
+        // 프로미스 반환 경고 때문에 즉시 실행 시킴
+        (async () => {
+            await getCategoryDetails();
+        })();
+    }, [category]);
+
+    useEffect(() => {
         window.scrollTo(0, 0);
     }, [category]); // Dependency array with 'category' to re-trigger when category changes
 
-    if (isLoading) {
-        return <LoadingSpinner/>;
-    }
-
-    if (error) {
-        return <ErrorComponent message={error.message}/>;
-    }
-
     return (
         <div>
-            <Fixedheader/>
-            <Header/>
-            <Productcategory/>
-
+            <Fixedheader />
+            <Header />
+            <Productcategory />
             <div className={styles.container}>
                 <div className={styles.inner}>
-                    {/* DetailedCategory component now receives data.detailedCategories as a prop */}
-                    <DetailedCategory details={data!.detailedCategories}/>
-
-                    <ItemList/>
+                    {data && <DetailedCategory details={data.detailedCategories} />}
+                    <ItemList />
                 </div>
             </div>
         </div>
