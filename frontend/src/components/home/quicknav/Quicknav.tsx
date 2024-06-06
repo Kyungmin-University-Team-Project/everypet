@@ -27,7 +27,7 @@ const Quicknav = () => {
   return (
     <div className={styles.quick__nav__container}>
       <nav className={styles.quick__nav}>
-        {categories.map((category, index) => (
+        {categories.map((category) => (
           <div key={category.name} className={styles.quick__nav__item}>
             <img
               className={styles.img}
