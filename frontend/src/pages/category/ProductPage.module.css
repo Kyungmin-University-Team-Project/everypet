@@ -3,7 +3,6 @@
     flex-direction: column;
     width: 100%;
 
-    /* background-color: aqua; */
 
     align-items: center;
     justify-content: center;
@@ -13,7 +12,6 @@
 .inner {
     width: 1250px;
 
-    /* background-color: aqua; */
 
     margin: 40px 0 40px 0;
 }

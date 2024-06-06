@@ -3,7 +3,6 @@ import styles from './TimeDeal.module.css';
 import Header from '../../layout/Header/Header';
 import Fixedheader from '../../layout/Header/Fixedheader';
 import Productcategory from '../../layout/category/Productcategory';
-import TimeItem from '../../components/timedeal/TimeItem';
 import TimeItemList from '../../components/timedeal/TimeItemList';
 import Footer from '../../components/home/Footer';
 
