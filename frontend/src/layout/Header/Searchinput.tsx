@@ -1,40 +1,64 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styles from './Searchinput.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '../../redux/store/store';
+import { setSearchInput } from '../../redux/features/searchSlice';
+
+interface PlaceholderData {
+    placeholders: string[];
+}
 
 const Searchinput = () => {
-  const [placeholder, setPlaceholder] =
-    useState('뭉치한테 새 간식이나 사줄까?');
+    const dispatch = useDispatch<AppDispatch>();
+    const inputValue = useSelector((state: RootState) => state.search.input);
+    const [placeholder, setPlaceholder] = useState<string>('');
+    const location = useLocation();
 
-  const [inputValue, setInputValue] = useState('강아지 간식');
-  // 첫 화면에서 플레이스홀더의 내용을 검색가능함
-  // 나중에 객체로 만들기
+    useEffect(() => {
+        const fetchPlaceholders = async (): Promise<void> => {
+            try {
+                const response = await fetch('/mock/search_input_placeholder_texts.json');
+                const data: PlaceholderData = await response.json();
+                const randomPlaceholder =
+                    data.placeholders[Math.floor(Math.random() * data.placeholders.length)];
+                setPlaceholder(randomPlaceholder);
+            } catch (error) {
+                console.error('Failed to fetch placeholder texts:', error);
+            }
+        };
 
-  const handleSearch = () => {
-    setPlaceholder(''); // input 요소의 값을 비웁니다.
+        fetchPlaceholders();
+    }, [location]);
 
-    console.log('성공');
-  };
+    useEffect(() => {
+        dispatch(setSearchInput('')); // Reset input value
+    }, [location, dispatch]);
 
-  const handleSearchClick = () => {
-    console.log(inputValue);
-  };
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(setSearchInput(e.target.value));
+    };
 
-  return (
-    <div className={styles.container}>
-      <input
-        placeholder={placeholder}
-        type='text'
-        className={styles.search__input}
-        onClick={handleSearch}
-        // 검색 기능은 아직
-      />
-      <button className={styles.search__btn} onClick={handleSearchClick}>
-        <FontAwesomeIcon icon={faMagnifyingGlass} />
-      </button>
-    </div>
-  );
+    const handleSearchClick = () => {
+        console.log(inputValue);
+    };
+
+    return (
+        <div className={styles.container}>
+            <input
+                type='text'
+                className={styles.search__input}
+                value={inputValue}
+                onChange={handleInputChange}
+                placeholder={placeholder}
+            />
+            <button className={styles.search__btn} onClick={handleSearchClick}>
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </button>
+        </div>
+    );
 };
 
 export default Searchinput;
