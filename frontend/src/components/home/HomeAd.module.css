@@ -1,7 +1,6 @@
 .container {
     display: flex;
     width: 100%;
-    /* background-color: rgb(211, 211, 248); */
 
     align-items: center;
 
@@ -11,7 +10,6 @@
 .inner {
     width: 1250px;
 
-    /* background-color: aqua; */
 }
 
 .title {
@@ -28,8 +26,8 @@
     object-fit: cover;
 
     border-radius: 20px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0 3px 7px -3px;
 }
 
 .rightAlign {

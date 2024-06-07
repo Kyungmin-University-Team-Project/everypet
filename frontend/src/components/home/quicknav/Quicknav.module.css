@@ -4,16 +4,13 @@
 
   width: 100%;
 
-  /* background-color: aqua; */
-
   margin-bottom: 80px;
 }
 
 .quick__nav {
   display: flex;
   justify-content: space-between;
-  width: 1250px; /* 네비게이션 전체 너비 설정 */
-  /* background-color: antiquewhite; */
+  width: 1250px;
 }
 
 .quick__nav__item {
@@ -23,7 +20,6 @@
   justify-content: center;
   align-items: center;
 
-  /* background-color: blue;  */
   margin-bottom: 10px;
 
   cursor: pointer;

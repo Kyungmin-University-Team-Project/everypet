@@ -7,11 +7,13 @@ import {Link} from 'react-router-dom';
 import useToggle from '../../utils/category/ToggleUtil';
 import Categorybarbtn from '../category/Categorybarbtn';
 import TopMenu from './TopMenu';
+import MobileSearchModal from "../mobile/MobileSearchModal";
 
-const Fixedheader = () => {
+const Fixedheader: React.FC = () => {
     const [isOpen, toggleOn, toggleOff] = useToggle(false);
-
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [scrollY, setScrollY] = useState(0);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -23,36 +25,48 @@ const Fixedheader = () => {
         };
 
         window.addEventListener('scroll', handleScroll);
+        window.addEventListener('resize', () => {
+            setIsMobile(window.innerWidth <= 768);
+        });
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', () => {
+                setIsMobile(window.innerWidth <= 768);
+            });
         };
     }, [isOpen, toggleOff]);
 
     return (
         <div className={scrollY >= 200 ? styles.open : styles.close}>
             <header className={styles.container__fixed}>
-                <TopMenu/>
-                <div className={styles.inner}>
+                {!isMobile && <TopMenu/>}
+                <div className={isMobile ? styles.innerMobile : styles.inner}>
                     <div className={styles.logo__wrap}>
-                        <Categorybarbtn
-                            active={false}
-                            isOpen={isOpen}
-                            setOpen={toggleOn}
-                            setClose={toggleOff}
-                        />
+                        {!isMobile && (
+                            <Categorybarbtn
+                                active={false}
+                                isOpen={isOpen}
+                                setOpen={toggleOn}
+                                setClose={toggleOff}
+                            />
+                        )}
                         <Link to='/' className={styles.title}>
                             에브리펫
                         </Link>
                     </div>
-
-                    <Searchinput/>
-
-                    <Usermenu/>
+                    {isMobile ? (
+                        <button className={styles.searchButton} onClick={() => setIsSearchOpen(true)}>
+                            <Searchinput/>
+                        </button>
+                    ) : (
+                        <Searchinput/>
+                    )}
+                    {!isMobile && <Usermenu/>}
                 </div>
             </header>
-
             <Categorymodal isOpen={isOpen} setOpen={toggleOn} setClose={toggleOff}/>
+            <MobileSearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)}/>
         </div>
     );
 };

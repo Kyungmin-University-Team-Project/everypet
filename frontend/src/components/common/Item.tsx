@@ -17,7 +17,6 @@ const Item = ({
         navigate('/moreInformation', {state: {item: {name, price, discount, recommended, reviewCount, imageUrl}}});
     };
 
-    // Function to render stars based on recommendation
     const renderStars = () => {
         let stars = [];
         for (let i = 0; i < 5; i++) {
@@ -28,10 +27,13 @@ const Item = ({
 
     return (
         <div className={styles.item} onClick={handleViewDetails}>
-            <img className={styles.img} src={imageUrl} alt={name}/>
+            <div className={styles.img__wrap}>
+                <img className={styles.img} src={imageUrl} alt={name}/>
+
+            </div>
             <div className={styles.tagAndIcons}>
                 <span className={styles.tag}>New</span>
-                <div>
+                <div className={styles.icon__wrap}>
                     <FaShoppingCart className={styles.cartIcon}/>
                     <FaHeart className={styles.likeIcon}/>
                 </div>

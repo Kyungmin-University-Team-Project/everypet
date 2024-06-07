@@ -1,28 +1,14 @@
 .container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 기본적으로 2개씩 보여줌 */
+    grid-gap: 0px;
 
-  /* background-color: aqua; */
+    margin-bottom: 40px;
 }
 
-/* Medium screens (greater than 800px) */
-@media (max-width: 1536px) {
-  .container {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 1100px) {
-  .container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Medium screens (greater than 800px) */
-@media (max-width: 700px) {
-  .container {
-    display: flex;
-    flex-direction: column;
-  }
+/* Medium screens (greater than 700px) */
+@media (min-width: 701px) {
+    .container {
+        grid-template-columns: repeat(4, 1fr); /* 노트북에서 3개씩 보여줌 */
+    }
 }

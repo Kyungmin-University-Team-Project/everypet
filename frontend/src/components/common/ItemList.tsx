@@ -6,7 +6,6 @@ import {dogMoreInformation} from '../../typings/dog_more_information';
 import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
 import ErrorComponent from "../../utils/reactQuery/ErrorComponent";
 
-
 const fetchItems = async (): Promise<dogMoreInformation[]> => {
     const response = await fetch('/mock/dog_more_information.json');
     if (!response.ok) throw new Error('Network response was not ok');
@@ -35,19 +34,17 @@ const ItemList = () => {
 
     return (
         <div className={styles.container}>
-            {
-                data && data.map((item, index) => (
-                    <Item
-                        key={index}
-                        name={item.name}
-                        price={item.price}
-                        discount={item.discount}
-                        recommended={item.recommended}
-                        reviewCount={item.reviewCount}
-                        imageUrl={getImageUrl(item.imageUrl)}
-                    />
-                ))
-            }
+            {data?.map((item) => (
+                <Item
+                    key={item.name}
+                    name={item.name}
+                    price={item.price}
+                    discount={item.discount}
+                    recommended={item.recommended}
+                    reviewCount={item.reviewCount}
+                    imageUrl={getImageUrl(item.imageUrl)}
+                />
+            ))}
         </div>
     );
 };

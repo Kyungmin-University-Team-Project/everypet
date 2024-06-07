@@ -5,20 +5,20 @@ import styles from './Maincarousel.module.css';
 import './slick-theme.css';
 import './slick.css';
 
+const bannerUrls = [
+    { url: require('../../../assets/img/banner/banner_1.png'), name: '배너 1' },
+    { url: require('../../../assets/img/banner/banner_2.png'), name: '배너 2' },
+    { url: require('../../../assets/img/banner/banner_3.png'), name: '배너 3' },
+    { url: require('../../../assets/img/banner/banner_4.png'), name: '배너 4' },
+    { url: require('../../../assets/img/banner/banner_5.png'), name: '배너 5' },
+    { url: require('../../../assets/img/banner/banner_6.png'), name: '배너 6' },
+    { url: require('../../../assets/img/banner/banner_7.png'), name: '배너 7' },
+    { url: require('../../../assets/img/banner/banner_8.png'), name: '배너 8' },
+    { url: require('../../../assets/img/banner/banner_9.png'), name: '배너 9' },
+];
+
 const Maincarousel = () => {
     const sliderRef = useRef<any>(null);
-
-    const bannerUrls = [
-        require('../../../assets/img/banner/banner_1.png'),
-        require('../../../assets/img/banner/banner_2.png'),
-        require('../../../assets/img/banner/banner_3.png'),
-        require('../../../assets/img/banner/banner_4.png'),
-        require('../../../assets/img/banner/banner_5.png'),
-        require('../../../assets/img/banner/banner_6.png'),
-        require('../../../assets/img/banner/banner_7.png'),
-        require('../../../assets/img/banner/banner_8.png'),
-        require('../../../assets/img/banner/banner_9.png'),
-    ];
 
     const settings = {
         dots: true,
@@ -34,12 +34,12 @@ const Maincarousel = () => {
     return (
         <div className={styles.container}>
             <Slider ref={sliderRef} {...settings}>
-                {bannerUrls.map((bannerUrl, index) => (
-                    <div key={index} className={styles.item}>
+                {bannerUrls.map((banner) => (
+                    <div key={banner.name} className={styles.item}>
                         <img
                             className={styles.img}
-                            src={bannerUrl}
-                            alt={`Banner ${index + 1}`}
+                            src={banner.url}
+                            alt={banner.name}
                         />
                     </div>
                 ))}
