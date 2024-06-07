@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import ProductcategoryItem from './ProductcategoryItem';
@@ -22,14 +22,23 @@ const categories = [
 
 const Productcategory = () => {
     const dispatch = useDispatch();
-
     const clickedCategory = useSelector(
         (state: RootState) => state.category.clickedCategory
     );
-
     const [isOpen, toggleOn, toggleOff] = useToggle(false);
-
     const location = useLocation();
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -65,11 +74,13 @@ const Productcategory = () => {
         <div>
             <nav className={styles.container}>
                 <div className={styles.inner}>
-                    <Categorybarbtn
-                        isOpen={isOpen}
-                        setOpen={toggleOn}
-                        setClose={toggleOff}
-                    />
+                    {!isMobile && (
+                        <Categorybarbtn
+                            isOpen={isOpen}
+                            setOpen={toggleOn}
+                            setClose={toggleOff}
+                        />
+                    )}
                     <ul className={styles.category__menu}>
                         {categories.map((category, index) => (
                             <ProductcategoryItem
@@ -81,7 +92,7 @@ const Productcategory = () => {
                             />
                         ))}
                     </ul>
-                    <Realtimekeyword/>
+                    {!isMobile && <Realtimekeyword/>}
                 </div>
             </nav>
             <Categorymodal isOpen={isOpen} setOpen={toggleOn} setClose={toggleOff}/>
