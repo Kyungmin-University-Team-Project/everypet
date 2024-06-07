@@ -1,9 +1,10 @@
 import React from 'react';
+import EatInformation from "../../components/moreinformation/EatInformation";
 
 const Information = () => {
     return (
         <div>
-asdasd
+            <EatInformation/>
         </div>
     );
 };

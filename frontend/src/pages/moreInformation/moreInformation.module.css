@@ -178,6 +178,7 @@ h2 {
 
 .tab_btn {
     display: inline-block;
+    flex: 1;
     cursor: pointer;
     padding: 15px 20px;
     outline: none;
@@ -187,8 +188,8 @@ h2 {
     background-color: #fafafa;
     color: #555;
     text-align: center;
-    flex: 1;
 }
+
 
 .tab_btn:first-child {
     border-left: none;
