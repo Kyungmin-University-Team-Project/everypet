@@ -3,7 +3,6 @@ import styles from './Home.module.css';
 import Maincarousel from '../../components/home/banner/Maincarousel';
 import Quicknav from '../../components/home/quicknav/Quicknav';
 
-import Footer from '../../components/home/Footer';
 
 import img1 from '../../assets/img/main_img/add1.jpg';
 import img2 from '../../assets/img/main_img/add2.jpg';

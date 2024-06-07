@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Outlet, useLocation} from 'react-router-dom';
 import Productcategory from '../../layout/category/Productcategory';
 import Home from './Home';
