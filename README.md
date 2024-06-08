@@ -60,6 +60,7 @@ docker-compose down
 
 ```
 👨‍👨‍👧 회원 : 로그인 | 회원가입 | 메일 인증
+🛍️ 상품: 상품 조회 | 장바구니 
 ```
 
 <details>
@@ -88,4 +89,4 @@ docker-compose down
 
 ## 🐏 우리 프로젝트는 이렇게 만들어졌어요
 
-![image](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyOtQXrDHyyTIu7R-p63Kd4c4LwFHqqNkS5g&s)
+![image](https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQR-praOfBqR7cHibjaDddVmpjLP8yJcVMAW7aOCdPubRGd-Iqv )

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.everypet.cart.data.dao.CartMapper">
+    <insert id="insertCart" parameterType="Cart">
+        INSERT INTO TBL_CART (
+            MEMBER_ID, PRODUCT_ID, CART_QUANTITY
+        ) VALUES (
+                     #{memberId}, #{productId}, #{cartQuantity}
+                 )
+    </insert>
+
+    <delete id="deleteCart">
+        DELETE FROM TBL_CART
+        WHERE MEMBER_ID = #{memberId} AND PRODUCT_ID = #{productId}
+    </delete>
+
+    <select id="selectAllCart" resultType="CartItem">
+        SELECT P.PRODUCT_ID, P.PRODUCT_NAME, P.PRODUCT_PRICE, C.CART_QUANTITY
+        FROM TBL_CART C JOIN TBL_PRODUCT P ON C.PRODUCT_ID = P.PRODUCT_ID
+        WHERE C.MEMBER_ID = #{memberId}
+    </select>
+
+</mapper>
