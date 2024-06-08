@@ -1,4 +1,4 @@
-package com.everypet.member.data.domain;
+package com.everypet.member.data.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,9 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Address {
 
-    private String memberId;    // 회원 아이디
+   private String memberId;    // 회원 아이디
 
     private String address;     // 주소
+
+    private String detailAddress;    // 상세 주소
 
     private String receiver;    // 수령인
 

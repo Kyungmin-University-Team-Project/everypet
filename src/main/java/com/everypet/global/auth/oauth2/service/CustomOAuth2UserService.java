@@ -8,7 +8,7 @@ import com.everypet.global.auth.oauth2.data.dto.CustomOAuth2User;
 import com.everypet.global.auth.oauth2.data.dto.response.GoogleResponse;
 import com.everypet.global.auth.oauth2.data.dto.response.NaverResponse;
 import com.everypet.global.auth.oauth2.data.dto.response.OAuth2Response;
-import com.everypet.member.data.dto.MemberDTO;
+import com.everypet.member.data.dto.SignupRequestDTO;
 import com.everypet.member.exception.MemberIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -66,11 +66,11 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             oAuth2MemberMapper.insertOAuth2Member(oauth2Member);
             oAuth2RoleMapper.insertRole(role);
 
-            MemberDTO memberDTO = MemberDTO.builder()
+            SignupRequestDTO signupRequestDTO = SignupRequestDTO.builder()
                     .memberId(username)
                     .name(oAuth2Response.getName()).build();
 
-            return new CustomOAuth2User(memberDTO);
+            return new CustomOAuth2User(signupRequestDTO);
         }
 
         existData = OAuth2Member.builder()
@@ -79,10 +79,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         oAuth2MemberMapper.updateOAuth2Member(existData);
 
-        MemberDTO memberDTO = MemberDTO.builder()
+        SignupRequestDTO signupRequestDTO = SignupRequestDTO.builder()
                 .memberId(existData.getMemberId())
                 .name(oAuth2Response.getName()).build();
 
-        return new CustomOAuth2User(memberDTO);
+        return new CustomOAuth2User(signupRequestDTO);
     }
 }

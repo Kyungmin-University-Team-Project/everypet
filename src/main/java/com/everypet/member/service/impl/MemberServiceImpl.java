@@ -2,10 +2,10 @@ package com.everypet.member.service.impl;
 
 import com.everypet.member.data.dao.MemberMapper;
 import com.everypet.member.data.dao.RoleMapper;
-import com.everypet.member.data.domain.Address;
+import com.everypet.member.data.dto.SignupRequestDTO;
 import com.everypet.member.data.domain.Member;
 import com.everypet.member.data.domain.Role;
-import com.everypet.member.data.dto.MemberDTO;
+import com.everypet.member.data.vo.Address;
 import com.everypet.member.exception.DuplicateMemberException;
 import com.everypet.member.exception.MemberIdNotFoundException;
 import com.everypet.member.service.MemberService;
@@ -24,17 +24,16 @@ public class MemberServiceImpl implements MemberService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public void register(MemberDTO memberDTO) {
+    public void register(SignupRequestDTO signupRequestDTO) {
 
-        Member member = memberDTO.toEntity();
+        Member member = signupRequestDTO.toEntity();
+        Address address = signupRequestDTO.getAddress().toEntity(signupRequestDTO);
 
         String memberId = member.getMemberId();
         String memberPwd = member.getMemberPwd();
 
-        Boolean isExist = memberMapper.existsByMemberId(memberId);
-
         // 이미 존재하는 아이디라면
-        if (isExist) {
+        if (memberMapper.existsByMemberId(memberId)) {
             throw new DuplicateMemberException(member.getMemberId());
         }
 
@@ -42,6 +41,7 @@ public class MemberServiceImpl implements MemberService {
         member.setMemberPwd(passwordEncoder.encode(memberPwd));
 
         memberMapper.insertMember(member);
+        memberMapper.insertAddress(address);
 
         roleMapper.insertRole(Role.builder()
                 .memberId(member.getMemberId())

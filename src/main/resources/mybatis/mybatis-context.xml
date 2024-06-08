@@ -10,7 +10,7 @@
     <typeAliases>
         <typeAlias type="com.everypet.member.data.domain.Member" alias="Member"></typeAlias>
         <typeAlias type="com.everypet.global.auth.oauth2.data.domain.OAuth2Member" alias="OAuth2Member"></typeAlias>
-        <typeAlias type="com.everypet.member.data.domain.Address" alias="Address"></typeAlias>
+        <typeAlias type="com.everypet.member.data.vo.Address" alias="Address"></typeAlias>
 
         <typeAlias type="com.everypet.product.data.domain.Product" alias="Product"></typeAlias>
         <typeAlias type="com.everypet.product.data.dto.ProductInsertDTO" alias="ProductInsertDTO"></typeAlias>

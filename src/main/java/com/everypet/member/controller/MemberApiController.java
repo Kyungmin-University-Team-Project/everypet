@@ -1,7 +1,7 @@
 package com.everypet.member.controller;
 
-import com.everypet.member.data.domain.Address;
-import com.everypet.member.data.dto.MemberDTO;
+import com.everypet.member.data.dto.SignupRequestDTO;
+import com.everypet.member.data.vo.Address;
 import com.everypet.member.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
@@ -29,7 +29,7 @@ public class MemberApiController {
 
     @ApiOperation(value = "회원 가입", notes = "새로운 회원을 등록합니다.")
     @PostMapping("/signup")
-    public ResponseEntity<String> signUp(@Valid @RequestBody MemberDTO member, BindingResult bindingResult) {
+    public ResponseEntity<String> signUp(@Valid @RequestBody SignupRequestDTO member, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()) {
             //log.error("회원 가입 실패");

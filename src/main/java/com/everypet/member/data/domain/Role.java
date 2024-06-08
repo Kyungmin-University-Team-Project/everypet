@@ -1,6 +1,5 @@
 package com.everypet.member.data.domain;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,4 +13,3 @@ public class Role {
     private String memberId;
     private String authorities;
 }
-
