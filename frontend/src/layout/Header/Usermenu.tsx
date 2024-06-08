@@ -21,8 +21,10 @@ const Usermenu = () => {
                     </Link>
                 </li>
                 <li className={styles.user__li}>
-                    <BsCart/>
-                    <span className={styles.tag}>장바구니</span>
+                    <Link to="/cart" className={styles.link}>
+                        <BsCart/>
+                        <span className={styles.tag}>장바구니</span>
+                    </Link>
                 </li>
             </ul>
 

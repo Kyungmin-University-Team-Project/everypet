@@ -1,0 +1,376 @@
+/* 공통 스타일 */
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.header {
+    width: 100%;
+    height: 80px;
+    background-color: white;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    border-bottom: solid 1px rgb(205, 205, 205);
+}
+
+.header .inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.header .title {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    color: #75acff;
+    font-family: 'WAGURI', sans-serif;
+    padding-left: 15px;
+}
+
+/* 기본 스타일 - 모바일 환경에 적용 */
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.cartItems {
+    height: auto;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.cartHeader {
+    position: sticky;
+    top: 0;
+    display: flex;
+    padding: 10px 20px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+    border-bottom: solid 1px #b6b6b6;
+    background-color: white;
+    z-index: 999;
+}
+
+.cartHeader h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.selectAll {
+    font-size: 0.9em;
+    color: #007BFF;
+    cursor: pointer;
+}
+
+.item__wrap{
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 20px;
+}
+
+.icon__btn{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.checkboxInput {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+
+    margin-left: 20px;
+}
+
+
+.removeItemButton {
+    cursor: pointer;
+    font-size: 1.4em;
+    color: #000000;
+
+    margin-right: 20px;
+}
+
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px;
+    box-sizing: border-box;
+    position: relative;
+
+    border-bottom: solid 1px #c5c5c5;
+
+}
+
+.itemLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.productImage {
+    width: 100px;
+    height: 100px;
+    background-color: #e1e1e1;
+    border-radius: 5px;
+    padding: 10px 0;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    height: 100%;
+
+    padding: 0 10px;
+}
+
+.productDetails {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.productDetails p {
+    margin: 0;
+    font-size: 1em;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.quantity button {
+    background: none;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.quantity input {
+    width: 40px;
+    text-align: center;
+    border: 1px solid #ccc;
+    margin: 0 5px;
+}
+
+.total {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-weight: bold;
+    height: 100%;
+    box-sizing: border-box;
+    text-align: right;
+
+    font-size: 20px;
+}
+
+.summaryContainer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: white;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.summary {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.summaryTotal {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+.discountCode, .shippingFee {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.discountCode label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.discountCode input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.applyDiscountButton {
+    margin-top: 5px;
+    padding: 8px 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.shippingFee {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.checkoutButton {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* 태블릿 및 그 이상 환경 */
+@media screen and (min-width: 769px) {
+    .title {
+        font-size: 28px;
+    }
+
+    .container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .cartItems {
+        width: 60%;
+    }
+
+    .item {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .productImage {
+        width: 100px;
+        height: 100px;
+    }
+
+    .productDetails {
+        flex-direction: row;
+        justify-content: space-between;
+        width: auto;
+    }
+
+    .total {
+        margin-top: 0;
+        margin-left: 20px;
+    }
+
+    .summaryTotal {
+        margin-right: 20px;
+    }
+
+    .discountCode, .shippingFee {
+        margin-bottom: 20px;
+    }
+
+    .checkoutButton {
+        width: auto;
+        align-self: center;
+    }
+}
+
+/* 노트북 및 데스크탑 환경 */
+@media screen and (min-width: 1400px) {
+    .title__wrap {
+        margin: auto;
+        width: 1100px;
+    }
+
+    .container {
+        flex-direction: row;
+        justify-content: space-between;
+        padding-bottom: 20px;
+    }
+
+    .cartItems {
+        width: 70%;
+    }
+
+    .productImage {
+        width: 120px;
+        height: 120px;
+    }
+
+    .summaryContainer {
+        position: sticky;
+        top: 0;
+        height: 100%;
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    .summaryTotal, .discountCode, .shippingFee {
+        margin-bottom: 20px;
+    }
+
+    .checkoutButton {
+        align-self: stretch;
+    }
+}
+
+/* 데스크탑 환경 */
+@media screen and (min-width: 1600px) {
+    .title__wrap {
+        width: 1250px;
+    }
+
+    .header .title {
+        font-size: 36px;
+    }
+
+    .container {
+        width: 1250px;
+        margin: 0 auto;
+        padding-bottom: 20px;
+    }
+
+    .productImage {
+        width: 140px;
+        height: 140px;
+    }
+}
