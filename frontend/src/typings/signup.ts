@@ -1,8 +1,14 @@
-import { AgreementJoin } from "./agreement";
-
 export interface Join {
   memberId: string;
   memberPwd: string;
   email: string;
-  agreement: AgreementJoin[];
+  birth: string;
+  name: string;
+  phone: string;
+  referrer: string;
+  address: {
+    address: string;
+    detailAddress: string;
+  };
+  agreeMarketingYn: string;
 }

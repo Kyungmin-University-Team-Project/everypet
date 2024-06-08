@@ -1,52 +1,52 @@
-import React, { useState, useEffect } from "react";
-import { Join } from "../../typings/signup";
+import React, { useState } from "react";
+import {useLocation, useNavigate} from "react-router-dom";
 import Postcode from "./Postcode";
 import styles from "./Signup.module.css";
 import { signUpLogin } from "../../typings/AuthAPI";
 import "@fortawesome/fontawesome-free/css/all.css";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { Join } from "../../typings/signup";
 
-const Signup = () => {
+const Signup: React.FC = () => {
+    const location = useLocation();
+    const agreeMarketingYn = location.state?.agreeMarketingYn || "N";
+    const navigate = useNavigate();
+
     const [user, setUser] = useState<Join>({
         memberId: "",
         memberPwd: "",
         email: "",
-        agreement: [],
+        name: "",
+        birth: "",
+        phone: "",
+        referrer: "",
+        address: {
+            address: "",
+            detailAddress: ""
+        },
+        agreeMarketingYn: agreeMarketingYn,
     });
     const [disableButton, setDisableButton] = useState(true);
-    const location = useLocation();
-    const { agreement } = location.state;
-
-    // Initialize the user state with the agreement data
-    useEffect(() => {
-        setUser((prevUser) => ({
-            ...prevUser,
-            agreement: agreement || []
-        }));
-    }, [agreement]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
+            // Log the data being sent
+            console.log("Sending user data:", JSON.stringify(user, null, 2));
+
             const response = await signUpLogin(user);
-            console.log(response);
-            const emailResponse = await axios.post(
-                "http://localhost:8080/email",
-                { email: user.email },
-                {
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                }
-            );
-            if (emailResponse.data.success) {
-                alert("이메일을 보냈어요!");
-            } else {
-                alert("이메일을 보내는데 실패했어요");
-            }
+
+            console.log("Server response:", response);
         } catch (error) {
-            console.log(error);
+            if (axios.isAxiosError(error) && error.response) {
+                navigate('/');
+                // Log detailed error information
+                console.log("Error response data:", error.response.data);
+                console.log("Error response status:", error.response.status);
+                console.log("Error response headers:", error.response.headers);
+            } else {
+                console.log("Error during signup:", error);
+            }
         }
     };
 
@@ -64,7 +64,22 @@ const Signup = () => {
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUser({ ...user, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        if (name === "address" || name === "detailAddress") {
+            setUser((prevUser) => ({
+                ...prevUser,
+                address: {
+                    ...prevUser.address,
+                    [name]: value
+                }
+            }));
+        } else {
+            setUser({ ...user, [name]: value });
+        }
+    };
+
+    const handleAddressChange = (address: string, detailAddress: string) => {
+        setUser({ ...user, address: { address, detailAddress } });
     };
 
     return (
@@ -97,11 +112,12 @@ const Signup = () => {
                 />
             </label>
 
-            <label className={styles.label_container} htmlFor='email'>
+            <label className={styles.label_container} htmlFor="email">
                 <i className={`fa-regular fa-envelope ${styles.i}`}></i>
                 <input
+                    id="email"
                     type="email"
-                    name='email'
+                    name="email"
                     placeholder="이메일"
                     className={styles.input_value}
                     value={user.email}
@@ -114,35 +130,56 @@ const Signup = () => {
 
             <label className={styles.label_container}>
                 <i className={`fa-regular fa-user ${styles.i}`}></i>
-                <input placeholder="이름" className={styles.input_value} />
+                <input
+                    id="name"
+                    name="name"
+                    value={user.name}
+                    onChange={handleChange}
+                    placeholder="이름"
+                    className={styles.input_value}
+                    required
+                />
             </label>
 
             <label className={styles.label_container}>
                 <i className={`fa-regular fa-calendar-days ${styles.i}`}></i>
-                <input placeholder="생년월일 8자리" className={styles.input_value} />
+                <input
+                    id="birth"
+                    name="birth"
+                    value={user.birth}
+                    onChange={handleChange}
+                    placeholder="생년월일 8자리"
+                    className={styles.input_value}
+                    required
+                />
             </label>
             <label className={styles.label_container}>
                 <i className={`fa-regular fa-calendar-days ${styles.i}`}></i>
                 <input
+                    id="phone"
+                    name="phone"
+                    value={user.phone}
+                    onChange={handleChange}
                     placeholder="핸드폰 번호(-)금지"
                     className={styles.input_value}
+                    required
                 />
             </label>
 
-            <Postcode />
+            <Postcode onAddressChange={handleAddressChange} />
 
             <label className={styles.label_container}>
                 <i className={`fa-regular fa-calendar-days ${styles.i}`}></i>
-                <input placeholder="추천인" className={styles.input_value} />
-                <button type="submit" className={styles.button_input}>
-                    인증하기
-                </button>
+                <input
+                    id="referrer"
+                    name="referrer"
+                    value={user.referrer}
+                    onChange={handleChange}
+                    placeholder="추천인"
+                    className={styles.input_value}
+                />
             </label>
-            <button
-                type="submit"
-                disabled={disableButton}
-                className={styles.join_btn}
-            >
+            <button type="submit" disabled={disableButton} className={styles.join_btn}>
                 가입하기
             </button>
         </form>

@@ -15,22 +15,16 @@ const Agreement = () => {
             agreement.map((item) =>
                 targetValue === item.value
                     ? { ...item, checked: !item.checked }
-                    : { ...item }
+                    : item
             )
         );
-        console.log(agreement);
     };
 
     useEffect(() => {
         fetch("/mock/agreements.json")
             .then((response) => response.json())
-            .then((data) => {
-                setAgreement(
-                    data.map((agreement: any) => ({
-                        ...agreement,
-                        checked: false,
-                    }))
-                );
+            .then((data: AgreementJoin[]) => {
+                setAgreement(data.map((agreement) => ({ ...agreement, checked: false })));
             })
             .catch((error) => console.error("Error fetching agreements:", error));
     }, []);
@@ -50,7 +44,14 @@ const Agreement = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        navigate("/login/signup", { state: { agreement } });
+        const marketingAgreement = agreement.find(
+            (item) => item.value === "check4" && item.checked
+        );
+        navigate("signup", {
+            state: {
+                agreeMarketingYn: marketingAgreement ? "Y" : "N",
+            },
+        });
     };
 
     return (
@@ -59,6 +60,7 @@ const Agreement = () => {
                 <div>
                     <label>
                         <input
+                            id='agreeMarketingYn'
                             type="checkbox"
                             onChange={onAllCheck}
                             checked={allIsChecked}
@@ -86,27 +88,27 @@ const Agreement = () => {
                                 required={item.children.includes("[필수]")}
                             />
                             <span className={styles.requiredText}>
-                {item.children.includes("[필수]") ? "[필수] " : "[선택]"}
-              </span>
+                                {item.children.includes("[필수]") ? "[필수] " : "[선택]"}
+                            </span>
                             {item.children.replace("[필수] ", "").replace("[선택] ", "")}
                             <div className={styles.textarea_container}>
-                <textarea rows={10} cols={50} className={styles.textarea}>
-                  {item.text}
-                </textarea>
+                                <textarea rows={10} cols={50} className={styles.textarea}>
+                                    {item.text}
+                                </textarea>
                             </div>
                         </label>
                     </div>
                 ))}
                 <span>
-          <button
-              className={`${styles.agreement_btn} ${
-                  !isButtonDisabled ? styles.active : ""
-              }`}
-              disabled={isButtonDisabled}
-          >
-            동의하고 진행하기
-          </button>
-        </span>
+                    <button
+                        className={`${styles.agreement_btn} ${
+                            !isButtonDisabled ? styles.active : ""
+                        }`}
+                        disabled={isButtonDisabled}
+                    >
+                        동의하고 진행하기
+                    </button>
+                </span>
             </form>
         </div>
     );
