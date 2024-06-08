@@ -22,6 +22,7 @@ import Information from "./pages/moreInformation/Information";
 import Review from "./pages/moreInformation/review";
 import ProductInquiry from "./pages/moreInformation/ProductInquiry";
 import SellerInformation from "./pages/moreInformation/SellerInformation";
+import Cart from "./pages/userService/Cart";
 
 
 const router = createBrowserRouter([
@@ -46,10 +47,11 @@ const router = createBrowserRouter([
                     { path: 'seller-information', element: <SellerInformation /> },
                 ],
             },
-            { path: 'deliveryInquiry', element: <DeliveryInquiry /> },
-            { path: 'customer-services', element: <CustomerService /> },
         ],
     },
+    { path: 'deliveryInquiry', element: <DeliveryInquiry /> },
+    { path: 'customer-services', element: <CustomerService /> },
+    { path: 'cart', element: <Cart /> },
     {
         path: '/login',
         element: <Login />,
