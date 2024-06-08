@@ -1,6 +1,6 @@
 package com.everypet.global.auth.oauth2.data.dto;
 
-import com.everypet.member.data.dto.MemberDTO;
+import com.everypet.member.data.dto.SignupRequestDTO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
@@ -10,10 +10,10 @@ import java.util.Map;
 
 public class CustomOAuth2User implements OAuth2User {
 
-    private final MemberDTO memberDTO;
+    private final SignupRequestDTO signupRequestDTO;
 
-    public CustomOAuth2User(MemberDTO memberDTO) {
-        this.memberDTO = memberDTO;
+    public CustomOAuth2User(SignupRequestDTO signupRequestDTO) {
+        this.signupRequestDTO = signupRequestDTO;
     }
 
     @Override
@@ -33,11 +33,11 @@ public class CustomOAuth2User implements OAuth2User {
 
     @Override
     public String getName() {
-        return memberDTO.getName();
+        return signupRequestDTO.getName();
     }
 
     public String getMemberId() {
-        return memberDTO.getMemberId();
+        return signupRequestDTO.getMemberId();
     }
 
 }
