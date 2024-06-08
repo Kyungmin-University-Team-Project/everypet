@@ -6,7 +6,7 @@ import styles from './Productcategory.module.css';
 import {setClickedCategory} from '../../redux/features/categorySlice';
 import {RootState} from '../../redux/store/rootReducer';
 import Categorymodal from './Categorymodal';
-import useToggle from '../../utils/category/ToggleUtil';
+import useToggle from '../../utils/common/ToggleUtil';
 import Categorybarbtn from './Categorybarbtn';
 import Realtimekeyword from '../Header/Realtimekeyword';
 

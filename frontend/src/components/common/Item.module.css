@@ -3,7 +3,6 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center; /* 아이템 중앙 정렬 */
-    width: 100%;
     max-width: 180px; /* 최대 너비 설정 */
     background-color: white;
     margin: auto; /* 수평 중앙 정렬 */
@@ -106,7 +105,7 @@
     color: white;
     padding: 5px;
     border-radius: 5px;
-    font-size: 0.8em; /* 모바일에서의 크기 */
+    font-size: 0.8em;
 }
 
 .recommendationAndReviews {
@@ -121,38 +120,39 @@
 
 .reviewCount {
     color: rgb(122, 122, 122);
-    font-size: 0.8em; /* 모바일에서의 크기 */
+    font-size: 0.8em;
 }
 
 @media (min-width: 701px) {
     .item {
-
-        margin: 10px 5px; /* 노트북과 데스크탑에서 상하좌우 여백 */
-        max-width: none; /* 노트북과 데스크탑에서는 너비 제한 없음 */
+        height: 400px;
+        padding: 0;
+        margin: 0;
+        max-width: none;
     }
 
     .title {
-        font-size: 1em; /* 노트북과 데스크탑에서의 크기 */
+        font-size: 1em;
     }
 
     .discount {
-        font-size: 24px; /* 노트북과 데스크탑에서의 크기 */
+        font-size: 24px;
     }
 
     .price {
-        font-size: 1.1em; /* 노트북과 데스크탑에서의 크기 */
+        font-size: 1.1em;
     }
 
     .cartIcon,
     .likeIcon {
-        font-size: 24px; /* 노트북과 데스크탑에서의 크기 */
+        font-size: 24px;
     }
 
     .tag {
-        font-size: 14px; /* 노트북과 데스크탑에서의 크기 */
+        font-size: 14px;
     }
 
     .reviewCount {
-        font-size: 13px; /* 노트북과 데스크탑에서의 크기 */
+        font-size: 13px;
     }
 }

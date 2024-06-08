@@ -15,10 +15,6 @@ const TimeDeal = ({category}: any) => {
 
     return (
         <div>
-            <Fixedheader/>
-            <Header/>
-            <Productcategory/>
-
             <div className={styles.container}>
                 <div className={styles.inner}>
                     {/* 아이템 리스트에 아이템 정보 넣기 */}

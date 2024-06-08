@@ -24,68 +24,40 @@ import ProductInquiry from "./pages/moreInformation/ProductInquiry";
 import SellerInformation from "./pages/moreInformation/SellerInformation";
 
 
-
-
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Root/>,
-    },
-    {
-        path: '/coupon',
-        element: <Cupon category={'coupon'}/>,
-    },
-    {
-        path: '/timesale',
-        element: <TimeDeal category={'timesale'}/>,
-    },
-    {
-        path: '/dog',
-        element: <ProductPage category={'dog'}/>,
-    },
-    {
-        path: '/cat',
-        element: <ProductPage category={'cat'}/>,
-    },
-    {
-        path: '/rat',
-        element: <ProductPage category={'rat'}/>,
-    },
-    {
-        path: '/bird',
-        element: <ProductPage category={'bird'}/>,
-    },
-    {
-        path: '/reptiles',
-        element: <ProductPage category={'reptiles'}/>,
-    },
-    {
-        path: '/moreInformation',
-        element: <MoreInformation/>,
+        element: <Root />,
         children: [
-            {path: 'information', element: <Information/>},
-            {path: 'review', element: <Review/>},
-            {path: 'product-inquiry', element: <ProductInquiry/>},
-            {path: 'seller-information', element: <SellerInformation/>},
-        ]
-    },
-
-    {
-        path: '/deliveryInquiry',
-        element: <DeliveryInquiry/>,
-    },
-    {
-        path: '/login',
-        element: <Login/>,
-        children: [
-            {path: 'agreement', element: <Agreement/>},
-            {path: 'signup', element: <Signup/>},
-            {path: 'forgot-password', element: <Findauth/>},
+            { path: 'coupon', element: <Cupon category={'coupon'} /> },
+            { path: 'timesale', element: <TimeDeal category={'timesale'} /> },
+            { path: 'dog', element: <ProductPage category={'dog'} /> },
+            { path: 'cat', element: <ProductPage category={'cat'} /> },
+            { path: 'rat', element: <ProductPage category={'rat'} /> },
+            { path: 'bird', element: <ProductPage category={'bird'} /> },
+            { path: 'reptiles', element: <ProductPage category={'reptiles'} /> },
+            {
+                path: 'moreInformation',
+                element: <MoreInformation />,
+                children: [
+                    { path: 'information', element: <Information /> },
+                    { path: 'review', element: <Review /> },
+                    { path: 'product-inquiry', element: <ProductInquiry /> },
+                    { path: 'seller-information', element: <SellerInformation /> },
+                ],
+            },
+            { path: 'deliveryInquiry', element: <DeliveryInquiry /> },
+            { path: 'customer-services', element: <CustomerService /> },
         ],
     },
     {
-        path: '/customer-services',
-        element: <CustomerService/>,
+        path: '/login',
+        element: <Login />,
+        children: [
+            { path: 'agreement', element: <Agreement /> },
+            { path: 'signup', element: <Signup /> },
+            { path: 'forgot-password', element: <Findauth /> },
+        ],
     },
 ]);
 
@@ -95,7 +67,7 @@ ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
             <QueryClientProvider client={queryClient}>
-                <RouterProvider router={router}/>
+                <RouterProvider router={router} />
             </QueryClientProvider>
         </Provider>
     </React.StrictMode>,

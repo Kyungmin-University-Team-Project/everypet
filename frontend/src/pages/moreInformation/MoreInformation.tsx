@@ -8,9 +8,7 @@ import { IoMoon } from 'react-icons/io5';
 import { TbTruckDelivery } from 'react-icons/tb';
 import styles from './moreInformation.module.css';
 import Review from "./review";
-import Fixedheader from "../../layout/Header/Fixedheader";
-import Header from "../../layout/Header/Header";
-import Productcategory from "../../layout/category/Productcategory";
+
 import Information from "./Information";
 import ProductInquiry from "./ProductInquiry";
 import SellerInformation from "./SellerInformation";
@@ -64,9 +62,7 @@ const MoreInformation: React.FC = () => {
 
     return (
         <div>
-            <Fixedheader />
-            <Header />
-            <Productcategory />
+
             <section className={styles.section_box}>
                 <article className={styles.article_moreInformation}>
                     <div className={styles.box_moreInformation}>
