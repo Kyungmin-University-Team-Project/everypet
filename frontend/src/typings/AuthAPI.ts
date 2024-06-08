@@ -1,8 +1,12 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import {Join} from "./signup";
+import {LoginData} from "./Login";
+// jwt 4.0 이상
+import { jwtDecode } from 'jwt-decode';
 
-interface ResponseData {
+export interface ResponseData {
     access: string;
+    user: string;
 }
 
 const api = axios.create({ baseURL: 'http://localhost:8080/' });
@@ -38,32 +42,42 @@ api.interceptors.request.use(
     }
 );
 
-export const login = async ({
-                                memberId,
-                                memberPwd,
-                            }: {
-    memberId: string;
-    memberPwd: string;
-}): Promise<ResponseData> => {
+export const login = async ({ memberId, memberPwd }: LoginData): Promise<any> => {
     const data = { memberId, memberPwd };
+
+    // Log the payload being sent to the server
+    console.log("Payload sent to server:", JSON.stringify(data, null, 2));
+
     try {
-        const response = await api.post('/signin', data);
+        const response: AxiosResponse<any> = await api.post('/signin', data);
+
+        // Log the response data
+        console.log("Server response:", response.data);
+
+        const access = response.headers['access'];
+
+        // Decode the JWT token to extract user information
+        // @ts-ignore
+        const decodedToken: any = jwtDecode(access);
+        const username = decodedToken.username;
+
         const responseData: ResponseData = {
-            access: response.headers['access'],
+            access: access,
+            user: username
         };
 
-        // 서버 응답 데이터 확인
-        console.log('Server Response Data:', responseData);
+        console.log('Parsed Server Response Data:', responseData);
 
-        // 토큰이 올바르게 추출되었는지 확인
-        if (!responseData.access) {
-            console.log('Invalid response data received from server');
-        }
-
-        return responseData; // 정상적인 경우 반환
+        return responseData;
     } catch (error) {
-        console.error('Error in login:', error);
-        throw error; // 오류가 발생한 경우 오류를 throw
+        if (axios.isAxiosError(error) && error.response) {
+            console.error("Error response data:", error.response.data);
+            console.error("Error response status:", error.response.status);
+            console.error("Error response headers:", error.response.headers);
+        } else {
+            console.error("Error during login:", error);
+        }
+        throw error;
     }
 };
 

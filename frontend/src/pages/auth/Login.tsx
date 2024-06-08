@@ -1,14 +1,13 @@
-import {Link, useLocation, useNavigate} from "react-router-dom";
-import React, {useEffect, useState} from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import styles from "./Login.module.css";
 import Signup from "./Signup";
 import Findauth from "./Findauth";
 import Agreement from "./Agreement";
-import {login} from "../../typings/AuthAPI";
-import {LoginData} from "../../typings/Login";
+import { login } from "../../typings/AuthAPI";
+import { LoginData } from "../../typings/Login";
 import "@fortawesome/fontawesome-free/css/all.css";
 import cryptoJs from 'crypto-js';
-
 
 const Login = () => {
     const navigate = useNavigate();
@@ -20,32 +19,34 @@ const Login = () => {
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setValues({...values, [e.target.id]: e.target.value});
+        setValues({ ...values, [e.target.id]: e.target.value });
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             const response = await login(values);
-            // 토큰 AES 암호화
             const encryptedAccess = cryptoJs.AES.encrypt(response.access, "secret-key").toString();
-            // 서버로부터 받은 토큰을 로컬 스토리지에 저장
             localStorage.setItem("access", encryptedAccess);
-            navigate('/')
+
+            if (response.user) {
+                localStorage.setItem("username", response.user); // Store username in localStorage
+            } else {
+                console.error("Username is undefined");
+            }
+
+            navigate('/');
         } catch (error) {
             console.log(error);
         }
     };
 
-    // Show login form based on current location
     useEffect(() => {
         setShowLoginForm(
             !["/login/signup", "/login/forgot-password", "/login/agreement"].includes(
                 location.pathname,
             ),
         );
-
-
     }, [location.pathname]);
 
     return (
@@ -57,7 +58,7 @@ const Login = () => {
                         <label htmlFor="memberId" className={styles.input_label}>
                             <p className={styles.login_text}>아이디</p>
                             <div className={styles.input_field}>
-                                <i className={`${styles.input_icon} fas fa-user`}/>
+                                <i className={`${styles.input_icon} fas fa-user`} />
                                 <input
                                     placeholder="아이디를 입력해주세요."
                                     id="memberId"
@@ -72,7 +73,7 @@ const Login = () => {
                         <label htmlFor="memberPwd" className={styles.input_label}>
                             <p className={styles.login_text}>비밀번호</p>
                             <div className={styles.input_field}>
-                                <i className={`${styles.input_icon} fas fa-lock`}/>
+                                <i className={`${styles.input_icon} fas fa-lock`} />
                                 <input
                                     type="password"
                                     placeholder="비밀번호를 입력해주세요."
@@ -107,15 +108,13 @@ const Login = () => {
                         <p className={styles.login_api}>구글 카카오 등 로그인!</p>
                     </form>
                 )}
+
             </section>
-            {location.pathname === "/login/signup" ? <Signup/> : null}
-            {location.pathname === "/login/forgot-password" ? <Findauth/> : null}
-            {location.pathname === "/login/agreement" ? <Agreement/> : null}
+            {location.pathname === "/login/signup" ? <Signup /> : null}
+            {location.pathname === "/login/forgot-password" ? <Findauth /> : null}
+            {location.pathname === "/login/agreement" ? <Agreement /> : null}
         </div>
     );
 };
 
 export default Login;
-
-
-

@@ -123,9 +123,6 @@ const Signup: React.FC = () => {
                     value={user.email}
                     onChange={handleChange}
                 />
-                <button type="button" className={styles.button_input}>
-                    코드발송
-                </button>
             </label>
 
             <label className={styles.label_container}>
