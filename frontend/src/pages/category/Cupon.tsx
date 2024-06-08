@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './Cupon.module.css';
-import Header from '../../layout/Header/Header';
-import Fixedheader from '../../layout/Header/Fixedheader';
-import Productcategory from '../../layout/category/Productcategory';
+
 import ItemList from '../../components/common/ItemList';
 
 const Cupon = ({ category }: any) => {
@@ -14,9 +12,7 @@ const Cupon = ({ category }: any) => {
 
   return (
     <div>
-      <Fixedheader />
-      <Header />
-      <Productcategory />
+
 
       <div className={styles.container}>
         <div className={styles.inner}>

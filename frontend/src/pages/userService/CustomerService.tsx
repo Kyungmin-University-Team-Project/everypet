@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Fixedheader from '../../layout/Header/Fixedheader';
-import Header from '../../layout/Header/Header';
-import Productcategory from '../../layout/category/Productcategory';
 import styles from './CustomerService.module.css';
 
 interface Notice {
@@ -24,9 +21,7 @@ const CustomerService = () => {
 
   return (
     <div>
-      <Fixedheader />
-      <Header />
-      <Productcategory />
+
       <div className={styles.container}>
         <aside className={styles.sidebar}>
           <span className={styles.sidebar__title}>고객센터</span>

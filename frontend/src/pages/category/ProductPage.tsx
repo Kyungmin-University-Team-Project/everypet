@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './ProductPage.module.css';
-import Header from '../../layout/Header/Header';
-import Fixedheader from '../../layout/Header/Fixedheader';
-import Productcategory from '../../layout/category/Productcategory';
+
 import ItemList from '../../components/common/ItemList';
 import DetailedCategory from '../../components/common/DetailedCategory';
 
@@ -44,9 +42,6 @@ const ProductPage = ({ category }: { category: string }) => {
 
     return (
         <div>
-            <Fixedheader />
-            <Header />
-            <Productcategory />
             <div className={styles.container}>
                 <div className={styles.inner}>
                     {data && <DetailedCategory details={data.detailedCategories} />}

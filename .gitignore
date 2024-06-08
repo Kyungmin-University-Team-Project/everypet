@@ -59,8 +59,7 @@ build/
 ### VS Code ###
 .vscode/
 
-### Mac OS ###
-.DS_Store
+
 
 ### 제외 ###
 /src/main/java/com/everypet/global/auth/oauth2/config/SocialClientRegistration.java

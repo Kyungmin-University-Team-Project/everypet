@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import styles from './Header.module.css';
 import {Link} from 'react-router-dom';
-import useToggle from '../../utils/category/ToggleUtil';
+import useToggle from '../../utils/common/ToggleUtil';
 import Categorymodal from '../category/Categorymodal';
 import Searchinput from './Searchinput';
 import Usermenu from './Usermenu';

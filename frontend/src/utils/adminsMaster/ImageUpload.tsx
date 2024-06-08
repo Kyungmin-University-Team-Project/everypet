@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styles from './ImageUpload.module.css';
 
 const ImageUpload: React.FC = () => {
@@ -18,26 +18,26 @@ const ImageUpload: React.FC = () => {
     const [descriptionImage, setDescriptionImage] = useState<File | null>(null);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files.length > 0) {
-            const file = event.target.files[0];
+        const file = event.target.files?.[0];
+        if (file) {
             setSelectedFile(file);
             setPreviewUrl(URL.createObjectURL(file));
         }
     };
 
     const handleDescriptionImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files.length > 0) {
-            const file = event.target.files[0];
+        const file = event.target.files?.[0];
+        if (file) {
             setDescriptionImage(file);
         }
     };
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (!selectedFile || !descriptionImage) return;
 
         const formData = new FormData();
         formData.append('memberId', memberId);
-        formData.append('productId', productId);
         formData.append('productName', productName);
         formData.append('productPrice', productPrice.toString());
         formData.append('productDiscountRate', productDiscountRate.toString());
@@ -50,7 +50,6 @@ const ImageUpload: React.FC = () => {
         // Log form data to the console
         console.log({
             memberId,
-            productId,
             productName,
             productPrice,
             productDiscountRate,
@@ -67,11 +66,10 @@ const ImageUpload: React.FC = () => {
                 body: formData,
             });
 
-            // Check the content type of the response
             const contentType = response.headers.get('content-type');
             if (!response.ok) {
                 let errorMessage = 'Image upload failed.';
-                if (contentType && contentType.includes('application/json')) {
+                if (contentType?.includes('application/json')) {
                     const errorData = await response.json();
                     errorMessage = errorData.message || errorMessage;
                 } else {
@@ -94,61 +92,99 @@ const ImageUpload: React.FC = () => {
             <form onSubmit={handleSubmit} className={styles.form}>
                 <label className={styles.label}>
                     Member ID:
-                    <input type="text" value={memberId} onChange={(e) => setMemberId(e.target.value)} required
-                           className={styles.input}/>
+                    <input
+                        type="text"
+                        value={memberId}
+                        onChange={(e) => setMemberId(e.target.value)}
+                        required
+                        className={styles.input}
+                    />
                 </label>
-                <label className={styles.label}>
-                    Product ID:
-                    <input type="text" value={productId} onChange={(e) => setProductId(e.target.value)} required
-                           className={styles.input}/>
-                </label>
+
                 <label className={styles.label}>
                     Product Name:
-                    <input type="text" value={productName} onChange={(e) => setProductName(e.target.value)} required
-                           className={styles.input}/>
+                    <input
+                        type="text"
+                        value={productName}
+                        onChange={(e) => setProductName(e.target.value)}
+                        required
+                        className={styles.input}
+                    />
                 </label>
                 <label className={styles.label}>
                     Product Price:
-                    <input type="number" value={productPrice} onChange={(e) => setProductPrice(Number(e.target.value))}
-                           required className={styles.input}/>
+                    <input
+                        type="number"
+                        value={productPrice}
+                        onChange={(e) => setProductPrice(Number(e.target.value))}
+                        required
+                        className={styles.input}
+                    />
                 </label>
                 <label className={styles.label}>
                     Discount Rate:
-                    <input type="number" value={productDiscountRate}
-                           onChange={(e) => setProductDiscountRate(Number(e.target.value))} required
-                           className={styles.input}/>
+                    <input
+                        type="number"
+                        value={productDiscountRate}
+                        onChange={(e) => setProductDiscountRate(Number(e.target.value))}
+                        required
+                        className={styles.input}
+                    />
                 </label>
                 <label className={styles.label}>
                     Number of Products:
-                    <input type="number" value={numberOfProduct}
-                           onChange={(e) => setNumberOfProduct(Number(e.target.value))} required
-                           className={styles.input}/>
+                    <input
+                        type="number"
+                        value={numberOfProduct}
+                        onChange={(e) => setNumberOfProduct(Number(e.target.value))}
+                        required
+                        className={styles.input}
+                    />
                 </label>
                 <label className={styles.label}>
                     Product Category:
-                    <input type="text" value={productCategory} onChange={(e) => setProductCategory(e.target.value)}
-                           required className={styles.input}/>
+                    <input
+                        type="text"
+                        value={productCategory}
+                        onChange={(e) => setProductCategory(e.target.value)}
+                        required
+                        className={styles.input}
+                    />
                 </label>
                 <label className={styles.label}>
                     Sales Status:
-                    <select value={productSalesStatusYN} onChange={(e) => setProductSalesStatusYN(e.target.value)}
-                            required className={styles.input}>
+                    <select
+                        value={productSalesStatusYN}
+                        onChange={(e) => setProductSalesStatusYN(e.target.value)}
+                        required
+                        className={styles.input}
+                    >
                         <option value="Y">Yes</option>
                         <option value="N">No</option>
                     </select>
                 </label>
                 <label className={styles.label}>
                     Product Image:
-                    <input type="file" onChange={handleFileChange} required className={styles.input}/>
+                    <input
+                        type="file"
+                        onChange={handleFileChange}
+                        required
+                        className={styles.input}
+                    />
                 </label>
                 {previewUrl && (
                     <div className={styles.preview}>
-                        <img src={previewUrl} alt="Selected preview" className={styles.previewImage}/>
+                        <img src={previewUrl} alt="Selected preview" className={styles.previewImage} />
                     </div>
                 )}
                 <label className={styles.label}>
                     Description Image:
-                    <input type="file" onChange={handleDescriptionImageChange} required className={styles.input}/>
+                    <input
+                        type="file"
+                        onChange={handleDescriptionImageChange}
+                        required
+                        className={styles.input}
+                    />
                 </label>
                 <button type="submit" className={styles.button}>Upload Image</button>
             </form>

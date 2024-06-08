@@ -4,7 +4,7 @@ import Categorymodal from '../category/Categorymodal';
 import Usermenu from './Usermenu';
 import Searchinput from './Searchinput';
 import {Link} from 'react-router-dom';
-import useToggle from '../../utils/category/ToggleUtil';
+import useToggle from '../../utils/common/ToggleUtil';
 import Categorybarbtn from '../category/Categorybarbtn';
 import TopMenu from './TopMenu';
 import MobileSearchModal from "../mobile/MobileSearchModal";
