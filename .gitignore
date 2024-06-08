@@ -60,8 +60,9 @@ build/
 .vscode/
 
 
+
 ### 제외 ###
 /src/main/java/com/everypet/global/auth/oauth2/config/SocialClientRegistration.java
-application.yml
+application.properties
 every-pet-418208-be0b25df67a9.json
 database.properties
