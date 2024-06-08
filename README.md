@@ -6,13 +6,13 @@ https://velog.io/@jiheon/Git-Commit-message-규칙
 
 ## 👥 팀원
 
-### 🔥 <span style="color:#3CB371; font-family: 'Comic Sans MS', cursive, sans-serif;">엔젤릭버스터 이용호</span>
+### 🔥 <span style="color:#3CB371; font-family: 'Comic Sans MS', cursive, sans-serif;">[Back end] 이용호</span>
 
-### 🏳️‍🌈 <span style="color:#FFA500; font-family: 'Comic Sans MS', cursive, sans-serif;">성소수자 노희철</span>
+### ⭐️ <span style="color:#FFA500; font-family: 'Comic Sans MS', cursive, sans-serif;">[Back end] 노희철</span>
 
-### 🌑 <span style="color:#9400D3; font-family: 'Comic Sans MS', cursive, sans-serif;">일간베스트 총괄 이관용</span>
+### 🌑 <span style="color:#9400D3; font-family: 'Comic Sans MS', cursive, sans-serif;">[Front end] 총괄 이관용</span>
 
-### ⚡️ <span style="color:#FF6347; font-family: 'Comic Sans MS', cursive, sans-serif;">남성 페미니스트 대표 박민규</span>
+### ⚡️ <span style="color:#FF6347; font-family: 'Comic Sans MS', cursive, sans-serif;">[Front end] 대표 박민규</span>
 
 ## 🚀 프로젝트 실행 방법
 
@@ -88,4 +88,4 @@ docker-compose down
 
 ## 🐏 우리 프로젝트는 이렇게 만들어졌어요
 
-![image](https://image.fmkorea.com/files/attach/new3/20231201/191505828/1355679914/6457622111/c4726da609a181bc397f164c21f51047.png)
+![image](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyOtQXrDHyyTIu7R-p63Kd4c4LwFHqqNkS5g&s)
