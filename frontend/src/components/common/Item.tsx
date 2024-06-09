@@ -2,18 +2,27 @@ import React from 'react';
 import { FaStar, FaRegStar, FaHeart, FaShoppingCart } from 'react-icons/fa';
 import styles from './Item.module.css';
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
-import {decryptToken} from "../../utils/common/tokenDecode";
+import {addToCart} from "../../utils/product/cart";
 
-const Item = ({
-                  productId,
-                  name,
-                  price,
-                  discount,
-                  recommended,
-                  reviewCount,
-                  imageUrl,
-              }: any) => {
+interface ItemProps {
+    productId: string;
+    name: string;
+    price: number;
+    discount: number;
+    recommended: number;
+    reviewCount: number;
+    imageUrl: string;
+}
+
+const Item: React.FC<ItemProps> = ({
+                                       productId,
+                                       name,
+                                       price,
+                                       discount,
+                                       recommended,
+                                       reviewCount,
+                                       imageUrl,
+                                   }) => {
     const navigate = useNavigate();
 
     const handleViewDetails = () => {
@@ -21,32 +30,9 @@ const Item = ({
         navigate('/moreInformation', { state: { item: { productId, name, price, discount, recommended, reviewCount, imageUrl } } });
     };
 
-    const handleAddToCart = async (event: React.MouseEvent) => {
+    const handleAddToCart = (event: React.MouseEvent) => {
         event.stopPropagation(); // 이벤트 전파 중지
-        try {
-            const encryptedToken = localStorage.getItem('access');
-            if (!encryptedToken) {
-                throw new Error("No access token found");
-            }
-
-            const token = decryptToken(encryptedToken); // 유틸리티 함수 사용
-
-            const response = await axios.post('/cart/add', {
-                productId: productId,
-                cartQuantity: 1
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'access': token
-                }
-            });
-
-            console.log("장바구니 추가 성공:", response.data);
-            alert("장바구니에 추가되었습니다.");
-        } catch (error) {
-            console.error("장바구니 추가 실패:", error);
-            alert("장바구니에 추가하는데 실패했습니다.");
-        }
+        addToCart(productId);
     };
 
     const renderStars = () => {
@@ -58,7 +44,7 @@ const Item = ({
     };
 
     return (
-        <div className={styles.item} onClick={handleViewDetails} key={productId}> {/* key를 productId로 설정 */}
+        <div className={styles.item} onClick={handleViewDetails}>
             <div className={styles.img__wrap}>
                 <img className={styles.img} src={imageUrl} alt={name} />
             </div>
