@@ -10,7 +10,7 @@
                  )
     </insert>
 
-    <delete id="deleteCart">
+    <delete id="deleteCart" parameterType="map">
         DELETE FROM TBL_CART
         WHERE MEMBER_ID = #{memberId} AND PRODUCT_ID = #{productId}
     </delete>

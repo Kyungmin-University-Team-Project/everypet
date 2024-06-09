@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,9 +37,9 @@ public class CartApiController {
     }
 
     @PostMapping("/cart/delete")
-    public ResponseEntity<String> deleteCart(@RequestBody String productId, @AuthenticationPrincipal Member member) {
+    public ResponseEntity<String> deleteCart(@RequestBody Map<String, String> productId, @AuthenticationPrincipal Member member) {
 
-        cartService.deleteCart(member.getUsername(), productId);
+        cartService.deleteCart(member.getUsername(), productId.get("productId"));
 
         return response(HttpStatus.OK, "장바구니 삭제 성공");
     }
