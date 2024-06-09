@@ -18,11 +18,8 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void addCart(String memberId, CartInsertDTO cartInsertDTO) {
-
         Cart cart = cartInsertDTO.toEntity(memberId);
-
         cartMapper.insertCart(cart);
-
     }
 
     @Override
