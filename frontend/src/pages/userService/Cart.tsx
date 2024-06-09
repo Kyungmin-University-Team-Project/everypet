@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios, { AxiosError } from 'axios';
-import CryptoJS from 'crypto-js';
-import styles from './Cart.module.css';
 import { Link } from "react-router-dom";
 import { FaTrashAlt } from 'react-icons/fa';
+import styles from './Cart.module.css';
+import {decryptToken} from "../../utils/common/tokenDecode";
 
 interface CartItem {
     productId: string;
@@ -12,19 +12,12 @@ interface CartItem {
     cartQuantity: number;
 }
 
-const secretKey = "secret-key";
-
 const Cart: React.FC = () => {
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
     const [selectAll, setSelectAll] = useState(false);
     const [deleteTrigger, setDeleteTrigger] = useState(false); // 삭제 이벤트 트리거
     const shippingFee = 3000; // 배송비
-
-    const decryptToken = (encryptedToken: string, key: string): string => {
-        const bytes = CryptoJS.AES.decrypt(encryptedToken, key);
-        return bytes.toString(CryptoJS.enc.Utf8);
-    };
 
     const fetchCartItems = async () => {
         try {
@@ -33,7 +26,7 @@ const Cart: React.FC = () => {
                 throw new Error("No access token found");
             }
 
-            const token = decryptToken(encryptedToken, secretKey);
+            const token = decryptToken(encryptedToken); // 유틸리티 함수 사용
             console.log("Decrypted Access Token:", token);
 
             const response = await axios.post<CartItem[]>('/cart/list', {}, {
@@ -85,7 +78,7 @@ const Cart: React.FC = () => {
                 throw new Error("No access token found");
             }
 
-            const token = decryptToken(encryptedToken, secretKey);
+            const token = decryptToken(encryptedToken); // 유틸리티 함수 사용
             console.log("이게 아이디" + productId);
 
             const response = await axios.post('/cart/delete', { productId }, {
@@ -125,6 +118,12 @@ const Cart: React.FC = () => {
             setSelectedItems(selectedItems.filter(id => id !== productId));
         } else {
             setSelectedItems([...selectedItems, productId]);
+        }
+    };
+
+    const deleteSelectedItems = async () => {
+        for (const productId of selectedItems) {
+            await deleteItem(productId);
         }
     };
 
@@ -205,6 +204,7 @@ const Cart: React.FC = () => {
                             <span>{totalPrice.toLocaleString()}원</span>
                         </div>
                         <button className={styles.checkoutButton}>결제하기</button>
+                        <button onClick={deleteSelectedItems} className={styles.checkoutButton}>선택 삭제</button>
                     </div>
                 </div>
             </div>
