@@ -9,7 +9,7 @@ export interface ResponseData {
     user: string;
 }
 
-const api = axios.create({ baseURL: 'http://localhost:8080/' });
+const api = axios.create({ baseURL: 'http://localhost:3000/' });
 
 // 401 에러 처리
 api.interceptors.request.use(
@@ -84,7 +84,6 @@ export const login = async ({ memberId, memberPwd }: LoginData): Promise<any> =>
 export const signUpLogin = async (user: Join): Promise<any> => {
     // Log the payload being sent to the server
     console.log("Payload sent to server:", JSON.stringify(user, null, 2));
-
     try {
         const response: AxiosResponse<any> = await api.post('/signup', user);
         // Log the response data
