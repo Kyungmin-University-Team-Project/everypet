@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios, { AxiosError } from 'axios';
-import CryptoJS from 'crypto-js';
-import styles from './Cart.module.css';
 import { Link } from "react-router-dom";
 import { FaTrashAlt } from 'react-icons/fa';
+import styles from './Cart.module.css';
+import {decryptToken} from "../../utils/common/tokenDecode";
 
 interface CartItem {
     productId: string;
@@ -12,18 +12,12 @@ interface CartItem {
     cartQuantity: number;
 }
 
-const secretKey = "secret-key";
-
 const Cart: React.FC = () => {
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
-    const [items, setItems] = useState<CartItem[]>([]); // 삭제용 배열
+    const [selectedItems, setSelectedItems] = useState<string[]>([]);
+    const [selectAll, setSelectAll] = useState(false);
     const [deleteTrigger, setDeleteTrigger] = useState(false); // 삭제 이벤트 트리거
     const shippingFee = 3000; // 배송비
-
-    const decryptToken = (encryptedToken: string, key: string): string => {
-        const bytes = CryptoJS.AES.decrypt(encryptedToken, key);
-        return bytes.toString(CryptoJS.enc.Utf8);
-    };
 
     const fetchCartItems = async () => {
         try {
@@ -32,7 +26,7 @@ const Cart: React.FC = () => {
                 throw new Error("No access token found");
             }
 
-            const token = decryptToken(encryptedToken, secretKey);
+            const token = decryptToken(encryptedToken); // 유틸리티 함수 사용
             console.log("Decrypted Access Token:", token);
 
             const response = await axios.post<CartItem[]>('/cart/list', {}, {
@@ -44,7 +38,7 @@ const Cart: React.FC = () => {
 
             console.log("Response Data:", response.data);
             setCartItems(response.data);
-            setItems(response.data); // 초기 항목 설정
+            setSelectedItems(response.data.map(item => item.productId)); // 초기 항목 선택 설정
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 handleAxiosError(error);
@@ -84,7 +78,7 @@ const Cart: React.FC = () => {
                 throw new Error("No access token found");
             }
 
-            const token = decryptToken(encryptedToken, secretKey);
+            const token = decryptToken(encryptedToken); // 유틸리티 함수 사용
             console.log("이게 아이디" + productId);
 
             const response = await axios.post('/cart/delete', { productId }, {
@@ -97,7 +91,8 @@ const Cart: React.FC = () => {
             console.log("Delete response:", response.data);
 
             // 아이템 삭제 후 목록에서 직접 제거
-            setItems(items.filter(item => item.productId !== productId));
+            setCartItems(cartItems.filter(item => item.productId !== productId));
+            setSelectedItems(selectedItems.filter(id => id !== productId));
             setDeleteTrigger(true); // 삭제 트리거 설정
         } catch (error) {
             console.error('Error deleting cart item:', error);
@@ -106,6 +101,29 @@ const Cart: React.FC = () => {
             } else {
                 console.error('Unexpected error:', error);
             }
+        }
+    };
+
+    const handleSelectAllChange = () => {
+        if (selectAll) {
+            setSelectedItems([]);
+        } else {
+            setSelectedItems(cartItems.map(item => item.productId));
+        }
+        setSelectAll(!selectAll);
+    };
+
+    const handleItemSelectChange = (productId: string) => {
+        if (selectedItems.includes(productId)) {
+            setSelectedItems(selectedItems.filter(id => id !== productId));
+        } else {
+            setSelectedItems([...selectedItems, productId]);
+        }
+    };
+
+    const deleteSelectedItems = async () => {
+        for (const productId of selectedItems) {
+            await deleteItem(productId);
         }
     };
 
@@ -126,12 +144,25 @@ const Cart: React.FC = () => {
                 <div className={styles.cartItems}>
                     <div className={styles.cartHeader}>
                         <h2>장바구니</h2>
-                        <span className={styles.selectAll}>전체 선택</span>
+                        <div className={styles.selectAll__wrap}>
+                            <span className={styles.selectAll}>전체</span>
+                            <input
+                                type="checkbox"
+                                checked={selectAll}
+                                onChange={handleSelectAllChange}
+                                className={styles.check__all__Input}
+                            />
+                        </div>
                     </div>
                     {cartItems.map((item) => (
                         <div className={styles.item__wrap} key={item.productId}>
                             <div className={styles.icon__btn}>
-                                <input type="checkbox" className={styles.checkboxInput} />
+                                <input
+                                    type="checkbox"
+                                    checked={selectedItems.includes(item.productId)}
+                                    onChange={() => handleItemSelectChange(item.productId)}
+                                    className={styles.checkboxInput}
+                                />
                                 <FaTrashAlt
                                     className={styles.removeItemButton}
                                     onClick={() => deleteItem(item.productId)}
@@ -150,9 +181,9 @@ const Cart: React.FC = () => {
                                         <p>{item.productName}</p>
                                     </div>
                                     <div className={styles.quantity}>
-                                        <button>-</button>
-                                        <input type="number" value={item.cartQuantity} readOnly />
-                                        <button>+</button>
+                                        <button className={styles.quantityButton}>-</button>
+                                        <input type="number" value={item.cartQuantity} readOnly className={styles.quantityInput}/>
+                                        <button className={styles.quantityButton}>+</button>
                                     </div>
                                     <div className={styles.total}>
                                         <p className={styles.price}>{item.productPrice}원</p>
@@ -165,14 +196,15 @@ const Cart: React.FC = () => {
                 <div className={styles.summaryContainer}>
                     <div className={styles.summary}>
                         <div className={styles.shippingFee}>
-                            <span>예상 배송비:</span>
-                            <span>₩{shippingFee.toLocaleString()}</span>
+                            <span>배송비:</span>
+                            <span>{shippingFee.toLocaleString()}원</span>
                         </div>
                         <div className={styles.summaryTotal}>
                             <span>합계:</span>
                             <span>{totalPrice.toLocaleString()}원</span>
                         </div>
                         <button className={styles.checkoutButton}>결제하기</button>
+                        <button onClick={deleteSelectedItems} className={styles.checkoutButton}>선택 삭제</button>
                     </div>
                 </div>
             </div>

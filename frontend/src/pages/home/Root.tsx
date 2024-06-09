@@ -5,6 +5,7 @@ import Home from './Home';
 import Header from '../../layout/Header/Header';
 import Fixedheader from '../../layout/Header/Fixedheader';
 import Footer from "../../components/home/Footer";
+import ScrollToTopButton from "../../components/common/ScrollToTopButton";
 
 const Root = () => {
     const location = useLocation();
@@ -35,6 +36,7 @@ const Root = () => {
             <Header/>
             <Productcategory/>
             {location.pathname === '/' ? <Home/> : <Outlet/>}
+            <ScrollToTopButton />
             <Footer/>
         </>
     );

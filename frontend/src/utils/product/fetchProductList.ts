@@ -5,6 +5,8 @@ import axios from "axios";
 export const fetchProductList = async (params: Params) => {
     try {
         const response = await axios.get('/product-list', { params });
+        console.log(response.data)
+
         return response.data;
     } catch (error) {
         console.error('Error fetching data:', error);

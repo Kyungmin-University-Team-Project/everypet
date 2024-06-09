@@ -8,10 +8,10 @@ import { IoMoon } from 'react-icons/io5';
 import { TbTruckDelivery } from 'react-icons/tb';
 import styles from './moreInformation.module.css';
 import Review from "./review";
-
 import Information from "./Information";
 import ProductInquiry from "./ProductInquiry";
 import SellerInformation from "./SellerInformation";
+import {addToCart} from "../../utils/product/cart";
 
 const MoreInformation: React.FC = () => {
     const location = useLocation();
@@ -28,7 +28,7 @@ const MoreInformation: React.FC = () => {
 
     useEffect(() => {
         if (item) {
-            const originalPrice = parseFloat(item.price.replace(/,/g, ''));
+            const originalPrice = parseFloat(item.price.toString().replace(/,/g, '')); // 여기 수정
             const calculatedDiscountedPrice = originalPrice - originalPrice * (item.discount / 100);
             setDiscountedPrice(Math.floor(calculatedDiscountedPrice));
         }
@@ -60,9 +60,18 @@ const MoreInformation: React.FC = () => {
         ref.current.scrollIntoView({ behavior: 'smooth' });
     };
 
+    const handleAddToCart = () => {
+        if (item) {
+            addToCart(item.productId, quantity);
+        }
+    };
+
+    if (!item) {
+        return <div>상품 정보를 불러오는 중입니다...</div>;
+    }
+
     return (
         <div>
-
             <section className={styles.section_box}>
                 <article className={styles.article_moreInformation}>
                     <div className={styles.box_moreInformation}>
@@ -77,7 +86,7 @@ const MoreInformation: React.FC = () => {
                             <div className={styles.reviews}>
                                 {renderStars(item.recommended)}
                                 <span className={styles.review_count}>
-                                    <strong>20,586</strong> 리뷰 보기
+                                    <strong>{item.reviewCount}</strong> 리뷰 보기
                                 </span>
                                 <FaAngleRight className={styles.icon} />
                             </div>
@@ -125,25 +134,24 @@ const MoreInformation: React.FC = () => {
                                     <input type="text" value={quantity} readOnly className={styles.quantity_input} />
                                     <button className={styles.increment} onClick={handleIncrement}>+</button>
                                 </div>
-                                <button className={styles.cart_button}>장바구니</button>
+                                <button className={styles.cart_button} onClick={handleAddToCart}>장바구니</button>
                                 <button className={styles.purchase_button}>구매하기</button>
                             </div>
                         </div>
                     </div>
                 </article>
-                {/* 상세정보, 리뷰, 상품질문, 판매자 정보, 버튼 */}
                 <article className={styles.information}>
                     <div className={styles.information_box}>
                         <button className={styles.tab_btn} onClick={() => scrollToSection(informationRef)}>상세정보</button>
                         <button className={styles.tab_btn} onClick={() => scrollToSection(purchaseInfoRef)}>리뷰</button>
                         <button className={styles.tab_btn} onClick={() => scrollToSection(reviewsRef)}>상품문의</button>
-                        <button className={styles.tab_btn} onClick={() => scrollToSection(productInquiryRef)}>판매자 정보</button>
+                        <button className={styles.tab_btn} onClick={() => scrollToSection(productInquiryRef)}>배송 정보</button>
                     </div>
                     <div ref={informationRef}>
                         <Information />
                     </div>
                     <div ref={purchaseInfoRef}>
-                       <Review/>
+                        <Review/>
                     </div>
                     <div ref={reviewsRef}>
                         <ProductInquiry/>

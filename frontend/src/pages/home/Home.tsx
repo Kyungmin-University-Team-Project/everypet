@@ -8,7 +8,7 @@ import img1 from '../../assets/img/main_img/add1.jpg';
 import img2 from '../../assets/img/main_img/add2.jpg';
 import img3 from '../../assets/img/main_img/add3.jpg';
 import HomeAd from '../../components/home/HomeAd';
-import {fetchProductList} from "../../utils/category/fetchProductList";
+import {fetchProductList} from "../../utils/product/fetchProductList";
 
 const adsData = [
     {

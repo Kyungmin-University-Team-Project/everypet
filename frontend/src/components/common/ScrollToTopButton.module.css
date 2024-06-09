@@ -1,0 +1,41 @@
+.scrollToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.scrollButton {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, opacity 0.3s;
+    opacity: 0.8;
+}
+
+.scrollButton:hover {
+    background-color: #0056b3;
+    opacity: 1;
+}
+
+/* Tablet */
+@media (min-width: 600px) {
+    .scrollButton {
+        padding: 15px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .scrollButton {
+        padding: 20px;
+    }
+
+    .icon{
+        font-size: 1.6rem;
+    }
+}

@@ -1,48 +1,55 @@
 import React from 'react';
-import {useQuery} from 'react-query';
+import { useQuery } from 'react-query';
 import Item from './Item';
 import styles from './ItemList.module.css';
-import {dogMoreInformation} from '../../typings/dog_more_information';
 import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
 import ErrorComponent from "../../utils/reactQuery/ErrorComponent";
+import {fetchProductList} from "../../utils/product/fetchProductList";
 
-const fetchItems = async (): Promise<dogMoreInformation[]> => {
-    const response = await fetch('/mock/dog_more_information.json');
-    if (!response.ok) throw new Error('Network response was not ok');
-    return response.json();
-};
+interface Product {
+    productId: string;
+    productName: string;
+    productPrice: number;
+    productDiscountRate: number;
+    productViews: number;
+    numberOfProduct: number;
+    imageUrl?: string;
+}
 
 const ItemList = () => {
-    const {data, error, isLoading} = useQuery<dogMoreInformation[], Error>('dogMoreInformation', fetchItems);
-
-    const getImageUrl = (imageUrl: string) => {
-        try {
-            return require(`../../assets/img/product_image/${imageUrl}`);
-        } catch (error) {
-            console.error('Error loading image:', error);
-            return '';
-        }
+    const fetchItems = async (): Promise<Product[]> => {
+        const params = {
+            orderBy: 'PRODUCT_VIEWS DESC',
+            page: 1,
+            pageSize: 10,
+            productCategory: 'Electronics'
+        };
+        console.log("Fetching items...");
+        return await fetchProductList(params);
     };
 
+    const { data, error, isLoading } = useQuery<Product[], Error>('products', fetchItems);
+
     if (isLoading) {
-        return <LoadingSpinner/>;
+        return <LoadingSpinner />;
     }
 
     if (error) {
-        return <ErrorComponent message={error.message}/>;
+        return <ErrorComponent message={error.message} />;
     }
 
     return (
         <div className={styles.container}>
             {data?.map((item) => (
                 <Item
-                    key={item.name}
-                    name={item.name}
-                    price={item.price}
-                    discount={item.discount}
-                    recommended={item.recommended}
-                    reviewCount={item.reviewCount}
-                    imageUrl={getImageUrl(item.imageUrl)}
+                    key={item.productId}
+                    productId={item.productId}
+                    name={item.productName}
+                    price={item.productPrice}
+                    discount={item.productDiscountRate}
+                    recommended={item.productViews}
+                    reviewCount={item.numberOfProduct}
+                    imageUrl={`https://storage.googleapis.com/every_pet_img/${item.productId}`} // 이미지 URL 수정
                 />
             ))}
         </div>
