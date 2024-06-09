@@ -9,7 +9,7 @@ export interface ResponseData {
     user: string;
 }
 
-const api = axios.create({ baseURL: 'http://localhost:8080/' });
+const api = axios.create({ baseURL: 'http://localhost:3000/' });
 
 // 401 에러 처리
 api.interceptors.request.use(
