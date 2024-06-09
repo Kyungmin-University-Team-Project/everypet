@@ -27,10 +27,9 @@
 .header .title {
     display: flex;
     align-items: center;
-    font-size: 24px;
+    font-size: 2rem;
     color: #75acff;
     font-family: 'WAGURI', sans-serif;
-    padding-left: 15px;
 }
 
 /* 기본 스타일 - 모바일 환경에 적용 */
@@ -47,13 +46,14 @@
     width: 100%;
     box-sizing: border-box;
     margin-bottom: 20px;
+
 }
 
 .cartHeader {
     position: sticky;
     top: 0;
     display: flex;
-    padding: 10px 20px;
+    padding: 10px 1.4rem;
     justify-content: space-between;
     margin-bottom: 20px;
     align-items: center;
@@ -67,9 +67,26 @@
     font-size: 1.5em;
 }
 
+.selectAll__wrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
 .selectAll {
     font-size: 0.9em;
     color: #007BFF;
+    cursor: pointer;
+    font-weight:bold;
+}
+
+.check__all__Input{
+    display: flex;
+    width: 20px;
+    height: 20px;
+
     cursor: pointer;
 }
 
@@ -163,18 +180,25 @@
     box-sizing: border-box;
 }
 
-.quantity button {
+.quantityButton {
     background: none;
     border: 1px solid #ccc;
     padding: 5px 10px;
     cursor: pointer;
+    width: 30px;
+    height: 30px;
 }
 
-.quantity input {
+.quantityInput {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 40px;
-    text-align: center;
     border: 1px solid #ccc;
     margin: 0 5px;
+    height: 30px;
+    box-sizing: border-box;
+    padding-left: 15px;
 }
 
 .total {
@@ -200,6 +224,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    border-top: solid 1px darkgrey;
 }
 
 .summary {
@@ -211,41 +237,23 @@
     max-width: 500px;
 }
 
-.summaryTotal {
-    font-weight: bold;
-    font-size: 1.2em;
-    margin-top: 10px;
-}
-
-.discountCode, .shippingFee {
-    width: 100%;
-    margin-top: 10px;
-}
-
-.discountCode label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.discountCode input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-.applyDiscountButton {
-    margin-top: 5px;
-    padding: 8px 16px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
 .shippingFee {
     display: flex;
+
+    width: 100%;
+    margin-top: 10px;
     justify-content: space-between;
+
+}
+
+.summaryTotal {
+    display: flex;
+    width: 100%;
+
+    justify-content: space-between;
+
+    font-weight: bold;
+    font-size: 1.2em;
     margin-top: 10px;
 }
 
@@ -260,10 +268,16 @@
     width: 100%;
 }
 
+
+
+
 /* 태블릿 및 그 이상 환경 */
 @media screen and (min-width: 769px) {
-    .title {
+    .header .title{
+        width: 60%;
+        margin: auto;
         font-size: 28px;
+
     }
 
     .container {
@@ -272,6 +286,7 @@
     }
 
     .cartItems {
+        margin: auto;
         width: 60%;
     }
 
@@ -296,32 +311,32 @@
         margin-left: 20px;
     }
 
-    .summaryTotal {
-        margin-right: 20px;
-    }
 
-    .discountCode, .shippingFee {
+    .shippingFee {
         margin-bottom: 20px;
     }
 
     .checkoutButton {
-        width: auto;
         align-self: center;
     }
 }
 
 /* 노트북 및 데스크탑 환경 */
 @media screen and (min-width: 1400px) {
-    .title__wrap {
+    .header .title {
         margin: auto;
         width: 1100px;
     }
 
     .container {
+        width: 1100px;
+        margin: auto;
+
         flex-direction: row;
         justify-content: space-between;
         padding-bottom: 20px;
     }
+
 
     .cartItems {
         width: 70%;
@@ -342,9 +357,11 @@
         justify-content: flex-start;
         align-items: flex-start;
         padding: 20px;
+
+        border-top: none;
     }
 
-    .summaryTotal, .discountCode, .shippingFee {
+    .summaryTotal, .shippingFee {
         margin-bottom: 20px;
     }
 
@@ -355,17 +372,16 @@
 
 /* 데스크탑 환경 */
 @media screen and (min-width: 1600px) {
-    .title__wrap {
-        width: 1250px;
-    }
-
     .header .title {
         font-size: 36px;
+        margin: auto;
+
+        width: 1250px;
     }
 
     .container {
         width: 1250px;
-        margin: 0 auto;
+        margin: auto;
         padding-bottom: 20px;
     }
 
