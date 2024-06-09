@@ -5,13 +5,17 @@ import Signup from "./Signup";
 import Findauth from "./Findauth";
 import Agreement from "./Agreement";
 import { login } from "../../typings/AuthAPI";
+import {loginState}  from "../../redux/auth/authSlice";
+import  {AppDispatch } from "../../redux/store/store";
 import { LoginData } from "../../typings/Login";
 import "@fortawesome/fontawesome-free/css/all.css";
 import cryptoJs from 'crypto-js';
+import {useDispatch} from "react-redux";
 
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const dispatch = useDispatch<AppDispatch>();
     const [showLoginForm, setShowLoginForm] = useState(true);
     const [values, setValues] = useState<LoginData>({
         memberId: "",
@@ -27,13 +31,7 @@ const Login = () => {
         try {
             const response = await login(values);
             const encryptedAccess = cryptoJs.AES.encrypt(response.access, "secret-key").toString();
-            localStorage.setItem("access", encryptedAccess);
-
-            if (response.user) {
-                localStorage.setItem("username", response.user); // Store username in localStorage
-            } else {
-                console.error("Username is undefined");
-            }
+            dispatch(loginState({ username: response.user, accessToken: encryptedAccess }));
 
             navigate('/');
         } catch (error) {
