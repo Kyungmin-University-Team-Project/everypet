@@ -2,7 +2,7 @@
 import axios from 'axios';
 import {decryptToken} from "../common/tokenDecode";
 
-export const addToCart = async (productId : string, quantity: number = 1) => {
+export const addToCart = async (productId: string, quantity: number = 1) => {
     try {
         const encryptedToken = localStorage.getItem('access');
         if (!encryptedToken) {
@@ -10,6 +10,8 @@ export const addToCart = async (productId : string, quantity: number = 1) => {
         }
 
         const token = decryptToken(encryptedToken); // 유틸리티 함수 사용
+
+        console.log(productId)
 
         const response = await axios.post('/cart/add', {
             productId: productId,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from 'react-query';
+import {useQuery} from 'react-query';
 import Item from './Item';
 import styles from './ItemList.module.css';
 import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
@@ -22,20 +22,20 @@ const ItemList = () => {
             orderBy: 'PRODUCT_VIEWS DESC',
             page: 1,
             pageSize: 10,
-            productCategory: 'Electronics'
+            productCategory: '강아지'
         };
         console.log("Fetching items...");
         return await fetchProductList(params);
     };
 
-    const { data, error, isLoading } = useQuery<Product[], Error>('products', fetchItems);
+    const {data, error, isLoading} = useQuery<Product[], Error>('products', fetchItems);
 
     if (isLoading) {
-        return <LoadingSpinner />;
+        return <LoadingSpinner/>;
     }
 
     if (error) {
-        return <ErrorComponent message={error.message} />;
+        return <ErrorComponent message={error.message}/>;
     }
 
     return (

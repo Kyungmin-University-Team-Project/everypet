@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { FaArrowUp } from 'react-icons/fa';
+import React, {useEffect, useState} from 'react';
+import {FaArrowUp} from 'react-icons/fa';
 import styles from './ScrollToTopButton.module.css';
 
 const ScrollToTopButton: React.FC = () => {
@@ -38,12 +38,7 @@ const ScrollToTopButton: React.FC = () => {
             {isVisible &&
               <button
                 onClick={scrollToTop}
-                className={`${styles.scrollButton} ${isVisible ? styles.enter : styles.leave}`}
-                onKeyDown={(event) => {
-                    if (event.key === 'Enter') {
-                        scrollToTop();
-                    }
-                }}
+                className={`${styles.scrollButton} ${isVisible ? styles.enter : ""}`}
               >
                 <FaArrowUp className={styles.icon}/>
               </button>
