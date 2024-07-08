@@ -1,7 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {SidebarProps} from '../../typings/layout';
+import React, { useEffect, useState } from 'react';
+import { SidebarProps } from '../../typings/layout';
 import styles from './Categorymodal.module.css';
-import {Link} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store/rootReducer';
+import { setClickedCategory } from '../../redux/features/categorySlice';
 
 const categories = [
     {
@@ -41,7 +44,6 @@ const categories = [
             '설치류 집',
             '설치류 옷',
             '설치류 미용',
-
         ],
     },
     {
@@ -53,7 +55,8 @@ const categories = [
             '새 집',
             '새 미용',
             '새 건강',
-            '새 케이지'],
+            '새 케이지',
+        ],
     },
     {
         name: '파충류',
@@ -69,8 +72,13 @@ const categories = [
     },
 ];
 
-const Categorymodal = ({isOpen, setClose}: SidebarProps) => {
+const CategoryModal = ({ isOpen, setClose }: SidebarProps) => {
     const [scrollY, setScrollY] = useState(0);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const clickedCategory = useSelector(
+        (state: RootState) => state.category.clickedCategory
+    );
 
     useEffect(() => {
         const handleScroll = () => {
@@ -84,9 +92,14 @@ const Categorymodal = ({isOpen, setClose}: SidebarProps) => {
         };
     }, []);
 
-    // 마우스가 모달 영역을 벗어날 때 모달 열림 상태를 false로 설정
     const handleMouseLeave = () => {
         setClose();
+    };
+
+    const handleCategoryClick = (name: string, link: string) => {
+        dispatch(setClickedCategory(name));
+        navigate(link);
+        setClose(); // 카테고리를 클릭하면 모달을 닫음
     };
 
     return (
@@ -99,21 +112,22 @@ const Categorymodal = ({isOpen, setClose}: SidebarProps) => {
             >
                 {isOpen && (
                     <div className={styles.categories__container}>
-                        {categories.map((category, index) => (
-                            <div key={index} className={styles.category}>
-                                <div className={styles.category__content}>
-                                    <Link to={category.link} className={styles.category__link}>
-                    <span className={styles.category__title}>
-                      {category.name}
-                    </span>
-                                    </Link>
+                        {categories.map((category) => (
+                            <div key={category.name} className={styles.category}>
+                                <div
+                                    className={styles.category__content}
+                                    onClick={() => handleCategoryClick(category.name, category.link)}
+                                >
+                                    <span className={styles.category__title}>
+                                        {category.name}
+                                    </span>
 
                                     <div className={styles.ul__wrap}>
                                         <div className={styles.ul__line__bg}></div>
                                         <div className={styles.ul__line}></div>
                                         <ul>
-                                            {category.subCategories.map((subCategory, subIndex) => (
-                                                <li key={subIndex}>{subCategory}</li>
+                                            {category.subCategories.map((subCategory) => (
+                                                <li key={subCategory}>{subCategory}</li>
                                             ))}
                                         </ul>
                                     </div>
@@ -127,4 +141,4 @@ const Categorymodal = ({isOpen, setClose}: SidebarProps) => {
     );
 };
 
-export default Categorymodal;
+export default CategoryModal;
