@@ -1,41 +1,36 @@
 import React from 'react';
-import {useQuery} from 'react-query';
+import { useQuery } from 'react-query';
+import { useSelector } from 'react-redux';
 import Item from './Item';
 import styles from './ItemList.module.css';
 import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
 import ErrorComponent from "../../utils/reactQuery/ErrorComponent";
-import {fetchProductList} from "../../utils/product/fetchProductList";
-
-interface Product {
-    productId: string;
-    productName: string;
-    productPrice: number;
-    productDiscountRate: number;
-    productViews: number;
-    numberOfProduct: number;
-    imageUrl?: string;
-}
+import { fetchProductList } from "../../utils/product/fetchProductList";
+import { Product } from "../../typings/Category";
+import { RootState } from '../../redux/store/rootReducer';
 
 const ItemList = () => {
+    const clickedCategory = useSelector((state: RootState) => state.category.clickedCategory);
+
     const fetchItems = async (): Promise<Product[]> => {
         const params = {
             orderBy: 'PRODUCT_VIEWS DESC',
             page: 1,
             pageSize: 10,
-            productCategory: '강아지'
+            productCategory: `${clickedCategory}%`
         };
-        console.log("Fetching items...");
+        console.log("Fetching items with params:", params);
         return await fetchProductList(params);
     };
 
-    const {data, error, isLoading} = useQuery<Product[], Error>('products', fetchItems);
+    const { data, error, isLoading } = useQuery<Product[], Error>(['products', clickedCategory], fetchItems);
 
     if (isLoading) {
-        return <LoadingSpinner/>;
+        return <LoadingSpinner />;
     }
 
     if (error) {
-        return <ErrorComponent message={error.message}/>;
+        return <ErrorComponent message={error.message} />;
     }
 
     return (

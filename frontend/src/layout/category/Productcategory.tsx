@@ -66,6 +66,7 @@ const Productcategory = () => {
         if (clickedCategory === category) {
             return;
         } else {
+            console.log(category)
             dispatch(setClickedCategory(category));
         }
     };
