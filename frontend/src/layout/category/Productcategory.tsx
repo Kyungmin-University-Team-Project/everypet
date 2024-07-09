@@ -5,7 +5,7 @@ import ProductcategoryItem from './ProductcategoryItem';
 import styles from './Productcategory.module.css';
 import {setClickedCategory} from '../../redux/features/categorySlice';
 import {RootState} from '../../redux/store/rootReducer';
-import Categorymodal from './Categorymodal';
+import Categorymodal from './CategoryModal';
 import useToggle from '../../utils/common/ToggleUtil';
 import Categorybarbtn from './Categorybarbtn';
 import Realtimekeyword from '../Header/Realtimekeyword';
@@ -25,6 +25,7 @@ const Productcategory = () => {
     const clickedCategory = useSelector(
         (state: RootState) => state.category.clickedCategory
     );
+
     const [isOpen, toggleOn, toggleOff] = useToggle(false);
     const location = useLocation();
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -66,6 +67,7 @@ const Productcategory = () => {
         if (clickedCategory === category) {
             return;
         } else {
+            console.log(category)
             dispatch(setClickedCategory(category));
         }
     };

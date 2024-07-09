@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import styles from './Fixedheader.module.css';
-import Categorymodal from '../category/Categorymodal';
 import Usermenu from './Usermenu';
 import Searchinput from './Searchinput';
 import {Link} from 'react-router-dom';
@@ -8,6 +7,7 @@ import useToggle from '../../utils/common/ToggleUtil';
 import Categorybarbtn from '../category/Categorybarbtn';
 import TopMenu from './TopMenu';
 import MobileSearchModal from "../mobile/MobileSearchModal";
+import CategoryModal from "../category/CategoryModal";
 
 const Fixedheader: React.FC = () => {
     const [isOpen, toggleOn, toggleOff] = useToggle(false);
@@ -65,7 +65,7 @@ const Fixedheader: React.FC = () => {
                     {!isMobile && <Usermenu/>}
                 </div>
             </header>
-            <Categorymodal isOpen={isOpen} setOpen={toggleOn} setClose={toggleOff}/>
+            <CategoryModal isOpen={isOpen} setOpen={toggleOn} setClose={toggleOff}/>
             <MobileSearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)}/>
         </div>
     );

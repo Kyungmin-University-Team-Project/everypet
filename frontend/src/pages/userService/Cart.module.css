@@ -67,7 +67,7 @@
     font-size: 1.5em;
 }
 
-.selectAll__wrap{
+.selectAll__wrap {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -79,10 +79,10 @@
     font-size: 0.9em;
     color: #007BFF;
     cursor: pointer;
-    font-weight:bold;
+    font-weight: bold;
 }
 
-.check__all__Input{
+.check__all__Input {
     display: flex;
     width: 20px;
     height: 20px;
@@ -90,14 +90,14 @@
     cursor: pointer;
 }
 
-.item__wrap{
+.item__wrap {
     display: flex;
     flex-direction: column;
 
     margin-bottom: 20px;
 }
 
-.icon__btn{
+.icon__btn {
     width: 100%;
     display: flex;
     align-items: center;
@@ -269,11 +269,9 @@
 }
 
 
-
-
 /* 태블릿 및 그 이상 환경 */
 @media screen and (min-width: 769px) {
-    .header .title{
+    .header .title {
         width: 60%;
         margin: auto;
         font-size: 28px;
@@ -286,8 +284,8 @@
     }
 
     .cartItems {
-        margin: auto;
         width: 60%;
+        margin: auto;
     }
 
     .item {
@@ -340,6 +338,7 @@
 
     .cartItems {
         width: 70%;
+        margin: 0;
     }
 
     .productImage {

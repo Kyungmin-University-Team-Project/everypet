@@ -1,15 +1,15 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios';
 import {Join} from "./signup";
 import {LoginData} from "./Login";
 // jwt 4.0 이상
-import { jwtDecode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 
 export interface ResponseData {
     access: string;
     user: string;
 }
 
-const api = axios.create({ baseURL: 'http://localhost:3000/' });
+const api = axios.create({baseURL: '/'});
 
 // 401 에러 처리
 api.interceptors.request.use(
@@ -20,15 +20,15 @@ api.interceptors.request.use(
         if (error.response && error.response.status === 401) {
             try {
                 let errorConfig: AxiosRequestConfig = error.config || {}; // errorConfig가 undefined인 경우 빈 객체로 설정
-                const { data } = await axios.post('access/refresh'); // axios로 요청 보내기
+                const {data} = await axios.post('access/refresh'); // axios로 요청 보내기
                 if (data) {
-                    const { access } = data;
+                    const {access} = data;
                     localStorage.removeItem('access');
                     localStorage.setItem('access', access);
                     if (errorConfig.headers) {
                         errorConfig.headers['Authorization'] = `Bearer ${access}`; // 새로운 토큰으로 헤더 업데이트
                     } else {
-                        errorConfig.headers = { Authorization: `Bearer ${access}` }; // 헤더가 없는 경우 새로 생성
+                        errorConfig.headers = {Authorization: `Bearer ${access}`}; // 헤더가 없는 경우 새로 생성
                     }
                     return axios.request(errorConfig); // 기존 요청 재시도
                 }
@@ -42,8 +42,8 @@ api.interceptors.request.use(
     }
 );
 
-export const login = async ({ memberId, memberPwd }: LoginData): Promise<any> => {
-    const data = { memberId, memberPwd };
+export const login = async ({memberId, memberPwd}: LoginData): Promise<any> => {
+    const data = {memberId, memberPwd};
 
     // Log the payload being sent to the server
     console.log("Payload sent to server:", JSON.stringify(data, null, 2));
@@ -106,7 +106,7 @@ export const sendVerificationEmail = async ({
                                             }: {
     email: string;
 }): Promise<{ success: boolean }> => {
-    const data = { email };
+    const data = {email};
     const response = await api.post('http://localhost:8080/api/send-verification-email', data, {
         headers: {
             'Content-Type': 'application/json'

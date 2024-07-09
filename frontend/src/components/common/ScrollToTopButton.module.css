@@ -1,3 +1,4 @@
+/* Scroll To Top Button Styles */
 .scrollToTop {
     position: fixed;
     bottom: 20px;
@@ -10,17 +11,25 @@
     color: white;
     border: none;
     border-radius: 50%;
-    padding: 10px;
+    padding: 15px;
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s, opacity 0.3s;
     opacity: 0.8;
+
+    font-size: 1.4rem;
 }
 
 .scrollButton:hover {
     background-color: #0056b3;
     opacity: 1;
 }
+
+.enter {
+    animation: enterAnimation 0.5s forwards;
+}
+
+/* Media Queries */
 
 /* Tablet */
 @media (min-width: 600px) {
@@ -35,7 +44,18 @@
         padding: 20px;
     }
 
-    .icon{
+    .icon {
         font-size: 1.6rem;
     }
 }
+
+/* Keyframes for Animations */
+@keyframes enterAnimation {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+

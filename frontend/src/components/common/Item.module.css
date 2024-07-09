@@ -42,6 +42,8 @@
     font-weight: bold;
     transition: all 0.2s ease-in;
     text-align: left; /* 텍스트 왼쪽 정렬 */
+
+    height: 2.6rem;
 }
 
 .item:hover .title {
