@@ -1,7 +1,7 @@
 package com.everypet.global.auth.jwt.filter;
 
 import com.everypet.global.auth.util.JWTManager;
-import com.everypet.member.data.domain.Member;
+import com.everypet.member.model.vo.Member;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

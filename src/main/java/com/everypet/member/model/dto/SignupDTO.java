@@ -1,6 +1,6 @@
-package com.everypet.member.data.dto;
+package com.everypet.member.model.dto;
 
-import com.everypet.member.data.domain.Member;
+import com.everypet.member.model.vo.Member;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SignupRequestDTO {
+public class SignupDTO {
 
     @ApiModelProperty(example = "user", notes = "회원 아이디")
     @NotBlank(message = "아이디는 필수 입력 값입니다.")
@@ -48,7 +48,7 @@ public class SignupRequestDTO {
     @NotBlank(message = "전화번호는 필수 입력 값입니다.")
     private String phone;
 
-    private SignupAddressRequestDTO address;
+    private SignupAddressDTO address;
 
     @ApiModelProperty(example = "yongho", notes = "추천인 아이디")
     private String referrer;

@@ -1,9 +1,9 @@
 package com.everypet.cart.controller;
 
-import com.everypet.cart.data.dto.CartInsertDTO;
-import com.everypet.cart.data.dto.CartItemDTO;
+import com.everypet.cart.model.dto.CartInsertDTO;
+import com.everypet.cart.model.dto.CartItemDTO;
 import com.everypet.cart.service.CartService;
-import com.everypet.member.data.domain.Member;
+import com.everypet.member.model.vo.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

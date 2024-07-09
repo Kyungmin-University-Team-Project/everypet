@@ -1,7 +1,7 @@
 package com.everypet.cart.service;
 
-import com.everypet.cart.data.dto.CartInsertDTO;
-import com.everypet.cart.data.dto.CartItemDTO;
+import com.everypet.cart.model.dto.CartInsertDTO;
+import com.everypet.cart.model.dto.CartItemDTO;
 
 import java.util.List;
 

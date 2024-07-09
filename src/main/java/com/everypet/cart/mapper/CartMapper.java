@@ -1,7 +1,7 @@
-package com.everypet.cart.data.dao;
+package com.everypet.cart.mapper;
 
-import com.everypet.cart.data.dto.CartItemDTO;
-import com.everypet.cart.data.vo.Cart;
+import com.everypet.cart.model.dto.CartItemDTO;
+import com.everypet.cart.model.vo.Cart;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

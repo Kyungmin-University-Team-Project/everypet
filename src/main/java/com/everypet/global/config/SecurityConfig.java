@@ -1,6 +1,6 @@
 package com.everypet.global.config;
 
-import com.everypet.global.auth.jwt.data.repository.RefreshTokenRepository;
+import com.everypet.global.auth.jwt.repository.RefreshTokenRepository;
 import com.everypet.global.auth.jwt.filter.CustomLogoutFilter;
 import com.everypet.global.auth.jwt.filter.JWTFilter;
 import com.everypet.global.auth.jwt.filter.LoginFilter;

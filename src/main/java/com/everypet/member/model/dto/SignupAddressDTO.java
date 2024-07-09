@@ -1,6 +1,6 @@
-package com.everypet.member.data.dto;
+package com.everypet.member.model.dto;
 
-import com.everypet.member.data.vo.Address;
+import com.everypet.member.model.vo.Address;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SignupAddressRequestDTO {
+public class SignupAddressDTO {
 
     @ApiModelProperty(example = "서울시 강남구 롯데캐슬 아파트", notes = "주소")
     @NotBlank(message = "주소는 필수 입력 값입니다.")
@@ -23,7 +23,7 @@ public class SignupAddressRequestDTO {
     @NotBlank(message = "상세 주소는 필수 입력 값입니다.")
     private String detailAddress;
 
-    public Address toEntity(SignupRequestDTO member) {
+    public Address toEntity(SignupDTO member) {
         return Address.builder()
                 .memberId(member.getMemberId())
                 .address(address)

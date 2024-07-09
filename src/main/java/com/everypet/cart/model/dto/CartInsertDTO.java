@@ -1,6 +1,6 @@
-package com.everypet.cart.data.dto;
+package com.everypet.cart.model.dto;
 
-import com.everypet.cart.data.vo.Cart;
+import com.everypet.cart.model.vo.Cart;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

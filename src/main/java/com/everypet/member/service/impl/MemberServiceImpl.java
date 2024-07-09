@@ -1,11 +1,12 @@
 package com.everypet.member.service.impl;
 
-import com.everypet.member.data.dao.MemberMapper;
-import com.everypet.member.data.dao.RoleMapper;
-import com.everypet.member.data.dto.SignupRequestDTO;
-import com.everypet.member.data.domain.Member;
-import com.everypet.member.data.domain.Role;
-import com.everypet.member.data.vo.Address;
+import com.everypet.member.mapper.MemberMapper;
+import com.everypet.member.mapper.RoleMapper;
+import com.everypet.member.model.dto.AddressDTO;
+import com.everypet.member.model.dto.SignupDTO;
+import com.everypet.member.model.vo.Member;
+import com.everypet.member.model.vo.Role;
+import com.everypet.member.model.vo.Address;
 import com.everypet.member.exception.DuplicateMemberException;
 import com.everypet.member.exception.MemberIdNotFoundException;
 import com.everypet.member.service.MemberService;
@@ -24,10 +25,10 @@ public class MemberServiceImpl implements MemberService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public void register(SignupRequestDTO signupRequestDTO) {
+    public void register(SignupDTO signupDTO) {
 
-        Member member = signupRequestDTO.toEntity();
-        Address address = signupRequestDTO.getAddress().toEntity(signupRequestDTO);
+        Member member = signupDTO.toEntity();
+        Address address = signupDTO.getAddress().toEntity(signupDTO);
 
         String memberId = member.getMemberId();
         String memberPwd = member.getMemberPwd();
@@ -50,8 +51,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void addressRegister(Address address) {
-        memberMapper.insertAddress(address);
+    public void addressRegister(AddressDTO address, String memberId) {
+
+        Address addressEntity = address.toEntity(memberId);
+
+        memberMapper.insertAddress(addressEntity);
     }
 
 

@@ -1,4 +1,4 @@
-package com.everypet.member.data.constant;
+package com.everypet.member.model.constant;
 
 public enum Level {
     NEW, BRONZE, SILVER, GOLD;

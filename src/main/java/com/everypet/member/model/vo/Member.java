@@ -1,6 +1,6 @@
-package com.everypet.member.data.domain;
+package com.everypet.member.model.vo;
 
-import com.everypet.member.data.constant.Level;
+import com.everypet.member.model.constant.Level;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package com.everypet.home.controller;
 
-import com.everypet.member.data.domain.Member;
+import com.everypet.member.model.vo.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +23,7 @@ public class HomeController {
         Collection<? extends GrantedAuthority> authorities = member.getAuthorities();
         Iterator<? extends GrantedAuthority> iter = authorities.iterator();
         GrantedAuthority auth = iter.next();
+
         String role = auth.getAuthority();
 
         System.out.println("Main Controller : " + name + " : " + role);
