@@ -1,7 +1,7 @@
-package com.everypet.member.data.dao;
+package com.everypet.member.mapper;
 
-import com.everypet.member.data.domain.Member;
-import com.everypet.member.data.vo.Address;
+import com.everypet.member.model.vo.Member;
+import com.everypet.member.model.vo.Address;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Optional;

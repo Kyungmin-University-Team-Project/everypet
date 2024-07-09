@@ -1,10 +1,10 @@
 package com.everypet.member.service;
 
-import com.everypet.member.data.dto.SignupRequestDTO;
-import com.everypet.member.data.vo.Address;
+import com.everypet.member.model.dto.AddressDTO;
+import com.everypet.member.model.dto.SignupDTO;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface MemberService extends UserDetailsService {
-    void register(SignupRequestDTO signupRequestDTO);
-    void addressRegister(Address address);
+    void register(SignupDTO signupDTO);
+    void addressRegister(AddressDTO address, String memberId);
 }

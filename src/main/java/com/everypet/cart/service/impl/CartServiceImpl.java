@@ -1,9 +1,9 @@
 package com.everypet.cart.service.impl;
 
-import com.everypet.cart.data.dao.CartMapper;
-import com.everypet.cart.data.dto.CartInsertDTO;
-import com.everypet.cart.data.dto.CartItemDTO;
-import com.everypet.cart.data.vo.Cart;
+import com.everypet.cart.mapper.CartMapper;
+import com.everypet.cart.model.dto.CartInsertDTO;
+import com.everypet.cart.model.dto.CartItemDTO;
+import com.everypet.cart.model.vo.Cart;
 import com.everypet.cart.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.everypet.cart.data.vo;
+package com.everypet.cart.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

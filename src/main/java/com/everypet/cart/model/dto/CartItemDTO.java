@@ -1,4 +1,4 @@
-package com.everypet.cart.data.dto;
+package com.everypet.cart.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

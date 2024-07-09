@@ -1,6 +1,7 @@
-package com.everypet.member.data.dao;
+package com.everypet.member.model.mapper;
 
 import com.everypet.global.config.DatabaseConfig;
+import com.everypet.member.mapper.MemberMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

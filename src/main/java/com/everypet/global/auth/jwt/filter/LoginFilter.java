@@ -3,7 +3,7 @@ package com.everypet.global.auth.jwt.filter;
 import com.everypet.global.auth.util.CookieManager;
 import com.everypet.global.auth.util.JWTManager;
 import com.everypet.global.auth.util.TokenExpirationTime;
-import com.everypet.member.data.dto.SignupRequestDTO;
+import com.everypet.member.model.dto.SignupDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -41,7 +41,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            SignupRequestDTO member = objectMapper.readValue(request.getInputStream(), SignupRequestDTO.class);
+            SignupDTO member = objectMapper.readValue(request.getInputStream(), SignupDTO.class);
 
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(member.getMemberId(), member.getMemberPwd());
 

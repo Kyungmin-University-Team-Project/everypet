@@ -1,6 +1,6 @@
-package com.everypet.member.data.dto;
+package com.everypet.member.model.dto;
 
-import com.everypet.member.data.vo.Address;
+import com.everypet.member.model.vo.Address;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
