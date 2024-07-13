@@ -1,7 +1,7 @@
 import React from 'react';
-import { FaStar, FaRegStar, FaHeart, FaShoppingCart } from 'react-icons/fa';
+import {FaHeart, FaRegStar, FaShoppingCart, FaStar} from 'react-icons/fa';
 import styles from './Item.module.css';
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {addToCart} from "../../utils/product/cart";
 
 interface ItemProps {
@@ -27,7 +27,19 @@ const Item: React.FC<ItemProps> = ({
 
     const handleViewDetails = () => {
         console.log(name, ': 해당상품 페이지로 이동');
-        navigate('/moreInformation', { state: { item: { productId, name, price, discount, recommended, reviewCount, imageUrl } } });
+        navigate('/moreInformation', {
+            state: {
+                item: {
+                    productId,
+                    name,
+                    price,
+                    discount,
+                    recommended,
+                    reviewCount,
+                    imageUrl
+                }
+            }
+        });
     };
 
     const handleAddToCart = (event: React.MouseEvent) => {
@@ -38,7 +50,7 @@ const Item: React.FC<ItemProps> = ({
     const renderStars = () => {
         let stars = [];
         for (let i = 0; i < 5; i++) {
-            stars.push(i < recommended ? <FaStar key={i} /> : <FaRegStar key={i} />);
+            stars.push(i < recommended ? <FaStar key={i}/> : <FaRegStar key={i}/>);
         }
         return stars;
     };
@@ -46,13 +58,13 @@ const Item: React.FC<ItemProps> = ({
     return (
         <div className={styles.item} onClick={handleViewDetails}>
             <div className={styles.img__wrap}>
-                <img className={styles.img} src={imageUrl} alt={name} />
+                <img className={styles.img} src={imageUrl} alt={name}/>
             </div>
             <div className={styles.tagAndIcons}>
                 <span className={styles.tag}>New</span>
                 <div className={styles.icon__wrap}>
-                    <FaShoppingCart className={styles.cartIcon} onClick={handleAddToCart} />
-                    <FaHeart className={styles.likeIcon} />
+                    <FaShoppingCart className={styles.cartIcon} onClick={handleAddToCart}/>
+                    <FaHeart className={styles.likeIcon}/>
                 </div>
             </div>
             <div className={styles.item__info}>

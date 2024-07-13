@@ -1,15 +1,24 @@
-// fetchProductList 함수 정의
-import {Params} from "../../typings/utils";
-import axios from "axios";
+import axios from 'axios';
+import { Product } from '../../typings/Category';
 
-export const fetchProductList = async (params: Params) => {
-    try {
-        const response = await axios.get('/product-list', { params });
-        console.log(response.data)
+interface FetchProductListParams {
+    orderBy: string;
+    page: number;
+    pageSize: number;
+    searchQuery?: string; // searchQuery 추가
+    productCategory?: string;
+}
 
-        return response.data;
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        throw error;  // 필요에 따라 에러를 다시 던질 수 있습니다.
-    }
+export const fetchProductList = async (params: FetchProductListParams): Promise<Product[]> => {
+    const { orderBy, page, pageSize, searchQuery, productCategory } = params;
+    const response = await axios.get('/product-list', {
+        params: {
+            orderBy,
+            page,
+            pageSize,
+            searchQuery,
+            productCategory,
+        },
+    });
+    return response.data;
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './SearchInput.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -11,6 +11,7 @@ const SearchInput = () => {
     const dispatch = useDispatch<AppDispatch>();
     const inputValue = useSelector((state: RootState) => state.search.input);
     const location = useLocation();
+    const navigate = useNavigate();
     const [isInputClicked, setIsInputClicked] = useState<boolean>(false);
     const recentSearches: string[] = ['검색어1', '검색어2', '검색어3']; // 예시 데이터
     const inputContainerRef = useRef<HTMLDivElement>(null);
@@ -31,7 +32,7 @@ const SearchInput = () => {
     };
 
     const handleSearchClick = () => {
-        console.log(inputValue);
+        navigateToSearchResults(inputValue);
         setIsInputClicked(false); // 검색 버튼 클릭 시 닫기
     };
 
@@ -52,15 +53,19 @@ const SearchInput = () => {
     };
 
     const handleSearchItemClick = (search: string) => {
-        console.log(search);
+        navigateToSearchResults(search);
         setIsInputClicked(false);
     };
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            console.log(inputValue);
+            navigateToSearchResults(inputValue);
             setIsInputClicked(false);
         }
+    };
+
+    const navigateToSearchResults = (query: string) => {
+        navigate(`/search?query=${encodeURIComponent(query)}`);
     };
 
     // 빈 문자열을 제외한 검색어 필터링
@@ -96,7 +101,7 @@ const SearchInput = () => {
                             </div>
                             {filteredSearches.map((search) => (
                                 <li key={search} className={styles.historyItem} onClick={() => handleSearchItemClick(search)}>
-                                    <FontAwesomeIcon icon={faMagnifyingGlass}/>
+                                    <FontAwesomeIcon icon={faMagnifyingGlass} />
                                     {search}
                                 </li>
                             ))}

@@ -23,6 +23,7 @@ import Review from "./pages/moreInformation/review";
 import ProductInquiry from "./pages/moreInformation/ProductInquiry";
 import SellerInformation from "./pages/moreInformation/SellerInformation";
 import Cart from "./pages/userService/Cart";
+import SearchPage from "./pages/category/SearchPage";
 
 
 const router = createBrowserRouter([
@@ -47,8 +48,10 @@ const router = createBrowserRouter([
                     { path: 'seller-information', element: <SellerInformation /> },
                 ],
             },
+            { path: 'search', element: <SearchPage /> }, // SearchPage route
         ],
     },
+
     { path: 'deliveryInquiry', element: <DeliveryInquiry /> },
     { path: 'customer-services', element: <CustomerService /> },
     { path: 'cart', element: <Cart /> },
