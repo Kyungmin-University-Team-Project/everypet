@@ -3,7 +3,7 @@ import styles from './Header.module.css';
 import {Link} from 'react-router-dom';
 import useToggle from '../../utils/common/ToggleUtil';
 import Categorymodal from '../category/CategoryModal';
-import Searchinput from './Searchinput';
+import Searchinput from './SearchInput';
 import Usermenu from './Usermenu';
 import TopMenu from './TopMenu';
 import MobileSearchModal from "../mobile/MobileSearchModal";

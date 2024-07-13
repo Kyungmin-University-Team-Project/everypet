@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styles from './Fixedheader.module.css';
 import Usermenu from './Usermenu';
-import Searchinput from './Searchinput';
+import Searchinput from './SearchInput';
 import {Link} from 'react-router-dom';
 import useToggle from '../../utils/common/ToggleUtil';
 import Categorybarbtn from '../category/Categorybarbtn';
