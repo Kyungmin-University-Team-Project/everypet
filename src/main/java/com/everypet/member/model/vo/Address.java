@@ -1,4 +1,4 @@
-package com.everypet.member.data.vo;
+package com.everypet.member.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

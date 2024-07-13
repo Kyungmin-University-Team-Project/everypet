@@ -1,6 +1,6 @@
-package com.everypet.member.data.dao;
+package com.everypet.member.mapper;
 
-import com.everypet.member.data.domain.Role;
+import com.everypet.member.model.vo.Role;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

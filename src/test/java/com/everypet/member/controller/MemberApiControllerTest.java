@@ -1,7 +1,7 @@
 package com.everypet.member.controller;
 
-import com.everypet.member.data.dto.SignupRequestDTO;
-import com.everypet.member.data.vo.Address;
+import com.everypet.member.model.dto.SignupDTO;
+import com.everypet.member.model.vo.Address;
 import com.everypet.member.service.MemberService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -30,14 +30,14 @@ public class MemberApiControllerTest {
 
     private MockMvc mockMvc;
 
-    private SignupRequestDTO member;
+    private SignupDTO member;
 
     private ObjectMapper mapper; // 수동으로 초기화
 
     @Before
     public void setUp() {
 
-        member = SignupRequestDTO.builder()
+        member = SignupDTO.builder()
                 .memberId("mockId")
                 .memberPwd("123")
                 .name("가짜계정")

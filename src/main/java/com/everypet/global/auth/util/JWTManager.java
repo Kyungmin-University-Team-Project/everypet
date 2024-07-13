@@ -1,7 +1,7 @@
 package com.everypet.global.auth.util;
 
-import com.everypet.global.auth.jwt.data.domain.RefreshToken;
-import com.everypet.global.auth.jwt.data.repository.RefreshTokenRepository;
+import com.everypet.global.auth.jwt.model.vo.RefreshToken;
+import com.everypet.global.auth.jwt.repository.RefreshTokenRepository;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

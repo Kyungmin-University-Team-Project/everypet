@@ -1,4 +1,4 @@
-package com.everypet.global.auth.jwt.data.domain;
+package com.everypet.global.auth.jwt.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

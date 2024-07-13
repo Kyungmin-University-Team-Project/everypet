@@ -1,7 +1,8 @@
 package com.everypet.member.controller;
 
-import com.everypet.member.data.dto.SignupRequestDTO;
-import com.everypet.member.data.vo.Address;
+import com.everypet.member.model.vo.Member;
+import com.everypet.member.model.dto.AddressDTO;
+import com.everypet.member.model.dto.SignupDTO;
 import com.everypet.member.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +31,7 @@ public class MemberApiController {
 
     @ApiOperation(value = "회원 가입", notes = "새로운 회원을 등록합니다.")
     @PostMapping("/signup")
-    public ResponseEntity<String> signUp(@Valid @RequestBody SignupRequestDTO member, BindingResult bindingResult) {
+    public ResponseEntity<String> signUp(@Valid @RequestBody SignupDTO member, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()) {
             //log.error("회원 가입 실패");
@@ -42,8 +44,8 @@ public class MemberApiController {
 
     @ApiOperation(value = "주소 추가", notes = "회원의 주소를 추가합니다.")
     @PostMapping("/address/register")
-    public ResponseEntity<String> addressRegister(@RequestBody Address address) {
-        memberService.addressRegister(address);
+    public ResponseEntity<String> addressRegister(@RequestBody AddressDTO address, @AuthenticationPrincipal Member member) {
+        memberService.addressRegister(address, member.getMemberId());
         return response(HttpStatus.CREATED, "주소 추가 완료");
     }
 
