@@ -1,4 +1,4 @@
-package com.everypet.product.data.dto;
+package com.everypet.product.model.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;

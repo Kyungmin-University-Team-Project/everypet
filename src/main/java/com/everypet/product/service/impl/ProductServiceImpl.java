@@ -1,11 +1,11 @@
 package com.everypet.product.service.impl;
 
-import com.everypet.product.data.dao.ProductMapper;
-import com.everypet.product.data.domain.Product;
-import com.everypet.product.data.dto.ProductCreateDTO;
-import com.everypet.product.data.dto.ProductInsertDTO;
-import com.everypet.product.data.dto.ProductUpdateDTO;
-import com.everypet.product.data.dto.SelectProductDTO;
+import com.everypet.product.model.dao.ProductMapper;
+import com.everypet.product.model.domain.Product;
+import com.everypet.product.model.vo.ProductCreateDTO;
+import com.everypet.product.model.vo.ProductInsertDTO;
+import com.everypet.product.model.vo.ProductUpdateDTO;
+import com.everypet.product.model.vo.SelectProductDTO;
 import com.everypet.product.service.ProductService;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;

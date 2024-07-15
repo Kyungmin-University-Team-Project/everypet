@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.everypet.product.data.dao.AdvertisementMapper">
+<mapper namespace="com.everypet.product.model.dao.AdvertisementMapper">
 
     <!-- 기존 광고의 순서를 업데이트 -->
     <update id="incrementOrder" parameterType="Integer">

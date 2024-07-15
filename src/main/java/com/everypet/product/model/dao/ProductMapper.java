@@ -1,9 +1,9 @@
-package com.everypet.product.data.dao;
+package com.everypet.product.model.dao;
 
-import com.everypet.product.data.domain.Product;
-import com.everypet.product.data.dto.ProductInsertDTO;
-import com.everypet.product.data.dto.ProductUpdateDTO;
-import com.everypet.product.data.dto.SelectProductDTO;
+import com.everypet.product.model.domain.Product;
+import com.everypet.product.model.vo.ProductInsertDTO;
+import com.everypet.product.model.vo.ProductUpdateDTO;
+import com.everypet.product.model.vo.SelectProductDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

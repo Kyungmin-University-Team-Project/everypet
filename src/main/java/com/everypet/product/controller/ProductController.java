@@ -1,9 +1,9 @@
 package com.everypet.product.controller;
 
-import com.everypet.product.data.domain.Product;
-import com.everypet.product.data.dto.ProductCreateDTO;
-import com.everypet.product.data.dto.ProductUpdateDTO;
-import com.everypet.product.data.dto.SelectProductDTO;
+import com.everypet.product.model.domain.Product;
+import com.everypet.product.model.vo.ProductCreateDTO;
+import com.everypet.product.model.vo.ProductUpdateDTO;
+import com.everypet.product.model.vo.SelectProductDTO;
 import com.everypet.product.service.ProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

@@ -1,11 +1,10 @@
 package com.everypet.product.service;
 
-import com.everypet.product.data.domain.Product;
-import com.everypet.product.data.dto.ProductCreateDTO;
-import com.everypet.product.data.dto.ProductUpdateDTO;
-import com.everypet.product.data.dto.SelectProductDTO;
+import com.everypet.product.model.domain.Product;
+import com.everypet.product.model.vo.ProductCreateDTO;
+import com.everypet.product.model.vo.ProductUpdateDTO;
+import com.everypet.product.model.vo.SelectProductDTO;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface ProductService {

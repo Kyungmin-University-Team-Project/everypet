@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.everypet.product.data.dao.ProductMapper">
+<mapper namespace="com.everypet.product.model.dao.ProductMapper">
 
     <!--    상품 등록   -->
     <insert id="insertProduct" useGeneratedKeys="true" keyProperty="prodId" parameterType="ProductInsertDTO">

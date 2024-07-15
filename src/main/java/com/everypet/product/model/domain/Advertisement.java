@@ -1,4 +1,4 @@
-package com.everypet.product.data.domain;
+package com.everypet.product.model.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,9 +1,9 @@
 package com.everypet.product.service;
 
-import com.everypet.product.data.domain.Advertisement;
-import com.everypet.product.data.dto.AdvertisementDTO;
-import com.everypet.product.data.dto.InsertAdvertisementDTO;
-import com.everypet.product.data.dto.UpdateAdvertisementDTO;
+import com.everypet.product.model.domain.Advertisement;
+import com.everypet.product.model.vo.AdvertisementDTO;
+import com.everypet.product.model.vo.InsertAdvertisementDTO;
+import com.everypet.product.model.vo.UpdateAdvertisementDTO;
 
 import java.util.List;
 
