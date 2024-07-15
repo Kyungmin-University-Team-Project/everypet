@@ -1,4 +1,4 @@
-package com.everypet.product.model.domain;
+package com.everypet.product.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

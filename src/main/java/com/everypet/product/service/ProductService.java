@@ -1,9 +1,9 @@
 package com.everypet.product.service;
 
-import com.everypet.product.model.domain.Product;
-import com.everypet.product.model.vo.ProductCreateDTO;
-import com.everypet.product.model.vo.ProductUpdateDTO;
-import com.everypet.product.model.vo.SelectProductDTO;
+import com.everypet.product.model.vo.Product;
+import com.everypet.product.model.dto.ProductCreateDTO;
+import com.everypet.product.model.dto.ProductUpdateDTO;
+import com.everypet.product.model.dto.SelectProductDTO;
 
 import java.util.List;
 

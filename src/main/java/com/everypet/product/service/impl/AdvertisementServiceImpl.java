@@ -2,10 +2,10 @@ package com.everypet.product.service.impl;
 
 import com.everypet.product.model.dao.AdvertisementMapper;
 import com.everypet.product.model.dao.ProductMapper;
-import com.everypet.product.model.domain.Advertisement;
-import com.everypet.product.model.vo.AdvertisementDTO;
-import com.everypet.product.model.vo.InsertAdvertisementDTO;
-import com.everypet.product.model.vo.UpdateAdvertisementDTO;
+import com.everypet.product.model.vo.Advertisement;
+import com.everypet.product.model.dto.AdvertisementDTO;
+import com.everypet.product.model.dto.InsertAdvertisementDTO;
+import com.everypet.product.model.dto.UpdateAdvertisementDTO;
 import com.everypet.product.service.AdvertisementService;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;

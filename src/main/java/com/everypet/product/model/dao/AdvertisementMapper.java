@@ -1,7 +1,7 @@
 package com.everypet.product.model.dao;
 
-import com.everypet.product.model.domain.Advertisement;
-import com.everypet.product.model.vo.AdvertisementDTO;
+import com.everypet.product.model.vo.Advertisement;
+import com.everypet.product.model.dto.AdvertisementDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

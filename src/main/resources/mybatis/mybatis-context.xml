@@ -12,17 +12,17 @@
         <typeAlias type="com.everypet.global.auth.oauth2.data.domain.OAuth2Member" alias="OAuth2Member"></typeAlias>
         <typeAlias type="com.everypet.member.model.vo.Address" alias="Address"></typeAlias>
 
-        <typeAlias type="com.everypet.product.model.domain.Product" alias="Product"></typeAlias>
-        <typeAlias type="com.everypet.product.model.vo.ProductInsertDTO" alias="ProductInsertDTO"></typeAlias>
-        <typeAlias type="com.everypet.product.model.vo.SelectProductDTO" alias="SelectProductDTO"></typeAlias>
-        <typeAlias type="com.everypet.product.model.vo.ProductUpdateDTO" alias="ProductUpdateDTO"></typeAlias>
+        <typeAlias type="com.everypet.product.model.vo.Product" alias="Product"></typeAlias>
+        <typeAlias type="com.everypet.product.model.dto.ProductInsertDTO" alias="ProductInsertDTO"></typeAlias>
+        <typeAlias type="com.everypet.product.model.dto.SelectProductDTO" alias="SelectProductDTO"></typeAlias>
+        <typeAlias type="com.everypet.product.model.dto.ProductUpdateDTO" alias="ProductUpdateDTO"></typeAlias>
         
         <typeAlias type="com.everypet.cart.model.vo.Cart" alias="Cart"></typeAlias>
         <typeAlias type="com.everypet.cart.model.dto.CartItemDTO" alias="CartItem"></typeAlias>
 
-        <typeAlias type="com.everypet.product.model.domain.Advertisement" alias="Advertisement"></typeAlias>
-        <typeAlias type="com.everypet.product.model.vo.AdvertisementDTO" alias="AdvertisementDTO"></typeAlias>
-        <typeAlias type="com.everypet.product.model.vo.InsertAdvertisementDTO" alias="InsertAdvertisementDto"></typeAlias>
+        <typeAlias type="com.everypet.product.model.vo.Advertisement" alias="Advertisement"></typeAlias>
+        <typeAlias type="com.everypet.product.model.dto.AdvertisementDTO" alias="AdvertisementDTO"></typeAlias>
+        <typeAlias type="com.everypet.product.model.dto.InsertAdvertisementDTO" alias="InsertAdvertisementDto"></typeAlias>
     </typeAliases>
 
 </configuration>

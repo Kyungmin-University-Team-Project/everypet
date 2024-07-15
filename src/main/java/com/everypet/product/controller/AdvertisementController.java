@@ -1,9 +1,9 @@
 package com.everypet.product.controller;
 
-import com.everypet.product.model.domain.Advertisement;
-import com.everypet.product.model.vo.AdvertisementDTO;
-import com.everypet.product.model.vo.InsertAdvertisementDTO;
-import com.everypet.product.model.vo.UpdateAdvertisementDTO;
+import com.everypet.product.model.vo.Advertisement;
+import com.everypet.product.model.dto.AdvertisementDTO;
+import com.everypet.product.model.dto.InsertAdvertisementDTO;
+import com.everypet.product.model.dto.UpdateAdvertisementDTO;
 import com.everypet.product.service.AdvertisementService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
