@@ -1,9 +1,6 @@
 package com.everypet.product.controller;
 
-import com.everypet.product.model.vo.Product;
-import com.everypet.product.model.dto.ProductCreateDTO;
-import com.everypet.product.model.dto.ProductUpdateDTO;
-import com.everypet.product.model.dto.SelectProductDTO;
+import com.everypet.product.model.dto.*;
 import com.everypet.product.service.ProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -72,13 +69,13 @@ public class ProductController {
 
     @ApiOperation(value = "상품 리스트 출력", notes = "orderBy, page, pageSize, productCategory 만 넣기, 상품 리스를을 출력합니다.")
     @GetMapping("/product-list")
-    public List<Product> selectProduct(@Valid @ModelAttribute SelectProductDTO selectProductDTO){
+    public List<ProductListDTO> selectProduct(@Valid @ModelAttribute SelectProductDTO selectProductDTO){
         return productService.selectProductList(selectProductDTO);
     }
 
     @ApiOperation(value = "상품 출력", notes = "productId 넣기, 상품을 출력합니다.")
     @GetMapping("/product")
-    public Product selectProductByProductId(String productId){
+    public ProductDTO selectProductByProductId(String productId){
         return productService.selectProductByProductId(productId);
     }
 
@@ -106,7 +103,45 @@ public class ProductController {
         return response(httpStatus,result);
     }
 
+    // --------------------------------------- 키워드 검색 ---------------------------------------------
 
+    @ApiOperation(value = "상품 키워드 검색", notes = "검색창에서 키워드를 입력하고, 키워드에 해당하는 상품 정보를 출력합니다.")
+    @GetMapping("/search-products")
+    public List<ProductListDTO> searchProducts(@Valid @ModelAttribute SearchProductDTO searchProductDTO){
+
+        return productService.selectProductListByKeyword(searchProductDTO);
+    }
+
+    @ApiOperation(value = "키워드 자동 검색", notes = "한 글자 단위로 키워드를 자동 검색합니다.")
+    @PostMapping("/autocomplete-keyword")
+    public List<String> autocompleteKeyword(@RequestBody String keyword){
+
+        return productService.autocompleteKeyword(keyword);
+    }
+
+    @ApiOperation(value = "키워드 추가", notes = "상품에 키워드를 추가합니다")
+    @PostMapping("/insert-keyword")
+    public ResponseEntity<String> insertKeyword(@RequestBody InsertProductKeywordDTO insertProductKeywordDTO){
+
+        String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        productService.insertProductKeyword(insertProductKeywordDTO, memberId);
+
+        return response(HttpStatus.OK, "키워드 추가 완료");
+    }
+
+    @ApiOperation(value = "키워드 삭제", notes = "상품에 키워드를 삭제합니다")
+    @PostMapping("/delete-keyword")
+    public ResponseEntity<String> deleteKeyword(@RequestBody DeleteProductKeywordDTO deleteProductKeywordDTO){
+
+        String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        productService.deleteProductKeyword(deleteProductKeywordDTO, memberId);
+
+        return response(HttpStatus.OK, "키워드 삭제 완료");
+    }
+
+    // ----------------------------------------------------------------------------------------------
     private ResponseEntity<String> response(HttpStatus httpStatus,String result) {
         return ResponseEntity.status(httpStatus)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")

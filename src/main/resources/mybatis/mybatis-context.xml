@@ -13,6 +13,8 @@
         <typeAlias type="com.everypet.member.model.vo.Address" alias="Address"></typeAlias>
 
         <typeAlias type="com.everypet.product.model.vo.Product" alias="Product"></typeAlias>
+        <typeAlias type="com.everypet.product.model.dto.ProductListDTO" alias="ProductListDTO"></typeAlias>
+        <typeAlias type="com.everypet.product.model.dto.ProductDTO" alias="ProductDTO"></typeAlias>
         <typeAlias type="com.everypet.product.model.dto.ProductInsertDTO" alias="ProductInsertDTO"></typeAlias>
         <typeAlias type="com.everypet.product.model.dto.SelectProductDTO" alias="SelectProductDTO"></typeAlias>
         <typeAlias type="com.everypet.product.model.dto.ProductUpdateDTO" alias="ProductUpdateDTO"></typeAlias>
@@ -23,6 +25,8 @@
         <typeAlias type="com.everypet.product.model.vo.Advertisement" alias="Advertisement"></typeAlias>
         <typeAlias type="com.everypet.product.model.dto.AdvertisementDTO" alias="AdvertisementDTO"></typeAlias>
         <typeAlias type="com.everypet.product.model.dto.InsertAdvertisementDTO" alias="InsertAdvertisementDto"></typeAlias>
+
+        <typeAlias type="com.everypet.product.model.dto.SearchProductDTO" alias="SearchProductDTO"></typeAlias>
     </typeAliases>
 
 </configuration>
