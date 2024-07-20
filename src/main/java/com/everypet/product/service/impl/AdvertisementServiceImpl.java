@@ -41,6 +41,8 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 
         Advertisement advertisement = Advertisement.builder()
                 .advertisementId(advertisementId)
+                .advertisementImg("https://storage.googleapis.com/every_pet_img/" + advertisementId)
+                .productId(insertAdvertisementDto.getProductId())
                 .memberId(insertAdvertisementDto.getMemberId())
                 .advertisementStartDate(insertAdvertisementDto.getAdvertisementStartDate())
                 .advertisementEndDate(insertAdvertisementDto.getAdvertisementEndDate())
@@ -53,6 +55,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 
     @Override
     public List<AdvertisementDTO> selectAllAdvertisements() {
+
         return advertisementMapper.selectAllAdvertisements();
     }
 

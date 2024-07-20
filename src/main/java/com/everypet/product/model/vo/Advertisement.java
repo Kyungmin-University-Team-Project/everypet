@@ -14,6 +14,8 @@ import java.time.LocalDate;
 public class Advertisement {
 
     private String advertisementId; // 광고 아이디
+    private String advertisementImg; // 상품 이미지
+    private String productId; // 상품 아이디
     private String memberId; // 회원 아이디
     private LocalDate advertisementStartDate; // 광고 시작 날짜
     private LocalDate advertisementEndDate; // 광고 종료 날짜
