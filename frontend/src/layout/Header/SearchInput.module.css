@@ -1,0 +1,129 @@
+/* 기본 스타일 - 모바일 환경에 적용 */
+.search__container {
+    display: flex;
+    width: 100%; /* 모바일에서의 너비 조정 */
+    height: 30px;
+    font-size: 16px;
+    border: solid 2px #4a8cf0;
+    border-radius: 20px;
+    padding: 0;
+    position: relative; /* 상대 위치 지정 */
+}
+
+.search__input {
+    width: 90%;
+    border: none;
+    outline: none;
+    font-size: 14px; /* 폰트 크기 조정 */
+    padding: 6px 40px 6px 16px; /* 패딩 조정, 오른쪽 패딩 추가 */
+    border-radius: 20px; /* 둥근 모서리 */
+}
+
+
+.search__input::placeholder {
+    color: rgb(165, 165, 165);
+}
+
+.search__btn {
+    width: 10%;
+    background: none;
+    border: none;
+    color: #4a8cf0;
+    font-size: 16px; /* 폰트 크기 조정 */
+    cursor: pointer;
+}
+
+@media screen and (min-width: 769px) {
+    .search__container {
+        width: 40%;
+        height: 40px; /* 높이 복원 */
+        border-radius: 20px;
+    }
+
+    /*웹에서만 적용*/
+    .search__container__write {
+        display: flex;
+        position: relative; /* 상대 위치 지정 */
+        width: 40%;
+        height: 40px; /* 높이 복원 */
+
+        font-size: 16px;
+        padding: 0;
+
+        border-radius: 10px 10px 0 0;
+        box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    }
+
+    .search__input {
+        font-size: 16px; /* 폰트 크기 복원 */
+    }
+
+    .historyContainer {
+        width: 100%;
+        background-color: white;
+        border-top: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 100%;
+        z-index: 1000;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    .historyList {
+        list-style: none;
+        padding: 10px;
+        margin: 0;
+    }
+
+    .historyList__header,
+    .historyList__footer {
+        display: flex;
+        color: gray;
+        justify-content: space-between;
+        padding: 8px;
+    }
+
+
+    .historyList__footer {
+        border-top: solid 1px #b7b7b7;
+    }
+
+    .historyItem {
+        display: flex;
+        align-items: center;
+
+        font-size: 18px;
+        color: #363636;
+
+        gap: 8px;
+
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .auto__save,
+    .close__btn {
+        font-size: 16px;
+        color: gray;
+
+        cursor: pointer;
+        background: none;
+        border: none;
+    }
+
+    .auto__save:hover,
+    .close__btn:hover {
+        text-decoration: underline;
+    }
+
+    .historyItem:hover {
+        background-color: #f0f0f0;
+    }
+
+    .noHistory {
+        padding: 10px;
+        color: #888;
+        text-align: center;
+    }
+}
