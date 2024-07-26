@@ -1,36 +1,37 @@
 import React from 'react';
-import { useQuery } from 'react-query';
+import {useQuery} from 'react-query';
+import axios from 'axios';
 import Item from './Item';
 import styles from './SearchItemList.module.css';
 import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
 import ErrorComponent from "../../utils/reactQuery/ErrorComponent";
-import { fetchProductList } from "../../utils/product/fetchProductList";
-import { Product } from "../../typings/Category";
+import {Product} from "../../typings/Category";
 
 interface SearchItemListProps {
     searchQuery: string;
 }
 
-const SearchItemList: React.FC<SearchItemListProps> = ({ searchQuery }) => {
+const SearchItemList: React.FC<SearchItemListProps> = ({searchQuery}) => {
     const fetchItems = async (): Promise<Product[]> => {
         const params = {
+            keyword: searchQuery,
             orderBy: 'PRODUCT_VIEWS DESC',
             page: 1,
             pageSize: 10,
-            productCategory: `${searchQuery}%`
         };
         console.log("Fetching items with params:", params);
-        return await fetchProductList(params);
+        const response = await axios.get('/search-products', {params});
+        return response.data;
     };
 
-    const { data, error, isLoading } = useQuery<Product[], Error>(['searchProducts', searchQuery], fetchItems);
+    const {data, error, isLoading} = useQuery<Product[], Error>(['searchProducts', searchQuery], fetchItems);
 
     if (isLoading) {
-        return <LoadingSpinner />;
+        return <LoadingSpinner/>;
     }
 
     if (error) {
-        return <ErrorComponent message={error.message} />;
+        return <ErrorComponent message={error.message}/>;
     }
 
     return (
