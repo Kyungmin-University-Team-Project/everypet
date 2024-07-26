@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import {useLocation, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Postcode from "./Postcode";
 import styles from "./Signup.module.css";
-import { signUpLogin } from "../../typings/AuthAPI";
+import { signUpLogin, sendVerificationEmail, verifyCode } from "../../typings/AuthAPI";
 import "@fortawesome/fontawesome-free/css/all.css";
 import axios from "axios";
 import { Join } from "../../typings/signup";
@@ -26,21 +26,24 @@ const Signup: React.FC = () => {
         },
         agreeMarketingYn: agreeMarketingYn,
     });
+
     const [disableButton, setDisableButton] = useState(true);
+    const [emailSent, setEmailSent] = useState(false);
+    const [emailVerified, setEmailVerified] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            // Log the data being sent
             console.log("Sending user data:", JSON.stringify(user, null, 2));
 
             const response = await signUpLogin(user);
 
             console.log("Server response:", response);
+            if (response.success) {
+                navigate('/'); // 가입 성공 후 리다이렉션
+            }
         } catch (error) {
             if (axios.isAxiosError(error) && error.response) {
-                navigate('/');
-                // Log detailed error information
                 console.log("Error response data:", error.response.data);
                 console.log("Error response status:", error.response.status);
                 console.log("Error response headers:", error.response.headers);
@@ -80,6 +83,40 @@ const Signup: React.FC = () => {
 
     const handleAddressChange = (address: string, detailAddress: string) => {
         setUser({ ...user, address: { address, detailAddress } });
+    };
+
+    const handleSendVerificationEmail = async () => {
+        try {
+            const response = await sendVerificationEmail({ email: user.email });
+            console.log("Verification email sent:", response);
+            setEmailSent(true); // Set state to indicate email has been sent
+        } catch (error) {
+            if (axios.isAxiosError(error) && error.response) {
+                console.log("Error response data:", error.response.data);
+                console.log("Error response status:", error.response.status);
+                console.log("Error response headers:", error.response.headers);
+            } else {
+                console.log("Error sending verification email:", error);
+            }
+        }
+    };
+
+    const [verificationCode, setVerificationCode] = useState("");
+
+    const handleVerifyCode = async () => {
+        try {
+            const response = await verifyCode({ email: user.email, code: verificationCode });
+            console.log("Verification successful:", response);
+            setEmailVerified(true); // Set state to indicate email verification successful
+        } catch (error) {
+            if (axios.isAxiosError(error) && error.response) {
+                console.log("Error response data:", error.response.data);
+                console.log("Error response status:", error.response.status);
+                console.log("Error response headers:", error.response.headers);
+            } else {
+                console.log("Error verifying code:", error);
+            }
+        }
     };
 
     return (
@@ -122,7 +159,36 @@ const Signup: React.FC = () => {
                     className={styles.input_value}
                     value={user.email}
                     onChange={handleChange}
+                    required
                 />
+                <button
+                    type="button"
+                    onClick={handleSendVerificationEmail}
+                    className={styles.verify_btn}
+                    disabled={!user.email || emailSent}
+                >
+                    {emailSent ? "인증 이메일 전송됨" : "이메일 인증"}
+                </button>
+                {emailSent && (
+                    <>
+                        <input
+                            type="text"
+                            value={verificationCode}
+                            onChange={(e) => setVerificationCode(e.target.value)}
+                            placeholder="인증 코드"
+                            className={styles.input_value}
+                            required
+                        />
+                        <button
+                            type="button"
+                            onClick={handleVerifyCode}
+                            className={styles.verify_btn}
+                            disabled={!verificationCode}
+                        >
+                            인증 코드 확인
+                        </button>
+                    </>
+                )}
             </label>
 
             <label className={styles.label_container}>
@@ -176,7 +242,7 @@ const Signup: React.FC = () => {
                     className={styles.input_value}
                 />
             </label>
-            <button type="submit" disabled={disableButton} className={styles.join_btn}>
+            <button type="submit" disabled={disableButton || !emailVerified} className={styles.join_btn}>
                 가입하기
             </button>
         </form>
