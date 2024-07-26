@@ -1,11 +1,7 @@
 package com.everypet.product.service;
 
-import com.everypet.product.data.domain.Product;
-import com.everypet.product.data.dto.ProductCreateDTO;
-import com.everypet.product.data.dto.ProductUpdateDTO;
-import com.everypet.product.data.dto.SelectProductDTO;
+import com.everypet.product.model.dto.*;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface ProductService {
@@ -13,9 +9,19 @@ public interface ProductService {
 
     void deleteProduct(String productId, String memberId);
 
-    List<Product> selectProductList(SelectProductDTO selectProductDTO);
+    List<ProductListDTO> selectProductList(SelectProductDTO selectProductDTO);
 
-    Product selectProductByProductId(String productId);
+    ProductDTO selectProductByProductId(String productId);
 
     void updateProduct(ProductUpdateDTO productUpdateDTO, String memberId);
+
+    List<ProductListDTO> selectProductListByKeyword(SearchProductDTO searchProductDTO);
+
+    List<String> autocompleteKeyword(String keyword);
+
+    void insertProductKeyword(InsertProductKeywordDTO insertProductKeywordDTO, String memberId);
+
+    void deleteProductKeyword(DeleteProductKeywordDTO deleteProductKeywordDTO, String memberId);
+
+
 }

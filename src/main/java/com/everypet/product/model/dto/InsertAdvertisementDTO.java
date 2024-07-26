@@ -1,4 +1,4 @@
-package com.everypet.product.data.dto;
+package com.everypet.product.model.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -18,6 +18,10 @@ public class InsertAdvertisementDTO {
         @NotBlank
         @ApiModelProperty(example = "user", notes = "회원의 아이디")
         private String memberId; // 회원 아이디
+
+        @NotBlank
+        @ApiModelProperty(example = "uuid", notes = "상품의 아이디")
+        private String productId; // 상품 아이디
 
         @NotBlank
         @ApiModelProperty(example = "이미지 파일", notes = "광고 이미지")

@@ -1,9 +1,9 @@
 package com.everypet.product.controller;
 
-import com.everypet.product.data.domain.Advertisement;
-import com.everypet.product.data.dto.AdvertisementDTO;
-import com.everypet.product.data.dto.InsertAdvertisementDTO;
-import com.everypet.product.data.dto.UpdateAdvertisementDTO;
+import com.everypet.product.model.dto.AdvertisementDTO;
+import com.everypet.product.model.dto.InsertAdvertisementDTO;
+import com.everypet.product.model.dto.UpdateAdvertisementDTO;
+import com.everypet.product.model.vo.Advertisement;
 import com.everypet.product.service.AdvertisementService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,20 +24,12 @@ public class AdvertisementController {
 
     private final AdvertisementService advertisementService;
 
-    @PostMapping("/ad-test")
-    public String test(){
-
-        return "test";
-    }
-
     @ApiOperation(value = "광고 추가", notes = "새로운 광고를 추가합니다.")
     @PostMapping("/insert-advertisement")
     public ResponseEntity<String> insertAdvertisement(InsertAdvertisementDTO insertAdvertisementDto){
 
         HttpStatus httpStatus;
         String result;
-
-        System.out.println(insertAdvertisementDto.getAdvertisementStatusYn());
 
         try {
             advertisementService.insertAdvertisement(insertAdvertisementDto);
@@ -102,6 +94,7 @@ public class AdvertisementController {
 
         return advertisementService.selectAdvertisementById(advertisementId);
     }
+
 
     private ResponseEntity<String> response(HttpStatus httpStatus,String result) {
         return ResponseEntity.status(httpStatus)

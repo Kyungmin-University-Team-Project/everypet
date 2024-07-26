@@ -1,11 +1,11 @@
 package com.everypet.product.service.impl;
 
-import com.everypet.product.data.dao.AdvertisementMapper;
-import com.everypet.product.data.dao.ProductMapper;
-import com.everypet.product.data.domain.Advertisement;
-import com.everypet.product.data.dto.AdvertisementDTO;
-import com.everypet.product.data.dto.InsertAdvertisementDTO;
-import com.everypet.product.data.dto.UpdateAdvertisementDTO;
+import com.everypet.product.model.dao.AdvertisementMapper;
+import com.everypet.product.model.dao.ProductMapper;
+import com.everypet.product.model.vo.Advertisement;
+import com.everypet.product.model.dto.AdvertisementDTO;
+import com.everypet.product.model.dto.InsertAdvertisementDTO;
+import com.everypet.product.model.dto.UpdateAdvertisementDTO;
 import com.everypet.product.service.AdvertisementService;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
@@ -41,6 +41,8 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 
         Advertisement advertisement = Advertisement.builder()
                 .advertisementId(advertisementId)
+                .advertisementImg("https://storage.googleapis.com/every_pet_img/" + advertisementId)
+                .productId(insertAdvertisementDto.getProductId())
                 .memberId(insertAdvertisementDto.getMemberId())
                 .advertisementStartDate(insertAdvertisementDto.getAdvertisementStartDate())
                 .advertisementEndDate(insertAdvertisementDto.getAdvertisementEndDate())
@@ -53,6 +55,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 
     @Override
     public List<AdvertisementDTO> selectAllAdvertisements() {
+
         return advertisementMapper.selectAllAdvertisements();
     }
 

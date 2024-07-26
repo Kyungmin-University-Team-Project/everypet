@@ -1,4 +1,4 @@
-package com.everypet.product.data.dto;
+package com.everypet.product.model.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -12,7 +12,7 @@ import javax.validation.constraints.Positive;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SelectProductDTO {
+public class SearchProductDTO {
 
     @NotBlank
     @ApiModelProperty(example = "PRODUCT_VIEWS DESC", notes = "ORDER BY 뒤에 삽입됩니다, 정렬 기준 설정하세요 ")
@@ -30,9 +30,8 @@ public class SelectProductDTO {
     private String orderBy;
 
     @NotBlank
-    @ApiModelProperty(example = "강아지%", notes = "검색 조건을 설정하세요, " +
-            "예시 : 강아지의 모든 물품 검색 => 강아지% ,강아지 사료를 검색 => 강아지 사료")
-    private String productCategory;
+    @ApiModelProperty(example = "고양이", notes = "키워드에 해당되는 상품 리스트를 출력합니다.")
+    private String keyword;
 
     @Positive
     @ApiModelProperty(example = "1", notes = "페이지 번호")
