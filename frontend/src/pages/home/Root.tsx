@@ -31,14 +31,14 @@ const Root = () => {
     }, []);
 
     return (
-        <>
+        <div>
             <Fixedheader/>
             <Header/>
             <Productcategory/>
             {location.pathname === '/' ? <Home/> : <Outlet/>}
-            <ScrollToTopButton />
+            <ScrollToTopButton/>
             <Footer/>
-        </>
+        </div>
     );
 };
 

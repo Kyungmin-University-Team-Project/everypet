@@ -5,12 +5,9 @@
     gap: 20px 0;
 }
 
-/* Medium screens (greater than 700px) */
 @media (min-width: 701px) {
     .container {
         grid-template-columns: repeat(4, 1fr); /* 노트북에서 3개씩 보여줌 */
         grid-gap: 40px 0;
-
-        margin-bottom: 40px;
     }
 }

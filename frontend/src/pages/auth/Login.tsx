@@ -1,18 +1,17 @@
 // src/components/Login/Login.tsx
-import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import React, {useEffect, useState} from "react";
+import {Link, useLocation, useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
 import cryptoJs from 'crypto-js';
-import { login } from "../../typings/AuthAPI";
-import { loginState } from "../../redux/auth/authSlice";
-import { LoginData } from "../../typings/Login";
+import {login} from "../../typings/AuthAPI";
+import {loginState} from "../../redux/auth/authSlice";
+import {LoginData} from "../../typings/Login";
 
 import styles from "./Login.module.css";
 import Signup from "./Signup";
 import Findauth from "./Findauth";
 import Agreement from "./Agreement";
 import "@fortawesome/fontawesome-free/css/all.css";
-import GoogleAuth from "./GoogleAuth";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -25,7 +24,7 @@ const Login = () => {
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setValues({ ...values, [e.target.id]: e.target.value });
+        setValues({...values, [e.target.id]: e.target.value});
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -33,7 +32,7 @@ const Login = () => {
         try {
             const response = await login(values);
             const encryptedAccess = cryptoJs.AES.encrypt(response.access, "secret-key").toString();
-            dispatch(loginState({ username: response.user, accessToken: encryptedAccess }));
+            dispatch(loginState({username: response.user, accessToken: encryptedAccess}));
 
             navigate('/');
         } catch (error) {
@@ -58,7 +57,7 @@ const Login = () => {
                         <label htmlFor="memberId" className={styles.input_label}>
                             <p className={styles.login_text}>아이디</p>
                             <div className={styles.input_field}>
-                                <i className={`${styles.input_icon} fas fa-user`} />
+                                <i className={`${styles.input_icon} fas fa-user`}/>
                                 <input
                                     placeholder="아이디를 입력해주세요."
                                     id="memberId"
@@ -73,7 +72,7 @@ const Login = () => {
                         <label htmlFor="memberPwd" className={styles.input_label}>
                             <p className={styles.login_text}>비밀번호</p>
                             <div className={styles.input_field}>
-                                <i className={`${styles.input_icon} fas fa-lock`} />
+                                <i className={`${styles.input_icon} fas fa-lock`}/>
                                 <input
                                     type="password"
                                     placeholder="비밀번호를 입력해주세요."
@@ -105,14 +104,13 @@ const Login = () => {
                             <Link to="/login/forgot-password">아이디/비밀번호 찾기 |</Link>
                             <Link to="/login/agreement">회원가입</Link>
                         </p>
-                        <GoogleAuth /> {/* Add GoogleAuth component */}
                     </form>
                 )}
 
             </section>
-            {location.pathname === "/login/signup" ? <Signup /> : null}
-            {location.pathname === "/login/forgot-password" ? <Findauth /> : null}
-            {location.pathname === "/login/agreement" ? <Agreement /> : null}
+            {location.pathname === "/login/signup" ? <Signup/> : null}
+            {location.pathname === "/login/forgot-password" ? <Findauth/> : null}
+            {location.pathname === "/login/agreement" ? <Agreement/> : null}
         </div>
     );
 };

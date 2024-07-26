@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import styles from './SearchPage.module.css';
 import SearchItemList from "../../components/common/SearchItemList";
 
@@ -13,8 +13,11 @@ const SearchPage = () => {
 
     return (
         <div className={styles.container}>
+            <p className={styles.searchWord}>
+                <span>검색어 : {searchQuery}</span>
+            </p>
             <div className={styles.inner}>
-                <SearchItemList searchQuery={searchQuery} />
+                <SearchItemList searchQuery={searchQuery}/>
             </div>
         </div>
     );

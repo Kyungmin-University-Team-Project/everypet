@@ -41,33 +41,6 @@
     width: 70%;
 }
 
-/* 태블릿 및 데스크탑 환경 */
-@media screen and (min-width: 769px) {
-    .container {
-        height: 80px;
-    }
-
-    .inner {
-        width: 100%;
-        max-width: 1100px;
-        margin: 0 auto;
-        justify-content: space-between;
-    }
-
-    .title {
-        font-size: 28px;
-    }
-}
-
-@media screen and (min-width: 1400px) {
-    .inner {
-        max-width: 1250px;
-    }
-
-    .title {
-        font-size: 36px;
-    }
-}
 
 /* Search input styles */
 .search__container {
@@ -121,5 +94,42 @@
 
     .search__btn {
         font-size: 16px; /* 폰트 크기 복원 */
+    }
+
+    .container {
+        height: 80px;
+    }
+
+    .inner {
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+        justify-content: space-between;
+    }
+
+    .title {
+        font-size: 28px;
+    }
+}
+
+
+@media screen and (min-width: 1400px) {
+    .inner {
+        max-width: 1100px;
+    }
+
+    .title {
+        font-size: 36px;
+    }
+}
+
+
+@media screen and (min-width: 1600px) {
+    .inner {
+        max-width: 1250px;
+    }
+
+    .title {
+        font-size: 36px;
     }
 }
