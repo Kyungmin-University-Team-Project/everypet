@@ -46,7 +46,7 @@ const SearchItemList: React.FC<SearchItemListProps> = ({searchQuery}) => {
                         discount={item.productDiscountRate}
                         recommended={item.productViews}
                         reviewCount={item.numberOfProduct}
-                        imageUrl={`https://storage.googleapis.com/every_pet_img/${item.productId}`} // 이미지 URL 수정
+                        imageUrl={`https://storage.googleapis.com/every_pet_img/${item.productId}`}
                     />
                 ))
             ) : (

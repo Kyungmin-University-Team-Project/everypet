@@ -1,10 +1,6 @@
 import React, {useEffect} from 'react';
 import styles from './TimeDeal.module.css';
-import Header from '../../layout/Header/Header';
-import Fixedheader from '../../layout/Header/Fixedheader';
-import Productcategory from '../../layout/category/Productcategory';
 import TimeItemList from '../../components/timedeal/TimeItemList';
-import Footer from '../../components/home/Footer';
 
 const TimeDeal = ({category}: any) => {
     useEffect(() => {
@@ -18,12 +14,10 @@ const TimeDeal = ({category}: any) => {
             <div className={styles.container}>
                 <div className={styles.inner}>
                     {/* 아이템 리스트에 아이템 정보 넣기 */}
-                    <span className={styles.title}>지금 당장 구매하세요 안사면 후회하는 가격!</span>
+                    <span className={styles.title}>지금이 가장 쌉니다 타임딜!⏰</span>
                     <TimeItemList/>
                 </div>
             </div>
-
-            <Footer/>
         </div>
     );
 };

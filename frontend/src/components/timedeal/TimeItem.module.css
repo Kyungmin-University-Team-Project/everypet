@@ -1,11 +1,10 @@
 .timeItem {
-    border: 1px solid #ddd;
+    border: 1px solid #cdcdcd;
     width: 1250px;
     font-family: Arial, sans-serif;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
     background-color: #fff;
-    border-radius: 5px;
     display: flex;
     flex-direction: column;
     cursor: pointer;
@@ -23,9 +22,9 @@
 
 .image {
     display: flex;
-    width: 50%;
+    width: 60%;
     height: 300px;
-    background-color: rgb(237, 237, 237);
+    background-color: rgb(246, 246, 246);
     justify-content: center;
     align-items: center;
 }
@@ -38,56 +37,96 @@
 
 .info {
     display: flex;
-    flex: 1;
-    padding: 20px;
+    width: 40%;
+    height: 90%;
+
+    padding: 0 20px;
+
     flex-direction: column;
+    justify-content: space-between;
+
 }
 
 .countdown {
+    display: flex;
+    width: 50%;
+
+    border: 1px #d3d3d3 solid;
+    border-radius: 20px;
+
     overflow: hidden;
-    height: 56px; /* Adjust based on font size */
+}
+
+.tag {
+    display: flex;
+    width: 50%;
+    height: 30px;
+    background-color: #ff1616;
+    color: white;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 20px;
 }
 
 .countdownText {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
     color: rgb(255, 41, 41);
-    font-size: 36px;
-    margin: 0 0 10px;
+    font-size: 18px;
     font-weight: bold;
+
+    margin-left: 10px;
 }
 
 .seconds {
-    display: inline-block;
     animation: digitChange 1s infinite;
 }
 
 .description {
     font-size: 20px;
     font-weight: bold;
+
+    margin-top: 30px;
 }
 
-.price {
+
+.price__container {
+    display: flex;
+    align-items: center;
     margin: 10px 0;
 }
 
 .priceTitle {
     color: #ff1b58;
-    font-size: 20px;
+    font-size: 68px;
     font-weight: bold;
     margin-right: 10px;
 }
 
-.discountedPrice {
-    font-size: 24px;
-    color: black;
-    margin-right: 10px;
-    font-weight: bold;
+.price {
+    display: flex;
+    flex-direction: column;
 }
 
 .originalPrice {
     text-decoration: line-through;
     color: #999;
-    font-size: 20px;
+    font-size: 18px;
 }
+
+
+.discountedPrice {
+    font-size: 28px;
+    color: black;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
 
 .details p {
     margin: 5px 0;
