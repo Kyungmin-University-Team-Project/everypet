@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import styles from './TimeItem.module.css';
-import {FaStar} from 'react-icons/fa';
 
 interface Item {
     timeLeft: number;
@@ -58,30 +57,28 @@ const TimeItem: React.FC<TimeItemProps> = ({item}) => {
                     <img src={item.image} alt='Product'/>
                 </div>
                 <div className={styles.info}>
-                    <div className={styles.countdown}>
-                        <h3 className={styles.countdownText}>
-                            {formatHoursMinutes(timeLeft)}:
-                            <span className={styles.seconds}>{seconds}</span>
-                        </h3>
+                    <div>
+                        <div className={styles.countdown}>
+                            <div className={styles.tag}>타임딜</div>
+                            <div className={styles.countdownText}>
+                                {formatHoursMinutes(timeLeft)}:
+                                <span className={styles.seconds}>{seconds}</span>
+                            </div>
+                        </div>
+                        <div className={styles.description}>{item.description}</div>
                     </div>
-                    <div className={styles.description}>{item.description}</div>
                     <div className={styles.details}>
-                        <div className={styles.price}>
-                            <span className={styles.priceTitle}>타임딜가</span>
-                            <span className={styles.discountedPrice}>
+                        <div className={styles.price__container}>
+                            {/*할인율 변수화 하기*/}
+                            <span className={styles.priceTitle}>20%</span>
+                            <div className={styles.price}>
+                                <span className={styles.originalPrice}>{item.originalPrice}원</span>
+                                <span className={styles.discountedPrice}>
                                 {item.discountedPrice}원
                             </span>
-                            <span className={styles.originalPrice}>{item.originalPrice}원</span>
+                            </div>
                         </div>
-                        <div className={styles.rating}>
-                            {[...Array(5)].map((_, index) => (
-                                <FaStar
-                                    key={index}
-                                    className={index < item.rating ? styles.star : styles.grayStar}
-                                />
-                            ))}
-                            <span className={styles.reviews}>({item.reviews})</span>
-                        </div>
+
                         <p>{item.details}</p>
                         <div className={styles.coupon}>
                             <span>{item.coupon}</span> {item.couponDescription}
