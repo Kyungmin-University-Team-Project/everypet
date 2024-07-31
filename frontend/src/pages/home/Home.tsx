@@ -1,5 +1,4 @@
-// Home.tsx
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import styles from './Home.module.css';
 import Maincarousel from '../../components/home/banner/Maincarousel';
 import Quicknav from '../../components/home/quicknav/Quicknav';
@@ -48,11 +47,11 @@ const Home: React.FC = () => {
 
     return (
         <div className={styles.container}>
-            <Maincarousel />
-            <Quicknav />
+            <Maincarousel/>
+            <Quicknav/>
             <div className={styles.brand__ad}>
                 {adsData.map((ad) => (
-                    <HomeAd key={ad.title} title={ad.title} imageUrl={ad.imageUrl} />
+                    <HomeAd key={ad.title} title={ad.title} imageUrl={ad.imageUrl}/>
                 ))}
             </div>
         </div>
