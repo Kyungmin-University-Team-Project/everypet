@@ -17,7 +17,6 @@
     top: 100px;
 
     background-color: white;
-    /*background-color: #28a745;*/
 
     margin: auto;
 
@@ -53,19 +52,17 @@
 
     margin: auto;
 
-    gap: 60px;
+    gap: 110px;
 }
 
 .category {
     display: flex;
 
-    /* background-color: aqua; */
 }
 
 .category__content {
     user-select: none;
 
-    /*background-color: #5e90ff;*/
 
     width: 8rem;
 }
@@ -80,7 +77,9 @@
     margin-left: -2px;
 
     transition: all 300ms linear;
+    cursor: pointer;
 }
+
 
 .ul__wrap {
     display: flex;
@@ -138,9 +137,8 @@
     color: #4a8cf0;
 }
 
-@media screen and (min-width: 1536px) {
-    .category__content {
-
-        /*background-color: #28a745;*/
+@media screen and (min-width: 1600px) {
+    .categories__container {
+        gap: 150px;
     }
 }
