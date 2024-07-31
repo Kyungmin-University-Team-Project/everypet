@@ -57,16 +57,14 @@ const TimeItem: React.FC<TimeItemProps> = ({item}) => {
                     <img src={item.image} alt='Product'/>
                 </div>
                 <div className={styles.info}>
-                    <div>
-                        <div className={styles.countdown}>
-                            <div className={styles.tag}>타임딜</div>
-                            <div className={styles.countdownText}>
-                                {formatHoursMinutes(timeLeft)}:
-                                <span className={styles.seconds}>{seconds}</span>
-                            </div>
+                    <div className={styles.countdown}>
+                        <div className={styles.tag}>타임딜</div>
+                        <div className={styles.countdownText}>
+                            {formatHoursMinutes(timeLeft)}:
+                            <span className={styles.seconds}>{seconds}</span>
                         </div>
-                        <div className={styles.description}>{item.description}</div>
                     </div>
+                    <div className={styles.description}>{item.description}</div>
                     <div className={styles.details}>
                         <div className={styles.price__container}>
                             {/*할인율 변수화 하기*/}
@@ -81,7 +79,8 @@ const TimeItem: React.FC<TimeItemProps> = ({item}) => {
 
                         <p>{item.details}</p>
                         <div className={styles.coupon}>
-                            <span>{item.coupon}</span> {item.couponDescription}
+                            <span>{item.coupon}</span>
+                            <span> {item.couponDescription}</span>
                         </div>
                     </div>
                 </div>

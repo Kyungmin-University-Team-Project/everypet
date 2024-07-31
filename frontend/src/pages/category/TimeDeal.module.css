@@ -2,32 +2,37 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-
-
     align-items: center;
     justify-content: center;
 }
 
 .inner {
-    width: 1250px;
-
+    width: 90%;
     margin-top: 40px;
 }
 
 .title {
     display: flex;
     width: 100%;
-
-    font-size: 36px;
+    font-size: 24px;
     font-weight: bold;
-
-    border-bottom: gray 1px solid;
-
-    padding-bottom: 20px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-@media screen and (max-width: 1536px) {
+
+@media screen and (min-width: 1400px) {
     .inner {
         width: 1100px;
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    .inner {
+        width: 1250px;
+    }
+
+    .title {
+        font-size: 36px;
     }
 }
