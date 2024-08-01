@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './MyPage.module.css';
 import Header from "../../layout/Header/Header";
+import Footer from "../../components/home/Footer";
 
 const MyPage = () => {
     return (
@@ -75,6 +76,7 @@ const MyPage = () => {
                     {/* 추가 섹션 */}
                 </div>
             </div>
+            <Footer/>
         </>
     );
 };

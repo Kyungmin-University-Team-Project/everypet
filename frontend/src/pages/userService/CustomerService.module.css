@@ -1,11 +1,8 @@
-/* CustomerService.module.css */
 
 .container {
     display: flex;
-    width: 1250px;
-    margin: 50px auto auto;
-
-    /* background-color: #28a745; */
+    width: 100%;
+    margin: auto;
 }
 
 .sidebar {
@@ -16,7 +13,7 @@
     margin-top: 25px;
 
     position: sticky;
-    top: 100px; /* 스크롤 시 고정될 위치 */
+    top: 50px; /* 스크롤 시 고정될 위치 */
 }
 
 .sidebar__title {
@@ -130,4 +127,10 @@
 .notice {
     color: #28a745;
     font-weight: bold;
+}
+
+@media screen and (min-width: 1400px) {
+    .container {
+        width: 1100px;
+    }
 }
