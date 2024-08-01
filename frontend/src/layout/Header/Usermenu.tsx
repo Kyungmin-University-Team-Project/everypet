@@ -11,8 +11,10 @@ const Usermenu = () => {
         <div className={styles.container}>
             <ul className={styles.user}>
                 <li className={styles.user__li}>
-                    <AiOutlineUser/>
-                    <span className={styles.tag}>마이페이지</span>
+                    <Link to="/myPage" className={styles.link}>
+                        <AiOutlineUser/>
+                        <span className={styles.tag}>마이페이지</span>
+                    </Link>
                 </li>
                 <li className={styles.user__li}>
                     <Link to="/deliveryInquiry" className={styles.link}>

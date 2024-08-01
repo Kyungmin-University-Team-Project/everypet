@@ -24,6 +24,7 @@ import ProductInquiry from "./pages/moreInformation/ProductInquiry";
 import SellerInformation from "./pages/moreInformation/SellerInformation";
 import Cart from "./pages/userService/Cart";
 import SearchPage from "./pages/category/SearchPage";
+import MyPage from "./pages/userService/MyPage";
 
 
 const router = createBrowserRouter([
@@ -52,9 +53,12 @@ const router = createBrowserRouter([
         ],
     },
 
+    {path: 'myPage', element: <MyPage/>},
     {path: 'deliveryInquiry', element: <DeliveryInquiry/>},
-    {path: 'customer-services', element: <CustomerService/>},
     {path: 'cart', element: <Cart/>},
+
+    {path: 'customer-services', element: <CustomerService/>},
+
     {
         path: '/login',
         element: <Login/>,

@@ -1,0 +1,98 @@
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin: 40px auto 0 auto;
+}
+
+.sidebar {
+    height: 100%;
+    width: 20%;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #b6b6b6;
+    margin-right: 20px;
+    padding: 20px;
+}
+
+.title {
+    font-size: 28px;
+    color: #679aff;
+    font-weight: bold;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    display: flex;
+    align-items: center;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s;
+    padding: 10px 0;
+
+    font-weight: bold;
+}
+
+.sidebar ul li:hover {
+    color: #4c89ff;
+}
+
+.sidebar ul li + li {
+    margin-top: 10px; /* 각 항목 간 간격을 조정 */
+}
+
+.sidebar__item {
+    width: 100%;
+    font-size: 18px;
+}
+
+.mainContent {
+    width: 75%;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.section h2 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #f2f2f2;
+}
+
+.button {
+    background-color: #4c89ff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 1400px) {
+    .container {
+        width: 1100px;
+    }
+}

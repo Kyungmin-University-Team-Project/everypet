@@ -17,6 +17,7 @@
     gap: 24px;
 }
 
+
 .links a {
     position: relative;
 }
@@ -30,6 +31,10 @@
     height: 16px; /* 구분선 길이 */
     width: 1px; /* 구분선 두께 */
     background-color: #ccc; /* 구분선 색상 */
+}
+
+.name {
+    font-weight: bold;
 }
 
 @media screen and (max-width: 1536px) {
