@@ -51,8 +51,8 @@ const TimeItem: React.FC<TimeItemProps> = ({item}) => {
     };
 
     return (
-        <div className={styles.timeItem}>
-            <div className={styles.body}>
+        <div className={styles.container}>
+            <div className={styles.timeItem}>
                 <div className={styles.image}>
                     <img src={item.image} alt='Product'/>
                 </div>

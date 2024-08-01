@@ -1,5 +1,5 @@
 import React from 'react';
-import {FaHeart, FaRegStar, FaShoppingCart, FaStar} from 'react-icons/fa';
+import {FaRegStar, FaShoppingCart, FaStar} from 'react-icons/fa';
 import styles from './Item.module.css';
 import {useNavigate} from "react-router-dom";
 import {addToCart} from "../../utils/product/cart";
@@ -64,7 +64,6 @@ const Item: React.FC<ItemProps> = ({
                 <span className={styles.tag}>New</span>
                 <div className={styles.icon__wrap}>
                     <FaShoppingCart className={styles.cartIcon} onClick={handleAddToCart}/>
-                    <FaHeart className={styles.likeIcon}/>
                 </div>
             </div>
             <div className={styles.item__info}>

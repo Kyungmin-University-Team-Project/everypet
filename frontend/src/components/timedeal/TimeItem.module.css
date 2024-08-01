@@ -1,10 +1,9 @@
-.timeItem {
+.container {
     border: 1px solid #cdcdcd;
     width: 100%;
     max-width: 100%;
     font-family: Arial, sans-serif;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 20px 0;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -12,11 +11,11 @@
     padding: 10px;
 }
 
-.timeItem:hover {
+.container:hover {
     border: 1px solid #4c89ff;
 }
 
-.body {
+.timeItem {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -52,7 +51,6 @@
     border: 1px #d3d3d3 solid;
     border-radius: 20px;
     overflow: hidden;
-    margin-bottom: 10px;
 }
 
 .tag {
@@ -90,13 +88,12 @@
 
 .price__container {
     display: flex;
-    justify-content: start;
-
+    justify-content: center;
 }
 
 .priceTitle {
     color: #ff1b58;
-    font-size: 48px;
+    font-size: 50px;
     font-weight: bold;
     margin-right: 10px;
 }
@@ -145,21 +142,19 @@
 }
 
 /* 태블릿 및 데스크탑 스타일 */
-@media screen and (min-width: 768px) {
-    .timeItem {
+@media screen and (min-width: 1400px) {
+    .container {
         width: 100%;
         max-width: 1250px;
-        margin: 20px auto;
     }
 
-    .body {
+    .timeItem {
         flex-direction: row;
         align-items: center;
     }
 
     .image {
         width: 60%;
-        height: 300px;
     }
 
     .info {
@@ -176,10 +171,11 @@
     }
 
     .description {
-        display: flex;
-        justify-content: start;
         font-size: 20px;
-        margin: 0;
+    }
+
+    .price__container {
+        gap: 50px;
     }
 
     .priceTitle {
