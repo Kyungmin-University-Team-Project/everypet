@@ -12,7 +12,7 @@ import Signup from './pages/auth/Signup';
 import Findauth from './pages/auth/Findauth';
 import store from './redux/store/store';
 import Agreement from './pages/auth/Agreement';
-import Cupon from './pages/category/Cupon';
+import Exhibitions from './pages/category/Exhibitions';
 import TimeDeal from './pages/category/TimeDeal';
 import CustomerService from './pages/userService/CustomerService';
 
@@ -29,39 +29,39 @@ import SearchPage from "./pages/category/SearchPage";
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Root />,
+        element: <Root/>,
         children: [
-            { path: 'coupon', element: <Cupon category={'coupon'} /> },
-            { path: 'timesale', element: <TimeDeal category={'timesale'} /> },
-            { path: 'dog', element: <ProductPage category={'dog'} /> },
-            { path: 'cat', element: <ProductPage category={'cat'} /> },
-            { path: 'rat', element: <ProductPage category={'rat'} /> },
-            { path: 'bird', element: <ProductPage category={'bird'} /> },
-            { path: 'reptiles', element: <ProductPage category={'reptiles'} /> },
+            {path: 'exhibitions', element: <Exhibitions category={'coupon'}/>},
+            {path: 'timesale', element: <TimeDeal category={'timesale'}/>},
+            {path: 'dog', element: <ProductPage category={'dog'}/>},
+            {path: 'cat', element: <ProductPage category={'cat'}/>},
+            {path: 'rat', element: <ProductPage category={'rat'}/>},
+            {path: 'bird', element: <ProductPage category={'bird'}/>},
+            {path: 'reptiles', element: <ProductPage category={'reptiles'}/>},
             {
                 path: 'moreInformation',
-                element: <MoreInformation />,
+                element: <MoreInformation/>,
                 children: [
-                    { path: 'information', element: <Information /> },
-                    { path: 'review', element: <Review /> },
-                    { path: 'product-inquiry', element: <ProductInquiry /> },
-                    { path: 'seller-information', element: <SellerInformation /> },
+                    {path: 'information', element: <Information/>},
+                    {path: 'review', element: <Review/>},
+                    {path: 'product-inquiry', element: <ProductInquiry/>},
+                    {path: 'seller-information', element: <SellerInformation/>},
                 ],
             },
-            { path: 'search', element: <SearchPage /> }, // SearchPage route
+            {path: 'search', element: <SearchPage/>}, // SearchPage route
         ],
     },
 
-    { path: 'deliveryInquiry', element: <DeliveryInquiry /> },
-    { path: 'customer-services', element: <CustomerService /> },
-    { path: 'cart', element: <Cart /> },
+    {path: 'deliveryInquiry', element: <DeliveryInquiry/>},
+    {path: 'customer-services', element: <CustomerService/>},
+    {path: 'cart', element: <Cart/>},
     {
         path: '/login',
-        element: <Login />,
+        element: <Login/>,
         children: [
-            { path: 'agreement', element: <Agreement /> },
-            { path: 'signup', element: <Signup /> },
-            { path: 'forgot-password', element: <Findauth /> },
+            {path: 'agreement', element: <Agreement/>},
+            {path: 'signup', element: <Signup/>},
+            {path: 'forgot-password', element: <Findauth/>},
         ],
     },
 ]);
@@ -72,7 +72,7 @@ ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
             <QueryClientProvider client={queryClient}>
-                <RouterProvider router={router} />
+                <RouterProvider router={router}/>
             </QueryClientProvider>
         </Provider>
     </React.StrictMode>,

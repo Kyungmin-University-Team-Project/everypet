@@ -1,30 +1,32 @@
 .timeItem {
     border: 1px solid #cdcdcd;
-    width: 1250px;
+    width: 100%;
+    max-width: 100%;
     font-family: Arial, sans-serif;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 0 auto;
-    background-color: #fff;
+    margin: 20px 0;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
     cursor: pointer;
+    padding: 10px;
 }
 
-.timeItem:hover .image img {
-    transform: scale(1.2);
+.timeItem:hover {
+    border: 1px solid #4c89ff;
 }
 
 .body {
     display: flex;
+    flex-direction: column;
     width: 100%;
     align-items: center;
 }
 
 .image {
     display: flex;
-    width: 60%;
-    height: 300px;
-    background-color: rgb(246, 246, 246);
+    width: 100%;
+    height: auto;
     justify-content: center;
     align-items: center;
 }
@@ -37,50 +39,42 @@
 
 .info {
     display: flex;
-    width: 40%;
-    height: 90%;
-
-    padding: 0 20px;
+    gap: 10px;
 
     flex-direction: column;
-    justify-content: space-between;
-
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .countdown {
     display: flex;
-    width: 50%;
-
     border: 1px #d3d3d3 solid;
     border-radius: 20px;
-
     overflow: hidden;
+    margin-bottom: 10px;
 }
 
 .tag {
     display: flex;
-    width: 50%;
+    width: 55%;
     height: 30px;
     background-color: #ff1616;
     color: white;
     font-weight: bold;
     align-items: center;
     justify-content: center;
-
     border-radius: 20px;
 }
 
 .countdownText {
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     color: rgb(255, 41, 41);
     font-size: 18px;
     font-weight: bold;
-
-    margin-left: 10px;
+    margin-left: 30px;
 }
 
 .seconds {
@@ -88,22 +82,21 @@
 }
 
 .description {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
-
-    margin-top: 30px;
+    margin-top: 10px;
+    text-align: center;
 }
-
 
 .price__container {
     display: flex;
-    align-items: center;
-    margin: 10px 0;
+    justify-content: start;
+
 }
 
 .priceTitle {
     color: #ff1b58;
-    font-size: 68px;
+    font-size: 48px;
     font-weight: bold;
     margin-right: 10px;
 }
@@ -111,63 +104,97 @@
 .price {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .originalPrice {
+    display: flex;
+    width: 100%;
+    align-items: start;
     text-decoration: line-through;
     color: #999;
-    font-size: 18px;
+    font-size: 14px;
 }
 
-
 .discountedPrice {
-    font-size: 28px;
+    font-size: 24px;
     color: black;
     margin-right: 10px;
     font-weight: bold;
 }
 
-
 .details p {
     margin: 5px 0;
     color: #333;
-    font-size: 16px;
+    font-size: 14px;
+    text-align: center;
 }
-
-.rating {
-    display: flex;
-    align-items: center;
-    margin: 5px 0;
-}
-
-.star {
-    color: gold;
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-}
-
-.grayStar {
-    color: lightgray;
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-}
-
-
-.reviews {
-    color: gray;
-}
-
 
 .coupon {
+    display: inline-block;
+    width: 100%;
+
     margin-top: 10px;
-    padding: 5px;
-    background-color: #5a62ff;
+    padding: 10px 0;
+    background-color: #4c89ff;
     border-radius: 5px;
     font-weight: bold;
-    display: inline-block;
-
     color: white;
+    text-align: center;
 }
 
+/* 태블릿 및 데스크탑 스타일 */
+@media screen and (min-width: 768px) {
+    .timeItem {
+        width: 100%;
+        max-width: 1250px;
+        margin: 20px auto;
+    }
+
+    .body {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .image {
+        width: 60%;
+        height: 300px;
+    }
+
+    .info {
+        width: 40%;
+        height: 100%;
+    }
+
+    .countdown {
+        width: 100%;
+    }
+
+    .countdownText {
+        margin-left: 50px;
+    }
+
+    .description {
+        display: flex;
+        justify-content: start;
+        font-size: 20px;
+        margin: 0;
+    }
+
+    .priceTitle {
+        font-size: 68px;
+    }
+
+    .originalPrice {
+        font-size: 18px;
+    }
+
+    .discountedPrice {
+        font-size: 28px;
+    }
+
+    .details p {
+        font-size: 16px;
+    }
+}

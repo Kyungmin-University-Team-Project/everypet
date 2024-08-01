@@ -11,7 +11,7 @@ import Categorybarbtn from './Categorybarbtn';
 import Realtimekeyword from '../Header/Realtimekeyword';
 
 const categories = [
-    {name: '쿠폰/기획전', link: '/coupon'},
+    {name: '기획전', link: '/exhibitions'},
     {name: '타임딜', link: '/timesale'},
     {name: '강아지', link: '/dog'},
     {name: '고양이', link: '/cat'},
@@ -84,9 +84,9 @@ const Productcategory = () => {
                         />
                     )}
                     <ul className={styles.category__menu}>
-                        {categories.map((category, index) => (
+                        {categories.map((category) => (
                             <ProductcategoryItem
-                                key={index}
+                                key={category.name}
                                 category={category.name}
                                 isActive={clickedCategory === category.name}
                                 onClick={handleClick}
