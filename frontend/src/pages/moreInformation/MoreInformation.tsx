@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { FaStar, FaRegStar, FaAngleRight } from 'react-icons/fa';
 import { IoIosInformationCircleOutline } from 'react-icons/io';
 import { FcHome } from 'react-icons/fc';
@@ -12,19 +12,37 @@ import Information from "./Information";
 import ProductInquiry from "./ProductInquiry";
 import SellerInformation from "./SellerInformation";
 import {addToCart} from "../../utils/product/cart";
+import {fetchProductDetails} from "../../typings/fetchProductDetails";
+import SaleInformation from "./SaleInformation";
 
 const MoreInformation: React.FC = () => {
     const location = useLocation();
     const item = location.state?.item;
-    const navigate = useNavigate();
     const [quantity, setQuantity] = useState<number>(1);
     const [discountedPrice, setDiscountedPrice] = useState<number>(0);
     const [totalPrice, setTotalPrice] = useState<number>(0);
+    const [productDetails, setProductDetails] = useState<any>(null);
 
     const informationRef = useRef(null);
     const purchaseInfoRef = useRef(null);
     const reviewsRef = useRef(null);
     const productInquiryRef = useRef(null);
+
+    useEffect(() => {
+        const fetchDetails = async () => {
+            if (item) {
+                console.log("Fetching details for product ID:", item.productId);
+                try {
+                    const details = await fetchProductDetails(item.productId);
+                    setProductDetails(details);
+                } catch (error) {
+                    console.error("Failed to fetch product details:", error);
+                }
+            }
+        };
+        fetchDetails();
+    }, [item]);
+
 
     useEffect(() => {
         if (item) {
@@ -73,14 +91,15 @@ const MoreInformation: React.FC = () => {
     return (
         <div>
             <section className={styles.section_box}>
+                <SaleInformation productDetails={productDetails} />
                 <article className={styles.article_moreInformation}>
                     <div className={styles.box_moreInformation}>
-                        <img src={item.imageUrl} className={styles.moreInformation_img} alt={item.name} />
+                        <img src={item.imageUrl} className={styles.moreInformation_img} alt={item.name}/>
                         <div className={styles.info_container}>
                             <div className={styles.breadcrumb}>
                                 <span className={styles.headingText}>강아지</span>
                                 <strong>놀자멍뭉</strong>
-                                <FaAngleRight className={styles.icon} />
+                                <FaAngleRight className={styles.icon}/>
                             </div>
                             <h2>{item.name}</h2>
                             <div className={styles.reviews}>
@@ -88,7 +107,7 @@ const MoreInformation: React.FC = () => {
                                 <span className={styles.review_count}>
                                     <strong>{item.reviewCount}</strong> 리뷰 보기
                                 </span>
-                                <FaAngleRight className={styles.icon} />
+                                <FaAngleRight className={styles.icon}/>
                             </div>
                             <p className={styles.price_original}>{item.price}원</p>
                             <p className={styles.dynamic_price}>
@@ -98,40 +117,41 @@ const MoreInformation: React.FC = () => {
                             </p>
                             <p>
                                 <strong>적립혜택</strong>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;최대 <strong className={styles.score_text}>2,270점 + 2p</strong> 적립
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;최대 <strong className={styles.score_text}>2,270점 +
+                                2p</strong> 적립
                             </p>
                             <p>
                                 <strong>배송정보</strong>
-                                <IoIosInformationCircleOutline className={styles.icon} />
+                                <IoIosInformationCircleOutline className={styles.icon}/>
                                 &nbsp;배송비 3,000원(30,000원 이상 무료배송)
-                                <br />
+                                <br/>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;제주도/도서산간 추가배송비 별도
                             </p>
                             <div className={styles.delivery_options}>
                                 <p className={styles.delivery}>
                                     <span>
-                                        <FcHome />
+                                        <FcHome/>
                                         {' '}<strong className={styles.delivery_options_text}>가장 빠른배송</strong>
                                         을 확인하세요!
                                     </span>
                                 </p>
                                 <p>
-                                    <FaBolt className={styles.fabolt} />
+                                    <FaBolt className={styles.fabolt}/>
                                     {' '}당일배송: 오늘(3/13) 밤 12시 도착
                                 </p>
                                 <p>
-                                    <IoMoon className={styles.iomoon} />
+                                    <IoMoon className={styles.iomoon}/>
                                     {' '}새벽배송: 내일(3/14) 새벽 7시 이전 도착
                                 </p>
                                 <p>
-                                    <TbTruckDelivery />
+                                    <TbTruckDelivery/>
                                     {' '}GS전달배송: 다음날 도착예정
                                 </p>
                             </div>
                             <div className={styles.purchase_options}>
                                 <div className={styles.quantity_control}>
                                     <button className={styles.decrement} onClick={handleDecrement}>-</button>
-                                    <input type="text" value={quantity} readOnly className={styles.quantity_input} />
+                                    <input type="text" value={quantity} readOnly className={styles.quantity_input}/>
                                     <button className={styles.increment} onClick={handleIncrement}>+</button>
                                 </div>
                                 <button className={styles.cart_button} onClick={handleAddToCart}>장바구니</button>
@@ -145,10 +165,11 @@ const MoreInformation: React.FC = () => {
                         <button className={styles.tab_btn} onClick={() => scrollToSection(informationRef)}>상세정보</button>
                         <button className={styles.tab_btn} onClick={() => scrollToSection(purchaseInfoRef)}>리뷰</button>
                         <button className={styles.tab_btn} onClick={() => scrollToSection(reviewsRef)}>상품문의</button>
-                        <button className={styles.tab_btn} onClick={() => scrollToSection(productInquiryRef)}>배송 정보</button>
+                        <button className={styles.tab_btn} onClick={() => scrollToSection(productInquiryRef)}>배송 정보
+                        </button>
                     </div>
                     <div ref={informationRef}>
-                        <Information />
+                        <Information/>
                     </div>
                     <div ref={purchaseInfoRef}>
                         <Review/>
@@ -159,7 +180,7 @@ const MoreInformation: React.FC = () => {
                     <div ref={productInquiryRef}>
                         <SellerInformation/>
                     </div>
-                    <Outlet />
+                    <Outlet/>
                 </article>
             </section>
         </div>
