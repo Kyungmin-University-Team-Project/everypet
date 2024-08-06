@@ -1,4 +1,4 @@
-package com.everypet.member.mapper;
+package com.everypet.member.model.dao;
 
 import com.everypet.member.model.vo.Member;
 import com.everypet.member.model.vo.Address;
@@ -8,7 +8,6 @@ import java.util.Optional;
 
 @Mapper
 public interface MemberMapper {
-    //List<Member> selectMemberAll();
     int insertMember(Member member);
     int insertAddress(Address address);
     Optional<Member> selectMemberByMemberId(String memberId);

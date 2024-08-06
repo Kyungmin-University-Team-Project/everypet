@@ -1,4 +1,4 @@
-package com.everypet.cart.mapper;
+package com.everypet.cart.model.dao;
 
 import com.everypet.cart.model.dto.CartItemDTO;
 import com.everypet.cart.model.vo.Cart;

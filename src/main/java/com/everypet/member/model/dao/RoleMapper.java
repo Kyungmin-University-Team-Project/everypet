@@ -1,4 +1,4 @@
-package com.everypet.member.mapper;
+package com.everypet.member.model.dao;
 
 import com.everypet.member.model.vo.Role;
 import org.apache.ibatis.annotations.Mapper;
