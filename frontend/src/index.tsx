@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux';
-import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import {createBrowserRouter, Route, RouterProvider, Routes} from 'react-router-dom';
 import {QueryClient, QueryClientProvider} from 'react-query'; // React Query import
 import ProductPage from './pages/category/ProductPage';
 import Root from './pages/home/Root';
@@ -13,7 +13,6 @@ import Findauth from './pages/auth/Findauth';
 import store from './redux/store/store';
 import Agreement from './pages/auth/Agreement';
 import Exhibitions from './pages/category/Exhibitions';
-import TimeDeal from './pages/category/TimeDeal';
 
 import MoreInformation from "./pages/moreInformation/MoreInformation";
 import DeliveryInquiry from "./pages/userService/DeliveryInquiry";
@@ -24,15 +23,19 @@ import SellerInformation from "./pages/moreInformation/SellerInformation";
 import Cart from "./pages/userService/Cart";
 import SearchPage from "./pages/category/SearchPage";
 import MyPage from "./pages/userService/MyPage";
+import TimeDeal from "./pages/category/TimeDeal";
+import ProtectedRoute from "./utils/route/ProtectedRoute";
+import RestrictedRoute from "./utils/route/RestrictedRoute";
 
 
 const router = createBrowserRouter([
+    // 모두 접속 가능
     {
         path: '/',
         element: <Root/>,
         children: [
             {path: 'exhibitions', element: <Exhibitions category={'coupon'}/>},
-            {path: 'timesale', element: <TimeDeal category={'timesale'}/>},
+            {path: 'timeDeal', element: <TimeDeal category={'timeDeal'}/>},
             {path: 'dog', element: <ProductPage category={'dog'}/>},
             {path: 'cat', element: <ProductPage category={'cat'}/>},
             {path: 'rat', element: <ProductPage category={'rat'}/>},
@@ -52,20 +55,41 @@ const router = createBrowserRouter([
         ],
     },
 
-    {path: 'myPage', element: <MyPage/>},
-    {path: 'deliveryInquiry', element: <DeliveryInquiry/>},
-    {path: 'cart', element: <Cart/>},
-
-
+    // 로그인 유저만 접속가능
     {
-        path: '/login',
-        element: <Login/>,
+        path: 'myPage',
+        element: <ProtectedRoute/>,
         children: [
+            {path: '', element: <MyPage/>},
+        ],
+    },
+    {
+        path: 'deliveryInquiry',
+        element: <ProtectedRoute/>,
+        children: [
+            {path: '', element: <DeliveryInquiry/>},
+        ],
+    },
+    {
+        path: 'cart',
+        element: <ProtectedRoute/>,
+        children: [
+            {path: '', element: <Cart/>},
+        ],
+    },
+
+    // 비로그인 유저만 접속가능
+    {
+        path: 'login',
+        element: <RestrictedRoute/>,
+        children: [
+            {path: '', element: <Login/>},
             {path: 'agreement', element: <Agreement/>},
             {path: 'signup', element: <Signup/>},
             {path: 'forgot-password', element: <Findauth/>},
         ],
     },
+
 ]);
 
 const queryClient = new QueryClient();
