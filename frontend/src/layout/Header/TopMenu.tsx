@@ -31,7 +31,6 @@ const TopMenu = () => {
                         <Link to='/login/agreement'>회원가입</Link>
                     </>
                 )}
-                <Link to='/customer-services'>고객센터</Link>
             </div>
         </div>
     );
