@@ -12,7 +12,7 @@ import Realtimekeyword from '../Header/Realtimekeyword';
 
 const categories = [
     {name: '기획전', link: '/exhibitions'},
-    {name: '타임딜', link: '/timesale'},
+    {name: '타임딜', link: '/timeDeal'},
     {name: '강아지', link: '/dog'},
     {name: '고양이', link: '/cat'},
     {name: '설치류', link: '/rat'},
