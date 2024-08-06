@@ -1,9 +1,10 @@
 import React, {useEffect, useState, useRef, useCallback} from 'react';
 import styles from './Realtimekeyword.module.css';
 
-import Modal from './Modal';
+import RealtimekeywordModal from './RealtimekeywordModal';
 import {Ranking} from '../../typings/layout';
 import {IoIosArrowDown} from 'react-icons/io';
+import {useNavigate} from "react-router-dom";
 
 const Realtimekeyword = () => {
     const [rankings, setRankings] = useState<Ranking[]>([]);
@@ -11,7 +12,8 @@ const Realtimekeyword = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
     const modalRef = useRef<HTMLDivElement>(null);
-
+    const navigate = useNavigate();
+    
     useEffect(() => {
         // mock 데이터 로드
         fetch('/mock/real_rank.json')
@@ -59,9 +61,10 @@ const Realtimekeyword = () => {
 
     // 실시간 검색어 누르면 해당 키워드로 검색
     const searchKeyword = () => {
-        console.log(currentRanking?.rank, currentRanking?.keyword);
+        if (currentRanking) {
+            navigate(`/search?query=${encodeURIComponent(currentRanking.keyword)}`);
+        }
     };
-
     return (
         <div className={styles.container} ref={containerRef}>
             {currentRanking && (
@@ -74,7 +77,7 @@ const Realtimekeyword = () => {
 
             {isModalOpen && (
                 <div className={styles.modalWrapper} ref={modalRef}>
-                    <Modal
+                    <RealtimekeywordModal
                         isOpen={isModalOpen}
                         onClose={closeRankModal}
                         rankings={rankings}

@@ -3,9 +3,10 @@ import {useQuery} from 'react-query';
 import axios from 'axios';
 import Item from './Item';
 import styles from './SearchItemList.module.css';
-import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
-import ErrorComponent from "../../utils/reactQuery/ErrorComponent";
-import {Product} from "../../typings/Category";
+import LoadingSpinner from '../../utils/reactQuery/LoadingSpinner';
+import ErrorComponent from '../../utils/reactQuery/ErrorComponent';
+import {Product} from '../../typings/Category';
+import {VscSearchStop} from 'react-icons/vsc';
 
 interface SearchItemListProps {
     searchQuery: string;
@@ -19,7 +20,7 @@ const SearchItemList: React.FC<SearchItemListProps> = ({searchQuery}) => {
             page: 1,
             pageSize: 10,
         };
-        console.log("Fetching items with params:", params);
+        console.log('Fetching items with params:', params);
         const response = await axios.get('/search-products', {params});
         return response.data;
     };
@@ -35,7 +36,7 @@ const SearchItemList: React.FC<SearchItemListProps> = ({searchQuery}) => {
     }
 
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} ${data && data.length === 0 ? styles.noResultsContainer : ''}`}>
             {data && data.length > 0 ? (
                 data.map((item) => (
                     <Item
@@ -50,7 +51,10 @@ const SearchItemList: React.FC<SearchItemListProps> = ({searchQuery}) => {
                     />
                 ))
             ) : (
-                <div className={styles.noResults}>검색 결과가 없습니다.</div>
+                <div className={styles.noResults}>
+                    <VscSearchStop className={styles.noResults__icon}/>
+                    <span className={styles.noResults__text}>검색 결과가 없습니다.</span>
+                </div>
             )}
         </div>
     );
