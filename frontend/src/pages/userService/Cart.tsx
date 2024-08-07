@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios, { AxiosError } from 'axios';
-import { Link } from "react-router-dom";
-import { FaTrashAlt } from 'react-icons/fa';
+import React, {useState, useEffect} from 'react';
+import axios, {AxiosError} from 'axios';
+import {Link} from "react-router-dom";
+import {FaTrashAlt} from 'react-icons/fa';
 import styles from './Cart.module.css';
 import {decryptToken} from "../../utils/common/tokenDecode";
 
@@ -81,7 +81,7 @@ const Cart: React.FC = () => {
             const token = decryptToken(encryptedToken); // 유틸리티 함수 사용
             console.log("이게 아이디" + productId);
 
-            const response = await axios.post('/cart/delete', { productId }, {
+            const response = await axios.post('/cart/delete', {productId}, {
                 headers: {
                     'Content-Type': 'application/json',
                     'access': token
@@ -121,15 +121,55 @@ const Cart: React.FC = () => {
         }
     };
 
-    const deleteSelectedItems = async () => {
-        for (const productId of selectedItems) {
-            await deleteItem(productId);
+    // const updateQuantity = async (productId: string, newQuantity: number) => {
+    //     try {
+    //         const encryptedToken = localStorage.getItem('access');
+    //         if (!encryptedToken) {
+    //             throw new Error("No access token found");
+    //         }
+
+    //         const token = decryptToken(encryptedToken); // 유틸리티 함수 사용
+
+    //         const response = await axios.post('/cart/update', { productId, newQuantity }, {
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 'access': token
+    //             }
+    //         });
+
+    //         console.log("Update response:", response.data);
+
+    //         setCartItems(cartItems.map(item =>
+    //             item.productId === productId ? { ...item, cartQuantity: newQuantity } : item
+    //         ));
+    //     } catch (error) {
+    //         console.error('Error updating cart item quantity:', error);
+    //         if (axios.isAxiosError(error)) {
+    //             handleAxiosError(error);
+    //         } else {
+    //             console.error('Unexpected error:', error);
+    //         }
+    //     }
+    // };
+
+    const handleQuantityChange = (productId: string, change: number) => {
+        const item = cartItems.find(item => item.productId === productId);
+        if (item) {
+            const newQuantity = item.cartQuantity + change;
+            if (newQuantity > 0) {
+                // updateQuantity(productId, newQuantity); // API 호출 주석 처리
+                setCartItems(cartItems.map(item =>
+                    item.productId === productId ? {...item, cartQuantity: newQuantity} : item
+                ));
+            }
         }
     };
 
-    // 총 상품 금액 계산
-    const productPrice = cartItems.reduce((total, item) => total + parseInt(item.productPrice.replace(/,/g, ''), 10) * item.cartQuantity, 0);
-    const totalPrice = productPrice + shippingFee; // 총 금액
+    // 선택된 상품들의 총 상품 금액 계산
+    const selectedProductPrice = cartItems
+        .filter(item => selectedItems.includes(item.productId))
+        .reduce((total, item) => total + parseInt(item.productPrice.replace(/,/g, ''), 10) * item.cartQuantity, 0);
+    const totalPrice = selectedProductPrice + (selectedProductPrice > 0 ? shippingFee : 0); // 총 금액
 
     return (
         <div className={styles.pageContainer}>
@@ -181,9 +221,18 @@ const Cart: React.FC = () => {
                                         <p>{item.productName}</p>
                                     </div>
                                     <div className={styles.quantity}>
-                                        <button className={styles.quantityButton}>-</button>
-                                        <input type="number" value={item.cartQuantity} readOnly className={styles.quantityInput}/>
-                                        <button className={styles.quantityButton}>+</button>
+                                        <button
+                                            className={styles.quantityButton}
+                                            onClick={() => handleQuantityChange(item.productId, -1)}
+                                        >-
+                                        </button>
+                                        <input type="number" value={item.cartQuantity} readOnly
+                                               className={styles.quantityInput}/>
+                                        <button
+                                            className={styles.quantityButton}
+                                            onClick={() => handleQuantityChange(item.productId, 1)}
+                                        >+
+                                        </button>
                                     </div>
                                     <div className={styles.total}>
                                         <p className={styles.price}>{item.productPrice}원</p>
@@ -204,7 +253,6 @@ const Cart: React.FC = () => {
                             <span>{totalPrice.toLocaleString()}원</span>
                         </div>
                         <button className={styles.checkoutButton}>결제하기</button>
-                        <button onClick={deleteSelectedItems} className={styles.checkoutButton}>선택 삭제</button>
                     </div>
                 </div>
             </div>

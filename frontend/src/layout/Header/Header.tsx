@@ -29,10 +29,13 @@ const Header: React.FC = () => {
             {!isMobile && <TopMenu/>}
             <header className={styles.container}>
                 <div className={isMobile ? styles.innerMobile : styles.inner}>
-                    <Link to='/' className={styles.title}>
-                        에브리펫
-                    </Link>
 
+                    <div className={styles.top__menu}>
+                        <Link to='/' className={styles.title}>
+                            에브리펫
+                        </Link>
+                        {isMobile && <Usermenu/>}
+                    </div>
                     {isMobile ? (
                         <button className={styles.searchButton} onClick={() => setIsSearchOpen(true)}>
                             <Searchinput/>

@@ -1,14 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import styles from './TimeItem.module.css';
+import {useNavigate} from 'react-router-dom';
+import {handleViewDetails as handleViewDetailsUtil} from '../../utils/product/detailNavigation';
 
 interface Item {
+    productId: string;
     timeLeft: number;
-    image: string;
-    discountedPrice: string;
-    originalPrice: string;
+    imageUrl: string;
+    price: number;
+    discount: number;
     description: string;
     rating: number;
-    reviews: string;
+    reviewCount: number;
     details: string;
     coupon: string;
     couponDescription: string;
@@ -21,6 +24,7 @@ interface TimeItemProps {
 const TimeItem: React.FC<TimeItemProps> = ({item}) => {
     const [timeLeft, setTimeLeft] = useState<number>(item.timeLeft);
     const [seconds, setSeconds] = useState<string>('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const formatTime = (seconds: number): string => {
@@ -50,11 +54,29 @@ const TimeItem: React.FC<TimeItemProps> = ({item}) => {
         return `${hours}:${minutes}`;
     };
 
+    const calculateDiscountedPrice = (price: number, discount: number): number => {
+        return Math.round(price * (1 - discount / 100));
+    };
+
+    const discountedPrice = calculateDiscountedPrice(item.price, item.discount);
+
+    const handleViewDetails = () => {
+        handleViewDetailsUtil(navigate, {
+            productId: item.productId,
+            name: item.description,
+            price: item.price,
+            discount: item.discount,
+            recommended: item.rating,
+            reviewCount: item.reviewCount,
+            imageUrl: item.imageUrl
+        });
+    };
+
     return (
-        <div className={styles.container}>
+        <div className={styles.container} onClick={handleViewDetails}>
             <div className={styles.timeItem}>
                 <div className={styles.image}>
-                    <img src={item.image} alt='Product'/>
+                    <img src={item.imageUrl} alt='Product'/>
                 </div>
                 <div className={styles.info}>
                     <div className={styles.countdown}>
@@ -67,16 +89,14 @@ const TimeItem: React.FC<TimeItemProps> = ({item}) => {
                     <div className={styles.description}>{item.description}</div>
                     <div className={styles.details}>
                         <div className={styles.price__container}>
-                            {/*할인율 변수화 하기*/}
-                            <span className={styles.priceTitle}>20%</span>
+                            <span className={styles.priceTitle}>{item.discount}%</span>
                             <div className={styles.price}>
-                                <span className={styles.originalPrice}>{item.originalPrice}원</span>
+                                <span className={styles.originalPrice}>{item.price}원</span>
                                 <span className={styles.discountedPrice}>
-                                {item.discountedPrice}원
-                            </span>
+                                    {discountedPrice}원
+                                </span>
                             </div>
                         </div>
-
                         <p>{item.details}</p>
                         <div className={styles.coupon}>
                             <span>{item.coupon}</span>

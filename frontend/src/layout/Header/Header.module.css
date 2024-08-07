@@ -1,9 +1,9 @@
 /* 기본 스타일 - 모바일 환경에 적용 */
 .container {
-    width: 100%;
-    height: 80px;
-    background-color: white;
     display: flex;
+    width: 100%;
+    height: 140px;
+    background-color: white;
     justify-content: center; /* 수평 가운데 정렬 */
     align-items: center; /* 수직 가운데 정렬 */
     border-bottom: solid 1px rgb(205, 205, 205);
@@ -19,26 +19,40 @@
 }
 
 .innerMobile {
-    width: 90%;
+    width: 100%;
     display: flex;
-    align-items: center; /* 수직 가운데 정렬 */
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding: 0 10px;
+}
+
+.top__menu {
+    display: flex;
+
     justify-content: space-between;
 }
 
 .title {
     display: flex;
     align-items: center;
-    font-size: 1.6rem;
+    font-size: 36px;
     color: #75acff;
     font-family: 'WAGURI', sans-serif;
     text-decoration: none;
+
+    margin-left: 5px;
 }
 
 .searchButton {
     background: none;
     border: none;
     cursor: pointer;
-    width: 70%;
+    width: 100%;
+
 }
 
 
@@ -109,6 +123,7 @@
 
     .title {
         font-size: 28px;
+        margin: 0;
     }
 }
 

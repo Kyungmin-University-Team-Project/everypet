@@ -51,9 +51,12 @@ const Fixedheader: React.FC = () => {
                                 setClose={toggleOff}
                             />
                         )}
-                        <Link to='/' className={styles.title}>
-                            에브리펫
-                        </Link>
+                        <div className={styles.top__menu}>
+                            <Link to='/' className={styles.title}>
+                                에브리펫
+                            </Link>
+                            {isMobile && <Usermenu/>}
+                        </div>
                     </div>
                     {isMobile ? (
                         <button className={styles.searchButton} onClick={() => setIsSearchOpen(true)}>
