@@ -21,7 +21,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 15px;
 }
 
 .header .title {
@@ -37,25 +37,20 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    box-sizing: border-box;
-    position: relative;
+
 }
 
 .cartItems {
     height: auto;
     width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-
 }
 
 .cartHeader {
     position: sticky;
     top: 0;
     display: flex;
-    padding: 10px 1.4rem;
+    padding: 15px;
     justify-content: space-between;
-    margin-bottom: 20px;
     align-items: center;
     border-bottom: solid 1px #b6b6b6;
     background-color: white;
@@ -94,7 +89,6 @@
     display: flex;
     flex-direction: column;
 
-    margin-bottom: 20px;
 }
 
 .icon__btn {
@@ -102,6 +96,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+
+    margin-top: 20px;
 }
 
 .checkboxInput {
@@ -111,6 +108,7 @@
     cursor: pointer;
 
     margin-left: 20px;
+
 }
 
 
@@ -215,7 +213,6 @@
 
 .summaryContainer {
     width: 100%;
-    position: fixed;
     bottom: 0;
     left: 0;
     background: white;
@@ -259,64 +256,17 @@
 
 .checkoutButton {
     padding: 10px 20px;
-    background-color: #007BFF;
+    background-color: #679aff;
     color: white;
     border: none;
     cursor: pointer;
     font-size: 1em;
     margin-top: 20px;
     width: 100%;
-}
 
+    border-radius: 10px;
 
-/* 태블릿 및 그 이상 환경 */
-@media screen and (min-width: 769px) {
-    .header .title {
-        width: 60%;
-        margin: auto;
-        font-size: 28px;
-
-    }
-
-    .container {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    .cartItems {
-        width: 60%;
-        margin: auto;
-    }
-
-    .item {
-        flex-direction: row;
-        align-items: center;
-    }
-
-    .productImage {
-        width: 100px;
-        height: 100px;
-    }
-
-    .productDetails {
-        flex-direction: row;
-        justify-content: space-between;
-        width: auto;
-    }
-
-    .total {
-        margin-top: 0;
-        margin-left: 20px;
-    }
-
-
-    .shippingFee {
-        margin-bottom: 20px;
-    }
-
-    .checkoutButton {
-        align-self: center;
-    }
+    font-weight: bold;
 }
 
 /* 노트북 및 데스크탑 환경 */
@@ -324,6 +274,7 @@
     .header .title {
         margin: auto;
         width: 1100px;
+
     }
 
     .container {
@@ -339,6 +290,10 @@
     .cartItems {
         width: 70%;
         margin: 0;
+    }
+
+    .cartHeader {
+        padding: 17px;
     }
 
     .productImage {
