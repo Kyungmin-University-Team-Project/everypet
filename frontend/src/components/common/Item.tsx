@@ -3,6 +3,7 @@ import {FaRegStar, FaShoppingCart, FaStar} from 'react-icons/fa';
 import styles from './Item.module.css';
 import {useNavigate} from "react-router-dom";
 import {addToCart} from "../../utils/product/cart";
+import {handleViewDetails as handleViewDetailsUtil} from "../../utils/product/detailNavigation";
 
 interface ItemProps {
     productId: string;
@@ -26,19 +27,14 @@ const Item: React.FC<ItemProps> = ({
     const navigate = useNavigate();
 
     const handleViewDetails = () => {
-        console.log(name, ': 해당상품 페이지로 이동');
-        navigate('/moreInformation', {
-            state: {
-                item: {
-                    productId,
-                    name,
-                    price,
-                    discount,
-                    recommended,
-                    reviewCount,
-                    imageUrl
-                }
-            }
+        handleViewDetailsUtil(navigate, {
+            productId,
+            name,
+            price,
+            discount,
+            recommended,
+            reviewCount,
+            imageUrl
         });
     };
 
