@@ -1,99 +1,47 @@
 import React, {useState, useEffect} from 'react';
-import axios, {AxiosError} from 'axios';
-import {Link} from "react-router-dom";
+import {Link} from 'react-router-dom';
 import {FaTrashAlt} from 'react-icons/fa';
 import styles from './Cart.module.css';
-import {decryptToken} from "../../utils/common/tokenDecode";
-
-interface CartItem {
-    productId: string;
-    productName: string;
-    productPrice: string;
-    cartQuantity: number;
-}
+import {CartItem, deleteCartItem, fetchCartItems} from '../../utils/product/cart';
+import {handleAxiosError} from '../../utils/error/errorHandler';
+import {AxiosError} from 'axios';
 
 const Cart: React.FC = () => {
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
     const [selectAll, setSelectAll] = useState(false);
-    const [deleteTrigger, setDeleteTrigger] = useState(false); // 삭제 이벤트 트리거
-    const shippingFee = 3000; // 배송비
+    const [deleteTrigger, setDeleteTrigger] = useState(false);
+    const shippingFee = 3000;
 
-    const fetchCartItems = async () => {
+    const loadCartItems = async () => {
         try {
-            const token = decryptToken();
-
-            if (!token) {
-                throw new Error('토큰이 존재하지 않습니다.');
-            }
-
-            const response = await axios.post<CartItem[]>('/cart/list', {}, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'access': token
-                }
-            });
-
-            setCartItems(response.data);
-            setSelectedItems(response.data.map(item => item.productId)); // 초기 항목 선택 설정
+            const items: CartItem[] = await fetchCartItems();
+            setCartItems(items);
+            setSelectedItems(items.map((item: CartItem) => item.productId));
         } catch (error) {
-            if (axios.isAxiosError(error)) {
-                handleAxiosError(error);
-            } else {
-                console.error('Unexpected error:', error);
-            }
+            handleAxiosError(error as AxiosError);
         }
     };
 
     useEffect(() => {
-        fetchCartItems();
+        loadCartItems();
     }, []);
 
     useEffect(() => {
         if (deleteTrigger) {
-            fetchCartItems();
+            loadCartItems();
             setDeleteTrigger(false);
         }
     }, [deleteTrigger]);
 
-    const handleAxiosError = (error: AxiosError) => {
-        console.error('Error fetching cart items:', error);
-        if (error.response) {
-            console.error("Server Error:", error.response.data);
-            console.error("Status Code:", error.response.status);
-        } else if (error.request) {
-            console.error("No response received:", error.request);
-        } else {
-            console.error("Error setting up request:", error.message);
-        }
-    };
-
-    const deleteItem = async (productId: string) => {
+    const handleDeleteItem = async (productId: string) => {
         try {
-            const token = decryptToken();
-
-            if (!token) {
-                throw new Error('토큰이 존재하지 않습니다.');
-            }
-
-            await axios.post('/cart/delete', {productId}, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'access': token
-                }
-            });
-
-            // 아이템 삭제 후 목록에서 직접 제거
+            await deleteCartItem(productId);
             setCartItems(cartItems.filter(item => item.productId !== productId));
             setSelectedItems(selectedItems.filter(id => id !== productId));
-            setDeleteTrigger(true); // 삭제 트리거 설정
+            setDeleteTrigger(true);
         } catch (error) {
-            console.error('Error deleting cart item:', error);
-            if (axios.isAxiosError(error)) {
-                handleAxiosError(error);
-            } else {
-                console.error('Unexpected error:', error);
-            }
+            handleAxiosError(error as AxiosError);
         }
     };
 
@@ -114,43 +62,11 @@ const Cart: React.FC = () => {
         }
     };
 
-    // const updateQuantity = async (productId: string, newQuantity: number) => {
-    //     try {
-    //         const encryptedToken = localStorage.getItem('access');
-    //         if (!encryptedToken) {
-    //             throw new Error("No access token found");
-    //         }
-
-    //         const token = decryptToken(encryptedToken); // 유틸리티 함수 사용
-
-    //         const response = await axios.post('/cart/update', { productId, newQuantity }, {
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 'access': token
-    //             }
-    //         });
-
-    //         console.log("Update response:", response.data);
-
-    //         setCartItems(cartItems.map(item =>
-    //             item.productId === productId ? { ...item, cartQuantity: newQuantity } : item
-    //         ));
-    //     } catch (error) {
-    //         console.error('Error updating cart item quantity:', error);
-    //         if (axios.isAxiosError(error)) {
-    //             handleAxiosError(error);
-    //         } else {
-    //             console.error('Unexpected error:', error);
-    //         }
-    //     }
-    // };
-
     const handleQuantityChange = (productId: string, change: number) => {
         const item = cartItems.find(item => item.productId === productId);
         if (item) {
             const newQuantity = item.cartQuantity + change;
             if (newQuantity > 0) {
-                // updateQuantity(productId, newQuantity); // API 호출 주석 처리
                 setCartItems(cartItems.map(item =>
                     item.productId === productId ? {...item, cartQuantity: newQuantity} : item
                 ));
@@ -158,11 +74,10 @@ const Cart: React.FC = () => {
         }
     };
 
-    // 선택된 상품들의 총 상품 금액 계산
     const selectedProductPrice = cartItems
         .filter(item => selectedItems.includes(item.productId))
         .reduce((total, item) => total + parseInt(item.productPrice.replace(/,/g, ''), 10) * item.cartQuantity, 0);
-    const totalPrice = selectedProductPrice + (selectedProductPrice > 0 ? shippingFee : 0); // 총 금액
+    const totalPrice = selectedProductPrice + (selectedProductPrice > 0 ? shippingFee : 0);
 
     return (
         <div className={styles.pageContainer}>
@@ -198,7 +113,7 @@ const Cart: React.FC = () => {
                                 />
                                 <FaTrashAlt
                                     className={styles.removeItemButton}
-                                    onClick={() => deleteItem(item.productId)}
+                                    onClick={() => handleDeleteItem(item.productId)}
                                 />
                             </div>
                             <div className={styles.item}>

@@ -52,27 +52,15 @@ const router = createBrowserRouter([
             {path: 'search', element: <SearchPage/>},
         ],
     },
-
-    // 로그인 유저만 접속 가능
+    
+    // 로그인 유저만 접속가능
     {
-        path: 'myPage',
+        path: '/',
         element: <ProtectedRoute/>,
         children: [
-            {path: '', element: <MyPage/>},
-        ],
-    },
-    {
-        path: 'deliveryInquiry',
-        element: <ProtectedRoute/>,
-        children: [
-            {path: '', element: <DeliveryInquiry/>},
-        ],
-    },
-    {
-        path: 'cart',
-        element: <ProtectedRoute/>,
-        children: [
-            {path: '', element: <Cart/>},
+            {path: 'myPage', element: <MyPage/>},
+            {path: 'deliveryInquiry', element: <DeliveryInquiry/>},
+            {path: 'cart', element: <Cart/>},
         ],
     },
 

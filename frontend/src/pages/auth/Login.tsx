@@ -1,17 +1,16 @@
-// src/components/Login/Login.tsx
-import React, {useEffect, useState} from "react";
-import {Link, useLocation, useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import cryptoJs from 'crypto-js';
-import {login} from "../../typings/AuthAPI";
-import {loginState} from "../../redux/auth/authSlice";
-import {LoginData} from "../../typings/Login";
+import React, {useEffect, useState} from 'react';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
+import {loginState} from '../../redux/auth/authSlice';
+import {LoginData} from '../../typings/Login';
 
-import styles from "./Login.module.css";
-import Signup from "./Signup";
-import Findauth from "./Findauth";
-import Agreement from "./Agreement";
-import "@fortawesome/fontawesome-free/css/all.css";
+import styles from './Login.module.css';
+import Signup from './Signup';
+import Findauth from './Findauth';
+import Agreement from './Agreement';
+import '@fortawesome/fontawesome-free/css/all.css';
+import {login} from "../../typings/AuthAPI";
+import {encryptToken} from "../../utils/token/token";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -19,8 +18,8 @@ const Login = () => {
     const dispatch = useDispatch();
     const [showLoginForm, setShowLoginForm] = useState(true);
     const [values, setValues] = useState<LoginData>({
-        memberId: "",
-        memberPwd: "",
+        memberId: '',
+        memberPwd: '',
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +30,14 @@ const Login = () => {
         e.preventDefault();
         try {
             const response = await login(values);
-            const encryptedAccess = cryptoJs.AES.encrypt(response.access, "secret-key").toString();
+
+            const secretKey = process.env.REACT_APP_CRYPTOJS_KEY;
+            if (!secretKey) {
+                throw new Error('CRYPTOJS_KEY is not defined in the environment variables');
+            }
+
+            const encryptedAccess = encryptToken(response.access);
+            localStorage.setItem('access', encryptedAccess);
             dispatch(loginState({username: response.user, accessToken: encryptedAccess}));
 
             navigate('/');
@@ -42,9 +48,9 @@ const Login = () => {
 
     useEffect(() => {
         setShowLoginForm(
-            !["/login/signup", "/login/forgot-password", "/login/agreement"].includes(
-                location.pathname,
-            ),
+            !['/login/signup', '/login/forgot-password', '/login/agreement'].includes(
+                location.pathname
+            )
         );
     }, [location.pathname]);
 
@@ -106,11 +112,10 @@ const Login = () => {
                         </p>
                     </form>
                 )}
-
             </section>
-            {location.pathname === "/login/signup" ? <Signup/> : null}
-            {location.pathname === "/login/forgot-password" ? <Findauth/> : null}
-            {location.pathname === "/login/agreement" ? <Agreement/> : null}
+            {location.pathname === '/login/signup' ? <Signup/> : null}
+            {location.pathname === '/login/forgot-password' ? <Findauth/> : null}
+            {location.pathname === '/login/agreement' ? <Agreement/> : null}
         </div>
     );
 };
