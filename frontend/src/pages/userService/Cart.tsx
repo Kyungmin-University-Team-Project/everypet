@@ -11,6 +11,7 @@ const Cart: React.FC = () => {
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
     const [selectAll, setSelectAll] = useState(false);
     const [deleteTrigger, setDeleteTrigger] = useState(false);
+    const [totalPrice, setTotalPrice] = useState(0);
     const shippingFee = 3000;
 
     const loadCartItems = async () => {
@@ -18,6 +19,7 @@ const Cart: React.FC = () => {
             const items: CartItem[] = await fetchCartItems();
             setCartItems(items);
             setSelectedItems(items.map((item: CartItem) => item.productId));
+            calculateTotalPrice(items, items.map((item: CartItem) => item.productId));
         } catch (error) {
             handleAxiosError(error as AxiosError);
         }
@@ -34,11 +36,26 @@ const Cart: React.FC = () => {
         }
     }, [deleteTrigger]);
 
+    const formatPrice = (price: number) => {
+        return price.toLocaleString() + '원';
+    };
+
+    const calculateTotalPrice = (items: CartItem[], selected: string[]) => {
+        const selectedProductPrice = items
+            .filter(item => selected.includes(item.productId))
+            .reduce((total, item) => total + parseInt(item.productPrice.replace(/,/g, ''), 10) * item.cartQuantity, 0);
+        const totalPrice = selectedProductPrice + (selectedProductPrice > 0 ? shippingFee : 0);
+        setTotalPrice(totalPrice);
+    };
+
     const handleDeleteItem = async (productId: string) => {
         try {
             await deleteCartItem(productId);
-            setCartItems(cartItems.filter(item => item.productId !== productId));
-            setSelectedItems(selectedItems.filter(id => id !== productId));
+            const newCartItems = cartItems.filter(item => item.productId !== productId);
+            const newSelectedItems = selectedItems.filter(id => id !== productId);
+            setCartItems(newCartItems);
+            setSelectedItems(newSelectedItems);
+            calculateTotalPrice(newCartItems, newSelectedItems);
             setDeleteTrigger(true);
         } catch (error) {
             handleAxiosError(error as AxiosError);
@@ -52,14 +69,15 @@ const Cart: React.FC = () => {
             setSelectedItems(cartItems.map(item => item.productId));
         }
         setSelectAll(!selectAll);
+        calculateTotalPrice(cartItems, selectAll ? [] : cartItems.map(item => item.productId));
     };
 
     const handleItemSelectChange = (productId: string) => {
-        if (selectedItems.includes(productId)) {
-            setSelectedItems(selectedItems.filter(id => id !== productId));
-        } else {
-            setSelectedItems([...selectedItems, productId]);
-        }
+        const newSelectedItems = selectedItems.includes(productId)
+            ? selectedItems.filter(id => id !== productId)
+            : [...selectedItems, productId];
+        setSelectedItems(newSelectedItems);
+        calculateTotalPrice(cartItems, newSelectedItems);
     };
 
     const handleQuantityChange = (productId: string, change: number) => {
@@ -67,20 +85,17 @@ const Cart: React.FC = () => {
         if (item) {
             const newQuantity = item.cartQuantity + change;
             if (newQuantity > 0) {
-                setCartItems(cartItems.map(item =>
+                const newCartItems = cartItems.map(item =>
                     item.productId === productId ? {...item, cartQuantity: newQuantity} : item
-                ));
+                );
+                setCartItems(newCartItems);
+                calculateTotalPrice(newCartItems, selectedItems);
             }
         }
     };
 
-    const selectedProductPrice = cartItems
-        .filter(item => selectedItems.includes(item.productId))
-        .reduce((total, item) => total + parseInt(item.productPrice.replace(/,/g, ''), 10) * item.cartQuantity, 0);
-    const totalPrice = selectedProductPrice + (selectedProductPrice > 0 ? shippingFee : 0);
-
     return (
-        <div className={styles.pageContainer}>
+        <div className={styles.container}>
             <header className={styles.header}>
                 <div className={styles.inner}>
                     <Link to='/' className={styles.title}>
@@ -88,7 +103,7 @@ const Cart: React.FC = () => {
                     </Link>
                 </div>
             </header>
-            <div className={styles.container}>
+            <div className={styles.section}>
                 <div className={styles.cartItems}>
                     <div className={styles.cartHeader}>
                         <h2>장바구니</h2>
@@ -143,7 +158,7 @@ const Cart: React.FC = () => {
                                         </button>
                                     </div>
                                     <div className={styles.total}>
-                                        <p className={styles.price}>{item.productPrice}원</p>
+                                        <p className={styles.price}>{formatPrice(parseInt(item.productPrice.replace(/,/g, ''), 10) * item.cartQuantity)}</p>
                                     </div>
                                 </div>
                             </div>
@@ -154,11 +169,11 @@ const Cart: React.FC = () => {
                     <div className={styles.summary}>
                         <div className={styles.shippingFee}>
                             <span>배송비:</span>
-                            <span>{shippingFee.toLocaleString()}원</span>
+                            <span>{formatPrice(shippingFee)}</span>
                         </div>
                         <div className={styles.summaryTotal}>
                             <span>합계:</span>
-                            <span>{totalPrice.toLocaleString()}원</span>
+                            <span>{formatPrice(totalPrice)}</span>
                         </div>
                         <button className={styles.checkoutButton}>결제하기</button>
                     </div>

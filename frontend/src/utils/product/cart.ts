@@ -15,6 +15,7 @@ export const addToCart = async (productId: string, quantity: number = 1) => {
         });
         alert("장바구니에 추가되었습니다.");
     } catch (error) {
+        // 여기에는 수량을 늘리거나 다른 로직 추가하기
         alert("장바구니에 추가하는데 실패했습니다.");
     }
 };

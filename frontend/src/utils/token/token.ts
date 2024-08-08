@@ -24,7 +24,6 @@ export const decryptToken = (): string | null => {
 
 export const reissueToken = async () => {
     try {
-        console.log('쿠키 확인:', document.cookie);
         const response = await axios.post('/reissue', {}, {withCredentials: true});
         const newToken = response.headers['access'];
         if (newToken) {
