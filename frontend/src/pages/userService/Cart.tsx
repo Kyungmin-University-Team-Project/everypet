@@ -21,13 +21,11 @@ const Cart: React.FC = () => {
 
     const fetchCartItems = async () => {
         try {
-            const encryptedToken = localStorage.getItem('access');
-            if (!encryptedToken) {
-                throw new Error("No access token found");
-            }
+            const token = decryptToken();
 
-            const token = decryptToken(encryptedToken); // 유틸리티 함수 사용
-            console.log("Decrypted Access Token:", token);
+            if (!token) {
+                throw new Error('토큰이 존재하지 않습니다.');
+            }
 
             const response = await axios.post<CartItem[]>('/cart/list', {}, {
                 headers: {
@@ -36,7 +34,6 @@ const Cart: React.FC = () => {
                 }
             });
 
-            console.log("Response Data:", response.data);
             setCartItems(response.data);
             setSelectedItems(response.data.map(item => item.productId)); // 초기 항목 선택 설정
         } catch (error) {
@@ -73,22 +70,18 @@ const Cart: React.FC = () => {
 
     const deleteItem = async (productId: string) => {
         try {
-            const encryptedToken = localStorage.getItem('access');
-            if (!encryptedToken) {
-                throw new Error("No access token found");
+            const token = decryptToken();
+
+            if (!token) {
+                throw new Error('토큰이 존재하지 않습니다.');
             }
 
-            const token = decryptToken(encryptedToken); // 유틸리티 함수 사용
-            console.log("이게 아이디" + productId);
-
-            const response = await axios.post('/cart/delete', {productId}, {
+            await axios.post('/cart/delete', {productId}, {
                 headers: {
                     'Content-Type': 'application/json',
                     'access': token
                 }
             });
-
-            console.log("Delete response:", response.data);
 
             // 아이템 삭제 후 목록에서 직접 제거
             setCartItems(cartItems.filter(item => item.productId !== productId));

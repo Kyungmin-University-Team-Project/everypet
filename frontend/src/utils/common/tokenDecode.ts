@@ -2,9 +2,13 @@
 
 import CryptoJS from 'crypto-js';
 
-const secretKey = "secret-key";
+const secretKey = 'secret-key';
 
-export const decryptToken = (encryptedToken: string): string => {
+export const decryptToken = (): string | null => {
+    const encryptedToken = localStorage.getItem('access');
+    if (!encryptedToken) {
+        return null;
+    }
     const bytes = CryptoJS.AES.decrypt(encryptedToken, secretKey);
     return bytes.toString(CryptoJS.enc.Utf8);
 };

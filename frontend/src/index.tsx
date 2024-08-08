@@ -1,10 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {createRoot} from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux';
-import {createBrowserRouter, Route, RouterProvider, Routes} from 'react-router-dom';
-import {QueryClient, QueryClientProvider} from 'react-query'; // React Query import
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import {QueryClient, QueryClientProvider} from 'react-query';
 import ProductPage from './pages/category/ProductPage';
 import Root from './pages/home/Root';
 import Login from './pages/auth/Login';
@@ -13,11 +13,9 @@ import Findauth from './pages/auth/Findauth';
 import store from './redux/store/store';
 import Agreement from './pages/auth/Agreement';
 import Exhibitions from './pages/category/Exhibitions';
-
 import MoreInformation from "./pages/moreInformation/MoreInformation";
 import DeliveryInquiry from "./pages/userService/DeliveryInquiry";
 import Information from "./pages/moreInformation/Information";
-import Review from "./pages/moreInformation/review";
 import ProductInquiry from "./pages/moreInformation/ProductInquiry";
 import SellerInformation from "./pages/moreInformation/SellerInformation";
 import Cart from "./pages/userService/Cart";
@@ -26,7 +24,7 @@ import MyPage from "./pages/userService/MyPage";
 import TimeDeal from "./pages/category/TimeDeal";
 import ProtectedRoute from "./utils/route/ProtectedRoute";
 import RestrictedRoute from "./utils/route/RestrictedRoute";
-
+import Review from "./pages/moreInformation/review";
 
 const router = createBrowserRouter([
     // 모두 접속 가능
@@ -51,11 +49,11 @@ const router = createBrowserRouter([
                     {path: 'seller-information', element: <SellerInformation/>},
                 ],
             },
-            {path: 'search', element: <SearchPage/>}, // SearchPage route
+            {path: 'search', element: <SearchPage/>},
         ],
     },
 
-    // 로그인 유저만 접속가능
+    // 로그인 유저만 접속 가능
     {
         path: 'myPage',
         element: <ProtectedRoute/>,
@@ -78,7 +76,7 @@ const router = createBrowserRouter([
         ],
     },
 
-    // 비로그인 유저만 접속가능
+    // 비로그인 유저만 접속 가능
     {
         path: 'login',
         element: <RestrictedRoute/>,
@@ -89,20 +87,20 @@ const router = createBrowserRouter([
             {path: 'forgot-password', element: <Findauth/>},
         ],
     },
-
 ]);
 
 const queryClient = new QueryClient();
+const container = document.getElementById('root');
+const root = createRoot(container!);
 
-ReactDOM.render(
+root.render(
     <React.StrictMode>
         <Provider store={store}>
             <QueryClientProvider client={queryClient}>
                 <RouterProvider router={router}/>
             </QueryClientProvider>
         </Provider>
-    </React.StrictMode>,
-    document.getElementById('root')
+    </React.StrictMode>
 );
 
 reportWebVitals();
