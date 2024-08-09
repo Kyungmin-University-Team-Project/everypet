@@ -1,4 +1,16 @@
-import {ProductDetails} from "../pages/moreInformation/SaleInformation";
+export interface ProductDetails {
+    memberId: string;
+    numberOfProduct: number;
+    productCategory: string;
+    productChangedDate: string;
+    productDiscountRate: number;
+    productId: string;
+    productName: string;
+    productPrice: number;
+    productRegistrationDate: string;
+    productSalesStatusYn: string;
+    productViews: number;
+}
 
 export const fetchProductDetails = async (productId: string): Promise<ProductDetails> => {
     try {
@@ -8,7 +20,6 @@ export const fetchProductDetails = async (productId: string): Promise<ProductDet
         }
         const data = await response.json();
 
-        // Construct the image URL according to the format
         const imageUrl = `${productId}-description`;
 
         return {

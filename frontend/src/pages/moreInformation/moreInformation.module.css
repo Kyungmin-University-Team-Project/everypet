@@ -20,6 +20,13 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+.moreInformation_imgTab {
+    object-fit: cover;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-top: 0.5rem;
+}
+
 .info_container {
     width: 50%;
     padding-left: 2rem;
