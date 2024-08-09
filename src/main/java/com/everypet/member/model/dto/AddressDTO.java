@@ -1,6 +1,5 @@
 package com.everypet.member.model.dto;
 
-import com.everypet.member.model.vo.Address;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,17 +29,5 @@ public class AddressDTO {
 
     @ApiModelProperty(example = "N", notes = "기본 배송지 여부")
     private char defaultYn; // 기본 배송지 여부
-
-    public Address toEntity(String memberId) {
-        return Address.builder()
-                .memberId(memberId)
-                .address(address)
-                .detailAddress(detailAddress)
-                .receiver(receiver)
-                .phone(phone)
-                .request(request)
-                .defaultYn(defaultYn)
-                .build();
-    }
 
 }

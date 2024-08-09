@@ -1,7 +1,8 @@
 package com.everypet.member.service.impl;
 
-import com.everypet.member.mapper.MemberMapper;
-import com.everypet.member.mapper.RoleMapper;
+import com.everypet.member.model.dao.MemberMapper;
+import com.everypet.member.model.dao.RoleMapper;
+import com.everypet.member.mapper.AddressMapper;
 import com.everypet.member.model.dto.AddressDTO;
 import com.everypet.member.model.dto.SignupDTO;
 import com.everypet.member.model.vo.Member;
@@ -53,7 +54,9 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void addressRegister(AddressDTO address, String memberId) {
 
-        Address addressEntity = address.toEntity(memberId);
+        //Address addressEntity = address.toEntity(memberId);
+
+        Address addressEntity = AddressMapper.INSTANCE.toVo(address, memberId);
 
         memberMapper.insertAddress(addressEntity);
     }

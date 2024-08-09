@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 
@@ -44,7 +45,7 @@ public class MemberApiController {
 
     @ApiOperation(value = "주소 추가", notes = "회원의 주소를 추가합니다.")
     @PostMapping("/address/register")
-    public ResponseEntity<String> addressRegister(@RequestBody AddressDTO address, @AuthenticationPrincipal Member member) {
+    public ResponseEntity<String> addressRegister(@RequestBody AddressDTO address, @ApiIgnore @AuthenticationPrincipal Member member) {
         memberService.addressRegister(address, member.getMemberId());
         return response(HttpStatus.CREATED, "주소 추가 완료");
     }

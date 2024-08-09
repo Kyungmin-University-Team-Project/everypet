@@ -2,6 +2,7 @@ package com.everypet.global.util.mail.controller;
 
 import com.everypet.global.util.mail.data.dto.EmailMessageDTO;
 import com.everypet.global.util.mail.service.EmailService;
+import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
 
+@Api(tags = "이메일 Api", description = "회원가입 및 인증 관련 이메일 API")
 @RequestMapping("/send-mail")
 @RestController
 @RequiredArgsConstructor
@@ -21,57 +23,47 @@ public class EmailController {
     private final EmailService emailService;
     private final StringRedisTemplate redisTemplate;
 
-    // 임시 비밀번호 발급
-    /*@PostMapping("/password")
-    public ResponseEntity sendPasswordMail(@RequestBody EmailPostDto emailPostDto) {
-        EmailMessageDTO emailMessage = EmailMessageDTO.builder()
-                .to(emailPostDto.getEmail())
-                .subject("[SAVIEW] 임시 비밀번호 발급")
-                .build();
-
-        emailService.sendMail(emailMessage, "password");
-
-        return ResponseEntity.ok().build();
-    }*/
-
-    // 회원가입 이메일 인증
-    @PostMapping("/email")
-    public ResponseEntity sendJoinMail(@RequestBody String email) {
-        String token = emailService.createToken();
+    // 회원가입 코드 발송
+    @ApiOperation(value = "회원가입 코드 발송", notes = "회원가입을 위한 코드를 발송합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "이메일이 발송되었습니다."),
+    })
+    @PostMapping("/code")
+    public ResponseEntity<String> sendJoinMail(@RequestBody @ApiParam(value = "수신자 이메일", required = true) String email) {
+        int code = emailService.createCode();
         ValueOperations<String, String> valueOps = redisTemplate.opsForValue();
 
-        valueOps.set(token, email, Duration.ofMinutes(5)); // 5분간 유효
+        valueOps.set(String.valueOf(code), email, Duration.ofMinutes(5)); // 5분간 유효
 
         EmailMessageDTO emailMessage = EmailMessageDTO.builder()
                 .to(email)
                 .subject("[Pornhub] 이메일 인증을 위한 인증 코드 발송")
                 .build();
 
-        emailService.joinSendMail(emailMessage, token);
+        emailService.sendCode(emailMessage, code);
 
-        return response(HttpStatus.OK, "이메일이 발송되었습니다.");
+       return ResponseEntity.status(HttpStatus.OK).header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8").body("이메일이 발송되었습니다.");
     }
 
     // 이메일 인증 처리
-    @GetMapping("/verify")
-    public ResponseEntity verifyEmail(@RequestParam String token) {
+    @ApiOperation(value = "이메일 인증", notes = "이메일 인증을 처리합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "true"),
+            @ApiResponse(code = 400, message = "false")
+    })
+    @PostMapping("/verify/code")
+    public ResponseEntity<Boolean> verifyEmail(@RequestBody @ApiParam(value = "인증코드", required = true) String code) {
         ValueOperations<String, String> valueOps = redisTemplate.opsForValue();
-        String email = valueOps.get(token);
+        String email = valueOps.get(code);
 
         if (email != null) {
             // 사용자 인증 로직 처리
             // email을 사용하여 사용자 정보 업데이트
-            redisTemplate.delete(token);
-            return response(HttpStatus.OK, "이메일 인증이 완료되었습니다.");
+            redisTemplate.delete(code);
+            return ResponseEntity.ok(true);
         } else {
-            return response(HttpStatus.BAD_REQUEST, "유효하지 않은 토큰입니다.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
         }
-    }
-
-    public ResponseEntity<String> response(HttpStatus httpStatus, String result) {
-        return ResponseEntity.status(httpStatus)
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")
-                .body(result);
     }
 
 }

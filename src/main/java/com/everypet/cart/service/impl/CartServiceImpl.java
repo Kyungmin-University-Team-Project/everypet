@@ -1,6 +1,6 @@
 package com.everypet.cart.service.impl;
 
-import com.everypet.cart.mapper.CartMapper;
+import com.everypet.cart.model.dao.CartMapper;
 import com.everypet.cart.model.dto.CartInsertDTO;
 import com.everypet.cart.model.dto.CartItemDTO;
 import com.everypet.cart.model.vo.Cart;
