@@ -1,10 +1,8 @@
 import React from 'react';
 import {Navigate, Outlet} from 'react-router-dom';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../redux/store/store';
 
 const ProtectedRoute: React.FC = () => {
-    const accessToken = useSelector((state: RootState) => state.auth.accessToken);
+    const accessToken = localStorage.getItem('access');
 
     if (!accessToken) {
         return <Navigate to="/login" replace/>;
