@@ -1,18 +1,23 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {FaTrashAlt} from 'react-icons/fa';
 import styles from './Cart.module.css';
 import {CartItem, deleteCartItem, fetchCartItems} from '../../utils/product/cart';
 import {handleAxiosError} from '../../utils/error/errorHandler';
 import {AxiosError} from 'axios';
 
+
+const shippingFee = 3000;
+
 const Cart: React.FC = () => {
+
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
     const [selectAll, setSelectAll] = useState(false);
     const [deleteTrigger, setDeleteTrigger] = useState(false);
     const [totalPrice, setTotalPrice] = useState(0);
-    const shippingFee = 3000;
+    const navigate = useNavigate();
+
 
     const loadCartItems = async () => {
         try {
@@ -92,6 +97,10 @@ const Cart: React.FC = () => {
                 calculateTotalPrice(newCartItems, selectedItems);
             }
         }
+    };
+
+    const handleCheckout = () => {
+        navigate('/payment'); // 결제 페이지로 이동
     };
 
     return (
@@ -175,7 +184,11 @@ const Cart: React.FC = () => {
                             <span>합계:</span>
                             <span>{formatPrice(totalPrice)}</span>
                         </div>
-                        <button className={styles.checkoutButton}>결제하기</button>
+                        <button
+                            className={styles.checkoutButton}
+                            onClick={handleCheckout}
+                        >주문하기
+                        </button>
                     </div>
                 </div>
             </div>

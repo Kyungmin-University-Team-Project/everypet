@@ -25,6 +25,7 @@ import TimeDeal from "./pages/category/TimeDeal";
 import ProtectedRoute from "./utils/route/ProtectedRoute";
 import RestrictedRoute from "./utils/route/RestrictedRoute";
 import Review from "./pages/moreInformation/review";
+import Payment from "./pages/userService/Payment";
 
 const router = createBrowserRouter([
     // 모두 접속 가능
@@ -52,7 +53,7 @@ const router = createBrowserRouter([
             {path: 'search', element: <SearchPage/>},
         ],
     },
-    
+
     // 로그인 유저만 접속가능
     {
         path: '/',
@@ -61,6 +62,7 @@ const router = createBrowserRouter([
             {path: 'myPage', element: <MyPage/>},
             {path: 'deliveryInquiry', element: <DeliveryInquiry/>},
             {path: 'cart', element: <Cart/>},
+            {path: 'payment', element: <Payment/>}, // 결제 페이지 라우팅 추가
         ],
     },
 
