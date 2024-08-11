@@ -1,8 +1,42 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {Link, useLocation} from 'react-router-dom';
 import styles from './Payment.module.css';
-import {Link} from "react-router-dom";
+import {CartItem} from "../../utils/product/cart";
+
+const shippingFee = 3000;
 
 const Payment: React.FC = () => {
+    const location = useLocation();
+    const {selectedProducts, totalPrice} = location.state || {selectedProducts: [], totalPrice: 0};
+
+    const [recipient, setRecipient] = useState('');
+    const [postalCode, setPostalCode] = useState('');
+    const [address, setAddress] = useState('');
+    const [detailedAddress, setDetailedAddress] = useState('');
+    const [phonePrefix, setPhonePrefix] = useState('010');
+    const [phoneNumber1, setPhoneNumber1] = useState('');
+    const [phoneNumber2, setPhoneNumber2] = useState('');
+    const [safeNumber, setSafeNumber] = useState(false);
+    const [request, setRequest] = useState('');
+
+    const formatPrice = (price: number) => price.toLocaleString('ko-KR') + '원';
+
+    const handlePayment = () => {
+        const shippingInfo = {
+            recipient,
+            postalCode,
+            address,
+            detailedAddress,
+            phone: `${phonePrefix}-${phoneNumber1}-${phoneNumber2}`,
+            safeNumber,
+            request
+        };
+
+        console.log("배송 정보:", shippingInfo);
+        console.log("주문 상품 목록:", selectedProducts);
+        console.log("총 결제 금액:", formatPrice(totalPrice + shippingFee));
+    };
+
     return (
         <div className={styles.container}>
             <header className={styles.header}>
@@ -12,11 +46,166 @@ const Payment: React.FC = () => {
                     </Link>
                 </div>
             </header>
-
-            <div className={styles.title}>
-                <span>주문 결제</span>
+            <div className={styles.section}>
+                <div className={styles.paymentItems}>
+                    <div className={styles.paymentHeader}>
+                        <h2>주문 결제</h2>
+                    </div>
+                    <section className={styles.orderInfo}>
+                        <div className={styles.orderHeader}>
+                            <h2 className={styles.orderTitle}>
+                                배송정보
+                            </h2>
+                            <button className={styles.orderSearch__btn}>
+                                배송지목록
+                            </button>
+                        </div>
+                        <div className={styles.inputForm}>
+                            <div className={styles.inputGroup}>
+                                <input
+                                    type="text"
+                                    id="recipient"
+                                    placeholder="받는사람"
+                                    className={styles.inputField}
+                                    value={recipient}
+                                    onChange={(e) => setRecipient(e.target.value)}
+                                />
+                            </div>
+                            <div className={styles.inputGroup__address}>
+                                <button className={styles.addressSearch__btn}>주소찾기</button>
+                                <input
+                                    type="text"
+                                    placeholder="우편번호"
+                                    className={styles.inputField}
+                                    value={postalCode}
+                                    onChange={(e) => setPostalCode(e.target.value)}
+                                />
+                            </div>
+                            <div className={styles.inputGroup}>
+                                <input
+                                    type="text"
+                                    placeholder="기본 주소"
+                                    className={styles.inputField}
+                                    value={address}
+                                    onChange={(e) => setAddress(e.target.value)}
+                                />
+                            </div>
+                            <div className={styles.inputGroup}>
+                                <input
+                                    type="text"
+                                    placeholder="상세 주소 및 상세 건물명"
+                                    className={styles.inputField}
+                                    value={detailedAddress}
+                                    onChange={(e) => setDetailedAddress(e.target.value)}
+                                />
+                            </div>
+                            <div className={styles.inputGroup__phone}>
+                                <select
+                                    className={styles.phoneSelect}
+                                    value={phonePrefix}
+                                    onChange={(e) => setPhonePrefix(e.target.value)}
+                                >
+                                    <option value="010">010</option>
+                                    <option value="011">011</option>
+                                    <option value="016">016</option>
+                                    <option value="017">017</option>
+                                </select>
+                                <input
+                                    type="text"
+                                    placeholder="휴대폰 앞자리"
+                                    className={styles.phoneInput}
+                                    value={phoneNumber1}
+                                    onChange={(e) => setPhoneNumber1(e.target.value)}
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="휴대폰 뒷자리"
+                                    className={styles.phoneInput}
+                                    value={phoneNumber2}
+                                    onChange={(e) => setPhoneNumber2(e.target.value)}
+                                />
+                            </div>
+                            <div className={styles.checkboxGroup}>
+                                <input
+                                    type="checkbox"
+                                    id="safeNumber"
+                                    className={styles.checkbox}
+                                    checked={safeNumber}
+                                    onChange={(e) => setSafeNumber(e.target.checked)}
+                                />
+                                <label htmlFor="safeNumber">안심번호 사용</label>
+                            </div>
+                            <div className={styles.inputGroup__request}>
+                                <div className={styles.requestTitle}>요청사항</div>
+                                <select
+                                    id="request"
+                                    className={styles.requestSelect}
+                                    value={request}
+                                    onChange={(e) => setRequest(e.target.value)}
+                                >
+                                    <option value="default">배송시 요청사항 선택하기</option>
+                                    <option value="door">문 앞에 놔주세요</option>
+                                    <option value="guard">경비실에 맡겨주세요</option>
+                                    <option value="phone">배송 전 휴대폰으로 연락주세요</option>
+                                    <option value="handle_with_care">파손위험이 있는 상품이니 조심히 다뤄주세요</option>
+                                    <option value="direct">직접 입력</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+                    <section className={styles.productInfo}>
+                        <div className={styles.productListHeader}>
+                            <h2 className={styles.productTitle}>
+                                주문상품
+                            </h2>
+                            <span className={styles.orderSubTitle}>
+                                상품수량 및 옵션변경은 상품상세 또는 장바구니에서 가능합니다.
+                            </span>
+                        </div>
+                        {selectedProducts.map((item: CartItem) => (
+                            <div className={styles.item__wrap} key={item.productId}>
+                                <div className={styles.item}>
+                                    <div className={styles.itemLeft}>
+                                        <img
+                                            src={`https://storage.googleapis.com/every_pet_img/${item.productId}`}
+                                            alt={item.productName}
+                                            className={styles.productImage}
+                                        />
+                                    </div>
+                                    <div className={styles.product}>
+                                        <div className={styles.productDetails}>
+                                            <p>{item.productName}</p>
+                                        </div>
+                                        <div className={styles.quantity}>
+                                            <p>{item.cartQuantity}개</p>
+                                        </div>
+                                        <div className={styles.total}>
+                                            <p className={styles.price}>{formatPrice(parseInt(item.productPrice.replace(/,/g, ''), 10) * item.cartQuantity)}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </section>
+                </div>
+                <div className={styles.summaryContainer}>
+                    <div className={styles.summary}>
+                        <div className={styles.shippingFee}>
+                            <span>배송비:</span>
+                            <span>{formatPrice(shippingFee)}</span>
+                        </div>
+                        <div className={styles.summaryTotal}>
+                            <span>합계:</span>
+                            <span>{formatPrice(totalPrice)}</span>
+                        </div>
+                        <button
+                            className={styles.checkoutButton}
+                            onClick={handlePayment}
+                        >결제하기
+                        </button>
+                    </div>
+                </div>
             </div>
-
         </div>
     );
 };
