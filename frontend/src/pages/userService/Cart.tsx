@@ -6,7 +6,6 @@ import {CartItem, deleteCartItem, fetchCartItems} from '../../utils/product/cart
 import {handleAxiosError} from '../../utils/error/errorHandler';
 import {AxiosError} from 'axios';
 
-
 const shippingFee = 3000;
 
 const Cart: React.FC = () => {
@@ -17,7 +16,6 @@ const Cart: React.FC = () => {
     const [deleteTrigger, setDeleteTrigger] = useState(false);
     const [totalPrice, setTotalPrice] = useState(0);
     const navigate = useNavigate();
-
 
     const loadCartItems = async () => {
         try {
@@ -100,7 +98,8 @@ const Cart: React.FC = () => {
     };
 
     const handleCheckout = () => {
-        navigate('/payment'); // 결제 페이지로 이동
+        const selectedProducts = cartItems.filter(item => selectedItems.includes(item.productId));
+        navigate('/payment', {state: {selectedProducts, totalPrice}}); // 결제 페이지로 이동하면서 상태 전달
     };
 
     return (
