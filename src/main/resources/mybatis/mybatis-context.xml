@@ -27,6 +27,9 @@
         <typeAlias type="com.everypet.product.model.dto.InsertAdvertisementDTO" alias="InsertAdvertisementDto"></typeAlias>
 
         <typeAlias type="com.everypet.product.model.dto.SearchProductDTO" alias="SearchProductDTO"></typeAlias>
+
+        <typeAlias type="com.everypet.order.model.vo.Order" alias="Order"></typeAlias>
+        <typeAlias type="com.everypet.order.model.vo.OrderDetail" alias="OrderDetail"></typeAlias>
     </typeAliases>
 
 </configuration>

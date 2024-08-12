@@ -127,4 +127,12 @@
         AND KEYWORD_ID = #{keywordId}
     </delete>
 
+    <!-- 상품 현재 가격 조회 (할인율 적용) -->
+    <select id="selectDiscountedProductPriceByProductId" resultType="int">
+        SELECT PRODUCT_PRICE * (1 - (PRODUCT_DISCOUNT_RATE / 100)) AS DISCOUNTED_PRICE
+        FROM TBL_PRODUCT
+        WHERE PRODUCT_SALES_STATUS_YN = 'Y'
+          AND PRODUCT_ID = #{productId}
+    </select>
+
 </mapper>
