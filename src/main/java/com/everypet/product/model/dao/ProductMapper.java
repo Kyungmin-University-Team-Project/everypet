@@ -20,4 +20,5 @@ public interface ProductMapper {
     List<String> autocompleteKeyword(String keyword);
     int insertProductKeyword(Map<String, Object> map);
     int deleteProductKeyword(Map<String, Object> map);
+    int selectDiscountedProductPriceByProductId(String productId);
 }

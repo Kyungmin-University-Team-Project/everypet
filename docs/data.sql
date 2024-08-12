@@ -20,7 +20,8 @@ CREATE TABLE TBL_MEMBER
 
 CREATE TABLE TBL_ADDRESS
 (
-    MEMBER_ID  VARCHAR(20)  NOT NULL,             # 회원 아이디
+    ADDRESS_ID    INT AUTO_INCREMENT PRIMARY KEY,    # 주소 아이디
+    MEMBER_ID  VARCHAR(50)  NOT NULL,             # 회원 아이디
     ADDRESS    VARCHAR(255) NOT NULL,             # 주소
     RECEIVER   VARCHAR(20)  NOT NULL,             # 받는 사람
     PHONE      VARCHAR(13)  NOT NULL,             # 전화번호
@@ -31,8 +32,8 @@ CREATE TABLE TBL_ADDRESS
 
 CREATE TABLE TBL_PRODUCT
 (
-    PRODUCT_ID                VARCHAR(255) NOT NULL PRIMARY KEY,   # 상품 아이디
-    MEMBER_ID                 VARCHAR(255) NOT NULL,               # 판매자 아이디
+    PRODUCT_ID                VARCHAR(40) NOT NULL PRIMARY KEY,   # 상품 아이디
+    MEMBER_ID                 VARCHAR(50) NOT NULL,               # 판매자 아이디
     PRODUCT_NAME              VARCHAR(255) NOT NULL,               # 상품 이름
     PRODUCT_IMG               VARCHAR(100),                        # 상품 이미지
     PRODUCT_DESCRIPTION_IMG   VARCHAR(100),                        # 상품 설명 이미지
@@ -50,7 +51,7 @@ CREATE TABLE TBL_PRODUCT
 CREATE TABLE TBL_CART
 (
     MEMBER_ID     VARCHAR(50) NOT NULL,  # 회원 아이디
-    PRODUCT_ID    VARCHAR(255) NOT NULL,  # 상품 아이디
+    PRODUCT_ID    VARCHAR(40) NOT NULL,  # 상품 아이디
     CART_QUANTITY INT         NOT NULL,  # 상품 수량
     PRIMARY KEY (MEMBER_ID, PRODUCT_ID), # 복합키
     FOREIGN KEY (MEMBER_ID) REFERENCES TBL_MEMBER (MEMBER_ID),
@@ -67,9 +68,9 @@ CREATE TABLE TBL_ROLE
 
 CREATE TABLE TBL_ADVERTISEMENTS
 (
-    ADVERTISEMENT_ID         INT AUTO_INCREMENT PRIMARY KEY, -- 광고 아이디
-    ADVERTISEMENT_IMG        VARCHAR(100) NOT NULL,          -- 광고 이미지
-    PRODUCT_ID               INT NOT NULL,                    -- 상품 아이디
+    ADVERTISEMENT_ID         VARCHAR(40) PRIMARY KEY, -- 광고 아이디
+    ADVERTISEMENT_IMG        VARCHAR(100) NOT NULL,   -- 광고 이미지
+    PRODUCT_ID               VARCHAR(255) NOT NULL,   -- 상품 아이디
     MEMBER_ID                VARCHAR(50) NOT NULL,    -- 광고주
     ADVERTISEMENT_START_DATE DATE        NOT NULL,    -- 광고 시작 날짜
     ADVERTISEMENT_END_DATE   DATE        NOT NULL,    -- 광고 종료 날짜
@@ -100,6 +101,50 @@ CREATE TABLE TBL_OAUTH2_ROLE
     AUTHORITIES VARCHAR(50) NOT NULL,
     FOREIGN KEY (MEMBER_ID) REFERENCES TBL_OAUTH2_MEMBER (MEMBER_ID)
 );
+
+CREATE TABLE TBL_ORDER
+(
+    ORDER_ID                 VARCHAR(40) PRIMARY KEY,                   -- 주문 ID (UUID)
+    MEMBER_ID                VARCHAR(50) NOT NULL,                      -- 회원 ID (주문자)
+    ORDER_DATE               DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 주문 날짜
+    TOTAL_AMOUNT             INT NOT NULL,                           -- 주문 총 금액
+    ADDRESS                  VARCHAR(255) NOT NULL,             # 주소
+    RECEIVER                 VARCHAR(20)  NOT NULL,             # 받는 사람
+    PHONE                    VARCHAR(13)  NOT NULL,             # 전화번호
+    REQUEST                  VARCHAR(255),                      # 요청사항
+    ORDER_STATUS             VARCHAR(50) NOT NULL DEFAULT 'PENDING', -- 주문 상태 (예: PENDING(보류), PAID(완료), CANCELED(취소))
+    FOREIGN KEY (MEMBER_ID) REFERENCES TBL_MEMBER(MEMBER_ID)      -- 회원 ID 외래 키
+);
+
+CREATE TABLE TBL_ORDER_DETAIL
+(
+    ORDER_DETAIL_ID          BIGINT AUTO_INCREMENT PRIMARY KEY,      -- 주문 상세 ID
+    ORDER_ID                 VARCHAR(40) NOT NULL,                   -- 주문 ID (UUID)
+    PRODUCT_ID               VARCHAR(255) NOT NULL,                  -- 상품 ID
+    PRODUCT_PRICE            INT NOT NULL,                           -- 상품 가격
+    QUANTITY                 INT NOT NULL,                           -- 구매 수량
+    DISCOUNT_RATE            INT NOT NULL DEFAULT 0,                 -- 할인율
+    FOREIGN KEY (ORDER_ID) REFERENCES TBL_ORDER(ORDER_ID),           -- 주문 ID 외래 키
+    FOREIGN KEY (PRODUCT_ID) REFERENCES TBL_PRODUCT(PRODUCT_ID)      -- 상품 ID 외래 키
+);
+
+CREATE TABLE TBL_PAYMENT
+(
+    PAYMENT_ID               VARCHAR(40) PRIMARY KEY,                   -- 결제 ID (UUID)
+    ORDER_ID                 VARCHAR(40) NOT NULL,                      -- 주문 ID (UUID)
+    PAYMENT_AMOUNT           INT NOT NULL,                              -- 결제 금액 (총 결제 금액)
+    PAYMENT_VAT              INT,                                       -- 부가세 금액
+    PAYMENT_STATUS           VARCHAR(50) NOT NULL DEFAULT 'PENDING',    -- 결제 상태 (예: PENDING, PAID, FAILED, CANCELED)
+    PAYMENT_UID              VARCHAR(40),                               -- 결제 고유 ID
+    MERCHANT_UID             VARCHAR(40),                               -- 상점 고유 주문 ID
+    RECEIPT_URL              VARCHAR(255),                              -- 결제 영수증 URL
+    PAYMENT_METHOD_TYPE      VARCHAR(50) NOT NULL,                      -- 결제 수단 타입 (예: CREDIT_CARD, BANK_TRANSFER)
+    REQUESTED_AT             DATETIME,                                  -- 결제 요청 시각
+    PAID_AT                  DATETIME,                                  -- 결제 완료 시각
+    FOREIGN KEY (ORDER_ID) REFERENCES TBL_ORDER(ORDER_ID)               -- 주문 ID 외래 키
+);
+
+
 
 INSERT INTO TBL_MEMBER (MEMBER_ID, MEMBER_PWD, NAME, EMAIL, PHONE, LAST_LOGIN_DATE, ACC_REGISTER_DATE, ACC_UPDATE_DATE)
 VALUES ('user', '$2a$10$HdOg00x3nTNCO06RwdeiA.dsWWJlWLHpx9jM8qVnQp35H3cxjDfCy', '유저', 'abc@example.com',
@@ -152,3 +197,14 @@ VALUES
     ('ba48fb59-c0cd-40ec-98f2-ce6385ded8eb', 'user', '힐스 강아지사료 어덜트 라이트 스몰포 1.5kg', 'https://storage.googleapis.com/every_pet_img/ba48fb59-c0cd-40ec-98f2-ce6385ded8eb', 'https://storage.googleapis.com/every_pet_img/ba48fb59-c0cd-40ec-98f2-ce6385ded8eb-description', 50000, '2024-06-10 00:54:15', NULL, 'Y', 0, 5, 0, '강아지'),
     ('c5b2cf0a-07e9-4b78-a915-1456aca46a47', 'user', '프라임 퍼포먼스 20kg 대용량 강아지사료 대형견 큰개 특수견 진도 뉴트리나', 'https://storage.googleapis.com/every_pet_img/c5b2cf0a-07e9-4b78-a915-1456aca46a47', 'https://storage.googleapis.com/every_pet_img/c5b2cf0a-07e9-4b78-a915-1456aca46a47-description', 90000, '2024-06-10 01:12:08', NULL, 'Y', 0, 5, 0, '강아지'),
     ('fbe9f994-2a81-439d-9974-5f802fe10b98', 'user', '보노네이처 강아지 인도어(면역&체중) & 스킨앤코트(피부&모질)', 'https://storage.googleapis.com/every_pet_img/fbe9f994-2a81-439d-9974-5f802fe10b98', 'https://storage.googleapis.com/every_pet_img/fbe9f994-2a81-439d-9974-5f802fe10b98-description', 40000, '2024-06-10 01:07:12', NULL, 'Y', 0, 5, 0, '강아지');
+
+INSERT INTO TBL_ADVERTISEMENTS
+(`ADVERTISEMENT_ID`,`ADVERTISEMENT_IMG`,`PRODUCT_ID`,`MEMBER_ID`,`ADVERTISEMENT_START_DATE`,`ADVERTISEMENT_END_DATE`,`ADVERTISEMENT_STATUS_YN`,`ADVERTISEMENT_SEQUENCE`)
+VALUES
+    ('17cba5c4-ba63-4288-bd40-f9b20f739d84','https://storage.googleapis.com/every_pet_img/17cba5c4-ba63-4288-bd40-f9b20f739d84','0ff3f590-f5b7-4521-86c7-6afbe7d4dec0','admin','2024-01-01','2025-01-01','Y',1),
+    ('6c436bbc-32a8-4453-b88b-a23a9bfdeaa6','https://storage.googleapis.com/every_pet_img/6c436bbc-32a8-4453-b88b-a23a9bfdeaa6','1f7832af-e587-495e-bf00-b14f9f3bf137','admin','2024-01-01','2025-01-01','Y',2),
+    ('fd36c1da-1157-48f6-b8a3-dfdbe58d0ed8','https://storage.googleapis.com/every_pet_img/fd36c1da-1157-48f6-b8a3-dfdbe58d0ed8','2375e2b0-837e-4d43-b8a9-f13090cc7c38','admin','2024-01-01','2025-01-01','Y',3);
+
+
+INSERT INTO TBL_ADDRESS (MEMBER_ID, ADDRESS, RECEIVER, PHONE, REQUEST, DEFAULT_YN)
+VALUES('user', '서울특별시 강남구 테헤란로 123', '홍길동', '010-1234-5678', '문 앞에 두고 벨 눌러주세요.', 'Y');

@@ -2,11 +2,13 @@ package com.everypet.member.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class Address {
 
    private String memberId;    // 회원 아이디
