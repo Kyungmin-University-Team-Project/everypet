@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.everypet.payment.model.dao.PaymentMapper">
+
+    <insert id="insertPayment" parameterType="Map">
+        INSERT INTO TBL_PAYMENT (
+            PAYMENT_ID, ORDER_ID, PAYMENT_AMOUNT, PAYMENT_VAT, PAYMENT_STATUS, PAYMENT_UID, MERCHANT_UID, RECEIPT_URL, PAYMENT_METHOD_TYPE, REQUESTED_AT, PAID_AT
+        )
+        VALUES (
+                   #{paymentId}, #{orderId}, #{paymentAmount}, #{paymentVat}, #{paymentStatus}, #{paymentUid}, #{merchantUid}, #{receiptUrl}, #{paymentMethodType}, #{requestedAt}, #{paidAt}
+               )
+    </insert>
+
+</mapper>
