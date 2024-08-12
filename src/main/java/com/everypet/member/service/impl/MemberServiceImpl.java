@@ -1,21 +1,28 @@
 package com.everypet.member.service.impl;
 
-import com.everypet.member.model.dao.MemberMapper;
-import com.everypet.member.model.dao.RoleMapper;
-import com.everypet.member.mapper.AddressMapper;
-import com.everypet.member.model.dto.AddressDTO;
-import com.everypet.member.model.dto.SignupDTO;
-import com.everypet.member.model.vo.Member;
-import com.everypet.member.model.vo.Role;
-import com.everypet.member.model.vo.Address;
+import com.everypet.global.util.mail.service.EmailService;
 import com.everypet.member.exception.DuplicateMemberException;
 import com.everypet.member.exception.MemberIdNotFoundException;
+import com.everypet.member.mapper.MsMemberInfoMapper;
+import com.everypet.member.mapper.MsSignupMapper;
+import com.everypet.member.model.dao.MemberMapper;
+import com.everypet.member.model.dao.RoleMapper;
+import com.everypet.member.model.dto.MemberInfoDTO;
+import com.everypet.member.model.dto.PasswordChageDTO;
+import com.everypet.member.model.dto.SignupDTO;
+import com.everypet.member.model.vo.Address;
+import com.everypet.member.model.vo.Member;
+import com.everypet.member.model.vo.Role;
 import com.everypet.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -24,11 +31,21 @@ public class MemberServiceImpl implements MemberService {
     private final MemberMapper memberMapper;
     private final RoleMapper roleMapper;
     private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
+
+    @Value("${email.subject.registration}")
+    private String signupSubject;
+
+    @Value("${email.template.registration}")
+    private String signupTemplate;
+
+    @Value("${error.password.mismatch}")
+    private String passwordMismatchError;
 
     @Override
     public void register(SignupDTO signupDTO) {
 
-        Member member = signupDTO.toEntity();
+        Member member = MsSignupMapper.INSTANCE.toVo(signupDTO);
         Address address = signupDTO.getAddress().toEntity(signupDTO);
 
         String memberId = member.getMemberId();
@@ -45,6 +62,10 @@ public class MemberServiceImpl implements MemberService {
         memberMapper.insertMember(member);
         memberMapper.insertAddress(address);
 
+        List<String> email = Collections.singletonList(signupDTO.getEmail());
+
+        emailService.sendEmail(email, signupSubject, signupTemplate, member.getName());
+
         roleMapper.insertRole(Role.builder()
                 .memberId(member.getMemberId())
                 .authorities("ROLE_USER")
@@ -52,15 +73,23 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void addressRegister(AddressDTO address, String memberId) {
+    public void changePassword(Member member, PasswordChageDTO passwordChage) {
 
-        //Address addressEntity = address.toEntity(memberId);
+        Member user = memberMapper.selectMemberByMemberId(member.getMemberId()).orElseThrow(() -> new MemberIdNotFoundException(member.getMemberId()));
 
-        Address addressEntity = AddressMapper.INSTANCE.toVo(address, memberId);
+        if (!passwordEncoder.matches(passwordChage.getOldPassword(), user.getMemberPwd())) {
+            throw new IllegalArgumentException(passwordMismatchError);
+        }
 
-        memberMapper.insertAddress(addressEntity);
+        user.setMemberPwd(passwordEncoder.encode(passwordChage.getNewPassword()));
+
+        memberMapper.updatePassword(user);
     }
 
+    @Override
+    public MemberInfoDTO getMemberInfoByMemberId(String memberId) {
+        return MsMemberInfoMapper.INSTANCE.toDto(memberMapper.selectMemberByMemberId(memberId).orElseThrow(() -> new MemberIdNotFoundException(memberId)));
+    }
 
     @Override
     public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
@@ -71,4 +100,5 @@ public class MemberServiceImpl implements MemberService {
 
         return member;
     }
+
 }

@@ -15,6 +15,12 @@
         WHERE MEMBER_ID = #{memberId}
     </select>
 
+    <update id="updatePassword" parameterType="Member">
+        UPDATE TBL_MEMBER
+        SET MEMBER_PWD = #{memberPwd}
+        WHERE MEMBER_ID = #{memberId}
+    </update>
+
     <insert id="insertMember" parameterType="Member">
         INSERT INTO TBL_MEMBER(
             MEMBER_ID, MEMBER_PWD, NAME, EMAIL, PHONE, AGREE_MARKETING_YN)
@@ -26,5 +32,10 @@
         INSERT INTO TBL_ADDRESS(MEMBER_ID, ADDRESS, RECEIVER, PHONE, REQUEST, DEFAULT_YN)
         VALUES (#{memberId}, #{address}, #{receiver}, #{phone}, #{request}, #{defaultYn})
     </insert>
+    
+    <delete id="deleteMember" parameterType="String">
+        DELETE FROM TBL_MEMBER
+        WHERE MEMBER_ID = #{memberId}
+    </delete>
 
 </mapper>
