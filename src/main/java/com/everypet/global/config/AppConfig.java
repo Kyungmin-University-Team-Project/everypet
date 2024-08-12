@@ -7,7 +7,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 //@Import({DatabaseConfig.class, MvcConfig.class, SecurityConfig.class, SwaggerConfig.class})
 @Configuration
 @ComponentScan(basePackages = {"com.everypet"})
-@PropertySource("classpath:application.properties")
+@PropertySource(value = "classpath:application.properties", encoding = "UTF-8")
 public class AppConfig {
 
     // 파일 업로드 설정

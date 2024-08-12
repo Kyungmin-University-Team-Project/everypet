@@ -12,4 +12,6 @@ public interface MemberMapper {
     int insertAddress(Address address);
     Optional<Member> selectMemberByMemberId(String memberId);
     Boolean existsByMemberId(String memberId);
+    void updatePassword(Member member);
+    //boolean existsNameAndEmail(String name, String email);
 }

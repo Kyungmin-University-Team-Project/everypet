@@ -1,6 +1,6 @@
 package com.everypet.member.model.dto;
 
-import com.everypet.member.model.vo.Member;
+import com.everypet.global.util.mail.model.dto.VerificationDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -56,15 +56,6 @@ public class SignupDTO {
     @ApiModelProperty(example = "N", notes = "마케팅 동의 여부")
     private char agreeMarketingYn;
 
-    public Member toEntity() {
-        return Member.builder()
-                .memberId(memberId)
-                .memberPwd(memberPwd)
-                .name(name)
-                .email(email)
-                .phone(phone)
-                .agreeMarketingYn(agreeMarketingYn)
-                .build();
-    }
+    private VerificationDTO verification;
 
 }

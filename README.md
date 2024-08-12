@@ -59,7 +59,7 @@ docker-compose down
 ## 🎯서비스 핵심기능
 
 ```
-👨‍👨‍👧 회원 : 로그인 | 회원가입 | 메일 인증
+👨‍👨‍👧 회원 : 로그인 | 회원가입 | 메일 인증 | 회원정보 수정 | 회원탈퇴 |
 🛍️ 상품: 상품 조회 | 장바구니 
 ```
 
@@ -87,6 +87,6 @@ docker-compose down
 
 🚧 공사중
 
-## 🐏 우리 프로젝트는 이렇게 만들어졌어요
+## 🦝 물에솜사탕씻기를겨우성공한너구리
 
-![image](https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQR-praOfBqR7cHibjaDddVmpjLP8yJcVMAW7aOCdPubRGd-Iqv )
+![image](https://mblogthumb-phinf.pstatic.net/MjAyMTAzMzFfMjY5/MDAxNjE3MTkzODk3ODM3.D3vloPSntDm1r1vKlkMezHqYDUltQIuwMxmkdUpUSScg.SM0htZ2akdHUdz7_fBCk7g6dpMHGteY4cs4jWwOCsMsg.JPEG.41minit/1617193897369.jpg?type=w800 )
