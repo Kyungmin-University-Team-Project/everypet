@@ -6,10 +6,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface AddressMapper {
-    AddressMapper INSTANCE = Mappers.getMapper(AddressMapper.class);
-
-    Address toVo(AddressDTO dto, String memberId);
+public interface MsAddressMapper {
+    MsAddressMapper INSTANCE = Mappers.getMapper(MsAddressMapper.class);
 
     AddressDTO toDto(Address entity);
+
+    Address toVo(AddressDTO dto, String memberId);
 }
