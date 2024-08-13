@@ -5,6 +5,7 @@ import com.everypet.member.exception.DuplicateMemberException;
 import com.everypet.member.exception.InvalidVerificationCodeException;
 import com.everypet.member.exception.MemberIdNotFoundException;
 import com.everypet.member.mapper.MsMemberInfoMapper;
+import com.everypet.member.mapper.MsPasswordRecovery;
 import com.everypet.member.mapper.MsSignupMapper;
 import com.everypet.member.model.dao.MemberMapper;
 import com.everypet.member.model.dao.RoleMapper;
@@ -44,7 +45,7 @@ public class MemberServiceImpl implements MemberService {
 
         Member member = MsSignupMapper.INSTANCE.toVo(signupDTO);
         Address address = signupDTO.getAddress().toEntity(signupDTO);
-        PasswordRecovery passwordRecovery = signupDTO.getPasswordRecovery().toEntity(signupDTO.getMemberId());
+        PasswordRecovery passwordRecovery = MsPasswordRecovery.INSTANCE.toVo(signupDTO.getPasswordRecovery(), member);
 
         String memberId = member.getMemberId();
         String memberPwd = member.getMemberPwd();

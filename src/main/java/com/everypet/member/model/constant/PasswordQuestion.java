@@ -1,5 +1,8 @@
 package com.everypet.member.model.constant;
 
+import lombok.Getter;
+
+@Getter
 public enum PasswordQuestion {
     // 사용자가 선택할 수 있는 보안 질문
     MOTHER_MAIDEN_NAME("어머니의 본래 성씨는 무엇입니까?"),
@@ -15,10 +18,6 @@ public enum PasswordQuestion {
 
     PasswordQuestion(String questionText) {
         this.questionText = questionText;
-    }
-
-    public String getQuestionText() {
-        return questionText;
     }
 
 }
