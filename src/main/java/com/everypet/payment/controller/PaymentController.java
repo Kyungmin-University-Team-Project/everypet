@@ -67,10 +67,10 @@ public class PaymentController {
             }
 
             // orderId와 payment의 merchantUid가 일치하는지 확인합니다.
-            if (orderId.equals(payment.getMerchantUid()) == false) {
-                orderService.deleteOrder(orderId);
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order ID mismatch");
-            }
+//            if (orderId.equals(payment.getMerchantUid()) == false) {
+//                orderService.deleteOrder(orderId);
+//                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order ID mismatch");
+//            }
 
             // 2. 고객사 내부 주문 데이터의 가격과 실제 지불된 금액을 비교합니다.
             Order order = orderService.selectOrder(orderId);

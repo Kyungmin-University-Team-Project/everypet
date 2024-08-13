@@ -1,13 +1,17 @@
-import React, {useState} from 'react';
-import {Link, useLocation} from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './Payment.module.css';
-import {CartItem} from "../../utils/product/cart";
+import { CartItem } from "../../utils/product/cart";
+import { handleKaKaoPaymentRequest } from "../../utils/product/payment";
+import axios from 'axios';
+import {decryptToken} from "../../utils/token/token";
+import axiosInstance from "../../utils/error/axiosInstance";
 
 const shippingFee = 3000;
 
 const Payment: React.FC = () => {
     const location = useLocation();
-    const {selectedProducts, totalPrice} = location.state || {selectedProducts: [], totalPrice: 0};
+    const { selectedProducts, totalPrice } = location.state || { selectedProducts: [], totalPrice: 0 };
 
     const [recipient, setRecipient] = useState('');
     const [postalCode, setPostalCode] = useState('');
@@ -21,20 +25,55 @@ const Payment: React.FC = () => {
 
     const formatPrice = (price: number) => price.toLocaleString('ko-KR') + '원';
 
-    const handlePayment = () => {
-        const shippingInfo = {
-            recipient,
-            postalCode,
-            address,
-            detailedAddress,
-            phone: `${phonePrefix}-${phoneNumber1}-${phoneNumber2}`,
-            safeNumber,
-            request
+    const handlePayment = async () => {
+        const orderId = crypto.randomUUID();
+        const addressId = '1';
+
+        // 주문 정보를 서버에 전송하기 위한 DTO 구성
+        const orderInsertDTO = {
+            addressId: addressId,
+            orderId: orderId,
+            products: selectedProducts.map((item: CartItem) => ({
+                productId: item.productId,
+                quantity: item.cartQuantity
+            }))
         };
 
-        console.log("배송 정보:", shippingInfo);
-        console.log("주문 상품 목록:", selectedProducts);
-        console.log("총 결제 금액:", formatPrice(totalPrice + shippingFee));
+        try {
+            const token = decryptToken(); // 로컬 스토리지에서 토큰 복호화
+
+            console.log(orderInsertDTO)
+
+            // 주문 정보를 서버로 전송
+            const orderResponse = await axiosInstance.post('/order/insert', orderInsertDTO, {
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            });
+
+            if (orderResponse.status === 200) {
+                console.log('주문 정보가 성공적으로 전송되었습니다.');
+
+                // 카카오페이 결제 요청
+                await handleKaKaoPaymentRequest(
+                    selectedProducts.length > 1
+                        ? `${selectedProducts[0].productName} 외 ${selectedProducts.length - 1}건`
+                        : selectedProducts[0]?.productName || '주문상품',
+                    totalPrice + shippingFee,
+                    orderId,
+                    addressId,
+                    selectedProducts.map((item: CartItem) => ({
+                        productId: item.productId,
+                        quantity: item.cartQuantity
+                    }))
+                );
+            } else {
+                alert('주문 정보 전송에 실패했습니다.');
+            }
+        } catch (error) {
+            console.error('주문 정보 전송 중 오류 발생:', error);
+            alert('주문 정보 전송에 실패했습니다.');
+        }
     };
 
     return (
