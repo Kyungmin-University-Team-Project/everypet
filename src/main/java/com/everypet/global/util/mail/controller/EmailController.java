@@ -30,7 +30,7 @@ public class EmailController {
     @PostMapping("/code")
     public ResponseEntity<String> sendMail(@RequestBody EmailMessageDTO emailMessageDTO) {
 
-        emailService.sendCode(emailMessageDTO.getTo(), emailMessageDTO.getSubject(), emailMessageDTO.getTemplatePath(), emailMessageDTO.getPurpose());
+        emailService.sendCode(emailMessageDTO.getTo(), emailMessageDTO.getPurpose());
 
         return ResponseEntityUtil.response("이메일이 발송되었습니다.", HttpStatus.OK);
     }
