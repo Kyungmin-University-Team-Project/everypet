@@ -4,18 +4,16 @@
 
     <!-- 주문 정보를 TBL_ORDER 테이블에 삽입 -->
     <insert id="insertOrder" parameterType="Map">
-        INSERT INTO TBL_ORDER (ORDER_ID, MEMBER_ID, TOTAL_AMOUNT, ADDRESS, RECEIVER, PHONE, REQUEST)
-        SELECT
-            #{orderId},
-            #{memberId},
-            #{totalAmount},
-            a.ADDRESS,
-            a.RECEIVER,
-            a.PHONE,
-            a.REQUEST
-        FROM TBL_ADDRESS a
-        WHERE a.ADDRESS_ID = #{addressId}
+        INSERT INTO TBL_ORDER (
+            ORDER_ID, MEMBER_ID, TOTAL_AMOUNT, PRODUCT_AMOUNT, DELIVERY_AMOUNT,
+            POSTAL_CODE, ADDRESS, ADDRESS_DETAIL, RECEIVER, PHONE, REQUEST
+        )
+        VALUES (
+                   #{orderId}, #{memberId}, #{totalAmount}, #{productAmount}, #{deliveryAmount},
+                   #{postalCode}, #{address}, #{addressDetail}, #{receiver}, #{phone}, #{request}
+               )
     </insert>
+
 
 
     <!-- 주문 정보를 TBL_ORDER 테이블에서 삭제 -->

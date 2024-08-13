@@ -115,14 +115,19 @@ CREATE TABLE TBL_ORDER
     ORDER_ID                 VARCHAR(40) PRIMARY KEY,                   -- 주문 ID (UUID)
     MEMBER_ID                VARCHAR(50) NOT NULL,                      -- 회원 ID (주문자)
     ORDER_DATE               DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 주문 날짜
-    TOTAL_AMOUNT             INT NOT NULL,                           -- 주문 총 금액
-    ADDRESS                  VARCHAR(255) NOT NULL,             # 주소
-    RECEIVER                 VARCHAR(20)  NOT NULL,             # 받는 사람
-    PHONE                    VARCHAR(13)  NOT NULL,             # 전화번호
-    REQUEST                  VARCHAR(255),                      # 요청사항
-    ORDER_STATUS             VARCHAR(50) NOT NULL DEFAULT 'PENDING', -- 주문 상태 (예: PENDING(보류), PAID(완료), CANCELED(취소))
-    FOREIGN KEY (MEMBER_ID) REFERENCES TBL_MEMBER(MEMBER_ID) ON DELETE CASCADE  -- 회원 ID 외래 키
+    TOTAL_AMOUNT             INT NOT NULL,                               -- 주문 총 금액
+    PRODUCT_AMOUNT             INT NOT NULL,                               -- 주문 총 금액
+    DELIVERY_AMOUNT             INT NOT NULL,                               -- 주문 총 금액
+    POSTAL_CODE              VARCHAR(10) NOT NULL,                       -- 우편번호
+    ADDRESS                  VARCHAR(255) NOT NULL,                      -- 기본 주소
+    ADDRESS_DETAIL           VARCHAR(255),                               -- 상세 주소 및 상세 건물명
+    RECEIVER                 VARCHAR(20)  NOT NULL,                      -- 받는 사람
+    PHONE                    VARCHAR(15)  NOT NULL,                      -- 휴대폰 번호 (전체)
+    REQUEST                  VARCHAR(255),                               -- 요청사항
+    ORDER_STATUS             VARCHAR(50) NOT NULL DEFAULT 'PENDING',     -- 주문 상태 (예: PENDING(보류), PAID(완료), CANCELED(취소))
+    FOREIGN KEY (MEMBER_ID) REFERENCES TBL_MEMBER(MEMBER_ID)             -- 회원 ID 외래 키
 );
+
 
 CREATE TABLE TBL_ORDER_DETAIL
 (
@@ -143,8 +148,6 @@ CREATE TABLE TBL_PAYMENT
     PAYMENT_AMOUNT           INT NOT NULL,                              -- 결제 금액 (총 결제 금액)
     PAYMENT_VAT              INT,                                       -- 부가세 금액
     PAYMENT_STATUS           VARCHAR(50) NOT NULL DEFAULT 'PENDING',    -- 결제 상태 (예: PENDING, PAID, FAILED, CANCELED)
-    PAYMENT_UID              VARCHAR(40),                               -- 결제 고유 ID
-    MERCHANT_UID             VARCHAR(40),                               -- 상점 고유 주문 ID
     RECEIPT_URL              VARCHAR(255),                              -- 결제 영수증 URL
     PAYMENT_METHOD_TYPE      VARCHAR(50) NOT NULL,                      -- 결제 수단 타입 (예: CREDIT_CARD, BANK_TRANSFER)
     REQUESTED_AT             DATETIME,                                  -- 결제 요청 시각
