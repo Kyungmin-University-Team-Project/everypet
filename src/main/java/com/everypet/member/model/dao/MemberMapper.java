@@ -1,7 +1,8 @@
 package com.everypet.member.model.dao;
 
-import com.everypet.member.model.vo.Member;
 import com.everypet.member.model.vo.Address;
+import com.everypet.member.model.vo.Member;
+import com.everypet.member.model.vo.PasswordRecovery;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Optional;
@@ -11,7 +12,9 @@ public interface MemberMapper {
     int insertMember(Member member);
     int insertAddress(Address address);
     Optional<Member> selectMemberByMemberId(String memberId);
-    Boolean existsByMemberId(String memberId);
+    boolean existsByMemberId(String memberId);
     void updatePassword(Member member);
-    //boolean existsNameAndEmail(String name, String email);
+    void deleteMember(Member member);
+    void insertPasswordRecovery(PasswordRecovery passwordRecovery);
+    PasswordRecovery selectPwdQuestion(String memberId);
 }

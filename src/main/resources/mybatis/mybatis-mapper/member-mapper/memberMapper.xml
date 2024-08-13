@@ -15,6 +15,12 @@
         WHERE MEMBER_ID = #{memberId}
     </select>
 
+    <select id="selectPwdQuestion" parameterType="String" resultType="PasswordRecovery">
+        SELECT *
+        FROM TBL_PASSWORD_RECOVERY
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+
     <update id="updatePassword" parameterType="Member">
         UPDATE TBL_MEMBER
         SET MEMBER_PWD = #{memberPwd}
@@ -33,9 +39,14 @@
         VALUES (#{memberId}, #{address}, #{receiver}, #{phone}, #{request}, #{defaultYn})
     </insert>
     
-    <delete id="deleteMember" parameterType="String">
+    <delete id="deleteMember" parameterType="Member">
         DELETE FROM TBL_MEMBER
         WHERE MEMBER_ID = #{memberId}
     </delete>
+
+    <insert id="insertPasswordRecovery" parameterType="PasswordRecovery">
+        INSERT INTO TBL_PASSWORD_RECOVERY(MEMBER_ID, QUESTION, ANSWER)
+        VALUES (#{memberId}, #{question}, #{answer})
+    </insert>
 
 </mapper>

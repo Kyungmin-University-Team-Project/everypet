@@ -16,12 +16,6 @@ public class EmailMessageDTO {
     @ApiModelProperty(example = "abc@naver.com", notes = "받는 사람 이메일")
     private String to;
 
-    @ApiModelProperty(example = "every-pet 회원가입을 위한 코드입니다.", notes = "이메일 제목")
-    private String subject;
-
-    @ApiModelProperty(example = "static/member/verification-email.html", notes = "이메일 템플릿 경로")
-    private String templatePath;
-
     @ApiModelProperty(example = "SIGNUP", notes = "이메일 목적", allowableValues = "SIGNUP, PASSWORD_CHANGE, PASSWORD_FIND")
     private Purpose purpose;
 

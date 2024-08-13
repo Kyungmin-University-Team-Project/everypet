@@ -56,6 +56,8 @@ public class SignupDTO {
     @ApiModelProperty(example = "N", notes = "마케팅 동의 여부")
     private char agreeMarketingYn;
 
+    private PasswordRecoveryDTO passwordRecovery;
+
     private VerificationDTO verification;
 
 }

@@ -2,16 +2,17 @@ package com.everypet.member.service.impl;
 
 import com.everypet.global.util.mail.service.EmailService;
 import com.everypet.member.exception.DuplicateMemberException;
+import com.everypet.member.exception.InvalidVerificationCodeException;
 import com.everypet.member.exception.MemberIdNotFoundException;
 import com.everypet.member.mapper.MsMemberInfoMapper;
+import com.everypet.member.mapper.MsPasswordRecovery;
 import com.everypet.member.mapper.MsSignupMapper;
 import com.everypet.member.model.dao.MemberMapper;
 import com.everypet.member.model.dao.RoleMapper;
-import com.everypet.member.model.dto.MemberInfoDTO;
-import com.everypet.member.model.dto.PasswordChageDTO;
-import com.everypet.member.model.dto.SignupDTO;
+import com.everypet.member.model.dto.*;
 import com.everypet.member.model.vo.Address;
 import com.everypet.member.model.vo.Member;
+import com.everypet.member.model.vo.PasswordRecovery;
 import com.everypet.member.model.vo.Role;
 import com.everypet.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -39,17 +40,19 @@ public class MemberServiceImpl implements MemberService {
     @Value("${email.template.registration}")
     private String signupTemplate;
 
-    @Value("${error.password.mismatch}")
-    private String passwordMismatchError;
-
     @Override
     public void register(SignupDTO signupDTO) {
 
         Member member = MsSignupMapper.INSTANCE.toVo(signupDTO);
         Address address = signupDTO.getAddress().toEntity(signupDTO);
+        PasswordRecovery passwordRecovery = MsPasswordRecovery.INSTANCE.toVo(signupDTO.getPasswordRecovery(), member);
 
         String memberId = member.getMemberId();
         String memberPwd = member.getMemberPwd();
+
+        // 이메일 인증 코드 확인
+        if(!emailService.verifyCode(signupDTO.getVerification()))
+            throw new InvalidVerificationCodeException("회원가입 인증 코드가 일치하지 않습니다.");
 
         // 이미 존재하는 아이디라면
         if (memberMapper.existsByMemberId(memberId)) {
@@ -61,10 +64,12 @@ public class MemberServiceImpl implements MemberService {
 
         memberMapper.insertMember(member);
         memberMapper.insertAddress(address);
+        memberMapper.insertPasswordRecovery(passwordRecovery);
 
         List<String> email = Collections.singletonList(signupDTO.getEmail());
 
         emailService.sendEmail(email, signupSubject, signupTemplate, member.getName());
+        emailService.deleteCode(signupDTO.getVerification());
 
         roleMapper.insertRole(Role.builder()
                 .memberId(member.getMemberId())
@@ -77,11 +82,16 @@ public class MemberServiceImpl implements MemberService {
 
         Member user = memberMapper.selectMemberByMemberId(member.getMemberId()).orElseThrow(() -> new MemberIdNotFoundException(member.getMemberId()));
 
+        if (!emailService.verifyCode(passwordChage.getVerification())) {
+            throw new InvalidVerificationCodeException("비밀번호 변경 인증 코드가 일치하지 않습니다.");
+        }
+
         if (!passwordEncoder.matches(passwordChage.getOldPassword(), user.getMemberPwd())) {
-            throw new IllegalArgumentException(passwordMismatchError);
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
 
         user.setMemberPwd(passwordEncoder.encode(passwordChage.getNewPassword()));
+        emailService.deleteCode(passwordChage.getVerification());
 
         memberMapper.updatePassword(user);
     }
@@ -89,6 +99,38 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberInfoDTO getMemberInfoByMemberId(String memberId) {
         return MsMemberInfoMapper.INSTANCE.toDto(memberMapper.selectMemberByMemberId(memberId).orElseThrow(() -> new MemberIdNotFoundException(memberId)));
+    }
+
+    @Override
+    public void deleteMember(Member member, DeleteMemberDTO deleteData) {
+
+        if(!emailService.verifyCode(deleteData.getVerification())) {
+            throw new InvalidVerificationCodeException("회원 탈퇴 인증 코드가 일치하지 않습니다.");
+        }
+
+        memberMapper.deleteMember(member);
+
+    }
+
+    @Override
+    public void passwordReset(PasswordResetDTO pwdResetData) {
+
+        Member member = memberMapper.selectMemberByMemberId(pwdResetData.getMemberId()).orElseThrow(() -> new MemberIdNotFoundException(pwdResetData.getMemberId()));
+
+        PasswordRecovery passwordRecovery = memberMapper.selectPwdQuestion(member.getMemberId());
+
+        if (!passwordRecovery.getAnswer().equals(pwdResetData.getAnswer())) {
+            throw new IllegalArgumentException("비밀번호 찾기 질문의 답이 일치하지 않습니다.");
+        }
+
+        if (!emailService.verifyCode(pwdResetData.getVerification())) {
+            throw new InvalidVerificationCodeException("비밀번호 초기화 인증 코드가 일치하지 않습니다.");
+        }
+
+        member.setMemberPwd(passwordEncoder.encode(pwdResetData.getNewPassword()));
+        emailService.deleteCode(pwdResetData.getVerification());
+
+        memberMapper.updatePassword(member);
     }
 
     @Override
