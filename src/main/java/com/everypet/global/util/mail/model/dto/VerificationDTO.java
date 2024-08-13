@@ -17,7 +17,7 @@ public class VerificationDTO {
     @ApiModelProperty(example = "1234", notes = "인증코드")
     private String code;
 
-    @ApiModelProperty(example = "SIGNUP", notes = "이메일 목적", allowableValues = "SIGNUP, PASSWORD_CHANGE, PASSWORD_FIND")
+    @ApiModelProperty(example = "SIGNUP", notes = "이메일 목적", allowableValues = "SIGNUP, PASSWORD_CHANGE, PASSWORD_FIND, DELETE_ACCOUNT")
     private Purpose purpose;
 
 }
