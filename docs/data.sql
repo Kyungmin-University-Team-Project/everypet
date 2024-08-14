@@ -31,9 +31,10 @@ CREATE TABLE TBL_ADDRESS
     ADDRESS_ID    INT AUTO_INCREMENT PRIMARY KEY,    # 주소 아이디
     MEMBER_ID  VARCHAR(50)  NOT NULL,             # 회원 아이디
     ADDRESS    VARCHAR(255) NOT NULL,             # 주소
+    DETAIL_ADDRESS VARCHAR(255),         # 상세 주소
     RECEIVER   VARCHAR(20)  NOT NULL,             # 받는 사람
     PHONE      VARCHAR(13)  NOT NULL,             # 전화번호
-    REQUEST    VARCHAR(255),                      # 요청사항
+    REQUEST    VARCHAR(255),                    # 요청사항
     DEFAULT_YN CHAR(1)      NOT NULL DEFAULT 'N', # 기본 배송지 여부
     FOREIGN KEY (MEMBER_ID) REFERENCES TBL_MEMBER (MEMBER_ID) ON DELETE CASCADE
 );
@@ -212,8 +213,8 @@ VALUES
     ('fd36c1da-1157-48f6-b8a3-dfdbe58d0ed8','https://storage.googleapis.com/every_pet_img/fd36c1da-1157-48f6-b8a3-dfdbe58d0ed8','2375e2b0-837e-4d43-b8a9-f13090cc7c38','admin','2024-01-01','2025-01-01','Y',3);
 
 
-INSERT INTO TBL_ADDRESS (MEMBER_ID, ADDRESS, RECEIVER, PHONE, REQUEST, DEFAULT_YN)
-VALUES('user', '서울특별시 강남구 테헤란로 123', '홍길동', '010-1234-5678', '문 앞에 두고 벨 눌러주세요.', 'Y');
+INSERT INTO TBL_ADDRESS (MEMBER_ID, ADDRESS,DETAIL_ADDRESS, RECEIVER, PHONE, REQUEST, DEFAULT_YN)
+VALUES('user', '서울특별시 강남구 테헤란로','105-1505', '홍길동', '010-1234-5678', '문 앞에 두고 벨 눌러주세요.', 'Y');
 
 INSERT INTO TBL_PASSWORD_RECOVERY (MEMBER_ID, QUESTION, ANSWER)
 VALUES ('user', '가장 좋아하는 동물은?', '햄이');
