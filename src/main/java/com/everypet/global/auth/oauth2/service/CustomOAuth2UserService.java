@@ -8,7 +8,7 @@ import com.everypet.global.auth.oauth2.data.dto.CustomOAuth2User;
 import com.everypet.global.auth.oauth2.data.dto.response.GoogleResponse;
 import com.everypet.global.auth.oauth2.data.dto.response.NaverResponse;
 import com.everypet.global.auth.oauth2.data.dto.response.OAuth2Response;
-import com.everypet.member.model.dto.SignupDTO;
+import com.everypet.member.model.dto.member.SignupDTO;
 import com.everypet.member.exception.MemberIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;

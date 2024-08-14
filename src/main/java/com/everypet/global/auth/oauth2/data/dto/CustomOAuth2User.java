@@ -1,6 +1,6 @@
 package com.everypet.global.auth.oauth2.data.dto;
 
-import com.everypet.member.model.dto.SignupDTO;
+import com.everypet.member.model.dto.member.SignupDTO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 

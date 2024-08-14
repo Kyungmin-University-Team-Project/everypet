@@ -1,4 +1,4 @@
-package com.everypet.member.model.dto;
+package com.everypet.member.model.dto.member;
 
 import com.everypet.member.model.constant.PasswordQuestion;
 import io.swagger.annotations.ApiModelProperty;

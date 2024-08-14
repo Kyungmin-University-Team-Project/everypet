@@ -1,10 +1,7 @@
 package com.everypet.member.model.vo;
 
 import com.everypet.member.model.constant.Level;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -105,10 +102,4 @@ public class Member implements UserDetails {
         return true;
     }
 
-    // 아이디 중복 체크
-    /*public void validateDuplicateMemberID(String id) {
-        if (id.equals(this.getMemberId())) {
-            throw new DuplicateMemberIDException(id);
-        }
-    }*/
 }

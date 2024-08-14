@@ -1,4 +1,4 @@
-package com.everypet.member.model.dto;
+package com.everypet.member.model.dto.member;
 
 import com.everypet.global.util.mail.model.dto.VerificationDTO;
 import io.swagger.annotations.ApiModelProperty;
