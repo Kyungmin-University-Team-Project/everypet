@@ -34,11 +34,6 @@
             #{memberId}, #{memberPwd}, #{name}, #{email}, #{phone}, #{agreeMarketingYn})
     </insert>
 
-    <insert id="insertAddress" parameterType="Address">
-        INSERT INTO TBL_ADDRESS(MEMBER_ID, ADDRESS, RECEIVER, PHONE, REQUEST, DEFAULT_YN)
-        VALUES (#{memberId}, #{address}, #{receiver}, #{phone}, #{request}, #{defaultYn})
-    </insert>
-    
     <delete id="deleteMember" parameterType="Member">
         DELETE FROM TBL_MEMBER
         WHERE MEMBER_ID = #{memberId}
@@ -48,5 +43,17 @@
         INSERT INTO TBL_PASSWORD_RECOVERY(MEMBER_ID, QUESTION, ANSWER)
         VALUES (#{memberId}, #{question}, #{answer})
     </insert>
+
+    <update id="updatePoint" parameterType="Member">
+        UPDATE TBL_MEMBER
+        SET POINT = #{point}
+        WHERE MEMBER_ID = #{memberId}
+    </update>
+
+    <select id="selectMemberByEmail" parameterType="FindIdDTO" resultType="String">
+        SELECT MEMBER_ID
+        FROM TBL_MEMBER
+        WHERE EMAIL = #{email} AND NAME = #{name}
+    </select>
 
 </mapper>

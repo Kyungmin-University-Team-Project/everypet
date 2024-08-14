@@ -1,7 +1,7 @@
 package com.everypet.member.controller;
 
 import com.everypet.global.util.ResponseEntityUtil;
-import com.everypet.member.model.dto.*;
+import com.everypet.member.model.dto.member.*;
 import com.everypet.member.model.vo.Member;
 import com.everypet.member.service.MemberService;
 import io.swagger.annotations.Api;
@@ -56,11 +56,18 @@ public class MemberApiController {
         return ResponseEntityUtil.response(memberInfo, HttpStatus.OK);
     }
     
-    @ApiOperation(value = "비밀번호 찾기", notes = "이메일 인증과 확인 질문을 통해 비밀번호를 초기화 합니다.")
+    @ApiOperation(value = "아이디 찾기", notes = "아이디를 찾습니다.")
+    @PostMapping("/id/find")
+    public ResponseEntity<String> findId(@RequestBody FindIdDTO request) {
+        List<String> members = memberService.findId(request);
+        return ResponseEntityUtil.response(members.toString(), HttpStatus.OK);
+    }
+    
+    @ApiOperation(value = "비밀번호 찾기", notes = "이메일 인증과 확인 질문을 통해 임시 비밀번호를 발급합니다.")
     @PostMapping("/password/reset")
     public ResponseEntity<String> passwordReset(@RequestBody PasswordResetDTO request) {
         memberService.passwordReset(request);
-        return ResponseEntityUtil.response("비밀번호 변경 성공", HttpStatus.OK);
+        return ResponseEntityUtil.response("임시 비밀번호 발급 성공", HttpStatus.OK);
     }
 
     @ApiOperation(value = "회원탈퇴", notes = "회원을 탈퇴합니다.")
