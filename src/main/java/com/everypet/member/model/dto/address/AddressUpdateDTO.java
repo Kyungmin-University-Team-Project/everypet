@@ -1,4 +1,4 @@
-package com.everypet.member.model.dto;
+package com.everypet.member.model.dto.address;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddressDTO {
+public class AddressUpdateDTO {
+
+    @ApiModelProperty(example = "1", notes = "주소 번호")
+    private int addressId;  // 주소 번호
 
     @ApiModelProperty(example = "서울시 강남구 롯데캐슬 아파트", notes = "주소")
     private String address; // 주소

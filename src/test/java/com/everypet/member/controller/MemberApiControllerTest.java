@@ -1,6 +1,6 @@
 package com.everypet.member.controller;
 
-import com.everypet.member.model.dto.SignupDTO;
+import com.everypet.member.model.dto.member.SignupDTO;
 import com.everypet.member.model.vo.Address;
 import com.everypet.member.service.MemberService;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,6 +1,7 @@
-package com.everypet.member.model.dto;
+package com.everypet.member.model.dto.member;
 
 import com.everypet.global.util.mail.model.dto.VerificationDTO;
+import com.everypet.member.model.dto.address.SignupAddressDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

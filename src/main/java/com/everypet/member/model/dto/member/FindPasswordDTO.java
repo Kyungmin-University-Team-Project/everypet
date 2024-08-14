@@ -1,4 +1,4 @@
-package com.everypet.member.model.dto;
+package com.everypet.member.model.dto.member;
 
 
 import io.swagger.annotations.ApiModelProperty;

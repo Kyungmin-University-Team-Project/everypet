@@ -3,7 +3,7 @@ package com.everypet.global.auth.jwt.filter;
 import com.everypet.global.auth.util.CookieManager;
 import com.everypet.global.auth.util.JWTManager;
 import com.everypet.global.auth.util.TokenExpirationTime;
-import com.everypet.member.model.dto.SignupDTO;
+import com.everypet.member.model.dto.member.SignupDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

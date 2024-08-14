@@ -1,4 +1,4 @@
-package com.everypet.member.model.dto;
+package com.everypet.member.model.dto.member;
 
 import com.everypet.member.model.constant.Level;
 import lombok.AllArgsConstructor;
