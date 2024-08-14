@@ -106,25 +106,10 @@ public class EmailServiceImpl implements EmailService {
 
         valueOps.set(redisKey, email, Duration.ofMinutes(5)); // 5분간 유효
 
-        String subject = getSubjectForPurpose(purpose);
+        String subject = purpose.getSubject();
 
         sendEmail(Collections.singletonList(email), subject, templatePath, code);
 
-    }
-
-    private String getSubjectForPurpose(Purpose purpose) {
-        switch (purpose) {
-            case SIGNUP:
-                return "[EVERY-PET] 회원가입을 위한 코드입니다.";
-            case PASSWORD_CHANGE:
-                return "[EVERY-PET] 비밀번호 변경을 위한 코드입니다.";
-            case PASSWORD_FIND:
-                return "[EVERY-PET] 비밀번호 찾기를 위한 코드입니다.";
-            case DELETE_ACCOUNT:
-                return "[EVERY-PET] 회원탈퇴를 위한 코드입니다.";
-            default:
-                throw new IllegalArgumentException("Unknown purpose: " + purpose);
-        }
     }
 
      /**

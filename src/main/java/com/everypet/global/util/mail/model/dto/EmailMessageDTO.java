@@ -16,7 +16,7 @@ public class EmailMessageDTO {
     @ApiModelProperty(example = "abc@naver.com", notes = "받는 사람 이메일")
     private String to;
 
-    @ApiModelProperty(example = "SIGNUP", notes = "이메일 목적", allowableValues = "SIGNUP, PASSWORD_CHANGE, PASSWORD_FIND")
+    @ApiModelProperty(example = "SIGNUP", notes = "이메일 목적", allowableValues = "SIGNUP, PASSWORD_CHANGE, PASSWORD_FIND, ID_FIND, PASSWORD_RESET")
     private Purpose purpose;
 
 }
