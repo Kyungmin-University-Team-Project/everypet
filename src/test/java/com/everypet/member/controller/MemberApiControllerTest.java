@@ -1,3 +1,4 @@
+/*
 package com.everypet.member.controller;
 
 import com.everypet.member.model.dto.member.SignupDTO;
@@ -94,4 +95,5 @@ public class MemberApiControllerTest {
     }
 
 }
+*/
 

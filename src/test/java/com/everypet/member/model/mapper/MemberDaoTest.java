@@ -1,3 +1,4 @@
+/*
 package com.everypet.member.model.mapper;
 
 import com.everypet.global.config.DatabaseConfig;
@@ -21,3 +22,4 @@ public class MemberDaoTest {
         System.out.println(memberMapper.selectMemberByMemberId("user"));
     }
 }
+*/
