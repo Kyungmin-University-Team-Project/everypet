@@ -69,6 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests() // 요청에 대한 보안 설정
                 .antMatchers("/resources/**").permitAll()
+                .antMatchers("/ws/**").permitAll()
                 .antMatchers("/send-mail/**").permitAll()
                 .antMatchers("/member/password/reset").permitAll()
                 .antMatchers("/member/id/find").permitAll()

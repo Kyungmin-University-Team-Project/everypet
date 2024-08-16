@@ -1,7 +1,9 @@
 package com.everypet.member.service.impl;
 
 import com.everypet.global.util.PasswordGenerator;
+import com.everypet.global.util.mail.model.constant.Purpose;
 import com.everypet.global.util.mail.service.EmailService;
+import com.everypet.global.util.point.service.PointService;
 import com.everypet.member.exception.DuplicateMemberException;
 import com.everypet.member.exception.InvalidVerificationCodeException;
 import com.everypet.member.exception.MemberIdNotFoundException;
@@ -19,6 +21,8 @@ import com.everypet.member.model.vo.PasswordRecovery;
 import com.everypet.member.model.vo.Role;
 import com.everypet.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -32,24 +36,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
+    private static final Logger log = LogManager.getLogger(MemberServiceImpl.class);
     private final MemberMapper memberMapper;
     private final AddressMapper addressMapper;
     private final RoleMapper roleMapper;
 
     private final PasswordEncoder passwordEncoder;
+    private final PointService pointService;
     private final EmailService emailService;
-
-    @Value("${email.subject.registration}")
-    private String signupSubject;
 
     @Value("${email.template.registration}")
     private String signupTemplate;
 
     @Value("${email.template.password-reset}")
     private String temporaryPwdTemplate;
-
-    @Value("${email.subject.password-reset}")
-    private String temporaryPwdSubject;
 
     @Override
     public void register(SignupDTO signupDTO) {
@@ -70,6 +70,17 @@ public class MemberServiceImpl implements MemberService {
             throw new DuplicateMemberException(member.getMemberId());
         }
 
+        // 추천인을 작성 했을 경우 실행
+        if (signupDTO.getReferrer() != null) {
+            // 해당 추천인 아이디가 존재하지 않을 경우
+            try {
+                Member user = memberMapper.selectMemberByMemberId(signupDTO.getReferrer()).orElseThrow(() -> new MemberIdNotFoundException(signupDTO.getReferrer()));
+                pointService.accumulateReferralPoints(user);
+            } catch (MemberIdNotFoundException e) {
+                log.error("추천인 아이디가 존재하지 않습니다.");
+            }
+        }
+
         // 비밀번호 암호화
         member.setMemberPwd(passwordEncoder.encode(memberPwd));
 
@@ -77,15 +88,12 @@ public class MemberServiceImpl implements MemberService {
         addressMapper.insertAddress(address);
         memberMapper.insertPasswordRecovery(passwordRecovery);
 
-        // 추천인이 있다면
-        /*if (signupDTO.getReferrer() != null) {
-            Member user = memberMapper.selectMemberByMemberId(signupDTO.getReferrer()).orElseThrow(() -> new MemberIdNotFoundException(signupDTO.getReferrer()));
-
-        }*/
+        // 포인트 적립
+        pointService.accumulateSignupPoints(member);
 
         List<String> email = Collections.singletonList(signupDTO.getEmail());
 
-        emailService.sendEmail(email, signupSubject, signupTemplate, member.getName());
+        emailService.sendEmail(email, Purpose.SIGNUP_WELCOME.getSubject(), signupTemplate, member.getName());
         emailService.deleteCode(signupDTO.getVerification());
 
         roleMapper.insertRole(Role.builder()
@@ -154,14 +162,16 @@ public class MemberServiceImpl implements MemberService {
         memberMapper.updatePassword(member);
 
         // 임시 비밀번호 발송
-        emailService.sendEmail(Collections.singletonList(member.getEmail()), temporaryPwdSubject, temporaryPwdTemplate, newPwd);
+        emailService.sendEmail(Collections.singletonList(member.getEmail()), Purpose.TEMPORARY_PASSWORD.getSubject(), temporaryPwdTemplate, newPwd);
 
     }
 
     @Override
     public List<String> findId(FindIdDTO dto) {
 
-        List<String> members = memberMapper.selectMemberByEmail(dto);
+        Member member = MsSignupMapper.INSTANCE.toVo(dto);
+
+        List<String> members = memberMapper.selectMemberByEmail(member);
 
         if(members.isEmpty()) {
             throw new InvalidVerificationCodeException("이메일 또는 이름이 일치하는 회원이 없습니다.");

@@ -13,7 +13,8 @@
         <typeAlias type="com.everypet.member.model.vo.PasswordRecovery" alias="PasswordRecovery"></typeAlias>
 
         <typeAlias type="com.everypet.member.model.vo.Address" alias="Address"></typeAlias>
-        <typeAlias type="com.everypet.member.model.dto.member.FindIdDTO" alias="FindIdDTO"></typeAlias>
+
+        <typeAlias type="com.everypet.global.util.point.model.vo.Point" alias="Point"></typeAlias>
 
         <typeAlias type="com.everypet.product.model.vo.Product" alias="Product"></typeAlias>
         <typeAlias type="com.everypet.product.model.dto.ProductListDTO" alias="ProductListDTO"></typeAlias>

@@ -5,7 +5,6 @@ import com.everypet.member.model.dto.member.*;
 import com.everypet.member.model.vo.Member;
 import com.everypet.member.service.MemberService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -75,17 +74,6 @@ public class MemberApiController {
     public ResponseEntity<String> deleteMember(@ApiIgnore @AuthenticationPrincipal Member member, @RequestBody DeleteMemberDTO request) {
         memberService.deleteMember(member, request);
         return ResponseEntityUtil.response("회원 탈퇴 성공", HttpStatus.OK);
-    }
-    @ApiModelProperty(value = "관리자 페이지", notes = "관리자 페이지입니다.")
-    @GetMapping("/admin")
-    public ResponseEntity<String> admin() {
-        return ResponseEntityUtil.response("ok", HttpStatus.OK);
-    }
-
-    @ApiModelProperty(value = "사용자 페이지", notes = "사용자 페이지입니다.")
-    @GetMapping("/user")
-    public ResponseEntity<String> user() {
-        return ResponseEntityUtil.response("ok", HttpStatus.OK);
     }
 
 }
