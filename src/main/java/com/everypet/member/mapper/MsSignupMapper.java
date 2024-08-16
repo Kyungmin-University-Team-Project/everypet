@@ -1,5 +1,6 @@
 package com.everypet.member.mapper;
 
+import com.everypet.member.model.dto.member.FindIdDTO;
 import com.everypet.member.model.dto.member.SignupDTO;
 import com.everypet.member.model.vo.Member;
 import org.mapstruct.Mapper;
@@ -12,4 +13,5 @@ public interface MsSignupMapper {
 
     Member toVo(SignupDTO dto);
 
+    Member toVo(FindIdDTO dto);
 }

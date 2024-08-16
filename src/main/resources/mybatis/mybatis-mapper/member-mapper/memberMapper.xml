@@ -50,10 +50,16 @@
         WHERE MEMBER_ID = #{memberId}
     </update>
 
-    <select id="selectMemberByEmail" parameterType="FindIdDTO" resultType="String">
+    <select id="selectMemberByEmail" parameterType="Member" resultType="String">
         SELECT MEMBER_ID
         FROM TBL_MEMBER
         WHERE EMAIL = #{email} AND NAME = #{name}
+    </select>
+
+    <select id="existsByPhoneNumber" parameterType="String" resultType="boolean">
+        SELECT COUNT(*) > 0
+        FROM TBL_MEMBER
+        WHERE PHONE = #{phone}
     </select>
 
 </mapper>
