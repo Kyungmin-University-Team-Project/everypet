@@ -3,5 +3,6 @@
     publish = "build"
 [[redirects]]
     from = "/*"
-    to = "/index.html"
+    to = "http://everypet-env.eba-pxs4atwe.ap-northeast-2.elasticbeanstalk.com/:splat"
     status = 200
+    force = true
