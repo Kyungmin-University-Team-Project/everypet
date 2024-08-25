@@ -46,7 +46,6 @@ const Postcode: React.FC<PostcodeProps> = ({ onAddressChange }) => {
   return (
       <div>
         <label className={styles.label_container}>
-          <i className={`fa-regular fa-user ${styles.code_i}`}></i>
           <input
               value={roadAddress || zipCode ? `${roadAddress} ${zipCode}` : ""}
               readOnly
@@ -65,7 +64,6 @@ const Postcode: React.FC<PostcodeProps> = ({ onAddressChange }) => {
         </Modal>
         <br />
         <label className={styles.label_container}>
-          <i className={`fa-regular fa-user ${styles.code_i}`}></i>
           <input
               id="detailAddress"
               type="text"
