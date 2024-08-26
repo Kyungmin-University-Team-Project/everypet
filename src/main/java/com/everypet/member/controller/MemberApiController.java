@@ -62,7 +62,7 @@ public class MemberApiController {
         return ResponseEntityUtil.response(members.toString(), HttpStatus.OK);
     }
     
-    @ApiOperation(value = "비밀번호 찾기", notes = "이메일 인증과 확인 질문을 통해 임시 비밀번호를 발급합니다.")
+    @ApiOperation(value = "비밀번호 찾기", notes = "이메일 인증을 통해 임시 비밀번호를 발급합니다.")
     @PostMapping("/password/reset")
     public ResponseEntity<String> passwordReset(@RequestBody PasswordResetDTO request) {
         memberService.passwordReset(request);

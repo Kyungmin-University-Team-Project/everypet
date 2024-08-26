@@ -16,8 +16,8 @@ public class PasswordResetDTO {
     @ApiModelProperty(example = "memberId", notes = "회원 아이디")
     private String memberId;
 
-    @ApiModelProperty(example="또시", notes = "비밀번호 찾기 답변")
-    private String answer;
+    @ApiModelProperty(example="이메일", notes = "회원 이메일")
+    private String email;
 
     private VerificationDTO verification;
 
