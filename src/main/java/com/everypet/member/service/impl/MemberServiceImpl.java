@@ -9,7 +9,6 @@ import com.everypet.member.exception.InvalidVerificationCodeException;
 import com.everypet.member.exception.MemberIdNotFoundException;
 import com.everypet.member.mapper.MsAddressMapper;
 import com.everypet.member.mapper.MsMemberInfoMapper;
-import com.everypet.member.mapper.MsPasswordRecovery;
 import com.everypet.member.mapper.MsSignupMapper;
 import com.everypet.member.model.dao.AddressMapper;
 import com.everypet.member.model.dao.MemberMapper;
@@ -17,7 +16,6 @@ import com.everypet.member.model.dao.RoleMapper;
 import com.everypet.member.model.dto.member.*;
 import com.everypet.member.model.vo.Address;
 import com.everypet.member.model.vo.Member;
-import com.everypet.member.model.vo.PasswordRecovery;
 import com.everypet.member.model.vo.Role;
 import com.everypet.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -56,7 +54,6 @@ public class MemberServiceImpl implements MemberService {
 
         Member member = MsSignupMapper.INSTANCE.toVo(signupDTO);
         Address address = MsAddressMapper.INSTANCE.toVo(signupDTO.getAddress(), member.getMemberId(), member.getName(), member.getPhone(), "문 앞");
-        PasswordRecovery passwordRecovery = MsPasswordRecovery.INSTANCE.toVo(signupDTO.getPasswordRecovery(), member);
 
         String memberId = member.getMemberId();
         String memberPwd = member.getMemberPwd();
@@ -86,7 +83,6 @@ public class MemberServiceImpl implements MemberService {
 
         memberMapper.insertMember(member);
         addressMapper.insertAddress(address);
-        memberMapper.insertPasswordRecovery(passwordRecovery);
 
         // 포인트 적립
         pointService.accumulateSignupPoints(member);
@@ -141,12 +137,6 @@ public class MemberServiceImpl implements MemberService {
     public void passwordReset(PasswordResetDTO pwdResetData) {
 
         Member member = memberMapper.selectMemberByMemberId(pwdResetData.getMemberId()).orElseThrow(() -> new MemberIdNotFoundException(pwdResetData.getMemberId()));
-
-        PasswordRecovery passwordRecovery = memberMapper.selectPwdQuestion(member.getMemberId());
-
-        if (!passwordRecovery.getAnswer().equals(pwdResetData.getAnswer())) {
-            throw new IllegalArgumentException("비밀번호 찾기 질문의 답이 일치하지 않습니다.");
-        }
 
         if (!emailService.verifyCode(pwdResetData.getVerification())) {
             throw new InvalidVerificationCodeException("비밀번호 초기화 인증 코드가 일치하지 않습니다.");

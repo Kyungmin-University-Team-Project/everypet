@@ -1,33 +1,211 @@
+/* Existing CSS */
 .section {
-    background-color: #f9f9f9;
+    margin: 20px;
+    font-family: Arial, sans-serif;
 }
 
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
+.header {
+    margin-bottom: 20px;
 }
 
-.table th,
-.table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #ddd;
+.searchBox {
+    padding: 10px;
+    font-size: 14px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.table th {
-    background-color: #f2f2f2;
-    text-align: left;
+.filterContainer {
+    display: flex;
+    margin-bottom: 20px;
 }
 
-.button {
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
+.filterButton {
+    padding: 5px 10px;
+    margin-right: 5px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-.button:hover {
-    background-color: #0056b3;
+.orderDate {
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+}
+
+.orderItem {
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.orderHeader {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: bold;
+}
+
+.orderContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.orderDetails {
+    flex-grow: 1;
+}
+
+.deliveryStatus {
+    margin-bottom: 10px;
+}
+
+.deliveryStatusText {
+    font-weight: bold;
+    color: #333;
+}
+
+.deliveryDate {
+    color: green;
+}
+
+.productInfo {
+    display: flex;
+    align-items: flex-start;
+}
+
+.productImage {
+    margin-right: 10px;
+}
+
+.productText {
+    display: flex;
+    flex-direction: column;
+}
+
+.productName {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.price {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+    color: #888;
+}
+
+.buttonGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.actionButton,
+.cartButton {
+    padding: 8px 12px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+}
+
+.cartButton {
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+}
+
+.actionButton:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.cartButton:hover {
+    background-color: #218838;
+}
+
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .searchBox {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .filterContainer {
+        flex-direction: column;
+    }
+
+    .filterButton {
+        margin-bottom: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .orderContent {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .productInfo {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .productImage {
+        margin-bottom: 10px;
+    }
+
+    .buttonGroup {
+        width: 100%;
+        margin-top: 1rem;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .actionButton, .cartButton {
+        width: 32%;
+        font-size: 12px;
+        padding: 10px 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .orderItem {
+        padding: 15px;
+    }
+
+    .orderHeader {
+        font-size: 14px;
+    }
+
+    .actionButton, .cartButton {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .buttonGroup {
+        flex-direction: column;
+        margin-top: 1rem;
+        width: 100%;
+    }
+
+    .actionButton:last-child, .cartButton:last-child {
+        margin-bottom: 0;
+    }
 }

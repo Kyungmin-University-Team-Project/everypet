@@ -121,8 +121,10 @@ const Signup: React.FC = () => {
 
     return (
         <form className={styles.form_container} onSubmit={handleSubmit}>
+            <h3>
+                에브리펫 아이디로 반려동물 쇼핑 끝!
+            </h3>
             <label htmlFor="memberId" className={styles.label_container}>
-                <i className={`fa-regular fa-user ${styles.i}`}></i>
                 <input
                     value={user.memberId}
                     name="memberId"
@@ -135,7 +137,6 @@ const Signup: React.FC = () => {
                 />
             </label>
             <label htmlFor="memberPwd" className={styles.label_container}>
-                <i className={`fa-solid fa-lock ${styles.i}`}></i>
                 <input
                     type="password"
                     value={user.memberPwd}
@@ -150,7 +151,6 @@ const Signup: React.FC = () => {
             </label>
 
             <label className={styles.label_container} htmlFor="email">
-                <i className={`fa-regular fa-envelope ${styles.i}`}></i>
                 <input
                     id="email"
                     type="email"
@@ -192,7 +192,6 @@ const Signup: React.FC = () => {
             </label>
 
             <label className={styles.label_container}>
-                <i className={`fa-regular fa-user ${styles.i}`}></i>
                 <input
                     id="name"
                     name="name"
@@ -205,7 +204,6 @@ const Signup: React.FC = () => {
             </label>
 
             <label className={styles.label_container}>
-                <i className={`fa-regular fa-calendar-days ${styles.i}`}></i>
                 <input
                     id="birth"
                     name="birth"
@@ -217,7 +215,6 @@ const Signup: React.FC = () => {
                 />
             </label>
             <label className={styles.label_container}>
-                <i className={`fa-regular fa-calendar-days ${styles.i}`}></i>
                 <input
                     id="phone"
                     name="phone"
@@ -232,7 +229,6 @@ const Signup: React.FC = () => {
             <Postcode onAddressChange={handleAddressChange} />
 
             <label className={styles.label_container}>
-                <i className={`fa-regular fa-calendar-days ${styles.i}`}></i>
                 <input
                     id="referrer"
                     name="referrer"

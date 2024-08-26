@@ -2,141 +2,178 @@ a {
     text-decoration: none;
     color: #333333;
 }
-/* div box */
+
 .login_box {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 550px;
+    padding: 25px;
+    border-radius: 8px;
 }
 
-.login_section{
+.login_section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-
 }
 
 .login_mainText {
     color: #75acff;
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: bold;
+    margin-bottom: 2rem;
 }
 
 .input_label {
     display: block;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
+    width: 100%;
 }
 
-.login_text {
-    margin-bottom: 0.5rem;
-}
-/* input */
 .input_field {
     position: relative;
-}
-
-.input_icon {
-    position: absolute;
-    left: 0.5rem;
-    top: 35%;
-    transform: translateY(-50%);
-    color: #4a8cf0;
-    font-size: 1.2rem;
-    z-index: 1;
+    width: 100%;
 }
 
 .input_input {
-    padding-left: 2.5rem;
     width: 100%;
-    height: 2.5rem;
+    height: 3rem;
+    padding: 0.6rem;
+    font-size: 1.1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     box-sizing: border-box;
-    z-index: 0;
+    color: #333333;
+    transition: border-color 0.3s ease;
 }
 
 .input_input:focus {
     outline: none;
-    border-color: #75acff;
+    border-color: #4a8cf0;
 }
 
-.login_input input{
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: 1px solid black;
-    outline: none;
-    margin-bottom: 1rem;
-    width: 20rem;
+.checkbox_label {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 1rem;
+    font-size: 1rem;
     color: #333333;
 }
 
-
-/* input checkbox */
-.checkbox_label {
-    text-align: center;
-}
-
-.circle {
-    display: inline-block;
+.login_checkbox {
+    margin-right: 0.5rem;
     width: 20px;
     height: 20px;
-    border: 2px solid #999; /* 회색 테두리 */
-    box-sizing: border-box;
-    border-radius: 10px;
-    position: relative;
-    top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    vertical-align: middle;
     cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff;
 }
 
-.circle:after {
+.login_checkbox:checked {
+    background-color: #4a8cf0;
+    border-color: #4a8cf0;
+}
+
+.login_checkbox:checked::after {
     content: '\2714';
-    font-size: 25px; /* 아이콘 크기 조정 */
-    color: #4a8cf0; /* 회색 아이콘 */
-    position: absolute;
-    top: -15px; /* 아이콘 상단 위치 조정 */
-    left: 1px; /* 아이콘 좌측 위치 조정 */
-    opacity: 0;
-    transition: 0.2s;
-}
-
-.login_checkbox:checked + .circle:after {
-    opacity: 1;
-
-}
-
-.login_checkbox {
-    position: absolute;
-    left: -999em;
-}
-
-/* login btn */
-.login_btn {
-    text-align: center;
-    width: 100%;
-    margin-top: 1rem;
-    border-radius: 5px;
+    font-size: 16px;
     color: white;
-    height: 2.5rem;
-    background-color: #75acff;
-    cursor: pointer;
+    display: block;
+    text-align: center;
+    line-height: 20px;
+}
+
+.login_btn {
+    width: 100%;
+    height: 3rem;
+    background-color: #4a8cf0;
+    color: white;
     border: none;
-    outline: none;
-    box-shadow: 1px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 1.5rem;
 }
 
 .login_btn:hover {
-    background-color: #5e90ff;
+    background-color: #3a78d4;
 }
 
-/* login link */
 .login_link {
+    margin-top: 1.2rem;
+    font-size: 1rem;
     text-align: center;
-    margin-top: 1rem;
+    color: #666666;
+}
+
+.login_link a {
+    color: #4a8cf0;
+    margin: 0 5px;
 }
 
 .login_api {
-    margin-top: 1rem;
+    margin-top: 1.2rem;
     text-align: center;
+}
+
+@media (max-width: 768px) {
+    .login_box {
+        max-width: 90%;
+        padding: 20px;
+    }
+
+    .login_mainText {
+        font-size: 1.5rem;
+    }
+
+    .input_input {
+        font-size: 1rem;
+        height: 2.8rem;
+        padding: 0.5rem;
+    }
+
+    .login_btn {
+        font-size: 1rem;
+        height: 3rem;
+    }
+
+    .login_link {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .login_box {
+        max-width: 95%;
+        padding: 15px;
+    }
+
+    .login_mainText {
+        font-size: 1.25rem;
+    }
+
+    .input_input {
+        font-size: 0.95rem;
+        height: 2.6rem;
+        padding: 0.4rem;
+    }
+
+    .login_btn {
+        font-size: 0.95rem;
+        height: 2.8rem;
+    }
+
+    .login_link {
+        font-size: 0.85rem;
+    }
 }

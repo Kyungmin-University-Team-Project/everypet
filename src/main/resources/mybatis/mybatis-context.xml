@@ -10,7 +10,6 @@
     <typeAliases>
         <typeAlias type="com.everypet.member.model.vo.Member" alias="Member"></typeAlias>
         <typeAlias type="com.everypet.global.auth.oauth2.data.domain.OAuth2Member" alias="OAuth2Member"></typeAlias>
-        <typeAlias type="com.everypet.member.model.vo.PasswordRecovery" alias="PasswordRecovery"></typeAlias>
 
         <typeAlias type="com.everypet.member.model.vo.Address" alias="Address"></typeAlias>
 

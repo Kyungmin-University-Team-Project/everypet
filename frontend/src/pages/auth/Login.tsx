@@ -63,9 +63,8 @@ const Login = () => {
                         <label htmlFor="memberId" className={styles.input_label}>
                             <p className={styles.login_text}>아이디</p>
                             <div className={styles.input_field}>
-                                <i className={`${styles.input_icon} fas fa-user`}/>
                                 <input
-                                    placeholder="아이디를 입력해주세요."
+                                    placeholder="아이디"
                                     id="memberId"
                                     name="memberId"
                                     value={values.memberId}
@@ -78,10 +77,9 @@ const Login = () => {
                         <label htmlFor="memberPwd" className={styles.input_label}>
                             <p className={styles.login_text}>비밀번호</p>
                             <div className={styles.input_field}>
-                                <i className={`${styles.input_icon} fas fa-lock`}/>
                                 <input
                                     type="password"
-                                    placeholder="비밀번호를 입력해주세요."
+                                    placeholder="비밀번호"
                                     id="memberPwd"
                                     name="memberPwd"
                                     className={styles.input_input}
