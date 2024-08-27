@@ -63,6 +63,9 @@ const Item: React.FC<ItemProps> = ({
                 <img className={styles.img} src={imageUrl} alt={name} />
             </div>
             <div className={styles.tagAndIcons}>
+                {/*
+                tag 는 나중에 db에 옵션으로 넣어서 해당하는 카테고리를 넣어주도록 변경
+                */}
                 <span className={styles.tag}>New</span>
                 <div className={styles.icon__wrap}>
                     <FaShoppingCart className={styles.cartIcon} onClick={handleAddToCart} />

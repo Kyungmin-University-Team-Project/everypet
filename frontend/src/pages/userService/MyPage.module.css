@@ -21,22 +21,25 @@
 
 .sidebar__item {
     width: 80%;
-
     padding: 10px 0;
     cursor: pointer;
-    transition: all 0.3s, color 0.3s;
-
-    margin-bottom: 5px;
+    transition: all 0.3s ease, color 0.3s ease;
 }
 
-.sidebar__item:hover,
-.sidebar__item.active {
+.sidebar__item a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    border-radius: 0 20px 20px 0;
+    transition: all 0.3s ease, color 0.3s ease;
+}
+
+.sidebar__item a:hover,
+.sidebar__item a.active {
     background-color: #4c89ff;
     color: white;
-    padding: 10px 15px;
-
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+    padding: 10px 15px; /* 패딩을 a 태그로 이동 */
+    border-radius: 0 20px 20px 0;
 }
 
 .mainContent {
