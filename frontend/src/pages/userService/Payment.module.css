@@ -208,6 +208,7 @@
     box-sizing: border-box;
     position: relative;
     border-bottom: 1px solid #c5c5c5;
+
 }
 
 .itemLeft {
@@ -227,10 +228,11 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100px;
     align-items: start;
     justify-content: space-between;
     padding: 0 10px;
+
+
 }
 
 .productDetails {
@@ -248,7 +250,6 @@
 .quantity {
     display: flex;
     align-items: center;
-    margin-top: 10px;
     width: 100%;
     box-sizing: border-box;
 }
@@ -342,7 +343,7 @@
     }
 
     .item {
-        height: 120px;
+        height: 160px;
     }
 
     .productImage {

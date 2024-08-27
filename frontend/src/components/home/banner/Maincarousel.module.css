@@ -29,6 +29,7 @@
 
 .left__arrow,
 .right__arrow {
+    display: none;
     pointer-events: auto; /* 컨트롤은 클릭 가능하게 설정 */
     border: none;
     cursor: pointer;
@@ -58,19 +59,17 @@
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* 모바일 환경에서 슬라이드 이동 버튼 숨기기 */
-@media screen and (max-width: 767px) {
-    .left__arrow,
-    .right__arrow {
-        display: none;
-    }
-}
 
 /* 노트북 환경에 적용 */
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1400px) {
+    .left__arrow,
+    .right__arrow {
+        display: block;
+    }
+
     .container {
         height: 400px; /* 높이를 노트북 환경에 맞춰 조정 */
-        margin-bottom: 140px;
+        margin-bottom: 80px;
     }
 
     .img {
@@ -83,19 +82,11 @@
 @media screen and (min-width: 1600px) {
     .container {
         height: 500px; /* 높이를 데스크탑 환경에 맞춰 조정 */
-        margin-bottom: 100px;
-    }
-
-    .left__arrow {
-        margin-left: 30px;
-    }
-
-    .right__arrow {
-        margin-right: 30px;
+        margin-bottom: 70px;
     }
 
     .img {
         max-width: 100%; /* 이미지 크기를 컨테이너 너비에 맞춤 */
-        height: auto; /* 높이는 자동으로 조정 */
+        height: 500px;
     }
 }

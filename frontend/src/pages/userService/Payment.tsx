@@ -31,18 +31,23 @@ const Payment: React.FC = () => {
 
         // 주문 정보를 서버에 전송하기 위한 DTO 구성
         const orderInsertDTO = {
-            addressId: addressId,
             orderId: orderId,
+            addressId: addressId,
             products: selectedProducts.map((item: CartItem) => ({
                 productId: item.productId,
                 quantity: item.cartQuantity
-            }))
+            })),
+            delivery: shippingFee,
+            postalCode: postalCode,
+            address: address,
+            addressDetail: detailedAddress,
+            receiver: recipient,
+            phone: `${phonePrefix}${phoneNumber1}${phoneNumber2}`,
+            request: request
         };
 
         try {
-            const token = decryptToken(); // 로컬 스토리지에서 토큰 복호화
-
-            console.log(orderInsertDTO)
+            console.log(orderInsertDTO);
 
             // 주문 정보를 서버로 전송
             const orderResponse = await axiosInstance.post('/order/insert', orderInsertDTO, {
@@ -75,6 +80,7 @@ const Payment: React.FC = () => {
             alert('주문 정보 전송에 실패했습니다.');
         }
     };
+
 
     return (
         <div className={styles.container}>
@@ -151,6 +157,7 @@ const Payment: React.FC = () => {
                                 </select>
                                 <input
                                     type="text"
+                                    maxLength={4}
                                     placeholder="휴대폰 앞자리"
                                     className={styles.phoneInput}
                                     value={phoneNumber1}
@@ -158,6 +165,7 @@ const Payment: React.FC = () => {
                                 />
                                 <input
                                     type="text"
+                                    maxLength={4}
                                     placeholder="휴대폰 뒷자리"
                                     className={styles.phoneInput}
                                     value={phoneNumber2}

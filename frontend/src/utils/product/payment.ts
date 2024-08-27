@@ -39,8 +39,8 @@ export const handleKaKaoPaymentRequest = async (
 
             // 서버로 결제 및 주문 정보 전송
             const notified = await axiosInstance.post('/payment/complete', {
-                paymentId: response.paymentId,
                 orderId: orderId,
+                paymentId: response.paymentId,
             }, {
                 headers: {
                     "Content-Type": "application/json",

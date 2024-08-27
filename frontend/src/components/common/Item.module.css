@@ -127,7 +127,6 @@
 
 @media (min-width: 701px) {
     .item {
-        height: 400px;
         padding: 0;
         margin: 0;
         max-width: none;
@@ -156,5 +155,8 @@
 
     .reviewCount {
         font-size: 13px;
+    }
+    .price__wrap{
+        height: 20px;
     }
 }

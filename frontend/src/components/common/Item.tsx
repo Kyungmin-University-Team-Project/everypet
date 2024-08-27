@@ -1,9 +1,9 @@
 import React from 'react';
-import {FaRegStar, FaShoppingCart, FaStar} from 'react-icons/fa';
+import { FaRegStar, FaShoppingCart, FaStar } from 'react-icons/fa';
 import styles from './Item.module.css';
-import {useNavigate} from "react-router-dom";
-import {addToCart} from "../../utils/product/cart";
-import {handleViewDetails as handleViewDetailsUtil} from "../../utils/product/detailNavigation";
+import { useNavigate } from "react-router-dom";
+import { addToCart } from "../../utils/product/cart";
+import { handleViewDetails as handleViewDetailsUtil } from "../../utils/product/detailNavigation";
 
 interface ItemProps {
     productId: string;
@@ -46,27 +46,43 @@ const Item: React.FC<ItemProps> = ({
     const renderStars = () => {
         let stars = [];
         for (let i = 0; i < 5; i++) {
-            stars.push(i < recommended ? <FaStar key={i}/> : <FaRegStar key={i}/>);
+            stars.push(i < recommended ? <FaStar key={i} /> : <FaRegStar key={i} />);
         }
         return stars;
     };
 
+    const formatPrice = (price: number) => {
+        return new Intl.NumberFormat('ko-KR').format(price);
+    };
+
+    const discountedPrice = price - (price * (discount / 100));
+
     return (
         <div className={styles.item} onClick={handleViewDetails}>
             <div className={styles.img__wrap}>
-                <img className={styles.img} src={imageUrl} alt={name}/>
+                <img className={styles.img} src={imageUrl} alt={name} />
             </div>
             <div className={styles.tagAndIcons}>
+                {/*
+                tag 는 나중에 db에 옵션으로 넣어서 해당하는 카테고리를 넣어주도록 변경
+                */}
                 <span className={styles.tag}>New</span>
                 <div className={styles.icon__wrap}>
-                    <FaShoppingCart className={styles.cartIcon} onClick={handleAddToCart}/>
+                    <FaShoppingCart className={styles.cartIcon} onClick={handleAddToCart} />
                 </div>
             </div>
             <div className={styles.item__info}>
                 <span className={styles.title}>{name}</span>
                 <div className={styles.price__wrap}>
-                    <span className={styles.discount}>{discount}%</span>
-                    <span className={styles.price}>{price}원</span>
+                    {discount > 0 && (
+                        <>
+                            <span className={styles.discount}>{discount}%</span>
+                            <span className={styles.price}>{formatPrice(discountedPrice)}원</span>
+                        </>
+                    )}
+                    {discount === 0 && (
+                        <span className={styles.price}>{formatPrice(price)}원</span>
+                    )}
                 </div>
                 <div className={styles.recommendationAndReviews}>
                     <div className={styles.stars}>{renderStars()}</div>

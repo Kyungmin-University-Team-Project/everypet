@@ -11,13 +11,13 @@ const Usermenu = () => {
         <div className={styles.container}>
             <ul className={styles.user}>
                 <li className={styles.user__li}>
-                    <Link to="/myPage" className={styles.link}>
+                    <Link to="/myPage/userInfo" className={styles.link}>
                         <AiOutlineUser/>
                         <span className={styles.tag}>마이페이지</span>
                     </Link>
                 </li>
                 <li className={styles.user__li}>
-                    <Link to="/deliveryInquiry" className={styles.link}>
+                    <Link to="/myPage/orderManagement" className={styles.link}>
                         <LiaShippingFastSolid/>
                         <span className={styles.tag}>배송조회</span>
                     </Link>
