@@ -5,33 +5,30 @@ const UserInfo = () => {
     return (
         <div className={styles.section}>
             <h2>회원 정보</h2>
-            <table className={styles.table}>
-                <tbody>
-                <tr>
-                    <th>아이디</th>
-                    <td>testUser1234</td>
-                </tr>
-                <tr>
-                    <th>이름</th>
-                    <td>박민규</td>
-                </tr>
-                <tr>
-                    <th>비밀번호 변경</th>
-                    <td>
-                        <button className={styles.button}>변경하기</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th>연락처</th>
-                    <td>010-1234-5678</td>
-                </tr>
-                <tr>
-                    <th>이메일</th>
-                    <td>test@example.com</td>
-                </tr>
-                </tbody>
-            </table>
+            <div className={styles.gridContainer}>
+                <div className={styles.label}>아이디</div>
+                <div className={styles.value}>testUser1234</div>
 
+                <div className={styles.label}>이름</div>
+                <div className={styles.value}>박민규</div>
+
+                <div className={styles.label}>비밀번호 변경</div>
+                <div className={styles.value}>
+                    <button className={styles.button}>변경하기</button>
+                </div>
+
+                <div className={styles.label}>연락처</div>
+                <div className={styles.value}>010-1234-5678</div>
+
+                <div className={styles.label}>이메일</div>
+                <div className={styles.value}>test@example.com</div>
+
+                <div className={styles.label}>회원등급</div>
+                <div className={styles.value}>씨앗🌱</div>
+
+                <div className={styles.label}>포인트</div>
+                <div className={styles.value}>14151248091785018 P</div>
+            </div>
         </div>
     );
 };

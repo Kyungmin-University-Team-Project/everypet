@@ -64,7 +64,7 @@ const Payment: React.FC = () => {
                     selectedProducts.length > 1
                         ? `${selectedProducts[0].productName} 외 ${selectedProducts.length - 1}건`
                         : selectedProducts[0]?.productName || '주문상품',
-                    totalPrice + shippingFee,
+                    totalPrice,
                     orderId,
                     addressId,
                     selectedProducts.map((item: CartItem) => ({
