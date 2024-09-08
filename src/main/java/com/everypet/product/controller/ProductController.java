@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Api(tags = "상품 Api")
@@ -139,6 +140,13 @@ public class ProductController {
         productService.deleteProductKeyword(deleteProductKeywordDTO, memberId);
 
         return response(HttpStatus.OK, "키워드 삭제 완료");
+    }
+    
+    // 실시간 검색어 순위
+    @ApiOperation(value = "실시간 검색어 순위", notes = "실시간 검색어 순위를 출력합니다.")
+    @PostMapping("/real-time-keyword")
+    public List<String> realTimeKeyword(){
+        return new ArrayList<>(productService.realTimeKeyword(10));
     }
 
     // ----------------------------------------------------------------------------------------------
