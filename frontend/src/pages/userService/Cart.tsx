@@ -171,7 +171,9 @@ const Cart: React.FC = () => {
                                         </button>
                                     </div>
                                     <div className={styles.total}>
-                                        <p className={styles.price}>{formatPrice(parseInt(item.productPrice.replace(/,/g, ''), 10) * item.cartQuantity)}</p>
+                                        <p className={styles.price}>
+                                            {item.productPrice ? formatPrice(parseInt(item.productPrice.replace(/,/g, ''), 10) * item.cartQuantity) : '0원'}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
