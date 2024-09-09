@@ -1,0 +1,8 @@
+[build]
+    command = "CI=false npm run build"
+    publish = "build"
+[[redirects]]
+    from = "/*"
+    to = "http://every-pet-env.eba-x3dvdddm.ap-northeast-2.elasticbeanstalk.com/:splat"
+    status = 200
+    force = true
