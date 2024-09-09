@@ -25,8 +25,7 @@
     padding: 0 15px;
 }
 
-.header .logo {
-    font-size: 2rem;
+.logo {
     color: #75acff;
     font-family: 'WAGURI', sans-serif;
 }
@@ -379,6 +378,10 @@
 
 /* 데스크탑 환경 */
 @media screen and (min-width: 1600px) {
+    .inner {
+        width: 1250px;
+    }
+
     .logo {
         font-size: 36px;
         width: 1250px;
