@@ -1,43 +1,44 @@
-version: '3'
 
-services:
-  tomcat:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - '8080:8080'
-    depends_on:
-      - mysql
-      - redis
-    environment:
-      db.driverClass: 'com.mysql.jdbc.Driver'
-      db.url: 'jdbc:mysql://mysql:3306/every-pet'
-      db.username: 'root'
-      db.password: 'root'
-      redis.host: 'redis'
-      redis.port: '6379'
-    networks:
-      - network
+  version: '3'
 
-  mysql:
-    image: mysql:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: every-pet
-    ports:
-      - '3308:3306'
-    volumes:
-      - ./docs/data.sql:/docker-entrypoint-initdb.d/data.sql
-    networks:
-      - network
+  services:
+    tomcat:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      ports:
+        - '8080:8080'
+      depends_on:
+        - mysql
+        - redis
+      environment:
+        db.driverClass: 'com.mysql.jdbc.Driver'
+        db.url: 'jdbc:mysql://mysql:3306/every-pet'
+        db.username: 'root'
+        db.password: 'root'
+        redis.host: 'redis'
+        redis.port: '6379'
+      networks:
+        - network
 
-  redis:
-    image: redis
-    ports:
-      - '6382:6379'
-    networks:
-      - network
+    mysql:
+      image: mysql:latest
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: every-pet
+      ports:
+        - '3308:3306'
+      volumes:
+        - ./docs/data.sql:/docker-entrypoint-initdb.d/data.sql
+      networks:
+        - network
 
-networks:
-  network:
+    redis:
+      image: redis
+      ports:
+        - '6382:6379'
+      networks:
+        - network
+
+  networks:
+    network:

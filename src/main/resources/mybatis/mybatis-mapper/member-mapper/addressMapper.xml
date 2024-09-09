@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.everypet.member.model.dao.AddressMapper">
+
+    <select id="selectAddressByMemberId" parameterType="String" resultType="Address">
+        SELECT *
+        FROM TBL_ADDRESS
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+
+    <insert id="insertAddress" parameterType="Address">
+        INSERT INTO TBL_ADDRESS(MEMBER_ID, ADDRESS, DETAIL_ADDRESS, RECEIVER, PHONE, REQUEST, DEFAULT_YN)
+        VALUES (#{memberId}, #{address}, #{detailAddress}, #{receiver}, #{phone}, #{request}, #{defaultYn})
+    </insert>
+
+    <update id="updateAddress" parameterType="Address">
+        UPDATE TBL_ADDRESS
+        SET ADDRESS = #{address}, RECEIVER = #{receiver}, PHONE = #{phone}, REQUEST = #{request}, DEFAULT_YN = #{defaultYn}
+        WHERE ADDRESS_ID = #{addressId} AND MEMBER_ID = #{memberId}
+    </update>
+
+    <delete id="deleteAddress" parameterType="Address">
+        DELETE FROM TBL_ADDRESS
+        WHERE ADDRESS_ID = #{addressId} AND MEMBER_ID = #{memberId}
+    </delete>
+
+</mapper>

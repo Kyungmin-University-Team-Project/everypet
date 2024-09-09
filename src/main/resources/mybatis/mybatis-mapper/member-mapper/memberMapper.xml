@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.everypet.member.model.dao.MemberMapper">
+
+    <select id="selectMemberByMemberId" parameterType="String" resultType="Member">
+        SELECT *
+        FROM TBL_MEMBER
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+
+    <select id="existsByMemberId" parameterType="String" resultType="boolean">
+        SELECT COUNT(*)
+        FROM TBL_MEMBER
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+
+    <update id="updatePassword" parameterType="Member">
+        UPDATE TBL_MEMBER
+        SET MEMBER_PWD = #{memberPwd}
+        WHERE MEMBER_ID = #{memberId}
+    </update>
+
+    <insert id="insertMember" parameterType="Member">
+        INSERT INTO TBL_MEMBER(
+            MEMBER_ID, MEMBER_PWD, NAME, EMAIL, PHONE, AGREE_MARKETING_YN)
+        VALUES (
+            #{memberId}, #{memberPwd}, #{name}, #{email}, #{phone}, #{agreeMarketingYn})
+    </insert>
+
+    <delete id="deleteMember" parameterType="Member">
+        DELETE FROM TBL_MEMBER
+        WHERE MEMBER_ID = #{memberId}
+    </delete>
+
+    <update id="updatePoint" parameterType="Member">
+        UPDATE TBL_MEMBER
+        SET POINT = #{point}
+        WHERE MEMBER_ID = #{memberId}
+    </update>
+
+    <select id="selectMemberByEmail" parameterType="Member" resultType="String">
+        SELECT MEMBER_ID
+        FROM TBL_MEMBER
+        WHERE EMAIL = #{email} AND NAME = #{name}
+    </select>
+
+    <select id="existsByPhoneNumber" parameterType="String" resultType="boolean">
+        SELECT COUNT(*) > 0
+        FROM TBL_MEMBER
+        WHERE PHONE = #{phone}
+    </select>
+
+</mapper>

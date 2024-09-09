@@ -1,54 +1,67 @@
 .container {
-  display: flex;
-  width: 100%;
-  /* background-color: rgb(211, 211, 248); */
-
-  align-items: center;
-
-  justify-content: center;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 .inner {
-  width: 1250px;
-
-  /* background-color: aqua; */
+    width: 100%;
 }
 
 .title {
-  display: block;
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
 
-  font-size: 36px;
-  font-weight: bold;
-
-  margin-bottom: 30px;
+    padding: 0 10px;
 }
 
 .main__img {
-  width: 100%;
-  object-fit: cover;
-
-  border-radius: 20px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    width: 100%;
+    object-fit: cover;
 }
 
 .rightAlign {
-  display: flex; /* Use flexbox for alignment */
-  justify-content: flex-end; /* Align to the right end */
-  margin: 10px 0; /* Margin for spacing */
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 0;
 }
 
 .view__all {
-  display: flex;
-  font-size: 18px;
-
-  color: gray;
-
-  align-items: center;
-  transition: all 0.2s ease;
+    display: flex;
+    font-size: 16px;
+    color: gray;
+    align-items: center;
+    transition: all 0.2s ease;
 }
 
 .view__all:hover {
-  color: #75acff;
-  cursor: pointer;
+    color: #75acff;
+    cursor: pointer;
 }
+
+@media screen and (min-width: 768px) {
+    .title {
+        font-size: 28px;
+    }
+
+    .view__all {
+        font-size: 18px;
+    }
+}
+
+
+@media screen and (min-width: 1400px) {
+    .inner {
+        width: 1100px;
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    .inner {
+        width: 1250px;
+    }
+}
+

@@ -1,9 +1,9 @@
 package com.everypet.global.config;
 
-import com.everypet.global.auth.jwt.data.repository.RefreshTokenRepository;
 import com.everypet.global.auth.jwt.filter.CustomLogoutFilter;
 import com.everypet.global.auth.jwt.filter.JWTFilter;
 import com.everypet.global.auth.jwt.filter.LoginFilter;
+import com.everypet.global.auth.jwt.repository.RefreshTokenRepository;
 import com.everypet.global.auth.oauth2.config.CustomClientRegistrationRepo;
 import com.everypet.global.auth.oauth2.handler.CustomSuccessHandler;
 import com.everypet.global.auth.oauth2.service.CustomOAuth2UserService;
@@ -27,6 +27,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.Collections;
 
 //@ComponentScan(basePackages = "com.everypet.global.auth.*")
@@ -69,6 +70,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests() // 요청에 대한 보안 설정
                 .antMatchers("/resources/**").permitAll()
+                .antMatchers("/ws/**").permitAll()
+                .antMatchers("/send-mail/**").permitAll()
+                .antMatchers("/member/password/reset").permitAll()
+                .antMatchers("/member/id/find").permitAll()
                 .antMatchers("/signin").anonymous()
                 .antMatchers("/signup").anonymous()
                 .antMatchers("/").permitAll()
@@ -107,11 +112,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // 세션 설정
         http
-                .sessionManagement() 
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        
+
         // cors 설정
-        http 
+        http
                 .cors((corsCustomizer -> corsCustomizer.configurationSource(new CorsConfigurationSource() {
 
                     @Override
@@ -119,7 +124,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                         CorsConfiguration configuration = new CorsConfiguration();
 
-                        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));  // 해당 IP에 응답을 허용
+                        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://aws--everypet.netlify.app"));  // 허용할 도메인
                         configuration.setAllowedMethods(Collections.singletonList("*")); // 모든 post, get, put, delete, patch 요청을 허용
                         configuration.setAllowCredentials(true);    // 내 서버에 json응답을 자바스크립가 처리할수 있게 설정
                         configuration.setAllowedHeaders(Collections.singletonList("*")); // 모든 header에 응답을 허용
@@ -145,4 +150,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 );
 
     }
+
 }

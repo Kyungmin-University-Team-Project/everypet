@@ -1,93 +1,54 @@
 import React from 'react';
+import { useQuery } from 'react-query';
+import { useSelector } from 'react-redux';
 import Item from './Item';
 import styles from './ItemList.module.css';
+import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
+import ErrorComponent from "../../utils/reactQuery/ErrorComponent";
+import { fetchProductList } from "../../utils/product/fetchProductList";
+import { Product } from "../../typings/Category";
+import { RootState } from '../../redux/store/rootReducer';
 
 const ItemList = () => {
-  // 아이템 리스트 props로 받기, 해당 데이터는 서버에서 받아옴
+    const clickedCategory = useSelector((state: RootState) => state.category.clickedCategory);
 
-  // 아래는 mock 데이터
-  const items = [
-    {
-      name: '[잘먹잘싸 봄맞이 할인] 소형견 사료',
-      price: '29,987',
-      recommended: 4, // Assuming 4 out of 5 stars
-      reviewCount: 150,
-      discount: 12,
-      imageUrl: require('../../assets/img/product_image/dog_food_1.jpg'),
-    },
-    {
-      name: '[DOG FOOD] 연어맛 강아지 사료',
-      price: '24,350',
-      recommended: 2, // Assuming 2 out of 5 stars
-      reviewCount: 85,
-      discount: 36,
-      imageUrl: require('../../assets/img/product_image/dog_food_2.jpg'),
-    },
-    {
-      name: 'DERMA 강아지 사료',
-      price: '68,987',
-      recommended: 5, // Full recommendation
-      reviewCount: 200,
-      discount: 40,
-      imageUrl: require('../../assets/img/product_image/dog_food_3.jpg'),
-    },
-    {
-      name: '[DOG FOOD] 치킨맛 강아지 사료',
-      price: '59,987',
-      recommended: 5, // Full recommendation
-      reviewCount: 300,
-      discount: 38,
-      imageUrl: require('../../assets/img/product_image/dog_food_4.jpg'),
-    },
-    {
-      name: '[잘먹잘싸 봄맞이 할인] 대형견 사료',
-      price: '64,987',
-      recommended: 3, // Assuming 3 out of 5 stars
-      reviewCount: 100,
-      discount: 51,
-      imageUrl: require('../../assets/img/product_image/dog_food_5.jpg'),
-    },
-    {
-      name: '강아지 사료 6',
-      price: '89,987',
-      recommended: 1, // Assuming only 1 out of 5 stars
-      reviewCount: 120,
-      discount: 78,
-      imageUrl: require('../../assets/img/product_image/dog_food_6.jpg'),
-    },
-    {
-      name: '강아지 사료 6',
-      price: '89,987',
-      recommended: 1, // Assuming only 1 out of 5 stars
-      reviewCount: 120,
-      discount: 8,
-      imageUrl: require('../../assets/img/product_image/dog_food_6.jpg'),
-    },
-    {
-      name: '강아지 사료 6',
-      price: '89,987',
-      recommended: 1, // Assuming only 1 out of 5 stars
-      reviewCount: 120,
-      discount: 3,
-      imageUrl: require('../../assets/img/product_image/dog_food_6.jpg'),
-    },
-  ];
+    const fetchItems = async (): Promise<Product[]> => {
+        const params = {
+            orderBy: 'PRODUCT_VIEWS DESC',
+            page: 1,
+            pageSize: 10,
+            productCategory: `${clickedCategory}%`
+        };
+        console.log("Fetching items with params:", params);
+        return await fetchProductList(params);
+    };
 
-  return (
-    <div className={styles.container}>
-      {items.map((item, index) => (
-        <Item
-          key={index}
-          name={item.name}
-          price={item.price}
-          discount={item.discount}
-          recommended={item.recommended}
-          reviewCount={item.reviewCount}
-          imageUrl={item.imageUrl}
-        />
-      ))}
-    </div>
-  );
+    const { data, error, isLoading } = useQuery<Product[], Error>(['products', clickedCategory], fetchItems);
+
+    if (isLoading) {
+        return <LoadingSpinner />;
+    }
+
+    if (error) {
+        return <ErrorComponent message={error.message} />;
+    }
+
+    return (
+        <div className={styles.container}>
+            {data?.map((item) => (
+                <Item
+                    key={item.productId}
+                    productId={item.productId}
+                    name={item.productName}
+                    price={item.productPrice}
+                    discount={item.productDiscountRate}
+                    recommended={item.productViews}
+                    reviewCount={item.numberOfProduct}
+                    imageUrl={`https://storage.googleapis.com/every_pet_img/${item.productId}`} // 이미지 URL 수정
+                />
+            ))}
+        </div>
+    );
 };
 
 export default ItemList;

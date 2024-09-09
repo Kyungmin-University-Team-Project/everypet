@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.everypet.order.model.dao.OrderMapper">
+
+    <!-- 주문 정보를 TBL_ORDER 테이블에 삽입 -->
+    <insert id="insertOrder" parameterType="Map">
+        INSERT INTO TBL_ORDER (
+            ORDER_ID, MEMBER_ID, TOTAL_AMOUNT, PRODUCT_AMOUNT, DELIVERY_AMOUNT,
+            POSTAL_CODE, ADDRESS, ADDRESS_DETAIL, RECEIVER, PHONE, REQUEST
+        )
+        VALUES (
+                   #{orderId}, #{memberId}, #{totalAmount}, #{productAmount}, #{deliveryAmount},
+                   #{postalCode}, #{address}, #{addressDetail}, #{receiver}, #{phone}, #{request}
+               )
+    </insert>
+
+
+
+    <!-- 주문 정보를 TBL_ORDER 테이블에서 삭제 -->
+    <delete id="deleteOrderByOrderId">
+        DELETE FROM TBL_ORDER
+        WHERE ORDER_ID = #{orderId}
+    </delete>
+
+    <select id="selectOrderById" resultType="Order">
+        SELECT ORDER_ID, MEMBER_ID, ORDER_DATE, TOTAL_AMOUNT, ADDRESS, RECEIVER, PHONE, REQUEST, ORDER_STATUS
+        FROM TBL_ORDER
+        WHERE ORDER_ID = #{orderId}
+    </select>
+
+    <update id="updateOrderStatusByOrderId" parameterType="Map">
+        UPDATE TBL_ORDER
+        SET ORDER_STATUS = #{orderStatus}
+        WHERE ORDER_ID = #{orderId}
+    </update>
+</mapper>

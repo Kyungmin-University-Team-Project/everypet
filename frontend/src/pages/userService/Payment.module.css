@@ -1,0 +1,400 @@
+/* 공통 스타일 */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.header {
+    width: 100%;
+    height: 80px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #cdcdcd;
+}
+
+.inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.logo {
+    color: #75acff;
+    font-family: 'WAGURI', sans-serif;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.paymentItems {
+    height: auto;
+    width: 100%;
+}
+
+.paymentHeader {
+    position: sticky;
+    top: 0;
+    display: flex;
+    padding: 15px;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #b6b6b6;
+    background-color: white;
+    z-index: 999;
+}
+
+.paymentHeader h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.orderInfo {
+    padding: 0 15px;
+    margin-bottom: 30px;
+
+    border-bottom: 1px solid #757575;
+}
+
+.orderHeader {
+    display: flex;
+    height: 70px;
+    align-items: center;
+}
+
+.orderTitle {
+    display: flex;
+    height: 50%;
+    align-items: center;
+}
+
+.orderSearch__btn {
+    height: 50%;
+    background-color: white;
+    border: 1px solid #b8b8b8;
+    font-size: 16px;
+    margin-left: 20px;
+}
+
+.inputForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputGroup {
+    display: flex;
+    margin-bottom: 15px;
+
+}
+
+.inputField {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* 내부 패딩과 테두리를 포함하여 크기를 계산합니다 */
+}
+
+.inputGroup__address {
+    display: flex;
+
+    margin-bottom: 15px;
+}
+
+.addressSearch__btn {
+    width: 40%;
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #ffffff;
+    color: #000000;
+    border: 3px solid #679aff;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+
+.inputGroup__phone {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+}
+
+.phoneSelect, .phoneInput {
+    width: 28%;
+    justify-content: space-between;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.checkboxGroup {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.checkbox {
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+}
+
+.inputGroup__request {
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.requestTitle {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.requestLabel {
+    font-size: 1rem;
+}
+
+.requestSelect {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: white;
+}
+
+
+.productInfo {
+    padding: 0 15px;
+}
+
+.productListHeader {
+    display: flex;
+    align-items: center;
+}
+
+.productTitle {
+    margin-right: 10px;
+}
+
+
+.item__wrap {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    border-bottom: 1px solid #c5c5c5;
+
+}
+
+.itemLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.productImage {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: start;
+    justify-content: space-between;
+    padding: 0 10px;
+
+
+}
+
+.productDetails {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.productDetails p {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.total {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-weight: bold;
+    box-sizing: border-box;
+    text-align: right;
+}
+
+.price {
+    margin: 0;
+    font-size: 20px;
+}
+
+.summaryContainer {
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background: white;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid darkgrey;
+}
+
+.summary {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.shippingFee {
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+
+.summaryTotal {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+.checkoutButton {
+    padding: 10px 20px;
+    background-color: #679aff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 20px;
+    width: 100%;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+/* 노트북 및 데스크탑 환경 */
+@media screen and (min-width: 1400px) {
+    .inner {
+        width: 1100px;
+    }
+
+    .logo {
+        font-size: 32px;
+    }
+
+    .section {
+        width: 1100px;
+        margin: auto;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-bottom: 20px;
+    }
+
+    .paymentItems {
+        width: 70%;
+        margin: 0;
+    }
+
+    .item {
+        height: 160px;
+    }
+
+    .productImage {
+        width: 120px;
+        height: 120px;
+    }
+
+    .productDetails p {
+        font-size: 1.6rem;
+    }
+
+    .summaryContainer {
+        position: sticky;
+        top: 0;
+        height: 100%;
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 20px;
+        border-top: none;
+    }
+
+    .summaryTotal, .shippingFee {
+        margin-bottom: 20px;
+    }
+
+    .checkoutButton {
+        align-self: stretch;
+    }
+}
+
+/* 데스크탑 환경 */
+@media screen and (min-width: 1600px) {
+    .inner {
+        width: 1250px;
+    }
+
+    .logo {
+        font-size: 36px;
+        width: 1250px;
+    }
+
+    .section {
+        width: 1250px;
+        margin: auto;
+        padding-bottom: 20px;
+    }
+
+    .productImage {
+        width: 140px;
+        height: 140px;
+    }
+}

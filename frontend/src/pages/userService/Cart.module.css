@@ -1,0 +1,360 @@
+/* 공통 스타일 */
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.header {
+    width: 100%;
+    height: 80px;
+    background-color: white;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    border-bottom: solid 1px rgb(205, 205, 205);
+}
+
+.header .inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.header .title {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    color: #75acff;
+    font-family: 'WAGURI', sans-serif;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+
+.cartItems {
+    height: auto;
+    width: 100%;
+}
+
+.cartHeader {
+    position: sticky;
+    top: 0;
+    display: flex;
+    padding: 15px;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: solid 1px #b6b6b6;
+    background-color: white;
+    z-index: 999;
+}
+
+.cartHeader h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.selectAll__wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.selectAll {
+    font-size: 0.9em;
+    color: #007BFF;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.check__all__Input {
+    display: flex;
+    width: 20px;
+    height: 20px;
+
+    cursor: pointer;
+}
+
+.item__wrap {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.icon__btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+
+    margin-top: 20px;
+}
+
+.checkboxInput {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+
+    margin-left: 20px;
+
+}
+
+
+.removeItemButton {
+    cursor: pointer;
+    font-size: 1.4em;
+    color: #000000;
+
+    margin-right: 20px;
+}
+
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px;
+    box-sizing: border-box;
+    position: relative;
+
+    border-bottom: solid 1px #c5c5c5;
+
+}
+
+.itemLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.productImage {
+    width: 100px;
+    height: 100px;
+
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 100px;
+
+    align-items: start;
+    justify-content: space-between;
+
+
+    padding: 0 10px;
+
+}
+
+.productDetails {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.productDetails p {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.quantityButton {
+    background: none;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+
+.quantityInput {
+    display: flex;
+    max-width: 100px;
+    text-align: center;
+    border: 1px solid #ccc;
+    margin: 0 5px;
+    height: 30px;
+    box-sizing: border-box;
+    padding-left: 15px;
+}
+
+.total {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-weight: bold;
+    box-sizing: border-box;
+    text-align: right;
+
+}
+
+.price {
+    margin: 0;
+    font-size: 20px;
+}
+
+.summaryContainer {
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background: white;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-top: solid 1px darkgrey;
+}
+
+.summary {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.shippingFee {
+    display: flex;
+
+    width: 100%;
+    margin-top: 10px;
+    justify-content: space-between;
+
+}
+
+.summaryTotal {
+    display: flex;
+    width: 100%;
+
+    justify-content: space-between;
+
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+.checkoutButton {
+    padding: 10px 20px;
+    background-color: #679aff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 20px;
+    width: 100%;
+
+    border-radius: 10px;
+
+    font-weight: bold;
+}
+
+/* 노트북 및 데스크탑 환경 */
+@media screen and (min-width: 1400px) {
+    .header .title {
+        margin: auto;
+        width: 1100px;
+
+    }
+
+    .section {
+        width: 1100px;
+        margin: auto;
+
+        flex-direction: row;
+        justify-content: space-between;
+        padding-bottom: 20px;
+    }
+
+
+    .cartItems {
+        width: 70%;
+        margin: 0;
+    }
+
+    .cartHeader {
+        padding: 17px;
+    }
+
+    .product {
+        height: 120px;
+    }
+
+    .productImage {
+        width: 120px;
+        height: 120px;
+    }
+
+    .productDetails p {
+        font-size: 1.6rem;
+    }
+
+    .summaryContainer {
+        position: sticky;
+        top: 0;
+        height: 100%;
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 20px;
+
+        border-top: none;
+    }
+
+    .summaryTotal, .shippingFee {
+        margin-bottom: 20px;
+    }
+
+    .checkoutButton {
+        align-self: stretch;
+    }
+}
+
+/* 데스크탑 환경 */
+@media screen and (min-width: 1600px) {
+    .header .title {
+        font-size: 36px;
+        margin: auto;
+
+        width: 1250px;
+    }
+
+    .section {
+        width: 1250px;
+        margin: auto;
+        padding-bottom: 20px;
+    }
+
+    .productImage {
+        width: 140px;
+        height: 140px;
+    }
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "[잘먹잘싸 봄맞이 할인!] 소형견 사료",
+    "price": "29,987",
+    "imageUrl": "dog_food_1.png"
+  },
+  {
+    "id": 2,
+    "name": "[DOG FOOD] 연어맛 강아지 사료",
+    "price": "24,350",
+    "imageUrl": "dog_food_2.png"
+  },
+  {
+    "id": 3,
+    "name": "DERMA 강아지 사료",
+    "price": "68,987",
+    "imageUrl": "dog_food_3.png"
+  },
+  {
+    "id": 4,
+    "name": "[DOG FOOD] 치킨맛 강아지 사료",
+    "price": "59,987",
+    "imageUrl": "dog_food_4.png"
+  },
+  {
+    "id": 5,
+    "name": "[잘먹잘싸 봄맞이 할인] 대형견 사료",
+    "price": "64,987",
+    "imageUrl": "dog_food_5.png"
+  },
+  {
+    "id": 6,
+    "name": "강아지 사료 6",
+    "price": "89,987",
+    "imageUrl": "dog_food_6.png"
+  },
+  {
+    "id": 7,
+    "name": "강아지 사료 7",
+    "price": "89,987",
+    "imageUrl": "dog_food_6.png"
+  },
+  {
+    "id": 8,
+    "name": "강아지 사료 8",
+    "price": "89,987",
+    "imageUrl": "dog_food_6.png"
+  }
+]

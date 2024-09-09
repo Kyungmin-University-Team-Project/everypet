@@ -1,135 +1,142 @@
-/* Categorymodal.module.css */
 
 .modal__open {
-  display: block;
+    display: block;
+
 }
 
 .modal__close {
-  display: none;
+    display: none;
 }
 
 .modal__fixed {
-  position: fixed;
-  width: 100%;
+    position: fixed;
+    display: flex;
+    width: 100%;
 
-  top: 100px;
+    top: 120px;
 
-  background-color: white;
+    background-color: white;
 
-  border-top: 1px solid #ccc; /* 상단 보더만 추가 */
-  border-bottom: 1px solid #ccc; /* 하단 보더만 추가 */
+    margin: auto;
 
-  padding: 20px 0 20px 0;
+    border-bottom: 1px solid #ccc;
 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+    padding: 20px 0 20px 0;
+
+
+    z-index: 1000;
 }
 
 .modal__content {
-  position: absolute;
-  width: 100%;
+    display: flex;
 
-  background-color: white;
+    position: absolute;
+    width: 100%;
 
-  border-top: 1px solid #ccc; /* 상단 보더만 추가 */
-  border-bottom: 1px solid #ccc; /* 하단 보더만 추가 */
+    background-color: white;
 
-  padding: 20px 0 20px 0;
+    border-top: 1px solid #ccc; /* 상단 보더만 추가 */
+    border-bottom: 1px solid #ccc; /* 하단 보더만 추가 */
 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+    padding: 20px 0 20px 0;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 }
 
 .categories__container {
-  display: flex;
-  flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 
-  margin-left: 29.5%;
+    margin: auto;
 
-  gap: 70px;
+    gap: 110px;
 }
 
 .category {
-  display: flex;
+    display: flex;
 
-  /* background-color: aqua; */
 }
 
 .category__content {
-  user-select: none;
+    user-select: none;
+
+
+    width: 8rem;
 }
 
 .category__title {
-  display: flex;
+    display: flex;
 
-  font-size: 18px;
-  font-weight: bold;
+    font-size: 18px;
+    font-weight: bold;
 
-  margin-bottom: 10px;
-  margin-left: -2px;
+    margin-bottom: 10px;
+    margin-left: -2px;
 
-  transition: all 300ms linear;
+    transition: all 300ms linear;
+    cursor: pointer;
 }
+
 
 .ul__wrap {
-  display: flex;
-  position: relative;
+    display: flex;
+    position: relative;
 }
+
 .ul__line__bg {
-  width: 2px; /* 배경 세로선의 너비 설정 */
-  height: 100%; /* 부모 요소에 맞게 높이 설정 */
-  background-color: #cac7c7; /* 배경 세로선의 색상 설정 */
-  position: absolute; /* 절대 위치 설정 */
+    width: 2px; /* 배경 세로선의 너비 설정 */
+    height: 100%; /* 부모 요소에 맞게 높이 설정 */
+    background-color: #cac7c7; /* 배경 세로선의 색상 설정 */
+    position: absolute; /* 절대 위치 설정 */
 }
 
 .ul__line {
-  width: 2px; /* 세로선의 너비 설정 */
-  height: 0; /* 초기에는 높이를 0으로 설정 */
-  background-color: #4a8cf0;
-  position: absolute; /* 절대 위치 설정 */
+    width: 2px; /* 세로선의 너비 설정 */
+    height: 0; /* 초기에는 높이를 0으로 설정 */
+    background-color: #4a8cf0;
+    position: absolute; /* 절대 위치 설정 */
 
-  transition: all 0.5s ease; /* 높이에 대한 트랜지션 설정 */
+    transition: all 0.5s ease; /* 높이에 대한 트랜지션 설정 */
 }
 
 .category__content:hover .ul__line {
-  height: 100%; /* 호버 시 세로선의 높이를 100%로 변경하여 보이도록 함 */
+    height: 100%; /* 호버 시 세로선의 높이를 100%로 변경하여 보이도록 함 */
 }
 
 .category__content:hover .category__title {
-  color: #4a8cf0;
+    color: #4a8cf0;
 }
 
 .category__content:hover .ul__wrap .ul__line {
-  background-color: #4a8cf0;
+    background-color: #4a8cf0;
 }
 
 .category ul {
-  list-style: none;
-  padding-left: 20px;
+    list-style: none;
+    padding-left: 20px;
 
-  margin: 0;
+    margin: 0;
 }
 
 .category ul li {
-  margin-bottom: 5px;
-  font-size: 14px;
-  color: #666;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #666;
 
-  margin-top: 20px;
+    margin-top: 20px;
 
-  cursor: pointer;
+    cursor: pointer;
 
-  transition: color 0.3s ease;
+    transition: color 0.3s ease;
 }
 
 .category ul li:hover {
-  color: #4a8cf0;
+    color: #4a8cf0;
 }
 
-@media screen and (max-width: 1536px) {
-  .categories__container {
-    margin-left: 28%;
-
-    gap: 36px;
-  }
+@media screen and (min-width: 1600px) {
+    .categories__container {
+        gap: 150px;
+    }
 }

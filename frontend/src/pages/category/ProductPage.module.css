@@ -1,18 +1,26 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
-  /* background-color: aqua; */
-
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 .inner {
-  width: 1250px;
+    width: 100%;
+    margin: 40px 0 40px 0;
+}
 
-  /* background-color: aqua; */
+/* 노트북 환경 */
+@media screen and (min-width: 1024px) and (max-width: 1599px) {
+    .inner {
+        width: 1100px;
+    }
+}
 
-  margin: 40px 0 40px 0;
+/* 데스크탑 환경 */
+@media screen and (min-width: 1600px) {
+    .inner {
+        width: 1250px;
+    }
 }

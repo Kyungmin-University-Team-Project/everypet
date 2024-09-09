@@ -1,5 +1,7 @@
 ul {
     list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 button {
@@ -7,62 +9,51 @@ button {
 }
 
 .find_form_container {
-    width: 560px;
-    background-color: #252525;
+    background-color: #ffffff;
+    margin: 0 auto;
+    width: 30%;
+    padding-top: 20px;
 }
 
 .ul_container {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     padding: 0;
     margin: 0;
-    border: 1px solid #2f2f2f;
+    border-bottom: 1px solid #e6e6e6;
 }
 
 .ul_container > li {
-    width: 50%;
-    height: 60px;
-    border-bottom: 3px solid #252525; /* 초기 상태는 비활성화 */
+    width: 110%;
+    height: 50px;
+    border-bottom: 3px solid transparent;
+    text-align: center;
 }
 
 .ul_container > li.active {
-    border-bottom: 3px solid #1351f9; /* 활성화된 상태는 파란색 */
+    border-bottom: 3px solid #1351f9;
 }
 
 .ul_container > li > button {
-    width: 100%;
     height: 100%;
     border: none;
-    background-color: #252525;
-    color: white;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
 }
 
 .find_container {
-    border-top: none;
-    border-right: 1px solid #888888;
-    border-left: 1px solid #888888;
-    border-bottom: 1px solid #888888;
-    box-sizing: border-box;
-    padding: 40px 40px;
-
+    border: 1px solid #e6e6e6;
+    padding: 20px;
 }
-
-.find_btn_container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-}
-
 
 .find_text {
-    font-size: 24px;
-    margin-bottom: 40px;
-    line-height: 36px;
+    font-size: 18px;
+    margin-bottom: 20px;
     text-align: center;
-    letter-spacing: -0.4px;
-    font-weight: 400;
-    color: #a5a5a5;
+    color: #333;
 }
 
 .find_form {
@@ -70,42 +61,100 @@ button {
     padding: 0;
 }
 
+.find_radio {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.form_option {
+    margin-bottom: 15px;
+}
+
+.input_group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 .find_input {
-    width: 100%;
-    font-size: 15px;
-    letter-spacing: -0.9px;
-    height: 53px;
-    line-height: 54px;
-    color: #fff;
-    background-color: #2f2f2f;
-    outline: none;
-    border: none;
-    padding-left: 5px;
-}
-
-
-.ul_form {
-    padding: 0;
-}
-
-.ul_form li {
-    font-size: 16px;
-    letter-spacing: -0.3px;
-    color: #212121;
+    flex: 1;
+    padding: 10px;
     margin-bottom: 1rem;
+    width: 95%;
+    font-size: 14px;
+    color: #333;
+    background-color: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    outline: none;
+}
+
+.find_request_btn {
+    margin-left: 10px;
+    padding: 10px 15px;
+    font-size: 14px;
+    background-color: #1351f9;
+    color: #ffffff;
+    width: 95%;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.error_text {
+    color: #ff4d4f;
+    font-size: 12px;
+    margin-bottom: 20px;
 }
 
 .ul_form_btn {
     display: block;
     width: 100%;
+    padding: 15px 0;
     background: #1351f9;
-    border-radius: 30px;
-    line-height: 60px;
-    font-size: 18px;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-size: 16px;
     color: #fff;
     text-align: center;
     border: none;
     outline: none;
-    margin-bottom: 1rem;
+    cursor: pointer;
 }
 
+@media (max-width: 768px) {
+    .find_form_container {
+        width: 100%;
+    }
+
+    .find_input,
+    .find_request_btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .input_group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+@media (max-width: 480px) {
+    .find_form_container {
+        width: 80%;
+    }
+
+    .ul_container > li > button {
+        font-size: 14px;
+    }
+
+    .find_text {
+        font-size: 16px;
+    }
+
+    .ul_form_btn {
+        font-size: 14px;
+        padding: 12px 0;
+    }
+}

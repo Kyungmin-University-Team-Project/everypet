@@ -6,13 +6,13 @@ https://velog.io/@jiheon/Git-Commit-message-규칙
 
 ## 👥 팀원
 
-### 🔥 <span style="color:#3CB371; font-family: 'Comic Sans MS', cursive, sans-serif;">엔젤릭버스터 이용호</span>
+### 🔥 <span style="color:#3CB371; font-family: 'Comic Sans MS', cursive, sans-serif;">[Back end] 이용호</span>
 
-### 🏳️‍🌈 <span style="color:#FFA500; font-family: 'Comic Sans MS', cursive, sans-serif;">성소수자 노희철</span>
+### ⭐️ <span style="color:#FFA500; font-family: 'Comic Sans MS', cursive, sans-serif;">[Back end] 노희철</span>
 
-### 🌑 <span style="color:#9400D3; font-family: 'Comic Sans MS', cursive, sans-serif;">일간베스트 총괄 이관용</span>
+### 🌑 <span style="color:#9400D3; font-family: 'Comic Sans MS', cursive, sans-serif;">[Front end] 총괄 이관용</span>
 
-### ⚡️ <span style="color:#FF6347; font-family: 'Comic Sans MS', cursive, sans-serif;">남성 페미니스트 대표 박민규</span>
+### ⚡️ <span style="color:#FF6347; font-family: 'Comic Sans MS', cursive, sans-serif;">[Front end] 대표 박민규</span>
 
 ## 🚀 프로젝트 실행 방법
 
@@ -59,7 +59,8 @@ docker-compose down
 ## 🎯서비스 핵심기능
 
 ```
-👨‍👨‍👧 회원 : 로그인 | 회원가입 | 메일 인증
+👨‍👨‍👧 회원 : 로그인 | 회원가입 | 메일 인증 | 회원정보 수정 | 회원탈퇴 |
+🛍️ 상품: 상품 조회 | 장바구니 
 ```
 
 <details>
@@ -86,6 +87,6 @@ docker-compose down
 
 🚧 공사중
 
-## 🐏 우리 프로젝트는 이렇게 만들어졌어요
+## 🦝 물에솜사탕씻기를겨우성공한너구리
 
-![image](https://image.fmkorea.com/files/attach/new3/20231201/191505828/1355679914/6457622111/c4726da609a181bc397f164c21f51047.png)
+![image](https://mblogthumb-phinf.pstatic.net/MjAyMTAzMzFfMjY5/MDAxNjE3MTkzODk3ODM3.D3vloPSntDm1r1vKlkMezHqYDUltQIuwMxmkdUpUSScg.SM0htZ2akdHUdz7_fBCk7g6dpMHGteY4cs4jWwOCsMsg.JPEG.41minit/1617193897369.jpg?type=w800 )

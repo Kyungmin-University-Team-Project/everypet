@@ -1,0 +1,91 @@
+.btn_wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5rem;
+}
+
+.modal_text {
+    font-weight: bold;
+}
+
+.modal_open_button {
+    text-align: center;
+    width: 10%;
+    border-radius: 5px;
+    color: white;
+    height: 2.5rem;
+    background-color: #5a99fa;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    box-shadow: 1px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+.modal_close_btn {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+
+
+.modal_container {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal_content {
+    background-color: #ffffff;
+    width: 500px;
+    height: 700px;
+    padding: 15px;
+}
+
+.modal_textarea {
+    width: 100%;
+    height: 10rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    box-sizing: border-box;
+    margin-top: 1rem;
+}
+
+.modal_form_btn {
+    text-align: center;
+    width: 100%;
+    margin-top: 1rem;
+    border-radius: 5px;
+    color: white;
+    height: 2.5rem;
+    background-color: #5a99fa;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    box-shadow: 1px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+
+}
+
+.modal_form_text {
+    font-weight: bold;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.modal_form_qa {
+    font-size: 14px;
+    color: #8f8f8f;
+}
+
+ul {
+    padding: 0;
+}
+

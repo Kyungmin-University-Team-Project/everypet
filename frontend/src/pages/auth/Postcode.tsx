@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 import Modal from "react-modal";
 import styles from "./Signup.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Postcode: React.FC = () => {
+interface PostcodeProps {
+  onAddressChange: (address: string, detailAddress: string) => void;
+}
+
+const Postcode: React.FC<PostcodeProps> = ({ onAddressChange }) => {
   const [zipCode, setZipcode] = useState<string>("");
   const [roadAddress, setRoadAddress] = useState<string>("");
   const [detailAddress, setDetailAddress] = useState<string>("");
@@ -14,6 +17,7 @@ const Postcode: React.FC = () => {
     setZipcode(data.zonecode);
     setRoadAddress(data.roadAddress);
     setIsOpen(false);
+    onAddressChange(data.roadAddress, detailAddress);
   };
 
   const customStyles = {
@@ -36,41 +40,42 @@ const Postcode: React.FC = () => {
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDetailAddress(e.target.value);
+    onAddressChange(roadAddress, e.target.value);
   };
 
   return (
-    <div>
-      <label className={styles.label_container}>
-        <i className={`fa-regular fa-user ${styles.code_i}`}></i>
-        <input
-          value={roadAddress || zipCode ? `${roadAddress} ${zipCode}` : ""}
-          readOnly
-          placeholder="우편번호 및 도로명 주소"
-          onClick={toggle}
-          className={styles.input_value}
-        />
-      </label>
-      <br />
-      <Modal isOpen={isOpen} ariaHideApp={false} style={customStyles}>
-        <div>
-          <DaumPostcode onComplete={completeHandler} />
-          <button onClick={toggle}>닫기</button>
-        </div>
-      </Modal>
-      <br />
-      <label className={styles.label_container}>
-        <i className={`fa-regular fa-user ${styles.code_i}`}></i>
-        <input
-          type="text"
-          onChange={changeHandler}
-          value={detailAddress}
-          placeholder="상세주소"
-          className={styles.input_value}
-        />
+      <div>
+        <label className={styles.label_container}>
+          <input
+              value={roadAddress || zipCode ? `${roadAddress} ${zipCode}` : ""}
+              readOnly
+              id="address"
+              placeholder="우편번호 및 도로명 주소"
+              onClick={toggle}
+              className={styles.input_value}
+          />
+        </label>
         <br />
-      </label>
-      <br />
-    </div>
+        <Modal isOpen={isOpen} ariaHideApp={false} style={customStyles}>
+          <div>
+            <DaumPostcode onComplete={completeHandler} />
+            <button onClick={toggle}>닫기</button>
+          </div>
+        </Modal>
+        <br />
+        <label className={styles.label_container}>
+          <input
+              id="detailAddress"
+              type="text"
+              onChange={changeHandler}
+              value={detailAddress}
+              placeholder="상세주소"
+              className={styles.input_value}
+          />
+          <br />
+        </label>
+        <br />
+      </div>
   );
 };
 

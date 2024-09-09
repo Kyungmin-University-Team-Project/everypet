@@ -1,48 +1,65 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './ProductPage.module.css';
-import Header from '../../layout/Header/Header';
-import Fixedheader from '../../layout/Header/Fixedheader';
-import Productcategory from '../../layout/category/Productcategory';
+
 import ItemList from '../../components/common/ItemList';
 import DetailedCategory from '../../components/common/DetailedCategory';
+import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
 
-const ProductPage = ({ category }: any) => {
-  const [categoryDetails, setCategoryDetails] = useState([]);
+interface DetailedCategory {
+    id: number;
+    name: string;
+    // 추가적인 속성이 있을 수 있음
+}
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    fetchCategoryDetails();
-  }, [category]); // Dependency array with 'category' to re-trigger when category changes
+const fetchCategoryDetails = async (category: string): Promise<{ detailedCategories: DetailedCategory[] }> => {
+    const response = await fetch(`/mock/${category}_detail_categories.json`);
+    if (!response.ok) throw new Error('Network response was not ok');
+    return response.json();
+};
 
-  const fetchCategoryDetails = async () => {
-    try {
-      const response = await fetch(`/mock/${category}_detail_categories.json`);
+const ProductPage = ({category}: { category: string }) => {
+    const [data, setData] = useState<{ detailedCategories: DetailedCategory[] } | null>(null);
+    const [isLoading, setIsLoading] = useState(true);  // 로딩 상태 추가
 
-      console.log(category);
-      if (!response.ok) throw new Error('Network response was not ok');
-      const data = await response.json();
-      setCategoryDetails(data.detailedCategories);
-    } catch (error) {
-      console.error('Failed to fetch category details:', error);
-    }
-  };
+    useEffect(() => {
+        const getCategoryDetails = async () => {
+            setIsLoading(true);  // 데이터 로딩 시작
+            try {
+                const result = await fetchCategoryDetails(category);
+                setData(result);
+            } catch (error) {
+                console.error('Failed to fetch category details:', error);
+            } finally {
+                setIsLoading(false);  // 데이터 로딩 완료
+            }
+        };
 
-  return (
-    <div>
-      <Fixedheader />
-      <Header />
-      <Productcategory />
+        // 비동기 함수를 즉시 실행
+        (async () => {
+            await getCategoryDetails();
+        })();
+    }, [category]);
 
-      <div className={styles.container}>
-        <div className={styles.inner}>
-          {/* DetailedCategory component now receives categoryDetails as a prop */}
-          <DetailedCategory details={categoryDetails} />
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [category]);
 
-          <ItemList />
+    return (
+        <div>
+            <div className={styles.container}>
+                <div className={styles.inner}>
+                    {isLoading ? (
+                        <LoadingSpinner/>
+                    ) : (
+                        <>
+                            {data && <DetailedCategory details={data.detailedCategories}/>}
+                            <ItemList/>
+                        </>
+                    )}
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default ProductPage;

@@ -1,121 +1,167 @@
-/* Item.module.css */
 .item {
-  border: 1px solid #ddd;
-  padding: 0 8px 0 8px;
-  background-color: white;
-  margin: 10px 0;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-  position: relative; /* Needed for absolute positioning of icons */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; /* 아이템 중앙 정렬 */
+    max-width: 180px; /* 최대 너비 설정 */
+    background-color: white;
+    margin: auto; /* 수평 중앙 정렬 */
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    position: relative;
+
+}
+
+.img__wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 90%;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+
+    margin-bottom: 10px;
 }
 
 .img {
-  transform: scale(0.8);
-  transition: transform 0.3s ease;
+    width: 80%; /* 이미지 너비 조정 */
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+
 }
 
 .item:hover .img {
-  transform: scale(0.9);
+    transform: scale(0.9);
 }
 
 .title {
-  color: #333;
-  font-size: 1em;
-  font-weight: bold;
+    color: #333;
+    font-size: 0.8rem;
+    font-weight: bold;
+    transition: all 0.2s ease-in;
+    text-align: left; /* 텍스트 왼쪽 정렬 */
 
-  transition: all 0.2s ease-in;
+    height: 2.6rem;
 }
 
 .item:hover .title {
-  color: #75acff;
+    color: #75acff;
 }
 
 .item__info {
-  display: flex;
-  flex-direction: column;
-
-  padding: 10px 0;
-  gap: 8px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 5px; /* 상하 여백 */
+    align-items: flex-start; /* 정보 왼쪽 정렬 */
 }
 
 .price__wrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .discount {
-  color: rgb(253, 111, 111);
-  font-size: 24px;
-  font-weight: bold;
+    color: rgb(253, 111, 111);
+    font-size: 1.2em; /* 모바일에서의 크기 */
+    font-weight: bold;
+}
+
+.un__discount{
+    text-decoration: line-through;
+    color: #888; /* 일반적으로 회색을 사용 */
 }
 
 .price {
-  color: rgb(0, 0, 0);
-  font-weight: bold;
-
-  font-size: 1.1em;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 1em; /* 모바일에서의 크기 */
 }
 
 .tagAndIcons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-
-  padding-bottom: 10px;
-
-  border-bottom: solid rgb(199, 199, 199) 1px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    padding-bottom: 10px;
+    border-bottom: solid rgb(199, 199, 199) 1px;
 }
 
 .cartIcon,
 .likeIcon {
-  font-size: 24px;
-  margin-right: 10px;
-
-  color: #8f8f8f;
-
-  transition: all 0.2s ease;
+    font-size: 1.2em; /* 모바일에서의 크기 */
+    margin-right: 10px;
+    color: #8f8f8f;
+    transition: all 0.2s ease;
 }
 
 .cartIcon:hover {
-  color: black;
+    color: black;
 }
 
 .likeIcon:hover {
-  color: rgb(255, 55, 55);
+    color: rgb(255, 55, 55);
 }
 
 .tag {
-  background-color: #ff8a00;
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-  font-size: 14px;
+    background-color: #ff8a00;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 0.8em;
 }
 
 .recommendationAndReviews {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .stars {
-  color: #ff8a00;
+    color: #ff8a00;
 }
 
 .reviewCount {
-  color: rgb(122, 122, 122);
-  font-size: 13px;
+    color: rgb(122, 122, 122);
+    font-size: 0.8em;
 }
 
-@media (max-width: 768px) {
-  .item {
-    margin: 10px auto;
-  }
+@media (min-width: 1400px) {
+    .item {
+        padding: 0;
+        margin: 0;
+        max-width: none;
+    }
+
+    .title {
+        font-size: 1em;
+    }
+
+    .discount {
+        font-size: 2em;
+    }
+
+    .price {
+        font-size: 1.4em;
+    }
+
+    .cartIcon,
+    .likeIcon {
+        font-size: 24px;
+    }
+
+    .tag {
+        font-size: 14px;
+    }
+
+    .reviewCount {
+        font-size: 13px;
+    }
+    .price__wrap{
+        height: 20px;
+    }
 }

@@ -1,11 +1,7 @@
 package com.everypet.product.service.impl;
 
-import com.everypet.product.data.dao.ProductMapper;
-import com.everypet.product.data.domain.Product;
-import com.everypet.product.data.dto.ProductCreateDTO;
-import com.everypet.product.data.dto.ProductInsertDTO;
-import com.everypet.product.data.dto.ProductUpdateDTO;
-import com.everypet.product.data.dto.SelectProductDTO;
+import com.everypet.product.model.dao.ProductMapper;
+import com.everypet.product.model.dto.*;
 import com.everypet.product.service.ProductService;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
@@ -19,7 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -40,19 +38,21 @@ public class ProductServiceImpl implements ProductService {
         uploadImageToCloudStorage(productId, productCreateDTO.getProductImage()); // 대표 이미지 업로드
         uploadImageToCloudStorage(productId + "-description", productCreateDTO.getProductDescriptionImage()); // 설명 이미지 업로드
 
-        ProductInsertDTO productInsertDTO = ProductInsertDTO.builder()
-                .productId(productId)
-                .memberId(memberId)
-                .productName(productCreateDTO.getProductName())
-                .productPrice(productCreateDTO.getProductPrice())
-                .productDiscountRate(productCreateDTO.getProductDiscountRate())
-                .numberOfProduct(productCreateDTO.getNumberOfProduct())
-                .productSalesStatusYN(productCreateDTO.getProductSalesStatusYN())
-                .productCategory(productCreateDTO.getProductCategory())
-                .build();
+        Map<String, Object> productInsertMap = new HashMap<>();
+        productInsertMap.put("productId", productId);
+        productInsertMap.put("memberId", memberId);
+        productInsertMap.put("productName", productCreateDTO.getProductName());
+        productInsertMap.put("productImg", "https://storage.googleapis.com/every_pet_img/" + productId);
+        productInsertMap.put("productDescriptionImg", "https://storage.googleapis.com/every_pet_img/" + productId + "-description");
+        productInsertMap.put("productPrice", productCreateDTO.getProductPrice());
+        productInsertMap.put("productDiscountRate", productCreateDTO.getProductDiscountRate());
+        productInsertMap.put("numberOfProduct", productCreateDTO.getNumberOfProduct());
+        productInsertMap.put("productSalesStatusYN", productCreateDTO.getProductSalesStatusYN());
+        productInsertMap.put("productCategory", productCreateDTO.getProductCategory());
+
 
         // DB에 저장하는 로직
-        int result = productMapper.insertProduct(productInsertDTO);
+        int result = productMapper.insertProduct(productInsertMap);
 
         if (result == 0) {
             throw new RuntimeException("DB에 상품 등록 실패");
@@ -78,18 +78,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> selectProductList(SelectProductDTO selectProductDTO) {
+    public List<ProductListDTO> selectProductList(SelectProductDTO selectProductDTO) {
 
         // 페이지 번호와 페이지 크기를 이용하여 페이지의 시작 인덱스를 계산
         int pageStart = (selectProductDTO.getPage() - 1) * selectProductDTO.getPageSize();
-
         selectProductDTO.setPageStart(pageStart);
 
         return productMapper.selectProduct(selectProductDTO);
     }
 
     @Override
-    public Product selectProductByProductId(String productId) {
+    public ProductDTO selectProductByProductId(String productId) {
 
         if (!productMapper.incrementProductViews(productId)) {
             throw new RuntimeException("상품 조회수 증가 실패");
@@ -129,8 +128,58 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+    @Override
+    public List<ProductListDTO> selectProductListByKeyword(SearchProductDTO searchProductDTO) {
+
+        // 페이지 번호와 페이지 크기를 이용하여 페이지의 시작 인덱스를 계산
+        int pageStart = (searchProductDTO.getPage() - 1) * searchProductDTO.getPageSize();
+        searchProductDTO.setPageStart(pageStart);
+
+        return productMapper.searchProductListByKeyword(searchProductDTO);
+    }
+
+    @Override
+    public List<String> autocompleteKeyword(String keyword) {
+
+        return productMapper.autocompleteKeyword(keyword);
+    }
+
+    @Override
+    public void insertProductKeyword(InsertProductKeywordDTO insertProductKeywordDTO, String memberId) {
+
+        validateProductDeletionPermission(insertProductKeywordDTO.getProductId(), memberId);
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("productId", insertProductKeywordDTO.getProductId());
+        params.put("keyword", insertProductKeywordDTO.getKeyword());
+
+        int result = productMapper.insertProductKeyword(params);
+
+        if (result == 0) {
+            throw new RuntimeException("DB에 키워드 추가 실패");
+        }
+    }
+
+    @Override
+    public void deleteProductKeyword(DeleteProductKeywordDTO deleteProductKeywordDTO, String memberId) {
+
+        validateProductDeletionPermission(deleteProductKeywordDTO.getProductId(), memberId);
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("productId", deleteProductKeywordDTO.getProductId());
+        params.put("keywordId", deleteProductKeywordDTO.getKeywordId());
+
+        int result = productMapper.deleteProductKeyword(params);
+
+        if (result == 0) {
+            throw new RuntimeException("DB에 키워드 삭제 실패");
+        }
+    }
+
+
+
     // 이미지 업로드
-    private BlobInfo uploadImageToCloudStorage(String productId, MultipartFile image) {
+    private void uploadImageToCloudStorage(String productId, MultipartFile image) {
         try {
             // Cloud에 이미지 업로드
             BlobInfo blobInfo = storage.create(
@@ -139,7 +188,6 @@ public class ProductServiceImpl implements ProductService {
                             .build(),
                     image.getInputStream()
             );
-            return blobInfo;
         }catch (IOException e) {
             throw new RuntimeException("클라우드에 이미지 업로드 실패");
         }
@@ -164,11 +212,11 @@ public class ProductServiceImpl implements ProductService {
         uploadImageToCloudStorage(productId, image);
     }
 
-    // 상품 삭제 권한 확인
+    // 상품 권한 확인
     public void validateProductDeletionPermission(String productId, String memberId) {
         String selectMemberId = productMapper.selectMemberIdByProductId(productId);
         if (!memberId.equals(selectMemberId)) {
-            throw new RuntimeException("상품 삭제 권한이 없습니다");
+            throw new RuntimeException("상품에 대한 권한이 없습니다");
         }
     }
 }

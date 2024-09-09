@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.everypet.global.util.point.model.dao.PointMapper">
+
+    <select id="findPointByMemberId" parameterType="String" resultType="Point">
+        SELECT MEMBER_ID, POINT
+        FROM TBL_MEMBER
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+
+    <update id="addMemberPoints" parameterType="Point">
+        UPDATE TBL_MEMBER
+        SET POINT = POINT + #{pointAmount}
+        WHERE MEMBER_ID = #{memberId}
+    </update>
+
+    <insert id="addPointHistory" parameterType="Point">
+        INSERT INTO TBL_POINT(MEMBER_ID, POINT_AMOUNT, POINT_TYPE, POINT_DESCRIPTION)
+        VALUES(#{memberId}, #{pointAmount}, #{pointType}, #{pointDescription})
+    </insert>
+
+</mapper>

@@ -1,16 +1,32 @@
-/*  form    */
 .form_container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-y: auto;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.main_text {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
 }
 
 .text {
     margin-left: 2rem;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
 }
 
-/* input checkbox */
+.p_text {
+    font-size: 14px;
+    color: #666;
+}
+
 .input_checkbox {
     position: relative;
     -webkit-appearance: none;
@@ -18,26 +34,28 @@
     appearance: none;
     width: 20px;
     height: 20px;
-    border: 2px solid black;
+    border: 2px solid #ccc;
     outline: none;
     cursor: pointer;
     vertical-align: middle;
-    margin-right: 8px;
+    margin-right: 10px;
+    border-radius: 3px;
 }
 
 .input_checkbox:checked {
-    border: 1px solid black;
+    border-color: #4a8cf0;
+    background-color: #4a8cf0;
 }
 
 .input_checkbox::before {
     content: '';
     position: absolute;
-    top: -3px;
-    left: 5px;
-    width: 7px;
-    height: 13px;
-    border: 1px solid black;
-    border-width: 0 2px 3px 0;
+    top: 2px;
+    left: 6px;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
     transform: rotate(45deg);
     opacity: 0;
 }
@@ -46,24 +64,25 @@
     opacity: 1;
 }
 
-/* textarea */
 .textarea_container {
     margin-left: 2rem;
+    margin-top: 10px;
 }
 
 .textarea {
+    width: calc(100% - 4rem);
     height: 80px;
-    padding: 5px;
-    font-size: 16px;
+    padding: 10px;
+    font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 5px;
     overflow-y: auto;
     resize: none;
-    margin-top: 1rem;
+    background-color: #f5f5f5;
 }
 
 .textarea::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 
 .textarea::-webkit-scrollbar-thumb {
@@ -77,31 +96,133 @@
 
 .textarea:focus {
     outline: none;
+    border-color: #4a8cf0;
+    background-color: #ffffff;
 }
 
-/* btn */
+.label_container {
+    width: 100%;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+
+.details_button {
+    background: none;
+    border: none;
+    color: #4a8cf0;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 2rem;
+    padding: 0;
+}
+
+.details_button:focus {
+    outline: none;
+}
+
+.requiredText {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
 .agreement_btn {
     text-align: center;
     width: 100%;
+    max-width: 500px;
     border-radius: 5px;
     color: white;
     height: 3rem;
     background-color: #888888;
-    cursor: pointer;
+    cursor: not-allowed;
     border: none;
     outline: none;
     transition: background-color 0.3s ease;
+    font-size: 16px;
+    margin-top: 20px;
 }
 
-.agreement_btn:hover {
-    background-color: #7FA8FF;
+.agreement_btn.active {
+    background-color: #4a8cf0;
+    cursor: pointer;
 }
 
-.requiredText {
-    color: #4a8cf0;
+.text-muted {
+    font-size: 12px;
+    color: #999;
+    margin-top: 20px;
+    text-align: center;
+    line-height: 1.5;
 }
 
-.label_container {
-    margin-bottom: 1rem;
+@media (max-width: 768px) {
+    .form_container {
+        padding: 15px;
+        max-width: 90%;
+    }
+
+    .text {
+        font-size: 13px;
+        margin-left: 1.5rem;
+    }
+
+    .p_text {
+        font-size: 13px;
+    }
+
+    .input_checkbox {
+        width: 18px;
+        height: 18px;
+        margin-right: 8px;
+    }
+
+    .textarea {
+        width: calc(100% - 3rem);
+        padding: 8px;
+    }
+
+    .details_button {
+        font-size: 13px;
+        margin-left: 1.5rem;
+    }
+
+    .agreement_btn {
+        font-size: 15px;
+    }
 }
 
+@media (max-width: 480px) {
+    .form_container {
+        padding: 10px;
+        max-width: 100%;
+    }
+
+    .text {
+        font-size: 12px;
+        margin-left: 1rem;
+    }
+
+    .p_text {
+        font-size: 12px;
+    }
+
+    .input_checkbox {
+        width: 16px;
+        height: 16px;
+        margin-right: 6px;
+    }
+
+    .textarea {
+        width: calc(100% - 2rem);
+        padding: 6px;
+    }
+
+    .details_button {
+        font-size: 12px;
+        margin-left: 1rem;
+    }
+
+    .agreement_btn {
+        font-size: 14px;
+    }
+}

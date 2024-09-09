@@ -1,37 +1,65 @@
 .container {
-  display: flex;
+    display: flex;
+    width: 100%;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.04) 0 3px 5px;
+    gap: 20px;
+    border-bottom: solid 1px rgb(205, 205, 205);
 
-  width: 100%;
-  height: 60px;
-  /* background-color: aqua; */
+}
 
-  justify-content: center;
-  align-items: center;
-
-  font-weight: 'Pretendard-Regular';
-
-  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
-
-  gap: 20px;
-
-  border-bottom: solid 1px rgb(205, 205, 205);
+.inner {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .category__menu {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 20px;
 
-  list-style-type: none; /* 점 없애기 */
-
-  margin-left: 40px;
-
-  gap: 52px;
-
-  /* background-color: aqua; */
+    padding: 0 20px;
 }
 
-@media screen and (max-width: 1536px) {
-  .category__menu {
-    gap: 24px;
-  }
+.category__menu::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for WebKit browsers */
+}
+
+.category__menu {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.category__menu li {
+    display: inline-block;
+}
+
+@media screen and (min-width: 1400px) {
+    .inner {
+        width: 1100px;
+    }
+
+    .category__menu {
+        gap: 24px;
+        padding: 0 0 0 40px;
+    }
+}
+
+
+@media screen and (min-width: 1600px) {
+    .inner {
+        width: 1250px;
+    }
+
+    .category__menu {
+        gap: 24px;
+    }
 }
