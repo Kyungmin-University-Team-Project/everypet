@@ -31,6 +31,7 @@ const Signup: React.FC = () => {
     const [emailSent, setEmailSent] = useState(false);
     const [emailVerified, setEmailVerified] = useState(false);
 
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
@@ -87,7 +88,7 @@ const Signup: React.FC = () => {
 
     const handleSendVerificationEmail = async () => {
         try {
-            const response = await sendVerificationEmail({ email: user.email });
+            const response = await sendVerificationEmail({  purpose: 'SIGNUP', to: user.email });
             console.log("Verification email sent:", response);
             setEmailSent(true); // Set state to indicate email has been sent
         } catch (error) {
