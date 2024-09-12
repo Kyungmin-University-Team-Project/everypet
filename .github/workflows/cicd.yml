@@ -29,7 +29,7 @@ jobs:
 
 
       - name: Set artifact
-        run: echo "artifact=$(ls target/*.jar | xargs -n 1 basename)" >> $GITHUB_ENV
+        run: echo "artifact=$(ls target/*.war | xargs -n 1 basename)" >> $GITHUB_ENV
 
       - name: Beanstalk Deploy
         uses: einaregilsson/beanstalk-deploy@v20
