@@ -13,11 +13,11 @@ jobs:
 
       - uses: actions/setup-java@v3
         with:
-          distribution: 'zulu'
+          distribution: 'corretto'
           java-version: '8'
 
       - name: Build with Maven
-        run: mvn -B clean package --file pom.xml
+        run: mvn -B clean install --file pom.xml
 
       - name: Get current time
         uses: josStorer/get-current-time@v2.0.2
@@ -28,7 +28,7 @@ jobs:
 
 
       - name: Set artifact
-        run: echo "artifact=$(ls target/*.war | xargs -n 1 basename)" >> $GITHUB_ENV
+        run: echo "artifact=$(ls target/*.war)" >> $GITHUB_ENV
 
       - name: Beanstalk Deploy
         uses: einaregilsson/beanstalk-deploy@v20
