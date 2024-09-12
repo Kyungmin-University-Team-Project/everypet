@@ -51,10 +51,16 @@ jobs:
           echo "redis.port=6379" >> src/main/resources/database.properties
           
           echo "spring.jwt.secret=${{ secrets.JWT_SECRET }}" >> src/main/resources/database.properties
-          
 
-      - name: Create googleClound.json
-        run: echo ${{ secrets.GOOGLE_CLOUD_JSON }} > src/main/resources/every-pet.json
+      - name: create-json
+        id: create-json
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "secrets.json"
+          json: ${{ secrets.GOOGLE_CLOUD_JSON }}
+
+      - name: Move JSON file
+        run: mv secrets.json src/main/resources/every-pet.json
 
       - name: Build with Maven
         run: mvn clean package
