@@ -51,18 +51,16 @@ jobs:
           echo "redis.port=6379" >> src/main/resources/database.properties
           
           echo "spring.jwt.secret=${{ secrets.JWT_SECRET }}" >> src/main/resources/database.properties
+          
 
-      - name: Install Google Cloud SDK
-        run: |
-          curl -sSL https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz | tar xz
-          ./google-cloud-sdk/install.sh
-          source ./google-cloud-sdk/path.bash.inc
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          version: 'latest'
+          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
       - name: Authenticate with Google Cloud
-        run: |
-          echo "${{ secrets.GOOGLE_CREDENTIALS }}" > $HOME/gcloud-service-key.json
-          gcloud auth activate-service-account --key-file=$HOME/gcloud-service-key.json
-          gcloud config set project every-pet-418208
+        run: gcloud auth activate-service-account --key-file=${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
       - name: Build with Maven
         run: mvn clean package
