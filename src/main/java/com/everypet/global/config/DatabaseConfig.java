@@ -23,13 +23,13 @@ import javax.sql.DataSource;
 @PropertySource("classpath:database.properties")
 public class DatabaseConfig {
 
-    @Value("${db.driverClass}")
+    @Value("${spring.datasource.driverClass}")
     private Class<? extends Driver> driverClass;
-    @Value("${db.url}")
+    @Value("${spring.datasource.url}")
     private String url;
-    @Value("${db.username}")
+    @Value("${spring.datasource.username}")
     private String username;
-    @Value("${db.password}")
+    @Value("${spring.datasource.password}")
     private String password;
 
     @Bean

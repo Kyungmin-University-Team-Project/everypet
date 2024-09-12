@@ -19,12 +19,11 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-
       - name: Get current time
         uses: josStorer/get-current-time@v2.0.2
         id: current-time
         with:
-          format: YYYY-MM-DDTHH-mm-ss
+          format: 'YYYY-MM-DDTHH-mm-ss'
           utcOffset: "+09:00"
 
 
