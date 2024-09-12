@@ -39,8 +39,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: spring-boot-developer
-          environment_name: SpringBootDeveloper-env
+          application_name: every-pet
+          environment_name: Every-pet-env
           version_label: github-action-${{ steps.current-time.outputs.formattedTime }}
           region: ap-northeast-2
           deployment_package: ${{ env.artifact }}
