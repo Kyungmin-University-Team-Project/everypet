@@ -23,12 +23,14 @@ jobs:
         uses: josStorer/get-current-time@v2.0.2
         id: current-time
         with:
-          format: 'YYYY-MM-DDTHH-mm-ss'
+          format: 'YYYY-MM-DDTHH:mm:ss'
           utcOffset: "+09:00"
 
-
       - name: Set artifact
-        run: echo "artifact=$(ls target/*.war)" >> $GITHUB_ENV
+        id: set-artifact
+        run: |
+          ARTIFACT=$(ls target/*.war)
+          echo "artifact=$ARTIFACT" >> $GITHUB_ENV
 
       - name: Beanstalk Deploy
         uses: einaregilsson/beanstalk-deploy@v20
@@ -39,4 +41,4 @@ jobs:
           environment_name: every-pet-env
           version_label: github-action-${{ steps.current-time.outputs.formattedTime }}
           region: ap-northeast-2
-          deployment_package: ./target/${{ env.artifact }}
+          deployment_package: ${{ env.artifact }}
