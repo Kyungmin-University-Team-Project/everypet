@@ -53,7 +53,7 @@ jobs:
           echo "spring.jwt.secret=${{ secrets.JWT_SECRET }}" >> src/main/resources/database.properties
           
 
-      - name: googleClound.json
+      - name: Create googleClound.json
         run: echo ${{ secrets.GOOGLE_CLOUD_JSON }} >> src/main/resources/every-pet.json
 
       - name: Build with Maven
