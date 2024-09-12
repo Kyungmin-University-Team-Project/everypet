@@ -60,7 +60,7 @@ jobs:
           json: ${{ secrets.GOOGLE_CLOUD_JSON }}
 
       - name: Move JSON file
-        run: mv secrets.json src/main/resources/every-pet-418208-be0b25df67a9
+        run: mv every-pet-418208-be0b25df67a9.json src/main/resources/every-pet-418208-be0b25df67a9
 
       - name: Build with Maven
         run: mvn clean package
