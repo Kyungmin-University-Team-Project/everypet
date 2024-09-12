@@ -53,14 +53,8 @@ jobs:
           echo "spring.jwt.secret=${{ secrets.JWT_SECRET }}" >> src/main/resources/database.properties
           
 
-      - name: Set up Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
-        with:
-          version: 'latest'
-          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
-
-      - name: Authenticate with Google Cloud
-        run: gcloud auth activate-service-account --key-file=${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+      - name: googleClound.json
+        run: echo ${{ secrets.GOOGLE_CLOUD_JSON }} >> src/main/resources/every-pet.json
 
       - name: Build with Maven
         run: mvn clean package
