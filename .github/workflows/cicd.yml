@@ -56,11 +56,11 @@ jobs:
         id: create-json
         uses: jsdaniell/create-json@1.1.2
         with:
-          name: "secrets.json"
+          name: "every-pet-418208-be0b25df67a9"
           json: ${{ secrets.GOOGLE_CLOUD_JSON }}
 
       - name: Move JSON file
-        run: mv secrets.json src/main/resources/every-pet.json
+        run: mv secrets.json src/main/resources/every-pet-418208-be0b25df67a9
 
       - name: Build with Maven
         run: mvn clean package
