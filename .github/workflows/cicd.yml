@@ -43,9 +43,9 @@ jobs:
       - name: Create database.properties
         run: |
           echo "spring.datasource.driverClass=com.mysql.cj.jdbc.Driver" >> src/main/resources/database.properties
-          echo "spring.datasource.url=\${SPRING_DATASOURCE_URL}" >> src/main/resources/database.properties
-          echo "spring.datasource.username=\${SPRING_DATASOURCE_USERNAME}" >> src/main/resources/database.properties
-          echo "spring.datasource.password=\${SPRING_DATASOURCE_PASSWORD}" >> src/main/resources/database.properties
+          echo "spring.datasource.url=${{ SPRING_DATASOURCE_URL }}" >> src/main/resources/database.properties
+          echo "spring.datasource.username=${{ SPRING_DATASOURCE_USERNAME }}" >> src/main/resources/database.properties
+          echo "spring.datasource.password=${{ secrets.SPRING_DATASOURCE_PASSWORD }}" >> src/main/resources/database.properties
           
           echo "redis.host=localhost" >> src/main/resources/database.properties
           echo "redis.port=6379" >> src/main/resources/database.properties
