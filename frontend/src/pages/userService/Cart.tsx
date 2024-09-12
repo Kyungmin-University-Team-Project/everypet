@@ -44,11 +44,16 @@ const Cart: React.FC = () => {
     };
 
     const calculateTotalPrice = (items: CartItem[], selected: string[]) => {
-        const selectedProductPrice = items
-            .filter(item => selected.includes(item.productId))
-            .reduce((total, item) => total + parseInt(item.productPrice.replace(/,/g, ''), 10) * item.cartQuantity, 0);
-        const totalPrice = selectedProductPrice + (selectedProductPrice > 0 ? shippingFee : 0);
-        setTotalPrice(totalPrice);
+        if (items && items.length > 0) {
+            const selectedProductPrice = items
+                .filter(item => selected.includes(item.productId))
+                .reduce((total, item) => {
+                    const productPrice = item.productPrice ? item.productPrice.replace(/,/g, '') : '0'; // productPrice가 undefined일 경우 '0'으로 처리
+                    return total + parseInt(productPrice, 10) * item.cartQuantity;
+                }, 0);
+            const totalPrice = selectedProductPrice + (selectedProductPrice > 0 ? shippingFee : 0);
+            setTotalPrice(totalPrice);
+        }
     };
 
     const handleDeleteItem = async (productId: string) => {
@@ -166,7 +171,9 @@ const Cart: React.FC = () => {
                                         </button>
                                     </div>
                                     <div className={styles.total}>
-                                        <p className={styles.price}>{formatPrice(parseInt(item.productPrice.replace(/,/g, ''), 10) * item.cartQuantity)}</p>
+                                        <p className={styles.price}>
+                                            {item.productPrice ? formatPrice(parseInt(item.productPrice.replace(/,/g, ''), 10) * item.cartQuantity) : '0원'}
+                                        </p>
                                     </div>
                                 </div>
                             </div>

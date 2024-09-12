@@ -2,7 +2,6 @@ import axios from 'axios';
 import {decryptToken, reissueToken} from '../token/token';
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8080', // baseURL을 실제 API 서버 주소로 변경
     headers: {
         'Content-Type': 'application/json',
     },

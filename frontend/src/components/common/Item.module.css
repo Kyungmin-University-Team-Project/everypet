@@ -71,6 +71,11 @@
     font-weight: bold;
 }
 
+.un__discount{
+    text-decoration: line-through;
+    color: #888; /* 일반적으로 회색을 사용 */
+}
+
 .price {
     color: rgb(0, 0, 0);
     font-weight: bold;
@@ -125,7 +130,7 @@
     font-size: 0.8em;
 }
 
-@media (min-width: 701px) {
+@media (min-width: 1400px) {
     .item {
         padding: 0;
         margin: 0;
@@ -137,11 +142,11 @@
     }
 
     .discount {
-        font-size: 24px;
+        font-size: 2em;
     }
 
     .price {
-        font-size: 1.1em;
+        font-size: 1.4em;
     }
 
     .cartIcon,

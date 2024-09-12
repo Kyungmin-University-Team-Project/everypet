@@ -94,9 +94,9 @@ export const signUpLogin = async (user: Join): Promise<any> => {
     }
 };
 
-export const sendVerificationEmail = async ({ email }: { email: string; }): Promise<{ success: boolean }> => {
-    const data = { email };
-    const response = await api.post('http://localhost:8080/send-mail/email', data, {
+export const sendVerificationEmail = async ({  purpose, to }: {  purpose:string; to: string }): Promise<{ success: boolean }> => {
+    const data = {  purpose, to };
+    const response = await api.post('http://localhost:8080/send-mail/code', data, {
         headers: {
             'Content-Type': 'application/json'
         }
