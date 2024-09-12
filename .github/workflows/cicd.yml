@@ -17,7 +17,7 @@ jobs:
           java-version: '8'
 
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -B clean install --file pom.xml
 
       - name: Get current time
         uses: josStorer/get-current-time@v2.0.2
