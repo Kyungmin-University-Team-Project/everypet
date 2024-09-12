@@ -54,7 +54,9 @@ jobs:
           
 
       - name: Create googleClound.json
-        run: echo ${{ secrets.GOOGLE_CLOUD_JSON }} >> src/main/resources/every-pet.json
+        run: |
+          touch src/main/resources/every-pet.json
+          echo ${{ secrets.GOOGLE_CLOUD_JSON }} >> src/main/resources/every-pet.json
 
       - name: Build with Maven
         run: mvn clean package
