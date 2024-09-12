@@ -1,4 +1,4 @@
-name: CI
+name: CI/CD
 
 on:
   push:
@@ -9,36 +9,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Set up Java
-        uses: actions/setup-java@v3
+      - uses: actions/setup-java@v3
         with:
           distribution: 'corretto'
           java-version: '8'
 
+      - name: Set up Maven
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'maven'
+          java-version: '8'
+
       - name: Build with Maven
-        run: mvn -B clean install --file pom.xml
+        run: mvn clean package
 
       - name: Get current time
-        id: current-time
         uses: josStorer/get-current-time@v2.0.2
+        id: current-time
         with:
           format: YYYY-MM-DDTHH-mm-ss
           utcOffset: "+09:00"
 
-      - name: Set artifact path
-        id: set-artifact
+      - name: Set artifact
         run: echo "artifact=$(ls target/*.war)" >> $GITHUB_ENV
 
       - name: Beanstalk Deploy
-        uses: einaregilsson/beanstalk-deploy@v22
+        uses: einaregilsson/beanstalk-deploy@v20
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: every-pet
-          environment_name: every-pet-env
-          version_label: github-action-${{ steps.current-time.outputs.formattedTime }}
+          application_name: spring-boot-developer
+          environment_name: SpringBootDeveloper-env
+          version_label: github-action-${{steps.current-time.outputs.formattedTime}}
           region: ap-northeast-2
-          deployment_package: ${{ env.artifact }}
+          deployment_package: ./target/${{env.artifact}}
