@@ -1,0 +1,87 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: '8'
+
+      - name: Set up Maven
+        run: sudo apt-get install maven
+
+      - name: Create application.properties
+        run: |
+          echo "spring.mail.host=smtp.gmail.com" >> src/main/resources/application.properties
+          echo "spring.mail.port=587" >> src/main/resources/application.properties
+          echo "spring.mail.username=${{ secrets.SMTP_USERNAME }}" >> src/main/resources/application.properties
+          echo "spring.mail.password=${{ secrets.SMTP_PASSWORD }}" >> src/main/resources/application.properties
+          echo "spring.mail.properties.mail.smtp.auth=true" >> src/main/resources/application.properties
+          echo "spring.mail.properties.mail.smtp.timeout=5000" >> src/main/resources/application.properties
+          echo "spring.mail.properties.mail.smtp.starttls.enable=true" >> src/main/resources/application.properties
+
+          echo "spring.cloud.gcp.bucket=every_pet_img" >> src/main/resources/application.properties
+
+          echo "email.template.registration=static/member/welcome-email.html" >> src/main/resources/application.properties
+          echo "email.template.password-reset=static/member/password-reset-email.html" >> src/main/resources/application.properties
+          echo "email.template.verification=static/member/verification-email.html" >> src/main/resources/application.properties
+
+          echo "portone.api.secret=${{ secrets.PORTONE_API_SECRET }}" >> src/main/resources/application.properties
+
+          echo "point.signup=500" >> src/main/resources/application.properties
+          echo "point.referral=1000" >> src/main/resources/application.properties
+
+      - name: Create database.properties
+        run: |
+          echo "spring.datasource.driverClass=com.mysql.cj.jdbc.Driver" >> src/main/resources/database.properties
+          echo "spring.datasource.url=${{ secrets.SPRING_DATASOURCE_URL }}" >> src/main/resources/database.properties
+          echo "spring.datasource.username=${{ secrets.SPRING_DATASOURCE_USERNAME }}" >> src/main/resources/database.properties
+          echo "spring.datasource.password=${{ secrets.SPRING_DATASOURCE_PASSWORD }}" >> src/main/resources/database.properties
+          
+          echo "redis.host=localhost" >> src/main/resources/database.properties
+          echo "redis.port=6379" >> src/main/resources/database.properties
+          
+          echo "spring.jwt.secret=${{ secrets.JWT_SECRET }}" >> src/main/resources/database.properties
+
+      - name: create-json
+        id: create-json
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "every-pet-418208-be0b25df67a9.json"
+          json: ${{ secrets.GOOGLE_CLOUD_JSON }}
+
+      - name: Move JSON file
+        run: mv every-pet-418208-be0b25df67a9.json src/main/resources/every-pet-418208-be0b25df67a9.json
+
+      - name: Build with Maven
+        run: mvn clean package
+
+      - name: Get current time
+        uses: josStorer/get-current-time@v2.0.2
+        id: current-time
+        with:
+          format: YYYY-MM-DDTHH-mm-ss
+          utcOffset: "+09:00"
+
+      - name: Set artifact
+        run: echo "artifact=$(ls ./target/*.war)" >> $GITHUB_ENV
+
+      - name: Beanstalk Deploy
+        uses: einaregilsson/beanstalk-deploy@v20
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: every-pet
+          environment_name: Every-pet-env
+          version_label: github-action-${{ steps.current-time.outputs.formattedTime }}
+          region: ap-northeast-2
+          deployment_package: ${{ env.artifact }}
