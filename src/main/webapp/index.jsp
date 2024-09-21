@@ -3,6 +3,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
     <script type="text/javascript">
+
             var stompClient = null;
             var privateStompClient = null;
 
