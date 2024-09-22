@@ -24,4 +24,10 @@
        WHERE C.MEMBER_ID = #{memberId}
     </select>
 
+    <update id="updateCart" parameterType="Cart">
+        UPDATE TBL_CART
+        SET CART_QUANTITY = #{cartQuantity}
+        WHERE MEMBER_ID = #{memberId} AND PRODUCT_ID = #{productId}
+    </update>
+
 </mapper>

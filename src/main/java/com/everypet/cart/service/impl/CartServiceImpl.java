@@ -23,8 +23,27 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void addCart(String memberId, CartInsertDTO cartInsertDTO) {
+
         Cart cart = MsCartMapper.INSTANCE.toVo(cartInsertDTO, memberId);
-        cartMapper.insertCart(cart);
+
+        List<CartItemDTO> cartList = cartMapper.selectAllCart(memberId);
+
+        boolean isUpdated = false;
+
+        // 이미 장바구니에 있는 상품인지 확인 있을경우 수량만 증가
+        for (CartItemDTO item : cartList) {
+            if (item.getProductId().equals(cart.getProductId())) {
+                cart.setCartQuantity(cart.getCartQuantity() + item.getCartQuantity());
+                cartMapper.updateCart(cart);
+                isUpdated = true;
+                break;
+            }
+        }
+
+        if (!isUpdated) {
+            cartMapper.insertCart(cart);
+        }
+
     }
 
     @Override
