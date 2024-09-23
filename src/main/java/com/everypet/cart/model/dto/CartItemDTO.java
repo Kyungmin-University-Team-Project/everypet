@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class CartItemDTO {
 
         @ApiModelProperty(example = "1", notes = "장바구니 아이디")
-        private String cartId;
+        private int cartId;
 
         @ApiModelProperty(example = "https://storage.googleapis.com/every_pet_img/1f7832af-e587-495e-bf00-b14f9f3bf137", notes = "상품 이미지")
         private String productImg;
