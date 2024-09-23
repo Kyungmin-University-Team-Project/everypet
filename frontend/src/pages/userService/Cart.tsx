@@ -11,7 +11,7 @@ const shippingFee = 3000;
 const Cart: React.FC = () => {
 
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
-    const [selectedItems, setSelectedItems] = useState<string[]>([]);
+    const [selectedItems, setSelectedItems] = useState<number[]>([]);
     const [selectAll, setSelectAll] = useState(false);
     const [deleteTrigger, setDeleteTrigger] = useState(false);
     const [totalPrice, setTotalPrice] = useState(0);
@@ -21,8 +21,9 @@ const Cart: React.FC = () => {
         try {
             const items: CartItem[] = await fetchCartItems();
             setCartItems(items);
-            setSelectedItems(items.map((item: CartItem) => item.productId));
-            calculateTotalPrice(items, items.map((item: CartItem) => item.productId));
+            console.log(items)
+            setSelectedItems(items.map((item: CartItem) => item.cartId));
+            calculateTotalPrice(items, items.map((item: CartItem) => item.cartId));
         } catch (error) {
             handleAxiosError(error as AxiosError);
         }
@@ -43,24 +44,24 @@ const Cart: React.FC = () => {
         return price.toLocaleString() + '원';
     };
 
-    const calculateTotalPrice = (items: CartItem[], selected: string[]) => {
+    const calculateTotalPrice = (items: CartItem[], selected: number[]) => {
         if (items && items.length > 0) {
             const selectedProductPrice = items
-                .filter(item => selected.includes(item.productId))
+                .filter(item => selected.includes(item.cartId))
                 .reduce((total, item) => {
-                    const productPrice = item.productPrice ? item.productPrice.replace(/,/g, '') : '0'; // productPrice가 undefined일 경우 '0'으로 처리
-                    return total + parseInt(productPrice, 10) * item.cartQuantity;
+                    const productPrice = item.price ?? 0;
+                    return total + productPrice * item.cartQuantity;
                 }, 0);
             const totalPrice = selectedProductPrice + (selectedProductPrice > 0 ? shippingFee : 0);
             setTotalPrice(totalPrice);
         }
     };
 
-    const handleDeleteItem = async (productId: string) => {
+    const handleDeleteItem = async (cartId: number) => {
         try {
-            await deleteCartItem(productId);
-            const newCartItems = cartItems.filter(item => item.productId !== productId);
-            const newSelectedItems = selectedItems.filter(id => id !== productId);
+            await deleteCartItem(cartId);
+            const newCartItems = cartItems.filter(item => item.cartId !== cartId);
+            const newSelectedItems = selectedItems.filter(id => id !== cartId);
             setCartItems(newCartItems);
             setSelectedItems(newSelectedItems);
             calculateTotalPrice(newCartItems, newSelectedItems);
@@ -74,27 +75,27 @@ const Cart: React.FC = () => {
         if (selectAll) {
             setSelectedItems([]);
         } else {
-            setSelectedItems(cartItems.map(item => item.productId));
+            setSelectedItems(cartItems.map(item => item.cartId));
         }
         setSelectAll(!selectAll);
-        calculateTotalPrice(cartItems, selectAll ? [] : cartItems.map(item => item.productId));
+        calculateTotalPrice(cartItems, selectAll ? [] : cartItems.map(item => item.cartId));
     };
 
-    const handleItemSelectChange = (productId: string) => {
-        const newSelectedItems = selectedItems.includes(productId)
-            ? selectedItems.filter(id => id !== productId)
-            : [...selectedItems, productId];
+    const handleItemSelectChange = (cartId: number) => {
+        const newSelectedItems = selectedItems.includes(cartId)
+            ? selectedItems.filter(id => id !== cartId)
+            : [...selectedItems, cartId];
         setSelectedItems(newSelectedItems);
         calculateTotalPrice(cartItems, newSelectedItems);
     };
 
-    const handleQuantityChange = (productId: string, change: number) => {
-        const item = cartItems.find(item => item.productId === productId);
+    const handleQuantityChange = (cartId: number, change: number) => {
+        const item = cartItems.find(item => item.cartId === cartId);
         if (item) {
             const newQuantity = item.cartQuantity + change;
             if (newQuantity > 0) {
                 const newCartItems = cartItems.map(item =>
-                    item.productId === productId ? {...item, cartQuantity: newQuantity} : item
+                    item.cartId === cartId ? {...item, cartQuantity: newQuantity} : item
                 );
                 setCartItems(newCartItems);
                 calculateTotalPrice(newCartItems, selectedItems);
@@ -103,7 +104,7 @@ const Cart: React.FC = () => {
     };
 
     const handleCheckout = () => {
-        const selectedProducts = cartItems.filter(item => selectedItems.includes(item.productId));
+        const selectedProducts = cartItems.filter(item => selectedItems.includes(item.cartId));
         navigate('/payment', {state: {selectedProducts, totalPrice}}); // 결제 페이지로 이동하면서 상태 전달
     };
 
@@ -131,23 +132,23 @@ const Cart: React.FC = () => {
                         </div>
                     </div>
                     {cartItems.map((item) => (
-                        <div className={styles.item__wrap} key={item.productId}>
+                        <div className={styles.item__wrap} key={item.cartId}>
                             <div className={styles.icon__btn}>
                                 <input
                                     type="checkbox"
-                                    checked={selectedItems.includes(item.productId)}
-                                    onChange={() => handleItemSelectChange(item.productId)}
+                                    checked={selectedItems.includes(item.cartId)}
+                                    onChange={() => handleItemSelectChange(item.cartId)}
                                     className={styles.checkboxInput}
                                 />
                                 <FaTrashAlt
                                     className={styles.removeItemButton}
-                                    onClick={() => handleDeleteItem(item.productId)}
+                                    onClick={() => handleDeleteItem(item.cartId)}
                                 />
                             </div>
                             <div className={styles.item}>
                                 <div className={styles.itemLeft}>
                                     <img
-                                        src={`https://storage.googleapis.com/every_pet_img/${item.productId}`}
+                                        src={item.productImg}
                                         alt={item.productName}
                                         className={styles.productImage}
                                     />
@@ -159,20 +160,20 @@ const Cart: React.FC = () => {
                                     <div className={styles.quantity}>
                                         <button
                                             className={styles.quantityButton}
-                                            onClick={() => handleQuantityChange(item.productId, -1)}
+                                            onClick={() => handleQuantityChange(item.cartId, -1)}
                                         >-
                                         </button>
                                         <input type="number" value={item.cartQuantity} readOnly
                                                className={styles.quantityInput}/>
                                         <button
                                             className={styles.quantityButton}
-                                            onClick={() => handleQuantityChange(item.productId, 1)}
+                                            onClick={() => handleQuantityChange(item.cartId, 1)}
                                         >+
                                         </button>
                                     </div>
                                     <div className={styles.total}>
                                         <p className={styles.price}>
-                                            {item.productPrice ? formatPrice(parseInt(item.productPrice.replace(/,/g, ''), 10) * item.cartQuantity) : '0원'}
+                                            {item.price ? formatPrice(item.price * item.cartQuantity) : '0원'}
                                         </p>
                                     </div>
                                 </div>

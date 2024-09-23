@@ -34,7 +34,7 @@ const Payment: React.FC = () => {
             orderId: orderId,
             addressId: addressId,
             products: selectedProducts.map((item: CartItem) => ({
-                productId: item.productId,
+                productId: item.cartId,
                 quantity: item.cartQuantity
             })),
             delivery: shippingFee,
@@ -68,7 +68,7 @@ const Payment: React.FC = () => {
                     orderId,
                     addressId,
                     selectedProducts.map((item: CartItem) => ({
-                        productId: item.productId,
+                        productId: item.cartId,
                         quantity: item.cartQuantity
                     }))
                 );
@@ -210,11 +210,11 @@ const Payment: React.FC = () => {
                             </span>
                         </div>
                         {selectedProducts.map((item: CartItem) => (
-                            <div className={styles.item__wrap} key={item.productId}>
+                            <div className={styles.item__wrap} key={item.cartId}>
                                 <div className={styles.item}>
                                     <div className={styles.itemLeft}>
                                         <img
-                                            src={`https://storage.googleapis.com/every_pet_img/${item.productId}`}
+                                            src={item.productImg}
                                             alt={item.productName}
                                             className={styles.productImage}
                                         />
@@ -227,7 +227,7 @@ const Payment: React.FC = () => {
                                             <p>{item.cartQuantity}개</p>
                                         </div>
                                         <div className={styles.total}>
-                                            <p className={styles.price}>{formatPrice(parseInt(item.productPrice.replace(/,/g, ''), 10) * item.cartQuantity)}</p>
+                                            <p className={styles.price}>{formatPrice(item.price * item.cartQuantity)}</p>
                                         </div>
                                     </div>
                                 </div>

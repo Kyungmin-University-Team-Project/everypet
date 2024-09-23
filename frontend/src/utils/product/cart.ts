@@ -1,10 +1,12 @@
 import axiosInstance from "../error/axiosInstance";
 
 export interface CartItem {
-    productId: string;
-    productName: string;
-    productPrice: string;
+    cartId: number;
     cartQuantity: number;
+    discountRate: number;
+    price:number;
+    productImg:string;
+    productName:string;
 }
 
 export const addToCart = async (productId: string, quantity: number = 1) => {
@@ -29,7 +31,7 @@ export const fetchCartItems = async (): Promise<CartItem[]> => {
     }
 };
 
-export const deleteCartItem = async (productId: string) => {
+export const deleteCartItem = async (productId: number) => {
     try {
         await axiosInstance.post('/cart/delete', {productId});
     } catch (error) {
