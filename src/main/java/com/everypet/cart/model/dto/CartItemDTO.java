@@ -1,10 +1,12 @@
 package com.everypet.cart.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -21,12 +23,15 @@ public class CartItemDTO {
         private String productName;
 
         @ApiModelProperty(example = "6999", notes = "상품 가격")
-        private int price;
+        private int productPrice;
 
         @ApiModelProperty(example = "10", notes = "할인율")
-        private int discountRate;
+        private int productDiscountRate;
 
         @ApiModelProperty(example = "3", notes = "수량")
         private int cartQuantity;
+
+        @JsonIgnore
+        private String productId;
 
 }

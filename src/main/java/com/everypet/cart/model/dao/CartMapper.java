@@ -12,4 +12,5 @@ public interface CartMapper {
     Integer insertCart(Cart cart);
     List<CartItemDTO> selectAllCart(String memberId);
     void deleteCart(@Param("memberId")String memberId, @Param("cartId")String productId);
+    void updateCart(Cart cart);
 }
