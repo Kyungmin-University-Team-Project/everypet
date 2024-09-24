@@ -227,7 +227,7 @@ const Payment: React.FC = () => {
                                             <p>{item.cartQuantity}개</p>
                                         </div>
                                         <div className={styles.total}>
-                                            <p className={styles.price}>{formatPrice(item.price * item.cartQuantity)}</p>
+                                            <p className={styles.price}>{formatPrice(item.productPrice * item.cartQuantity)}</p>
                                         </div>
                                     </div>
                                 </div>
