@@ -34,7 +34,7 @@ const Payment: React.FC = () => {
             orderId: orderId,
             addressId: addressId,
             products: selectedProducts.map((item: CartItem) => ({
-                productId: item.cartId,
+                productId: item.productId,
                 quantity: item.cartQuantity
             })),
             delivery: shippingFee,

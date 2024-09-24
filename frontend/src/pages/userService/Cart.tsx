@@ -56,13 +56,11 @@ const Cart: React.FC = () => {
         }
     };
 
-    const handleDeleteItem = async (cartId: string) => {
+    const handleDeleteItem = async (productId: string) => {
         try {
-
-            console.log(cartId)
-            await deleteCartItem(cartId);
-            const newCartItems = cartItems.filter(item => item.cartId !== cartId);
-            const newSelectedItems = selectedItems.filter(id => id !== cartId);
+            await deleteCartItem(productId);
+            const newCartItems = cartItems.filter(item => item.productId !== productId);
+            const newSelectedItems = selectedItems.filter(id => id !== productId);
             setCartItems(newCartItems);
             setSelectedItems(newSelectedItems);
             calculateTotalPrice(newCartItems, newSelectedItems);
@@ -143,7 +141,7 @@ const Cart: React.FC = () => {
                                 />
                                 <FaTrashAlt
                                     className={styles.removeItemButton}
-                                    onClick={() => handleDeleteItem(item.cartId)}
+                                    onClick={() => handleDeleteItem(item.productId)}
                                 />
                             </div>
                             <div className={styles.item}>
