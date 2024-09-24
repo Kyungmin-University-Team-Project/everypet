@@ -11,7 +11,7 @@ const shippingFee = 3000;
 const Cart: React.FC = () => {
 
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
-    const [selectedItems, setSelectedItems] = useState<number[]>([]);
+    const [selectedItems, setSelectedItems] = useState<string[]>([]);
     const [selectAll, setSelectAll] = useState(false);
     const [deleteTrigger, setDeleteTrigger] = useState(false);
     const [totalPrice, setTotalPrice] = useState(0);
@@ -21,7 +21,6 @@ const Cart: React.FC = () => {
         try {
             const items: CartItem[] = await fetchCartItems();
             setCartItems(items);
-            console.log(items)
             setSelectedItems(items.map((item: CartItem) => item.cartId));
             calculateTotalPrice(items, items.map((item: CartItem) => item.cartId));
         } catch (error) {
@@ -44,12 +43,12 @@ const Cart: React.FC = () => {
         return price.toLocaleString() + '원';
     };
 
-    const calculateTotalPrice = (items: CartItem[], selected: number[]) => {
+    const calculateTotalPrice = (items: CartItem[], selected: string[]) => {
         if (items && items.length > 0) {
             const selectedProductPrice = items
                 .filter(item => selected.includes(item.cartId))
                 .reduce((total, item) => {
-                    const productPrice = item.price ?? 0;
+                    const productPrice = item.productPrice ?? 0;
                     return total + productPrice * item.cartQuantity;
                 }, 0);
             const totalPrice = selectedProductPrice + (selectedProductPrice > 0 ? shippingFee : 0);
@@ -57,11 +56,11 @@ const Cart: React.FC = () => {
         }
     };
 
-    const handleDeleteItem = async (cartId: number) => {
+    const handleDeleteItem = async (productId: string) => {
         try {
-            await deleteCartItem(cartId);
-            const newCartItems = cartItems.filter(item => item.cartId !== cartId);
-            const newSelectedItems = selectedItems.filter(id => id !== cartId);
+            await deleteCartItem(productId);
+            const newCartItems = cartItems.filter(item => item.productId !== productId);
+            const newSelectedItems = selectedItems.filter(id => id !== productId);
             setCartItems(newCartItems);
             setSelectedItems(newSelectedItems);
             calculateTotalPrice(newCartItems, newSelectedItems);
@@ -81,7 +80,7 @@ const Cart: React.FC = () => {
         calculateTotalPrice(cartItems, selectAll ? [] : cartItems.map(item => item.cartId));
     };
 
-    const handleItemSelectChange = (cartId: number) => {
+    const handleItemSelectChange = (cartId: string) => {
         const newSelectedItems = selectedItems.includes(cartId)
             ? selectedItems.filter(id => id !== cartId)
             : [...selectedItems, cartId];
@@ -89,7 +88,7 @@ const Cart: React.FC = () => {
         calculateTotalPrice(cartItems, newSelectedItems);
     };
 
-    const handleQuantityChange = (cartId: number, change: number) => {
+    const handleQuantityChange = (cartId: string, change: number) => {
         const item = cartItems.find(item => item.cartId === cartId);
         if (item) {
             const newQuantity = item.cartQuantity + change;
@@ -142,7 +141,7 @@ const Cart: React.FC = () => {
                                 />
                                 <FaTrashAlt
                                     className={styles.removeItemButton}
-                                    onClick={() => handleDeleteItem(item.cartId)}
+                                    onClick={() => handleDeleteItem(item.productId)}
                                 />
                             </div>
                             <div className={styles.item}>
@@ -173,7 +172,7 @@ const Cart: React.FC = () => {
                                     </div>
                                     <div className={styles.total}>
                                         <p className={styles.price}>
-                                            {item.price ? formatPrice(item.price * item.cartQuantity) : '0원'}
+                                            {item.productPrice ? formatPrice(item.productPrice * item.cartQuantity) : '0원'}
                                         </p>
                                     </div>
                                 </div>

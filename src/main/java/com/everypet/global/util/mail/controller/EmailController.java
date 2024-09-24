@@ -27,7 +27,7 @@ public class EmailController {
     @ApiOperation(value = "코드 발송", notes = "코드를 발송합니다.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "이메일이 발송되었습니다."),
-    })sa
+    })
     @PostMapping("/code")
     public ResponseEntity<String> sendMail(@RequestBody EmailMessageDTO emailMessageDTO) {
 
