@@ -40,7 +40,7 @@ docker-compose down
 
 ## 🧬 스웨거
 
-[스웨거 링크](http://localhost:8080/swagger-ui.html)
+[스웨거 링크](http://localhost:8080/swagger-ui/index.html)
 
 ## 🛠️ 기술스택
 
