@@ -11,6 +11,6 @@ import java.util.List;
 public interface CartMapper {
     Integer insertCart(Cart cart);
     List<CartItemDTO> selectAllCart(String memberId);
-    void deleteCart(@Param("memberId")String memberId, @Param("cartId")String productId);
+    void deleteCart(@Param("memberId") String memberId, @Param("productId") String productId);
     void updateCart(Cart cart);
 }

@@ -7,6 +7,7 @@ import com.everypet.global.util.ResponseEntityUtil;
 import com.everypet.member.model.vo.Member;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
-import java.util.Map;
 
 @RequestMapping("/cart")
 @Api(tags = "장바구니 Api")
@@ -27,7 +27,7 @@ public class CartApiController {
 
     @ApiOperation(value = "장바구니 추가", notes = "회원의 장바구니에 상품을 추가합니다.")
     @PostMapping("/add")
-    public ResponseEntity<String> addCart(@RequestBody CartInsertDTO cartInsertDTO, @AuthenticationPrincipal Member member) {
+    public ResponseEntity<String> addCart(@RequestBody CartInsertDTO cartInsertDTO, @ApiIgnore @AuthenticationPrincipal Member member) {
         cartService.addCart(member.getMemberId(), cartInsertDTO);
         return ResponseEntityUtil.response("장바구니 추가 성공", HttpStatus.CREATED);
     }
@@ -41,8 +41,11 @@ public class CartApiController {
 
     @ApiOperation(value = "장바구니 삭제", notes = "회원의 장바구니에 상품을 삭제합니다.")
     @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteCart(@RequestBody Map<String, String> cartId, @AuthenticationPrincipal Member member) {
-        cartService.deleteCart(member.getUsername(), cartId.get("cartId"));
+    public ResponseEntity<String> deleteCart(
+            @ApiParam(value = "삭제할 상품의 ID", required = true, example = "58ee090a-7401-43ea-98fa-4c8c119d5f7e")
+            @RequestParam String productId,
+            @ApiIgnore @AuthenticationPrincipal Member member) {
+        cartService.deleteCart(member.getUsername(), productId);
         return ResponseEntityUtil.response("장바구니 삭제 성공", HttpStatus.OK);
     }
 

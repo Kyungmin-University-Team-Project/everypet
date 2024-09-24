@@ -88,6 +88,6 @@ docker-compose down
 
 🚧 공사중
 
-## 🦝 물에솜사탕씻기를겨우성공한너구리
+## 😇 프로젝트의 정상화 과정
 
-![image](https://mblogthumb-phinf.pstatic.net/MjAyMTAzMzFfMjY5/MDAxNjE3MTkzODk3ODM3.D3vloPSntDm1r1vKlkMezHqYDUltQIuwMxmkdUpUSScg.SM0htZ2akdHUdz7_fBCk7g6dpMHGteY4cs4jWwOCsMsg.JPEG.41minit/1617193897369.jpg?type=w800 )
+![image](https://image.fmkorea.com/files/attach/new4/20240808/7338495769_6775339301_e7d40bafd4fba74fe0f98d74c84c0650.jpg )
