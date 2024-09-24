@@ -1,6 +1,5 @@
 package com.everypet.cart.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,7 +30,7 @@ public class CartItemDTO {
         @ApiModelProperty(example = "3", notes = "수량")
         private int cartQuantity;
 
-        @JsonIgnore
+        @ApiModelProperty(example = "58ee090a-7401-43ea-98fa-4c8c119d5f7e", notes = "상품 아이디")
         private String productId;
 
 }
