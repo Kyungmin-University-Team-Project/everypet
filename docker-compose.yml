@@ -1,4 +1,3 @@
-
   version: '3'
 
   services:
@@ -12,10 +11,10 @@
         - mysql
         - redis
       environment:
-        db.driverClass: 'com.mysql.jdbc.Driver'
-        db.url: 'jdbc:mysql://mysql:3306/every-pet'
-        db.username: 'root'
-        db.password: 'root'
+        spring.datasource.driverClass: 'com.mysql.jdbc.Driver'
+        spring.datasource.url: 'jdbc:mysql://localhost:3306/every_pet?serverTimezone=Asia/Seoul'
+        spring.datasource.username: 'root'
+        spring.datasource.password: 'root'
         redis.host: 'redis'
         redis.port: '6379'
       networks:
@@ -27,7 +26,7 @@
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: every-pet
       ports:
-        - '3308:3306'
+        - '3306:3306'
       volumes:
         - ./docs/data.sql:/docker-entrypoint-initdb.d/data.sql
       networks:
@@ -36,7 +35,7 @@
     redis:
       image: redis
       ports:
-        - '6382:6379'
+        - '6379:6379'
       networks:
         - network
 
