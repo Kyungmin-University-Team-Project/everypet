@@ -41,7 +41,7 @@ const Chat = () => {
         // 서버로 메시지 전송
         if (stompClient && inputMessage) {
             // stompClient.send('/app/application', {}, JSON.stringify({ text: inputMessage }));
-            setInputMessage('');
+            // setInputMessage('');
         }
     };
 

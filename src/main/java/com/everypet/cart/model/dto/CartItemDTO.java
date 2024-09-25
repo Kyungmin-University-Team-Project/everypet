@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class CartItemDTO {
 
         @ApiModelProperty(example = "1", notes = "장바구니 아이디")
-        private String cartId;
+        private int cartId;
 
         @ApiModelProperty(example = "https://storage.googleapis.com/every_pet_img/1f7832af-e587-495e-bf00-b14f9f3bf137", notes = "상품 이미지")
         private String productImg;
@@ -21,12 +22,15 @@ public class CartItemDTO {
         private String productName;
 
         @ApiModelProperty(example = "6999", notes = "상품 가격")
-        private int price;
+        private int productPrice;
 
         @ApiModelProperty(example = "10", notes = "할인율")
-        private int discountRate;
+        private int productDiscountRate;
 
         @ApiModelProperty(example = "3", notes = "수량")
         private int cartQuantity;
+
+        @ApiModelProperty(example = "58ee090a-7401-43ea-98fa-4c8c119d5f7e", notes = "상품 아이디")
+        private String productId;
 
 }
