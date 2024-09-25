@@ -16,9 +16,6 @@ jobs:
           distribution: 'corretto'
           java-version: '8'
 
-      - name: Set up Maven
-        run: sudo apt-get install maven
-
       - name: Create application.properties
         run: |
           echo "spring.mail.host=smtp.gmail.com" >> src/main/resources/application.properties

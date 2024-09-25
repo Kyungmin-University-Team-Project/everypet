@@ -9,16 +9,15 @@ import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +27,8 @@ public class ProductServiceImpl implements ProductService {
     private String bucketName;
     private final Storage storage;
     private final ProductMapper productMapper;
+
+    private final StringRedisTemplate redisTemplate;
 
     @Override
     public void insertProduct(ProductCreateDTO productCreateDTO, String memberId){
@@ -135,6 +136,10 @@ public class ProductServiceImpl implements ProductService {
         int pageStart = (searchProductDTO.getPage() - 1) * searchProductDTO.getPageSize();
         searchProductDTO.setPageStart(pageStart);
 
+        // 검색 키워드를 Redis에 저장 (인기 검색어) - 24시간 유지
+        redisTemplate.opsForZSet().incrementScore("search:keyword:", searchProductDTO.getKeyword(), 1);
+        redisTemplate.expire("search:keyword:", 60 * 60 * 24, TimeUnit.SECONDS);
+
         return productMapper.searchProductListByKeyword(searchProductDTO);
     }
 
@@ -176,7 +181,10 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-
+    @Override
+    public Set<String> realTimeKeyword(int count) {
+        return redisTemplate.opsForZSet().reverseRange("search:keyword:", 0, count - 1);
+    }
 
     // 이미지 업로드
     private void uploadImageToCloudStorage(String productId, MultipartFile image) {

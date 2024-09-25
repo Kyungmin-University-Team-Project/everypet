@@ -3,6 +3,7 @@ package com.everypet.product.service;
 import com.everypet.product.model.dto.*;
 
 import java.util.List;
+import java.util.Set;
 
 public interface ProductService {
     void insertProduct(ProductCreateDTO productCreateDTO, String memberId);
@@ -23,5 +24,5 @@ public interface ProductService {
 
     void deleteProductKeyword(DeleteProductKeywordDTO deleteProductKeywordDTO, String memberId);
 
-
+    Set<String> realTimeKeyword(int count);
 }
