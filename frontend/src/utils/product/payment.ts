@@ -1,6 +1,6 @@
 import * as PortOne from "@portone/browser-sdk/v2";
 import axios from "axios";
-import {decryptToken} from "../token/token";
+import {decryptToken} from "../auth/token";
 import axiosInstance from "../error/axiosInstance";
 
 interface Product {
@@ -12,8 +12,6 @@ export const handleKaKaoPaymentRequest = async (
     orderName: string,
     totalAmount: number,
     orderId: string,
-    addressId: string,
-    products: Product[]
 ) => {
     const response = await PortOne.requestPayment({
         storeId: "store-9fb2e733-efb3-44e1-98c7-7e017b9c43b4",
@@ -24,6 +22,7 @@ export const handleKaKaoPaymentRequest = async (
         currency: "CURRENCY_KRW",
         payMethod: "EASY_PAY",
         isTestChannel: true,
+        // 아래 부분은 사용자의 정보를 넘겨주기
         customer: {
             email: "customer@example.com",
             phoneNumber: '010-6662-8752',

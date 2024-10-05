@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Postcode from "./Postcode";
 import styles from "./Signup.module.css";
-import { signUpLogin, sendVerificationEmail, verifyCode } from "../../typings/AuthAPI";
+import { signUpLogin, sendVerificationEmail, verifyCode } from "../../utils/auth/AuthAPI";
 import "@fortawesome/fontawesome-free/css/all.css";
 import axios from "axios";
 import { Join } from "../../typings/signup";

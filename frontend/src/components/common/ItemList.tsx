@@ -6,7 +6,7 @@ import styles from './ItemList.module.css';
 import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
 import ErrorComponent from "../../utils/reactQuery/ErrorComponent";
 import { fetchProductList } from "../../utils/product/fetchProductList";
-import { Product } from "../../typings/Category";
+import { Product } from "../../typings/product";
 import { RootState } from '../../redux/store/rootReducer';
 
 const ItemList = () => {
