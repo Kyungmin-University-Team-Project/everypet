@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { Join } from "./signup";
-import { LoginData } from "./Login";
+import { Join } from "../../typings/signup";
+import { LoginData } from "../../typings/login";
 // jwt 4.0 이상
 import { jwtDecode } from 'jwt-decode';
 

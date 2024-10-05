@@ -5,6 +5,7 @@ import RealtimekeywordModal from './RealtimekeywordModal';
 import {Ranking} from '../../typings/layout';
 import {IoIosArrowDown} from 'react-icons/io';
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 const Realtimekeyword = () => {
     const [rankings, setRankings] = useState<Ranking[]>([]);
@@ -28,6 +29,19 @@ const Realtimekeyword = () => {
         }, 2000);
 
         return () => clearInterval(intervalId);
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.post('/real-time-keyword');
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+
+        fetchData();
     }, []);
 
     const handleClickOutside = useCallback((event: MouseEvent) => {

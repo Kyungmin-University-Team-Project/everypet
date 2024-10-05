@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {decryptToken, reissueToken} from '../token/token';
+import {decryptToken, reissueToken} from '../auth/token';
 
 const axiosInstance = axios.create({
     headers: {

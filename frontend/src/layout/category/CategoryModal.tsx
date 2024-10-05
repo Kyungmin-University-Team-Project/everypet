@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { SidebarProps } from '../../typings/layout';
+import { MegaMenuProps } from '../../typings/layout';
 import styles from './Categorymodal.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -72,7 +72,7 @@ const categories = [
     },
 ];
 
-const CategoryModal = ({ isOpen, setClose }: SidebarProps) => {
+const CategoryModal = ({ isOpen, setClose }: MegaMenuProps) => {
     const [scrollY, setScrollY] = useState(0);
     const navigate = useNavigate();
     const dispatch = useDispatch();

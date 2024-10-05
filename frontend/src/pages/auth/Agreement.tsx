@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { AgreementJoin } from "../../typings/agreement";
 import styles from "./Agreement.module.css";
+import {AgreementJoin} from "../../typings/signup";
 
 const Agreement: React.FC = () => {
     const [allIsChecked, setAllIsChecked] = useState<boolean>(false);

@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from './ProductcategoryItem.module.css';
-import { ProductcategoryItemProps } from '../../typings/layout';
+import styles from './ProductCategoryItem.module.css';
+import { ProductCategoryItemProps } from '../../typings/layout';
 
-const ProductcategoryItem = ({
+const ProductCategoryItem = ({
   category,
   isActive,
   onClick,
   link,
-}: ProductcategoryItemProps) => {
+}: ProductCategoryItemProps) => {
   return (
     <li>
       <Link to={link}>
@@ -23,4 +23,4 @@ const ProductcategoryItem = ({
   );
 };
 
-export default ProductcategoryItem;
+export default ProductCategoryItem;

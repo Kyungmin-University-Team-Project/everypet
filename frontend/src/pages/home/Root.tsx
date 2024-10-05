@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {Outlet, useLocation} from 'react-router-dom';
-import Productcategory from '../../layout/category/Productcategory';
+import Productcategory from '../../layout/category/ProductCategory';
 import Home from './Home';
 import Header from '../../layout/Header/Header';
 import Fixedheader from '../../layout/Header/Fixedheader';
