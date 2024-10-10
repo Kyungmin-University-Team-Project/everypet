@@ -158,6 +158,27 @@ CREATE TABLE TBL_PAYMENT
     FOREIGN KEY (ORDER_ID) REFERENCES TBL_ORDER(ORDER_ID)               -- 주문 ID 외래 키
 );
 
+CREATE TABLE TBL_RANKING
+(
+    KEYWORD                 VARCHAR(255) PRIMARY KEY ,                -- 검색어
+    RANKING                 INT,                                      -- 순위
+    PREVIOUS_RANK           INT,                                      -- 이전 순위
+    RANKING_GAP             INT,                                      -- 순위 변동 값
+    TOTAL_SCORE             DOUBLE,                                   -- 총 검색 점수
+    ONE_HOUR_SCORE          DOUBLE,                                   -- 1시간 검색 점수
+    DAILY_SCORE             DOUBLE,                                   -- 일일 검색 점수
+    WEEKLY_SCORE            DOUBLE,                                   -- 주간 검색 점수
+    TOTAL_COUNT             INT                                       -- 총 검색 횟수
+);
+
+CREATE TABLE TBL_KEYWORD_LOG
+(
+    KEYWORD_LOG_ID          BIGINT AUTO_INCREMENT PRIMARY KEY,              -- 키워드 로그 ID
+    KEYWORD                 VARCHAR(255) NOT NULL,                          -- 검색어
+    SEARCH_DATE             DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,    -- 검색 날짜
+    MEMBER_ID               VARCHAR(50)                                     -- 회원 ID
+);
+
 ## 나중에 추가하자
 /*CREATE TABLE TBL_INQUIRY
 (
