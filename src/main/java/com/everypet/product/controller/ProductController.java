@@ -1,5 +1,6 @@
 package com.everypet.product.controller;
 
+import com.everypet.member.model.vo.Member;
 import com.everypet.product.model.dto.*;
 import com.everypet.product.service.ProductService;
 import io.swagger.annotations.Api;
@@ -9,12 +10,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Api(tags = "상품 Api")
@@ -108,9 +111,9 @@ public class ProductController {
 
     @ApiOperation(value = "상품 키워드 검색", notes = "검색창에서 키워드를 입력하고, 키워드에 해당하는 상품 정보를 출력합니다.")
     @GetMapping("/search-products")
-    public List<ProductListDTO> searchProducts(@Valid @ModelAttribute SearchProductDTO searchProductDTO){
+    public List<ProductListDTO> searchProducts(@Valid @ModelAttribute SearchProductDTO searchProductDTO, @ApiIgnore @AuthenticationPrincipal Member member, @ApiIgnore HttpServletRequest request){
 
-        return productService.selectProductListByKeyword(searchProductDTO);
+        return productService.selectProductListByKeyword(searchProductDTO, member, request);
     }
 
     @ApiOperation(value = "키워드 자동 검색", notes = "한 글자 단위로 키워드를 자동 검색합니다.")
@@ -140,13 +143,6 @@ public class ProductController {
         productService.deleteProductKeyword(deleteProductKeywordDTO, memberId);
 
         return response(HttpStatus.OK, "키워드 삭제 완료");
-    }
-    
-    // 실시간 검색어 순위
-    @ApiOperation(value = "실시간 검색어 순위", notes = "실시간 검색어 순위를 출력합니다.")
-    @PostMapping("/real-time-keyword")
-    public List<String> realTimeKeyword(){
-        return new ArrayList<>(productService.realTimeKeyword(10));
     }
 
     // ----------------------------------------------------------------------------------------------

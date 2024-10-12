@@ -1,9 +1,10 @@
 package com.everypet.product.service;
 
+import com.everypet.member.model.vo.Member;
 import com.everypet.product.model.dto.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Set;
 
 public interface ProductService {
     void insertProduct(ProductCreateDTO productCreateDTO, String memberId);
@@ -16,7 +17,7 @@ public interface ProductService {
 
     void updateProduct(ProductUpdateDTO productUpdateDTO, String memberId);
 
-    List<ProductListDTO> selectProductListByKeyword(SearchProductDTO searchProductDTO);
+    List<ProductListDTO> selectProductListByKeyword(SearchProductDTO searchProductDTO, Member member, HttpServletRequest request);
 
     List<String> autocompleteKeyword(String keyword);
 
@@ -24,5 +25,4 @@ public interface ProductService {
 
     void deleteProductKeyword(DeleteProductKeywordDTO deleteProductKeywordDTO, String memberId);
 
-    Set<String> realTimeKeyword(int count);
 }

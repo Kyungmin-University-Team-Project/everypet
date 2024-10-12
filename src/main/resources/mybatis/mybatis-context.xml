@@ -33,6 +33,11 @@
 
         <typeAlias type="com.everypet.order.model.vo.Order" alias="Order"></typeAlias>
         <typeAlias type="com.everypet.order.model.vo.OrderDetail" alias="OrderDetail"></typeAlias>
+
+        <typeAlias type="com.everypet.keyword.model.dto.KeywordRankDTO" alias="KeywordRankDTO"></typeAlias>
+        <typeAlias type="com.everypet.keyword.model.dto.KeywordRankDTO$TopKeywordRankDetail" alias="TopKeywordRankDetail"></typeAlias>
+        <package name="com.everypet.keyword.model.vo"></package>
+
     </typeAliases>
 
 </configuration>

@@ -1,5 +1,9 @@
 package com.everypet.product.service.impl;
 
+import com.everypet.global.util.IpUtil;
+import com.everypet.keyword.service.KeywordLogService;
+import com.everypet.keyword.service.KeywordRankService;
+import com.everypet.member.model.vo.Member;
 import com.everypet.product.model.dao.ProductMapper;
 import com.everypet.product.model.dto.*;
 import com.everypet.product.service.ProductService;
@@ -8,27 +12,33 @@ import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageException;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
+    private static final Logger log = LogManager.getLogger(ProductServiceImpl.class);
     @Value("${spring.cloud.gcp.bucket}") // application.yml에 써둔 bucket 이름
     private String bucketName;
     private final Storage storage;
     private final ProductMapper productMapper;
 
-    private final StringRedisTemplate redisTemplate;
+    private final KeywordRankService keywordRankService;
+    private final KeywordLogService keywordLogService;
 
     @Override
     public void insertProduct(ProductCreateDTO productCreateDTO, String memberId){
@@ -130,15 +140,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductListDTO> selectProductListByKeyword(SearchProductDTO searchProductDTO) {
+    public List<ProductListDTO> selectProductListByKeyword(SearchProductDTO searchProductDTO, Member member, HttpServletRequest request) {
 
         // 페이지 번호와 페이지 크기를 이용하여 페이지의 시작 인덱스를 계산
         int pageStart = (searchProductDTO.getPage() - 1) * searchProductDTO.getPageSize();
         searchProductDTO.setPageStart(pageStart);
 
-        // 검색 키워드를 Redis에 저장 (인기 검색어) - 24시간 유지
-        redisTemplate.opsForZSet().incrementScore("search:keyword:", searchProductDTO.getKeyword(), 1);
-        redisTemplate.expire("search:keyword:", 60 * 60 * 24, TimeUnit.SECONDS);
+        // ip 주소 가져오기
+        String ip = IpUtil.getClientIpAddress(request);
+        // 검색 기록을 저장
+        keywordRankService.keywordRedisSave(ip, searchProductDTO.getKeyword());
+
+        // 검색 기록을 DB에 저장
+        keywordLogService.saveKeywordLog(searchProductDTO.getKeyword(), member);
 
         return productMapper.searchProductListByKeyword(searchProductDTO);
     }
@@ -179,11 +193,6 @@ public class ProductServiceImpl implements ProductService {
         if (result == 0) {
             throw new RuntimeException("DB에 키워드 삭제 실패");
         }
-    }
-
-    @Override
-    public Set<String> realTimeKeyword(int count) {
-        return redisTemplate.opsForZSet().reverseRange("search:keyword:", 0, count - 1);
     }
 
     // 이미지 업로드
