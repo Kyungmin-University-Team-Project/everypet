@@ -9,11 +9,11 @@
 
     <typeAliases>
         <typeAlias type="com.everypet.member.model.vo.Member" alias="Member"></typeAlias>
-        <typeAlias type="com.everypet.global.auth.oauth2.data.domain.OAuth2Member" alias="OAuth2Member"></typeAlias>
+        <typeAlias type="com.everypet.auth.oauth2.data.domain.OAuth2Member" alias="OAuth2Member"></typeAlias>
 
         <typeAlias type="com.everypet.member.model.vo.Address" alias="Address"></typeAlias>
 
-        <typeAlias type="com.everypet.global.util.point.model.vo.Point" alias="Point"></typeAlias>
+        <typeAlias type="com.everypet.point.model.vo.Point" alias="Point"></typeAlias>
 
         <typeAlias type="com.everypet.product.model.vo.Product" alias="Product"></typeAlias>
         <typeAlias type="com.everypet.product.model.dto.ProductListDTO" alias="ProductListDTO"></typeAlias>
@@ -36,6 +36,7 @@
 
         <typeAlias type="com.everypet.keyword.model.dto.KeywordRankDTO" alias="KeywordRankDTO"></typeAlias>
         <typeAlias type="com.everypet.keyword.model.dto.KeywordRankDTO$TopKeywordRankDetail" alias="TopKeywordRankDetail"></typeAlias>
+
         <package name="com.everypet.keyword.model.vo"></package>
 
     </typeAliases>
