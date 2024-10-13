@@ -1,8 +1,9 @@
-package com.everypet.global.util.mail.service.impl;
+package com.everypet.mail.service.impl;
 
-import com.everypet.global.util.mail.model.constant.Purpose;
-import com.everypet.global.util.mail.model.dto.VerificationDTO;
-import com.everypet.global.util.mail.service.EmailService;
+import com.everypet.global.util.IpUtil;
+import com.everypet.mail.model.constant.Purpose;
+import com.everypet.mail.model.dto.VerificationDTO;
+import com.everypet.mail.service.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
@@ -15,6 +16,7 @@ import org.springframework.util.StreamUtils;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
@@ -79,13 +81,6 @@ public class EmailServiceImpl implements EmailService {
         }
     }
 
-    // 쳄플릿 로딩 및 포맷팅
-    private String loadAndFormatTemplate(String templatePath, Object... args) throws IOException {
-        ClassPathResource resource = new ClassPathResource(templatePath);
-        String template = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
-        return String.format(template, args);
-    }
-
     /**
      * 이메일 인증 코드를 생성하고, 주어진 이메일 주소로 전송합니다. 인증 코드는 5분간 유효합니다. (5분이 지나면 만료됨)
      * sendCode 메소드는 내부적으로 {@link #sendEmail(List, String, String, Object...)} 메서드를 호출하여 이메일을 전송합니다.
@@ -95,14 +90,16 @@ public class EmailServiceImpl implements EmailService {
      *
      */
     @Override
-    public void sendCode(String email, Purpose purpose) {
+    public void sendCode(String email, Purpose purpose, HttpServletRequest request) {
 
         SecureRandom random = new SecureRandom();
         int code = random.nextInt(9000) + 1000;
 
         ValueOperations<String, String> valueOps = redisTemplate.opsForValue();
 
-        String redisKey = purpose.name() + ":" + code;
+        String ip = IpUtil.getClientIpAddress(request);
+
+        String redisKey = ip + ":" + purpose.name() + ":" + code;
 
         valueOps.set(redisKey, email, Duration.ofMinutes(5)); // 5분간 유효
 
@@ -115,32 +112,37 @@ public class EmailServiceImpl implements EmailService {
      /**
      * 주어진 인증 정보를 사용하여 인증 코드를 확인합니다.
      * 인증 코드가 일치하면 true를 반환하고, 그렇지 않으면 false를 반환합니다.
-     * 인증 코드가 확인되면, 해당 인증 코드는 {@link #deleteCode(VerificationDTO)} 메소드를 사용하여 삭제해야 합니다.
+     * 인증 코드가 확인되면, 해당 인증 코드는 {@link #deleteCode(VerificationDTO, String)} 메소드를 호출하여 삭제됩니다.
      *
      * @param verification 인증 정보 DTO (인증 코드와 목적 포함)
      * @return 인증 코드가 유효하면 true, 그렇지 않으면 false
      */
     @Override
-    public boolean verifyCode(VerificationDTO verification) {
+    public boolean verifyCode(VerificationDTO verification, HttpServletRequest request) {
         ValueOperations<String, String> valueOps = redisTemplate.opsForValue();
 
-        String redisKey = verification.getPurpose().name() + ":" + verification.getCode();
+        String ip = IpUtil.getClientIpAddress(request);
+
+        String redisKey = ip + ":" + verification.getPurpose().name() + ":" + verification.getCode();
         String email = valueOps.get(redisKey);
+
+        deleteCode(verification, ip);
 
         return email != null;
     }
 
-    /**
-     * 주어진 인증 정보를 사용하여 인증 코드를 삭제합니다.
-     *
-     * @param verification 인증 정보 DTO (인증 코드와 목적 포함)
-     */
-    @Override
-    public void deleteCode(VerificationDTO verification) {
+    private void deleteCode(VerificationDTO verification, String ip) {
         ValueOperations<String, String> valueOps = redisTemplate.opsForValue();
 
-        String redisKey = verification.getPurpose().name() + ":" + verification.getCode();
+        String redisKey = ip + ":" + verification.getPurpose().name() + ":" + verification.getCode();
         valueOps.getOperations().delete(redisKey);
+    }
+
+    // 템플릿 로딩 및 포맷팅
+    private String loadAndFormatTemplate(String templatePath, Object... args) throws IOException {
+        ClassPathResource resource = new ClassPathResource(templatePath);
+        String template = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
+        return String.format(template, args);
     }
 
 }

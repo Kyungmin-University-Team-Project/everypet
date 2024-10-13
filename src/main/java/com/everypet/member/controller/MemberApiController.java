@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -40,9 +41,9 @@ public class MemberApiController {
 
     @ApiOperation(value = "비밀번호 변경", notes = "회원의 비밀번호를 변경합니다.")
     @PostMapping("/password/change")
-    public ResponseEntity<String> changePassword(@ApiIgnore @AuthenticationPrincipal Member member,  @Valid @RequestBody PasswordChageDTO passwordChage) {
+    public ResponseEntity<String> changePassword(@ApiIgnore @AuthenticationPrincipal Member member, @Valid @RequestBody PasswordChageDTO passwordChage, @ApiIgnore HttpServletRequest request) {
 
-        memberService.changePassword(member, passwordChage);
+        memberService.changePassword(member, passwordChage, request);
 
         return ResponseEntityUtil.response("비밀번호 변경 성공", HttpStatus.OK);
     }
@@ -57,22 +58,22 @@ public class MemberApiController {
     
     @ApiOperation(value = "아이디 찾기", notes = "아이디를 찾습니다.")
     @PostMapping("/id/find")
-    public ResponseEntity<String> findId(@RequestBody FindIdDTO request) {
-        List<String> members = memberService.findId(request);
+    public ResponseEntity<String> findId(@RequestBody FindIdDTO findIdDTO, @ApiIgnore HttpServletRequest request) {
+        List<String> members = memberService.findMemberId(findIdDTO, request);
         return ResponseEntityUtil.response(members.toString(), HttpStatus.OK);
     }
     
     @ApiOperation(value = "비밀번호 찾기", notes = "이메일 인증을 통해 임시 비밀번호를 발급합니다.")
     @PostMapping("/password/reset")
-    public ResponseEntity<String> passwordReset(@RequestBody PasswordResetDTO request) {
-        memberService.passwordReset(request);
+    public ResponseEntity<String> passwordReset(@RequestBody PasswordResetDTO passwordResetDTO, @ApiIgnore HttpServletRequest request) {
+        memberService.passwordReset(passwordResetDTO, request);
         return ResponseEntityUtil.response("임시 비밀번호 발급 성공", HttpStatus.OK);
     }
 
     @ApiOperation(value = "회원탈퇴", notes = "회원을 탈퇴합니다.")
     @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteMember(@ApiIgnore @AuthenticationPrincipal Member member, @RequestBody DeleteMemberDTO request) {
-        memberService.deleteMember(member, request);
+    public ResponseEntity<String> deleteMember(@ApiIgnore @AuthenticationPrincipal Member member, @RequestBody DeleteMemberDTO deleteMemberDTO, @ApiIgnore HttpServletRequest request) {
+        memberService.deleteMember(member, deleteMemberDTO, request);
         return ResponseEntityUtil.response("회원 탈퇴 성공", HttpStatus.OK);
     }
 
