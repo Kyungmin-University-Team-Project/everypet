@@ -10,9 +10,7 @@ import com.everypet.payment.service.PaymentService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -79,12 +77,5 @@ public class PaymentController {
             orderService.deleteOrder(orderId);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Payment verification failed: " + e.getMessage());
         }
-    }
-
-    // ----------------------------------------------------------------------------------------------
-    private ResponseEntity<String> response(HttpStatus httpStatus,String result) {
-        return ResponseEntity.status(httpStatus)
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")
-                .body(result);
     }
 }

@@ -1,7 +1,10 @@
 package com.everypet.order.service;
 
 import com.everypet.order.model.dto.InsertOrderDTO;
+import com.everypet.order.model.dto.OrderDTO;
 import com.everypet.order.model.vo.Order;
+
+import java.util.List;
 
 public interface OrderService {
     void insertOrder(InsertOrderDTO insertOrderDTO, String memberId);
@@ -11,4 +14,6 @@ public interface OrderService {
     Order selectOrder(String orderId);
 
     void updateOrderStatus(String orderId, String status);
+
+    List<OrderDTO.MyOrderListDTO> getMyOrderList(String memberId, int pageStart, int pageSize);
 }

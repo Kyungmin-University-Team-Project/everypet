@@ -21,10 +21,26 @@
         WHERE ORDER_ID = #{orderId}
     </delete>
 
+    <!-- 주문 디테일 정보를 TBL_ORDER_DETAIL 테이블에서 조회 -->
     <select id="selectOrderDetailsByOrderId" resultType="OrderDetail">
         SELECT ORDER_DETAIL_ID, ORDER_ID, PRODUCT_ID, PRODUCT_PRICE, QUANTITY, DISCOUNT_RATE
         FROM TBL_ORDER_DETAIL
         WHERE ORDER_ID = #{orderId}
     </select>
+
+    <!-- 리뷰 했음으로 변경 -->
+    <update id="updateReviewStatusToY" parameterType="Long">
+        UPDATE TBL_ORDER_DETAIL
+        SET REVIEW_STATUS = 'Y'
+        WHERE ORDER_DETAIL_ID = #{orderDetailId}
+    </update>
+
+    <!-- 리뷰 안 했음으로 변경 -->
+    <update id="updateReviewStatusToN" parameterType="Long">
+        UPDATE TBL_ORDER_DETAIL od
+            JOIN TBL_REVIEW r ON od.ORDER_DETAIL_ID = r.ORDER_DETAIL_ID
+            SET od.REVIEW_STATUS = 'N'
+        WHERE r.REVIEW_ID = #{reviewId}
+    </update>
 
 </mapper>

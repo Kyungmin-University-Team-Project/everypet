@@ -37,6 +37,8 @@
         <typeAlias type="com.everypet.keyword.model.dto.KeywordRankDTO" alias="KeywordRankDTO"></typeAlias>
         <typeAlias type="com.everypet.keyword.model.dto.KeywordRankDTO$TopKeywordRankDetail" alias="TopKeywordRankDetail"></typeAlias>
 
+        <typeAlias type="com.everypet.review.model.dto.ReviewDTO$ProductReviewDTO" alias="ProductReviewDTO"/>
+
         <package name="com.everypet.keyword.model.vo"></package>
 
     </typeAliases>

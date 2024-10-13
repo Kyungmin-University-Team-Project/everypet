@@ -8,8 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Null;
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -44,8 +43,12 @@ public class ProductUpdateDTO {
         private MultipartFile productDescriptionImage; // 상품 설명 이미지 파일
 
         @NotBlank
-        @ApiModelProperty(example = "사료", notes = "상품 카테고리")
-        private String productCategory; // 상품 카테고리
+        @ApiModelProperty(example = "고양이", notes = "상품 대분류 카테고리")
+        private String productMainCategory; // 상품 대분류 카테고리
+
+        @NotBlank
+        @ApiModelProperty(example = "사료", notes = "상품 소분류 카테고리")
+        private String productSubCategory; // 상품 소분류 카테고리
 
         @NotBlank
         @ApiModelProperty(example = "Y", notes = "상품 판매 상태")
@@ -55,3 +58,4 @@ public class ProductUpdateDTO {
         @ApiModelProperty(example = "2021-05-20", notes = "상품 수정일, 보내지 마세요")
         private LocalDateTime productChangedDate; // 상품 수정일
 }
+

@@ -7,22 +7,27 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface ProductService {
-    void insertProduct(ProductCreateDTO productCreateDTO, String memberId);
 
+    // 새로운 상품 정보 추가
+    void insertProduct(ProductDTO.ProductInsertDTO productInsertDTO, String memberId);
+
+    // 상품 삭제
     void deleteProduct(String productId, String memberId);
 
-    List<ProductListDTO> selectProductList(SelectProductDTO selectProductDTO);
+    // 상품 리스트 조회
+    List<ProductListDTO> selectProductList(String productMainCategory, String  productSubCategory, String  orderBy, int page, int pageSize);
 
-    ProductDTO selectProductByProductId(String productId);
+    // 단일 상품 상세 조회
+    ProductListDTO selectProductByProductId(String productId);
 
-    void updateProduct(ProductUpdateDTO productUpdateDTO, String memberId);
+    void updateProduct(ProductDTO.ProductInsertDTO productUpdateDTO, String memberId);
 
-    List<ProductListDTO> selectProductListByKeyword(SearchProductDTO searchProductDTO, Member member, HttpServletRequest request);
+    List<ProductListDTO> selectProductListByKeyword(String keyword, String orderBy, int page, int pageSize, Member member, HttpServletRequest request);
 
     List<String> autocompleteKeyword(String keyword);
 
-    void insertProductKeyword(InsertProductKeywordDTO insertProductKeywordDTO, String memberId);
+    void insertProductKeyword(ProductKeywordDTO insertProductKeywordDTO, String memberId);
 
-    void deleteProductKeyword(DeleteProductKeywordDTO deleteProductKeywordDTO, String memberId);
+    void deleteProductKeyword(ProductKeywordDTO deleteProductKeywordDTO, String memberId);
 
 }
