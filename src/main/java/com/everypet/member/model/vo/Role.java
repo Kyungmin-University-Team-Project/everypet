@@ -12,4 +12,11 @@ import lombok.NoArgsConstructor;
 public class Role {
     private String memberId;
     private String authorities;
+
+    public static Role of(String memberId, String authorities) {
+        return Role.builder()
+                .memberId(memberId)
+                .authorities(authorities)
+                .build();
+    }
 }
