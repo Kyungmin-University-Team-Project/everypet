@@ -1,6 +1,5 @@
 package com.everypet.member.model.dto.member;
 
-import com.everypet.global.util.mail.model.dto.VerificationDTO;
 import com.everypet.member.model.dto.address.SignupAddressDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -49,14 +48,12 @@ public class SignupDTO {
     @NotBlank(message = "전화번호는 필수 입력 값입니다.")
     private String phone;
 
-    private SignupAddressDTO address;
-
     @ApiModelProperty(example = "yongho", notes = "추천인 아이디")
     private String referrer;
 
     @ApiModelProperty(example = "N", notes = "마케팅 동의 여부")
     private char agreeMarketingYn;
 
-    private VerificationDTO verification;
+    private SignupAddressDTO address;
 
 }
