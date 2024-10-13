@@ -3,6 +3,7 @@ package com.everypet.order.service.impl;
 import com.everypet.order.model.dao.OrderDetailMapper;
 import com.everypet.order.model.dao.OrderMapper;
 import com.everypet.order.model.dto.InsertOrderDTO;
+import com.everypet.order.model.dto.OrderDTO;
 import com.everypet.order.model.vo.Order;
 import com.everypet.order.service.OrderService;
 import com.everypet.product.model.dao.ProductMapper;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -104,6 +106,17 @@ public class OrderServiceImpl implements OrderService {
             map.put("orderStatus", status);
 
             orderMapper.updateOrderStatusByOrderId(map);
+    }
+
+    @Override
+    public List<OrderDTO.MyOrderListDTO> getMyOrderList(String memberId, int pageStart, int pageSize) {
+        // 파라미터를 담을 Map 생성
+        Map<String, Object> params = new HashMap<>();
+        params.put("memberId", memberId);
+        params.put("pageStart", pageStart);
+        params.put("pageSize", pageSize);
+
+        return orderMapper.selectOrderListByMember(params);
     }
 
 }

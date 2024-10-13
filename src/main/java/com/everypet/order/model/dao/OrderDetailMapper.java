@@ -11,4 +11,8 @@ public interface OrderDetailMapper {
     int insertOrderDetail(Map<String, Object> map);
     int deleteOrderDetailByOrderId(String orderId);
     List<OrderDetail> selectOrderDetailsByOrderId(String orderId);
+    int updateReviewStatusToY(Long orderDetailId);
+    int updateReviewStatusToN(Long reviewId);
+
+
 }
