@@ -8,36 +8,30 @@
     </settings>
 
     <typeAliases>
-        <typeAlias type="com.everypet.member.model.vo.Member" alias="Member"></typeAlias>
-        <typeAlias type="com.everypet.global.auth.oauth2.data.domain.OAuth2Member" alias="OAuth2Member"></typeAlias>
+        <typeAlias type="com.everypet.member.model.vo.Member" alias="Member"/>
+        <typeAlias type="com.everypet.global.auth.oauth2.data.domain.OAuth2Member" alias="OAuth2Member"/>
+        <typeAlias type="com.everypet.member.model.vo.Address" alias="Address"/>
+        <typeAlias type="com.everypet.global.util.point.model.vo.Point" alias="Point"/>
+        <typeAlias type="com.everypet.product.model.vo.Product" alias="Product"/>
+        <typeAlias type="com.everypet.product.model.dto.ProductListDTO" alias="ProductListDTO"/>
+        <typeAlias type="com.everypet.product.model.dto.ProductDTO" alias="ProductDTO"/>
+        <typeAlias type="com.everypet.product.model.dto.SelectProductDTO" alias="SelectProductDTO"/>
+        <typeAlias type="com.everypet.product.model.dto.ProductUpdateDTO" alias="ProductUpdateDTO"/>
+        <typeAlias type="com.everypet.cart.model.vo.Cart" alias="Cart"/>
+        <typeAlias type="com.everypet.cart.model.dto.CartItemDTO" alias="CartItem"/>
+        <typeAlias type="com.everypet.product.model.vo.Advertisement" alias="Advertisement"/>
+        <typeAlias type="com.everypet.product.model.dto.AdvertisementDTO" alias="AdvertisementDTO"/>
+        <typeAlias type="com.everypet.product.model.dto.InsertAdvertisementDTO" alias="InsertAdvertisementDto"/>
+        <typeAlias type="com.everypet.product.model.dto.SearchProductDTO" alias="SearchProductDTO"/>
+        <typeAlias type="com.everypet.order.model.vo.Order" alias="Order"/>
+        <typeAlias type="com.everypet.order.model.vo.OrderDetail" alias="OrderDetail"/>
+        <typeAlias type="com.everypet.keyword.model.dto.KeywordRankDTO" alias="KeywordRankDTO"/>
+        <typeAlias type="com.everypet.keyword.model.dto.KeywordRankDTO$TopKeywordRankDetail" alias="TopKeywordRankDetail"/>
+        <typeAlias type="com.everypet.order.model.dto.OrderDTO$MyOrderListDTO" alias="MyOrderListDTO"/>
+        <typeAlias type="com.everypet.review.model.dto.ReviewDTO$ProductReviewDTO" alias="ProductReviewDTO"/>
 
-        <typeAlias type="com.everypet.member.model.vo.Address" alias="Address"></typeAlias>
-
-        <typeAlias type="com.everypet.global.util.point.model.vo.Point" alias="Point"></typeAlias>
-
-        <typeAlias type="com.everypet.product.model.vo.Product" alias="Product"></typeAlias>
-        <typeAlias type="com.everypet.product.model.dto.ProductListDTO" alias="ProductListDTO"></typeAlias>
-        <typeAlias type="com.everypet.product.model.dto.ProductDTO" alias="ProductDTO"></typeAlias>
-        <typeAlias type="com.everypet.product.model.dto.ProductInsertDTO" alias="ProductInsertDTO"></typeAlias>
-        <typeAlias type="com.everypet.product.model.dto.SelectProductDTO" alias="SelectProductDTO"></typeAlias>
-        <typeAlias type="com.everypet.product.model.dto.ProductUpdateDTO" alias="ProductUpdateDTO"></typeAlias>
-        
-        <typeAlias type="com.everypet.cart.model.vo.Cart" alias="Cart"></typeAlias>
-        <typeAlias type="com.everypet.cart.model.dto.CartItemDTO" alias="CartItem"></typeAlias>
-
-        <typeAlias type="com.everypet.product.model.vo.Advertisement" alias="Advertisement"></typeAlias>
-        <typeAlias type="com.everypet.product.model.dto.AdvertisementDTO" alias="AdvertisementDTO"></typeAlias>
-        <typeAlias type="com.everypet.product.model.dto.InsertAdvertisementDTO" alias="InsertAdvertisementDto"></typeAlias>
-
-        <typeAlias type="com.everypet.product.model.dto.SearchProductDTO" alias="SearchProductDTO"></typeAlias>
-
-        <typeAlias type="com.everypet.order.model.vo.Order" alias="Order"></typeAlias>
-        <typeAlias type="com.everypet.order.model.vo.OrderDetail" alias="OrderDetail"></typeAlias>
-
-        <typeAlias type="com.everypet.keyword.model.dto.KeywordRankDTO" alias="KeywordRankDTO"></typeAlias>
-        <typeAlias type="com.everypet.keyword.model.dto.KeywordRankDTO$TopKeywordRankDetail" alias="TopKeywordRankDetail"></typeAlias>
-        <package name="com.everypet.keyword.model.vo"></package>
-
+        <!-- package로 지정된 alias -->
+        <package name="com.everypet.keyword.model.vo"/>
     </typeAliases>
 
 </configuration>
