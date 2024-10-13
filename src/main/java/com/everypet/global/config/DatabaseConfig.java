@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-@MapperScan(basePackages = {"com.everypet.*.model.*", "com.everypet.global.*.*.data.dao", "com.everypet.global.*.*.model.dao"})
+@MapperScan(basePackages = {"com.everypet.*.model.*", "com.everypet.auth.oauth2.data.dao"})
 @PropertySource("classpath:database.properties")
 public class DatabaseConfig {
 
