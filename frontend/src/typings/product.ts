@@ -2,11 +2,31 @@
  *  상품에 대한 정보
  * */
 export interface Product {
+    memberId: string;
+    name: string;
+    numberOfProduct: number;
+    productDescriptionImg: string;
+    productDiscountRate: number;
     productId: string;
+    productImg: string;
+    productMainCategory: string;
     productName: string;
     productPrice: number;
-    productDiscountRate: number;
+    productRatingAvg: number;
+    productRegistrationDate: string;
+    productSalesStatusYN: string;
+    productSubCategory: string;
     productViews: number;
-    numberOfProduct: number;
-    imageUrl?: string;
+    reviewCount: number;
+    salesCount: number;
+}
+
+
+export interface CategoryProductList {
+    productMainCategory: string,
+    productSubCategory: string,
+    // 임시 나중에 string 변경후 변수화
+    orderBy: string,
+    page: number,
+    pageSize: 10
 }

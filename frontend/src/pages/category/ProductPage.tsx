@@ -11,6 +11,7 @@ interface DetailedCategory {
     // 추가적인 속성이 있을 수 있음
 }
 
+// mock에서 디테일 카테고리 가져옴
 const fetchCategoryDetails = async (category: string): Promise<{ detailedCategories: DetailedCategory[] }> => {
     const response = await fetch(`/mock/${category}_detail_categories.json`);
     if (!response.ok) throw new Error('Network response was not ok');
@@ -53,7 +54,6 @@ const ProductPage = ({category}: { category: string }) => {
                     ) : (
                         <>
                             {data && <DetailedCategory details={data.detailedCategories}/>}
-                            <ItemList/>
                         </>
                     )}
                 </div>

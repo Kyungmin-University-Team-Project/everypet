@@ -65,6 +65,7 @@ public class ProductController {
             @PathVariable String productMainCategory,
             @PathVariable String productSubCategory){
         try {
+
             return ResponseEntity.ok().body(productService.selectProductList(productMainCategory, productSubCategory, orderBy, page, pageSize));
         }catch (RuntimeException e){
             return ResponseEntity.badRequest().body(null);

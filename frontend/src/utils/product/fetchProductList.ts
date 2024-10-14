@@ -1,24 +1,12 @@
 import axios from 'axios';
-import { Product } from '../../typings/product';
+import {CategoryProductList, Product} from '../../typings/product';
 
-interface FetchProductListParams {
-    orderBy: string;
-    page: number;
-    pageSize: number;
-    searchQuery?: string; // searchQuery 추가
-    productCategory?: string;
-}
 
-export const fetchProductList = async (params: FetchProductListParams): Promise<Product[]> => {
-    const { orderBy, page, pageSize, searchQuery, productCategory } = params;
-    const response = await axios.get('/product-list', {
-        params: {
-            orderBy,
-            page,
-            pageSize,
-            searchQuery,
-            productCategory,
-        },
-    });
+export const fetchProductList = async (params: CategoryProductList): Promise<Product[]> => {
+
+    const {productMainCategory, productSubCategory, orderBy, page, pageSize} = params;
+
+    const response = await axios.get(`/product/list/${productMainCategory}/${productSubCategory}/${orderBy}/${page}/${pageSize}`);
+
     return response.data;
 };

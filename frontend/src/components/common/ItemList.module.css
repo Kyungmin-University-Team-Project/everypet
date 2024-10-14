@@ -1,9 +1,24 @@
+.selectContainer{
+    display: flex;
+    width: 100%;
+
+    justify-content: end;
+}
+
+.select {
+    padding: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 .container {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 기본적으로 2개씩 보여줌 */
 
     gap: 20px 0;
 }
+
 
 /* Medium screens (greater than 700px) */
 @media (min-width: 701px) {

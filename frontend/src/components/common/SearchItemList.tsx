@@ -12,6 +12,8 @@ interface SearchItemListProps {
     searchQuery: string;
 }
 
+
+// home에서 보여주는 리스트에선 keyword에 브랜드 명을 넣어주기
 const SearchItemList: React.FC<SearchItemListProps> = ({searchQuery}) => {
     const fetchItems = async (): Promise<Product[]> => {
         const params = {
