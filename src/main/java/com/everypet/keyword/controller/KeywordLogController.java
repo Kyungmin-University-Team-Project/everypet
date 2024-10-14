@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Api("키워드 로그 Api")
+@Api(tags = "키워드 로그 Api")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/keyword-log")
