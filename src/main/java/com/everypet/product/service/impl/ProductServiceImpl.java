@@ -83,9 +83,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductListDTO> selectProductList(String productMainCategory, String  productSubCategory, String  orderBy, int page, int pageSize) {
 
-        System.out.println("productMainCategory = " + productMainCategory);
-        System.out.println("productSubCategory = " + productSubCategory);
-
         // 페이지 번호와 페이지 크기를 이용하여 페이지의 시작 인덱스를 계산
         int pageStart = (page - 1) * pageSize;
 
@@ -93,8 +90,6 @@ public class ProductServiceImpl implements ProductService {
         if ("all".equals(productSubCategory)) {
             productSubCategory = "%";  // LIKE '%' 처리
         }
-
-        System.out.println("productSubCategory = " + productSubCategory);
 
         Map<String, Object> params = new HashMap<>();
         params.put("productMainCategory", productMainCategory);
@@ -221,9 +216,9 @@ public class ProductServiceImpl implements ProductService {
     private String convertOrderByKeywordToQuery(String orderBy) {
         switch (orderBy) {
             case "sales_high":
-                return "SALES_COUNT DESC";  // 판매량 높은 순
+                return "salesCount DESC";  // 판매량 높은 순
             case "sales_low":
-                return "SALES_COUNT ASC";   // 판매량 낮은 순
+                return "salesCount ASC";   // 판매량 낮은 순
             case "price_high":
                 return "PRODUCT_PRICE DESC"; // 가격 높은 순
             case "price_low":

@@ -55,7 +55,7 @@ public class ProductController {
     }
 
     @ApiOperation(value = "카테고리 별 상품 리스트 출력", notes = "카테고리 대분류, 카테고리 소분류, 정렬 기준, 페이지 번호, 페이지 사이즈를 경로로 받아서 상품 리스트를 출력합니다.\n" +
-            "대분류 : 강아지, 고양이, 조류\n소분류 : all, 간식, 모래, 사료, 새장, 영양제, 장난감, 화장실\n" +
+            "대분류 : dog, cat, bird\n소분류 : all, snack, sand, feed, cage, health, toy, restroom\n" +
             "정렬 : popularity(인기순), sales_high(판매량 높은 순), sales_low(판매량 낮은 순), price_high(가격 높은 순), price_low(가격 낮은 순), latest(최신순), oldest(오래된순)")
     @GetMapping("/list/{productMainCategory}/{productSubCategory}/{orderBy}/{page}/{pageSize}")
     public ResponseEntity<List<ProductListDTO>> selectProduct(

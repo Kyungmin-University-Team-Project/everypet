@@ -1,10 +1,11 @@
 package com.everypet.review.model.dto;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -60,24 +61,5 @@ public class ReviewDTO {
         private int notHelpfulCount;
         // 리뷰 사진
         private List<String> reviewPhotosURL;
-    }
-
-    @Data
-    @Builder
-    public static class ProductReviewSearchDTO {
-
-        @ApiModelProperty(example = "uuid", notes = "상품의 ID를 넣어주세요")
-        private Long productId;  // 상품 ID
-
-        @ApiModelProperty(example = "latest", notes = "정렬 기준을 설정합니다. 예: latest(최신순), oldest(오래된순), most_helpful(도움이 많이 된 순), least_helpful(도움이 적게 된 순)")
-        private String sortBy = "latest";  // 정렬 기준 (기본값: 최신순)
-
-        @ApiModelProperty(example = "1", notes = "페이지 번호를 넣어주세요. 1 이상이어야 합니다.")
-        @Min(value = 1, message = "페이지 번호는 1 이상이어야 합니다.")
-        private int page = 1;  // 페이지 번호 (기본값: 1)
-
-        @ApiModelProperty(example = "10", notes = "페이지당 리뷰 개수를 넣어주세요. 1 이상이어야 합니다.")
-        @Min(value = 1, message = "페이지 크기는 1 이상이어야 합니다.")
-        private int pageSize = 10;  // 페이지당 리뷰 개수 (기본값: 10)
     }
 }
