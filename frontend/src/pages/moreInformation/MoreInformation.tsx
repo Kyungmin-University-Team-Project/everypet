@@ -9,7 +9,7 @@ import Review from "./review";
 import ProductInquiry from "./ProductInquiry";
 import SellerInformation from "./SellerInformation";
 import { addToCart } from "../../utils/product/cart";
-import { fetchProductDetails, ProductDetails } from "../../typings/fetchProductDetails";
+import { fetchProductDetails, ProductDetails } from "../../utils/product/fetchProductDetails";
 
 const MoreInformation: React.FC = () => {
     const location = useLocation();

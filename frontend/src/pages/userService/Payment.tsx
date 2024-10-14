@@ -4,7 +4,7 @@ import styles from './Payment.module.css';
 import { CartItem } from "../../utils/product/cart";
 import { handleKaKaoPaymentRequest } from "../../utils/product/payment";
 import axios from 'axios';
-import {decryptToken} from "../../utils/token/token";
+import {decryptToken} from "../../utils/auth/token";
 import axiosInstance from "../../utils/error/axiosInstance";
 
 const shippingFee = 3000;
@@ -66,11 +66,6 @@ const Payment: React.FC = () => {
                         : selectedProducts[0]?.productName || '주문상품',
                     totalPrice,
                     orderId,
-                    addressId,
-                    selectedProducts.map((item: CartItem) => ({
-                        productId: item.cartId,
-                        quantity: item.cartQuantity
-                    }))
                 );
             } else {
                 alert('주문 정보 전송에 실패했습니다.');

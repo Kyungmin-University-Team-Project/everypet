@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Product } from '../../typings/Category';
+import { Product } from '../../typings/product';
 
 interface FetchProductListParams {
     orderBy: string;

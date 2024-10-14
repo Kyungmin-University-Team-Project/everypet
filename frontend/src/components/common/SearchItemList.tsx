@@ -5,7 +5,7 @@ import Item from './Item';
 import styles from './SearchItemList.module.css';
 import LoadingSpinner from '../../utils/reactQuery/LoadingSpinner';
 import ErrorComponent from '../../utils/reactQuery/ErrorComponent';
-import {Product} from '../../typings/Category';
+import {Product} from '../../typings/product';
 import {VscSearchStop} from 'react-icons/vsc';
 
 interface SearchItemListProps {
