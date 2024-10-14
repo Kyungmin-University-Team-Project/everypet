@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import ProductcategoryItem from './ProductcategoryItem';
-import styles from './Productcategory.module.css';
+import ProductcategoryItem from './ProductCategoryItem';
+import styles from './ProductCategory.module.css';
 import {setClickedCategory} from '../../redux/features/categorySlice';
 import {RootState} from '../../redux/store/rootReducer';
 import Categorymodal from './CategoryModal';
@@ -20,7 +20,7 @@ const categories = [
     {name: '파충류', link: '/reptiles'},
 ];
 
-const Productcategory = () => {
+const ProductCategory = () => {
     const dispatch = useDispatch();
     const clickedCategory = useSelector(
         (state: RootState) => state.category.clickedCategory
@@ -102,4 +102,4 @@ const Productcategory = () => {
     );
 };
 
-export default Productcategory;
+export default ProductCategory;

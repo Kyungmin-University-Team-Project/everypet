@@ -2,15 +2,16 @@ import React, {useEffect, useState} from 'react';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {loginState} from '../../redux/auth/authSlice';
-import {LoginData} from '../../typings/Login';
 
 import styles from './Login.module.css';
 import Signup from './Signup';
 import Findauth from './Findauth';
 import Agreement from './Agreement';
 import '@fortawesome/fontawesome-free/css/all.css';
-import {login} from "../../typings/AuthAPI";
-import {encryptToken} from "../../utils/token/token";
+import {login} from "../../utils/auth/AuthAPI";
+import {encryptToken} from "../../utils/auth/token";
+import {LoginData} from "../../typings/login";
+
 
 const Login = () => {
     const navigate = useNavigate();
