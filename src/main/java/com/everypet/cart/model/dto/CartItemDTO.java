@@ -1,6 +1,5 @@
 package com.everypet.cart.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class CartItemDTO {
 
         @ApiModelProperty(example = "1", notes = "장바구니 아이디")
-        private String cartId;
+        private int cartId;
 
         @ApiModelProperty(example = "https://storage.googleapis.com/every_pet_img/1f7832af-e587-495e-bf00-b14f9f3bf137", notes = "상품 이미지")
         private String productImg;
@@ -31,7 +30,7 @@ public class CartItemDTO {
         @ApiModelProperty(example = "3", notes = "수량")
         private int cartQuantity;
 
-        @JsonIgnore
+        @ApiModelProperty(example = "58ee090a-7401-43ea-98fa-4c8c119d5f7e", notes = "상품 아이디")
         private String productId;
 
 }

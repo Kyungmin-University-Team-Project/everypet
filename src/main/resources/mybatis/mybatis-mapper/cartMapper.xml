@@ -4,16 +4,13 @@
 <mapper namespace="com.everypet.cart.model.dao.CartMapper">
 
     <insert id="insertCart" parameterType="Cart">
-        INSERT INTO TBL_CART (
-            MEMBER_ID, PRODUCT_ID, CART_QUANTITY
-        ) VALUES (
-                     #{memberId}, #{productId}, #{cartQuantity}
-                 )
+        INSERT INTO TBL_CART (MEMBER_ID, PRODUCT_ID, CART_QUANTITY)
+        VALUES (#{memberId}, #{productId}, #{cartQuantity})
     </insert>
 
-    <delete id="deleteCart" parameterType="map">
+    <delete id="deleteCart" parameterType="String">
         DELETE FROM TBL_CART
-        WHERE MEMBER_ID = #{memberId} AND CART_ID = #{cartId}
+        WHERE MEMBER_ID = #{memberId} AND PRODUCT_ID = #{productId}
     </delete>
 
    <select id="selectAllCart" resultType="com.everypet.cart.model.dto.CartItemDTO">
@@ -22,7 +19,7 @@
                 JOIN TBL_PRODUCT P ON C.PRODUCT_ID = P.PRODUCT_ID
                 JOIN TBL_MEMBER M ON C.MEMBER_ID = M.MEMBER_ID
        WHERE C.MEMBER_ID = #{memberId}
-    </select>
+   </select>
 
     <update id="updateCart" parameterType="Cart">
         UPDATE TBL_CART

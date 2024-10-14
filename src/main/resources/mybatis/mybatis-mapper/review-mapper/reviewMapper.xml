@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.everypet.review.model.dao.ReviewMapper">
+
+    <!-- 리뷰 삽입 -->
+    <!--
+        useGeneratedKeys="true": 삽입된 reviewId 값을 자동으로 반환합니다.
+        keyProperty="reviewId": 반환된 reviewId를 reviewMap에 담습니다.
+    -->
+    <insert id="insertReview" parameterType="map" useGeneratedKeys="true" keyProperty="reviewId">
+        INSERT INTO TBL_REVIEW (
+            ORDER_DETAIL_ID, MEMBER_ID, PRODUCT_ID, DETAILED_PRODUCT_REVIEW_CONTENTS,
+            ONE_LINE_PRODUCT_REVIEW_CONTENTS, PRODUCT_RATING, CREATED_AT
+        )
+        VALUES (
+                   #{orderDetailId}, #{memberId}, #{productId}, #{detailedProductReviewContents},
+                   #{oneLineProductReviewContents}, #{productRating}, NOW()
+               )
+    </insert>
+
+    <!-- 리뷰 삭제 -->
+    <delete id="deleteReviewById" parameterType="long">
+        DELETE FROM TBL_REVIEW
+        WHERE REVIEW_ID = #{reviewId}
+    </delete>
+
+    <!-- 리뷰 목록 조회 -->
+    <select id="selectReviewsByProductId" parameterType="map" resultType="ProductReviewDTO">
+        SELECT
+        r.REVIEW_ID,
+        r.MEMBER_ID,
+        r.PRODUCT_ID,
+        r.DETAILED_PRODUCT_REVIEW_CONTENTS,
+        r.ONE_LINE_PRODUCT_REVIEW_CONTENTS,
+        r.PRODUCT_RATING,
+        r.CREATED_AT,
+        -- 도움이 된 수 계산
+        (SELECT COUNT(*) FROM TBL_REVIEW_HELPFUL h WHERE h.REVIEW_ID = r.REVIEW_ID AND h.IS_HELPFUL_YN = 'Y') AS helpfulCount,
+        -- 도움이 안된 수 계산
+        (SELECT COUNT(*) FROM TBL_REVIEW_HELPFUL h WHERE h.REVIEW_ID = r.REVIEW_ID AND h.IS_HELPFUL_YN = 'N') AS notHelpfulCount,
+        -- 도움이 된 수 + 도움이 안된 수의 합계
+        (SELECT COUNT(*) FROM TBL_REVIEW_HELPFUL h WHERE h.REVIEW_ID = r.REVIEW_ID) AS totalHelpfulCount
+        FROM TBL_REVIEW r
+        WHERE r.PRODUCT_ID = #{productId}
+        GROUP BY r.REVIEW_ID
+        ORDER BY ${orderBy}  <!-- Java에서 동적으로 처리된 정렬 값 사용 -->
+        LIMIT #{pageStart}, #{pageSize}
+    </select>
+
+    <select id="selectReviewByReviewId" parameterType="long" resultType="ProductReviewDTO">
+        SELECT
+            r.REVIEW_ID,
+            r.MEMBER_ID,
+            r.PRODUCT_ID,
+            r.DETAILED_PRODUCT_REVIEW_CONTENTS,
+            r.ONE_LINE_PRODUCT_REVIEW_CONTENTS,
+            r.PRODUCT_RATING,
+            r.CREATED_AT,
+            -- 도움이 된 수 계산
+            (SELECT COUNT(*) FROM TBL_REVIEW_HELPFUL h WHERE h.REVIEW_ID = r.REVIEW_ID AND h.IS_HELPFUL_YN = 'Y') AS helpfulCount,
+            -- 도움이 안된 수 계산
+            (SELECT COUNT(*) FROM TBL_REVIEW_HELPFUL h WHERE h.REVIEW_ID = r.REVIEW_ID AND h.IS_HELPFUL_YN = 'N') AS notHelpfulCount
+        FROM
+            TBL_REVIEW r
+        WHERE
+            r.REVIEW_ID = #{reviewId}
+    </select>
+
+
+</mapper>

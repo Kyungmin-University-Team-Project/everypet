@@ -14,7 +14,37 @@
                )
     </insert>
 
-
+    <!-- 자신이 주문한 주문 리스트 조회 -->
+    <select id="selectOrderListByMember" resultType="MyOrderListDTO" parameterType="String">
+        SELECT
+            o.ORDER_ID,
+            o.ORDER_DATE,
+            o.TOTAL_AMOUNT,
+            o.PRODUCT_AMOUNT,
+            o.DELIVERY_AMOUNT,
+            od.ORDER_DETAIL_ID,
+            od.PRODUCT_ID,
+            od.PRODUCT_PRICE,
+            od.QUANTITY,
+            od.DISCOUNT_RATE,
+            p.PRODUCT_NAME,
+            p.PRODUCT_IMG,
+            p.PRODUCT_CATEGORY,
+            -- 리뷰 작성 여부
+            od.REVIEW_STATUS_YN
+        FROM
+            TBL_ORDER o
+                JOIN
+            TBL_ORDER_DETAIL od ON o.ORDER_ID = od.ORDER_ID
+                JOIN
+            TBL_PRODUCT p ON od.PRODUCT_ID = p.PRODUCT_ID
+        WHERE
+            o.MEMBER_ID = #{memberId}
+        ORDER BY
+            o.ORDER_DATE DESC
+            LIMIT
+            #{pageStart}, #{pageSize}
+    </select>
 
     <!-- 주문 정보를 TBL_ORDER 테이블에서 삭제 -->
     <delete id="deleteOrderByOrderId">

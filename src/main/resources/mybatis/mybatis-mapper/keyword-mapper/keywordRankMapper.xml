@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.everypet.keyword.model.dao.KeywordRankMapper">
+
+    <insert id="saveKeywordRank" parameterType="KeywordRankDTO">
+        INSERT INTO TBL_RANKING (KEYWORD, TOTAL_SCORE, ONE_HOUR_SCORE, DAILY_SCORE, WEEKLY_SCORE, TOTAL_COUNT)
+        VALUES (#{keyword}, #{totalScore}, #{oneHourScore}, #{dailyScore}, #{weeklyScore}, #{totalCount})
+    </insert>
+
+    <update id="updateTotalScore" parameterType="KeywordRankDTO">
+        UPDATE TBL_RANKING
+        SET TOTAL_SCORE = #{totalScore}, ONE_HOUR_SCORE = #{oneHourScore}, DAILY_SCORE = #{dailyScore},
+            WEEKLY_SCORE = #{weeklyScore}, TOTAL_COUNT = #{totalCount}, RANKING = #{ranking},
+            PREVIOUS_RANK = #{previousRank}, RANKING_GAP = #{rankingGap}
+        WHERE KEYWORD = #{keyword}
+    </update>
+
+    <select id="findTopKeywordRankDetail" resultType="TopKeywordRankDetail">
+        SELECT KEYWORD, RANKING, PREVIOUS_RANK, RANKING_GAP FROM TBL_RANKING ORDER BY RANKING LIMIT 10
+    </select>
+
+    <select id="findKeywordRank" parameterType="String" resultType="KeywordRankDTO">
+        SELECT * FROM TBL_RANKING WHERE KEYWORD = #{keyword}
+    </select>
+
+    <select id="findAllKeywordRank" resultType="KeywordRankDTO">
+        SELECT * FROM TBL_RANKING
+    </select>
+
+    <delete id="deleteRecordsWithZeroScore" parameterType="String">
+        DELETE FROM TBL_RANKING WHERE TOTAL_SCORE = 0
+    </delete>
+
+    <update id="resetOneHourScore">
+        UPDATE TBL_RANKING,
+        SET ONE_HOUR_SCORE = 0
+    </update>
+
+    <update id="resetDailyScore">
+        UPDATE TBL_RANKING
+        SET DAILY_SCORE = 0
+    </update>
+
+    <update id="resetWeeklyScore">
+        UPDATE TBL_RANKING
+        SET WEEKLY_SCORE = 0
+    </update>
+
+</mapper>

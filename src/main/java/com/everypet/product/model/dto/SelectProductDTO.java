@@ -7,8 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -32,7 +31,12 @@ public class SelectProductDTO {
     @NotBlank
     @ApiModelProperty(example = "강아지%", notes = "검색 조건을 설정하세요, " +
             "예시 : 강아지의 모든 물품 검색 => 강아지% ,강아지 사료를 검색 => 강아지 사료")
-    private String productCategory;
+    private String productMainCategory;
+
+    @NotBlank
+    @ApiModelProperty(example = "강아지%", notes = "검색 조건을 설정하세요, " +
+            "예시 : 강아지의 모든 물품 검색 => 강아지% ,강아지 사료를 검색 => 강아지 사료")
+    private String productSubCategory;
 
     @Positive
     @ApiModelProperty(example = "1", notes = "페이지 번호")

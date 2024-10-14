@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.everypet.global.auth.oauth2.data.dao.OAuth2MemberMapper">
+<mapper namespace="com.everypet.auth.oauth2.data.dao.OAuth2MemberMapper">
 
     <select id="selectOAuth2MemberByMemberId" parameterType="String" resultType="OAuth2Member">
         SELECT * FROM TBL_OAUTH2_MEMBER WHERE MEMBER_ID = #{memberId}

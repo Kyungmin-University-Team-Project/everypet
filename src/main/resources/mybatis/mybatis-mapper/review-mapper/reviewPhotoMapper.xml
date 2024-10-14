@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.everypet.review.model.dao.ReviewPhotoMapper">
+
+    <!-- 리뷰 사진 삽입 -->
+    <insert id="insertReviewPhoto" parameterType="map">
+        INSERT INTO TBL_REVIEW_PHOTO (
+            REVIEW_ID, PHOTO_URL
+        )
+        VALUES (
+                   #{reviewId}, #{photoUrl}
+               )
+    </insert>
+
+    <!-- 리뷰 사진 URL 조회 -->
+    <select id="selectReviewPhotosByReviewId" parameterType="long" resultType="string">
+        SELECT PHOTO_URL FROM TBL_REVIEW_PHOTO
+        WHERE REVIEW_ID = #{reviewId}
+    </select>
+
+    <!-- 리뷰 사진 삭제 -->
+    <delete id="deleteReviewPhotosByReviewId" parameterType="long">
+        DELETE FROM TBL_REVIEW_PHOTO
+        WHERE REVIEW_ID = #{reviewId}
+    </delete>
+
+</mapper>
