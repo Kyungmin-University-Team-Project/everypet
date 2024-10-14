@@ -4,7 +4,6 @@ import com.everypet.keyword.mapper.MsKeywordRankMapper;
 import com.everypet.keyword.model.dao.KeywordRankMapper;
 import com.everypet.keyword.model.dto.KeywordRankDTO;
 import com.everypet.keyword.model.dto.KeywordRankDTO.TopKeywordRank;
-import com.everypet.keyword.model.dto.KeywordRankDTO.TopKeywordRankDetail;
 import com.everypet.keyword.service.KeywordRankService;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
@@ -12,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -64,16 +62,8 @@ public class KeywordRankServiceImpl implements KeywordRankService {
     }
 
     @Override
-    public TopKeywordRank findAllTopKeywordRank() {
-        List<TopKeywordRankDetail> topKeywordRankList = keywordRankMapper.findTopKeywordRankDetail();
-
-        LocalDateTime now = LocalDateTime.now();
-        // 현재 시간의 10분 단위로 계산
-        int minute = (now.getMinute() / 10) * 10;
-        // 10분 단위로 끊어서 현재 시간을 계산
-        LocalDateTime time = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), now.getHour(), minute, 0);
-
-        return TopKeywordRank.of(time, topKeywordRankList);
+    public List<TopKeywordRank> findAllTopKeywordRank() {
+        return keywordRankMapper.findTopKeywordRank();
     }
 
     @Override

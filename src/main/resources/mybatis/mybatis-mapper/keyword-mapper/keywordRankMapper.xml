@@ -16,7 +16,7 @@
         WHERE KEYWORD = #{keyword}
     </update>
 
-    <select id="findTopKeywordRankDetail" resultType="TopKeywordRankDetail">
+    <select id="findTopKeywordRank" resultType="TopKeywordRank">
         SELECT KEYWORD, RANKING, PREVIOUS_RANK, RANKING_GAP FROM TBL_RANKING ORDER BY RANKING LIMIT 10
     </select>
 
