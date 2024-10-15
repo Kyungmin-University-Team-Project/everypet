@@ -105,7 +105,8 @@ const Signup: React.FC = () => {
         setUser({...user, address: {address, detailAddress}});
     };
 
-    const handleSendVerificationEmail = async () => {
+    const handleSendVerificationEmail = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         try {
             await sendVerificationEmail({purpose: 'SIGNUP', to: user.email.trim()});
             setEmailSent(true);
@@ -118,7 +119,8 @@ const Signup: React.FC = () => {
         }
     };
 
-    const handleVerifyCode = async () => {
+    const handleVerifyCode = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         try {
             await verifyCode({purpose: 'SIGNUP', code: code.code});
             console.log()

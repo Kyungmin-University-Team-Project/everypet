@@ -120,3 +120,14 @@ export const verifyCode = async ({purpose, code}: { purpose: string; code: strin
 
     return response.data;
 };
+
+export const passwordFind = async ({email, memberId}: { email: string, memberId: string }) => {
+    const data = {email, memberId};
+    const response = await api.post('/member/password/reset', data, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    console.log(response.data);
+    return response.data;
+}
