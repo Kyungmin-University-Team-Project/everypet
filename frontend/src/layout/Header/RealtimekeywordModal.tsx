@@ -1,12 +1,12 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import styles from './RealtimekeywordModal.module.css';
-import { Ranking } from '../../typings/layout';
-import { format, addMinutes } from 'date-fns';
-import { ko } from 'date-fns/locale';
-import { IoIosArrowUp } from 'react-icons/io';
-import { FaLongArrowAltUp, FaLongArrowAltDown } from 'react-icons/fa';
-import { CgBorderStyleSolid } from 'react-icons/cg';
+import {Ranking} from '../../typings/layout';
+import {format, addMinutes} from 'date-fns';
+import {ko} from 'date-fns/locale';
+import {IoIosArrowUp} from 'react-icons/io';
+import {FaLongArrowAltUp, FaLongArrowAltDown} from 'react-icons/fa';
+import {CgBorderStyleSolid} from 'react-icons/cg';
 
 interface ModalProps {
     isOpen: boolean;
@@ -14,7 +14,7 @@ interface ModalProps {
     rankings: Ranking[];
 }
 
-const RealtimekeywordModal: React.FC<ModalProps> = ({ isOpen, onClose, rankings }) => {
+const RealtimekeywordModal: React.FC<ModalProps> = ({isOpen, onClose, rankings}) => {
     const navigate = useNavigate();
 
     if (!isOpen) return null;
@@ -24,17 +24,17 @@ const RealtimekeywordModal: React.FC<ModalProps> = ({ isOpen, onClose, rankings 
     const minutes = currentDate.getMinutes();
     const roundedMinutes = Math.floor(minutes / 10) * 10;
     const roundedDate = addMinutes(currentDate, roundedMinutes - minutes);
-    const formattedDate = format(roundedDate, 'yyyy.MM.dd HH:mm', { locale: ko });
+    const formattedDate = format(roundedDate, 'yyyy.MM.dd HH:mm', {locale: ko});
 
 
     // 순위 변동 아이콘 렌더링
-    const renderTrendIcon = (rankingGap : number) => {
+    const renderTrendIcon = (rankingGap: number) => {
         if (rankingGap > 0) {
-            return <FaLongArrowAltUp className={styles.upArrow} />;
+            return <FaLongArrowAltUp className={styles.upArrow}/>
         } else if ((rankingGap < 0)) {
-            return <FaLongArrowAltDown className={styles.downArrow} />;
+            return <FaLongArrowAltDown className={styles.downArrow}/>
         } else {
-            return <CgBorderStyleSolid className={styles.steady} />;
+            return <CgBorderStyleSolid className={styles.steady}/>;
         }
     };
 
@@ -47,7 +47,7 @@ const RealtimekeywordModal: React.FC<ModalProps> = ({ isOpen, onClose, rankings 
     return (
         <div className={styles.modal}>
             <div className={styles.modalContent}>
-                <IoIosArrowUp className={styles.closeButton} onClick={onClose} />
+                <IoIosArrowUp className={styles.closeButton} onClick={onClose}/>
                 <div className={styles.modalHeader}>
                     실시간 쇼핑 검색어
                     <div className={styles.modalDate}>{formattedDate} 기준</div>

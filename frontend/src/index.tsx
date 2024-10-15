@@ -16,7 +16,6 @@ import Exhibitions from './pages/category/Exhibitions';
 import MoreInformation from "./pages/moreInformation/MoreInformation";
 import DeliveryInquiry from "./pages/userService/DeliveryInquiry";
 import Information from "./pages/moreInformation/Information";
-import ProductInquiry from "./pages/moreInformation/ProductInquiry";
 import SellerInformation from "./pages/moreInformation/SellerInformation";
 import Cart from "./pages/userService/Cart";
 import SearchPage from "./pages/category/SearchPage";

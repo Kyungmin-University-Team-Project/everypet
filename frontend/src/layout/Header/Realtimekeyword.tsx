@@ -19,9 +19,7 @@ const Realtimekeyword = () => {
         const fetchRankings = async () => {
             try {
                 const response = await axios.post('/keyword-rank/real-time-rank');
-                console.log(response)
-                setRankings(response.data.topKeywordRankList);  // 응답 데이터에 맞게 상태 업데이트
-                console.log(response.data);
+                setRankings(response.data);  // 응답 데이터에 맞게 상태 업데이트
             } catch (error) {
                 console.error('Error fetching real-time keyword rankings:', error);
             }
