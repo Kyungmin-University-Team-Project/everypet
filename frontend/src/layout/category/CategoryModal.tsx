@@ -1,84 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { MegaMenuProps } from '../../typings/layout';
+import { DetailedCategoryList } from '../../typings/product';
 import styles from './Categorymodal.module.css';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store/rootReducer';
-import { setClickedCategory } from '../../redux/features/categorySlice';
-
-const categories = [
-    {
-        name: '강아지',
-        link: '/dog',
-        subCategories: [
-            '강아지 사료',
-            '강아지 장난감',
-            '강아지 집',
-            '강아지 목줄 및 목걸이',
-            '강아지 의류',
-            '강아지 미용',
-            '강아지 건강',
-        ],
-    },
-    {
-        name: '고양이',
-        link: '/cat',
-        subCategories: [
-            '고양이 사료',
-            '고양이 장난감',
-            '고양이 집',
-            '고양이 옷',
-            '고양이 미용',
-            '고양이 건강',
-            '고양이 화장실',
-            '고양이 나무와 가구',
-            '캣잎',
-        ],
-    },
-    {
-        name: '설치류',
-        link: '/rat',
-        subCategories: [
-            '설치류 먹이',
-            '설치류 장난감',
-            '설치류 집',
-            '설치류 옷',
-            '설치류 미용',
-        ],
-    },
-    {
-        name: '조류',
-        link: '/bird',
-        subCategories: [
-            '새 먹이',
-            '새 장난감',
-            '새 집',
-            '새 미용',
-            '새 건강',
-            '새 케이지',
-        ],
-    },
-    {
-        name: '파충류',
-        link: '/reptiles',
-        subCategories: [
-            '파충류 먹이',
-            '파충류 장난감',
-            '파충류 미용',
-            '파충류 건강',
-            '파충류 케이지',
-            '파충류 히터 및 조명',
-        ],
-    },
-];
+import { fetchCategoryDetails } from "../../utils/product/category";
 
 const CategoryModal = ({ isOpen, setClose }: MegaMenuProps) => {
     const [scrollY, setScrollY] = useState(0);
+    const [categories, setCategories] = useState<{ name: string, link: string, subCategories: { name: string, link: string }[] }[]>([]);
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const clickedCategory = useSelector(
-        (state: RootState) => state.category.clickedCategory
-    );
 
     useEffect(() => {
         const handleScroll = () => {
@@ -92,12 +22,77 @@ const CategoryModal = ({ isOpen, setClose }: MegaMenuProps) => {
         };
     }, []);
 
+    useEffect(() => {
+        // 카테고리 데이터를 비동기로 불러오기
+        const loadCategories = async () => {
+            try {
+                const dogData = await fetchCategoryDetails('dog');
+                const catData = await fetchCategoryDetails('cat');
+                const ratData = await fetchCategoryDetails('rat');
+                const birdData = await fetchCategoryDetails('bird');
+                const reptilesData = await fetchCategoryDetails('reptiles');
+
+                // 필요한 카테고리 데이터를 적절히 구조화
+                const fetchedCategories = [
+                    {
+                        name: '강아지',
+                        link: '/dog',
+                        subCategories: dogData.detailedCategories.map((item: DetailedCategoryList) => ({
+                            name: item.name,
+                            link: item.link,
+                        })),
+                    },
+                    {
+                        name: '고양이',
+                        link: '/cat',
+                        subCategories: catData.detailedCategories.map((item: DetailedCategoryList) => ({
+                            name: item.name,
+                            link: item.link,
+                        })),
+                    },
+                    {
+                        name: '설치류',
+                        link: '/rat',
+                        subCategories: ratData.detailedCategories.map((item: DetailedCategoryList) => ({
+                            name: item.name,
+                            link: item.link,
+                        })),
+                    },
+                    {
+                        name: '조류',
+                        link: '/bird',
+                        subCategories: birdData.detailedCategories.map((item: DetailedCategoryList) => ({
+                            name: item.name,
+                            link: item.link,
+                        })),
+                    },
+                    {
+                        name: '파충류',
+                        link: '/reptiles',
+                        subCategories: reptilesData.detailedCategories.map((item: DetailedCategoryList) => ({
+                            name: item.name,
+                            link: item.link,
+                        })),
+                    },
+                ];
+
+                setCategories(fetchedCategories);
+            } catch (error) {
+                console.error('Failed to load category details:', error);
+            }
+        };
+
+        if (isOpen) {
+            loadCategories(); // 모달이 열렸을 때 카테고리 데이터를 불러옴
+        }
+    }, [isOpen]);
+
     const handleMouseLeave = () => {
         setClose();
     };
 
-    const handleCategoryClick = (name: string, link: string) => {
-        dispatch(setClickedCategory(name));
+    const handleCategoryClick = (link: string) => {
+        console.log(link);
         navigate(link);
         setClose(); // 카테고리를 클릭하면 모달을 닫음
     };
@@ -107,27 +102,31 @@ const CategoryModal = ({ isOpen, setClose }: MegaMenuProps) => {
             className={isOpen ? styles.modal__open : styles.modal__close}
             onMouseLeave={handleMouseLeave} // 모달 영역을 벗어날 때 호출
         >
-            <div
-                className={scrollY >= 200 ? styles.modal__fixed : styles.modal__content}
-            >
+            <div className={scrollY >= 200 ? styles.modal__fixed : styles.modal__content}>
                 {isOpen && (
                     <div className={styles.categories__container}>
                         {categories.map((category) => (
                             <div key={category.name} className={styles.category}>
                                 <div
                                     className={styles.category__content}
-                                    onClick={() => handleCategoryClick(category.name, category.link)}
+                                    onClick={() => handleCategoryClick(category.link)}
                                 >
-                                    <span className={styles.category__title}>
-                                        {category.name}
-                                    </span>
+                                    <span className={styles.category__title}>{category.name}</span>
 
                                     <div className={styles.ul__wrap}>
                                         <div className={styles.ul__line__bg}></div>
                                         <div className={styles.ul__line}></div>
                                         <ul>
                                             {category.subCategories.map((subCategory) => (
-                                                <li key={subCategory}>{subCategory}</li>
+                                                <li
+                                                    key={subCategory.name}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation(); // 이벤트 버블링 방지
+                                                        handleCategoryClick(subCategory.link);
+                                                    }} // 클릭 시 해당 링크로 이동
+                                                >
+                                                    {subCategory.name}
+                                                </li>
                                             ))}
                                         </ul>
                                     </div>
