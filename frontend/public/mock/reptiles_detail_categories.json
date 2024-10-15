@@ -1,22 +1,28 @@
 {
   "detailedCategories": [
     {
-      "name": "먹이"
+      "name": "파충류 먹이",
+      "tag": "feed"
     },
     {
-      "name": "장난감"
+      "name": "파충류 장난감",
+      "tag": "toy"
     },
     {
-      "name": "미용"
+      "name": "파충류 건강",
+      "tag": "health"
     },
     {
-      "name": "건강"
+      "name": "파충류 집",
+      "tag": "house"
     },
     {
-      "name": "케이지"
+      "name": "파충류 히터",
+      "tag": "heater"
     },
     {
-      "name": "히터 및 조명"
+      "name": "파충류 간식",
+      "tag": "snack"
     }
   ]
 }

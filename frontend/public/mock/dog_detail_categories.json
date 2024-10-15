@@ -1,25 +1,40 @@
 {
   "detailedCategories": [
     {
-      "name": "사료"
+      "name": "강아지 사료",
+      "tag": "feed"
     },
     {
-      "name": "장난감"
+      "name": "강아지 장난감",
+      "tag": "toy"
     },
     {
-      "name": "집"
+      "name": "강아지 집",
+      "tag": "house"
     },
     {
-      "name": "목줄 및 목걸이"
+      "name": "강아지 목줄 및 하네스",
+      "tag": "leash"
     },
     {
-      "name": "의류"
+      "name": "강아지 의류",
+      "tag": "clothes"
     },
     {
-      "name": "미용"
+      "name": "강아지 간식",
+      "tag": "snack"
     },
     {
-      "name": "건강"
+      "name": "강아지 미용",
+      "tag": "beauty"
+    },
+    {
+      "name": "강아지 건강",
+      "tag": "health"
+    },
+    {
+      "name": "강아지 화장실",
+      "tag": "restroom"
     }
   ]
 }

@@ -30,3 +30,8 @@ export interface CategoryProductList {
     page: number,
     pageSize: 10
 }
+
+export interface DetailedCategoryList {
+    name: string;
+    tag: string;
+}

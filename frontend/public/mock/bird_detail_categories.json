@@ -1,22 +1,28 @@
 {
   "detailedCategories": [
     {
-      "name": "먹이"
+      "name": "새 먹이",
+      "tag": "feed"
     },
     {
-      "name": "장난감"
+      "name": "새 장난감",
+      "tag": "toy"
     },
     {
-      "name": "집"
+      "name": "새 집",
+      "tag": "house"
     },
     {
-      "name": "미용"
+      "name": "새 미용",
+      "tag": "beauty"
     },
     {
-      "name": "건강"
+      "name": "새 건강",
+      "tag": "health"
     },
     {
-      "name": "케이지"
+      "name": "새 간식",
+      "tag": "snack"
     }
   ]
 }

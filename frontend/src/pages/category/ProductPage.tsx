@@ -1,25 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './ProductPage.module.css';
 
-import ItemList from '../../components/common/ItemList';
 import DetailedCategory from '../../components/common/DetailedCategory';
 import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
+import { DetailedCategoryList } from "../../typings/product";
 
-interface DetailedCategory {
-    id: number;
-    name: string;
-    // 추가적인 속성이 있을 수 있음
-}
-
-// mock에서 디테일 카테고리 가져옴
-const fetchCategoryDetails = async (category: string): Promise<{ detailedCategories: DetailedCategory[] }> => {
+const fetchCategoryDetails = async (category: string): Promise<{ detailedCategories: DetailedCategoryList[] }> => {
     const response = await fetch(`/mock/${category}_detail_categories.json`);
+
     if (!response.ok) throw new Error('Network response was not ok');
     return response.json();
 };
 
-const ProductPage = ({category}: { category: string }) => {
-    const [data, setData] = useState<{ detailedCategories: DetailedCategory[] } | null>(null);
+const ProductPage = ({ category }: { category: string }) => {
+    const [data, setData] = useState<{ detailedCategories: DetailedCategoryList[] } | null>(null);
     const [isLoading, setIsLoading] = useState(true);  // 로딩 상태 추가
 
     useEffect(() => {
@@ -50,10 +44,10 @@ const ProductPage = ({category}: { category: string }) => {
             <div className={styles.container}>
                 <div className={styles.inner}>
                     {isLoading ? (
-                        <LoadingSpinner/>
+                        <LoadingSpinner />
                     ) : (
                         <>
-                            {data && <DetailedCategory details={data.detailedCategories}/>}
+                            {data && <DetailedCategory details={data.detailedCategories} />} {/* data에 접근 시 detailedCategories를 전달 */}
                         </>
                     )}
                 </div>

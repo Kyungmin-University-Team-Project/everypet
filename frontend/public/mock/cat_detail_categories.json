@@ -1,31 +1,32 @@
 {
   "detailedCategories": [
     {
-      "name": "사료"
+      "name": "고양이 사료",
+      "tag": "feed"
     },
     {
-      "name": "장난감"
+      "name": "고양이 장난감",
+      "tag": "toy"
     },
     {
-      "name": "집"
+      "name": "고양이 집",
+      "tag": "house"
     },
     {
-      "name": "옷"
+      "name": "고양이 옷",
+      "tag": "clothes"
     },
     {
-      "name": "미용"
+      "name": "고양이 미용",
+      "tag": "beauty"
     },
     {
-      "name": "건강"
+      "name": "고양이 건강",
+      "tag": "health"
     },
     {
-      "name": "화장실"
-    },
-    {
-      "name": "나무와 가구"
-    },
-    {
-      "name": "캣잎"
+      "name": "고양이 화장실",
+      "tag": "restroom"
     }
   ]
 }
