@@ -1,15 +1,15 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { Join } from "../../typings/signup";
-import { LoginData } from "../../typings/login";
+import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios';
+import {Join} from "../../typings/signup";
+import {LoginData} from "../../typings/login";
 // jwt 4.0 이상
-import { jwtDecode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 
 export interface ResponseData {
     access: string;
     user: string;
 }
 
-const api = axios.create({ baseURL: '/' });
+const api = axios.create({baseURL: 'http://localhost:8080'});
 
 // 401 에러 처리
 api.interceptors.request.use(
@@ -20,15 +20,15 @@ api.interceptors.request.use(
         if (error.response && error.response.status === 401) {
             try {
                 let errorConfig: AxiosRequestConfig = error.config || {}; // errorConfig가 undefined인 경우 빈 객체로 설정
-                const { data } = await axios.post('access/refresh'); // axios로 요청 보내기
+                const {data} = await axios.post('access/refresh'); // axios로 요청 보내기
                 if (data) {
-                    const { access } = data;
+                    const {access} = data;
                     localStorage.removeItem('access');
                     localStorage.setItem('access', access);
                     if (errorConfig.headers) {
                         errorConfig.headers['Authorization'] = `Bearer ${access}`; // 새로운 토큰으로 헤더 업데이트
                     } else {
-                        errorConfig.headers = { Authorization: `Bearer ${access}` }; // 헤더가 없는 경우 새로 생성
+                        errorConfig.headers = {Authorization: `Bearer ${access}`}; // 헤더가 없는 경우 새로 생성
                     }
                     return axios.request(errorConfig); // 기존 요청 재시도
                 }
@@ -42,8 +42,8 @@ api.interceptors.request.use(
     }
 );
 
-export const login = async ({ memberId, memberPwd }: LoginData): Promise<any> => {
-    const data = { memberId, memberPwd };
+export const login = async ({memberId, memberPwd}: LoginData): Promise<any> => {
+    const data = {memberId, memberPwd};
 
     console.log("Payload sent to server:", JSON.stringify(data, null, 2));
     try {
@@ -79,7 +79,7 @@ export const login = async ({ memberId, memberPwd }: LoginData): Promise<any> =>
 export const signUpLogin = async (user: Join): Promise<any> => {
     console.log("Payload sent to server:", JSON.stringify(user, null, 2));
     try {
-        const response: AxiosResponse<any> = await api.post('/signup', user);
+        const response: AxiosResponse<any> = await api.post('/member/signup', user);
         console.log("Server response:", response.data);
         return response.data;
     } catch (error) {
@@ -94,9 +94,11 @@ export const signUpLogin = async (user: Join): Promise<any> => {
     }
 };
 
-export const sendVerificationEmail = async ({  purpose, to }: {  purpose:string; to: string }): Promise<{ success: boolean }> => {
-    const data = {  purpose, to };
-    const response = await api.post('http://localhost:8080/send-mail/code', data, {
+export const sendVerificationEmail = async ({purpose, to}: { purpose: string; to: string }): Promise<{
+    success: boolean
+}> => {
+    const data = {purpose, to};
+    const response = await api.post('/send-mail/code', data, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -105,13 +107,16 @@ export const sendVerificationEmail = async ({  purpose, to }: {  purpose:string;
     return response.data;
 };
 
-export const verifyCode = async ({ email, code }: { email: string; code: string; }): Promise<{ success: boolean }> => {
-    const data = { email, code };
-    const response = await api.post('http://localhost:8080/api/verify-code', data, {
+export const verifyCode = async ({purpose, code}: { purpose: string; code: string; }): Promise<{
+    success: boolean
+}> => {
+    const data = {purpose, code};
+    const response = await api.post('/send-mail/code/verify', data, {
         headers: {
             'Content-Type': 'application/json'
         }
     });
+    console.log(response.data)
 
     return response.data;
 };
