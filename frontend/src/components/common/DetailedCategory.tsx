@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './DetailedCategory.module.css';
 import ItemList from "./ItemList";
 import { DetailedCategoryList } from "../../typings/product";
@@ -9,26 +9,26 @@ interface DetailedCategoryProps {
 }
 
 const DetailedCategory: React.FC<DetailedCategoryProps> = ({ details }) => {
-    const navigate = useNavigate();
     const location = useLocation();
 
-    const handleCategoryClick = (tag: string) => {
-        // 현재 URL에 /tag 붙여서 URL만 변경 (페이지 이동 없음)
-        navigate(`${location.pathname}/${tag}`, { replace: true });
-    };
+    // 현재 URL 경로에서 subcategory 추출
+    const currentSubcategory = location.pathname.split('/')[2];
 
     return (
         <div>
             <div className={styles.container}>
-                {details.map((detail, index) => (
-                    <div
-                        key={index}  // 인덱스를 키로 사용
-                        className={styles.item}
-                        onClick={() => handleCategoryClick(detail.tag)}  // 클릭 시 URL 변경
-                    >
-                        {detail.name}
-                    </div>
-                ))}
+                {details.map((detail, index) => {
+                    // 현재 상세 카테고리가 활성화된 상태인지 확인
+                    const isActive = currentSubcategory === detail.tag;
+                    return (
+                        <Link to={detail.link}
+                              key={index}
+                              className={`${isActive ? styles.active : styles.item}`}
+                        >
+                            {detail.name}
+                        </Link>
+                    );
+                })}
             </div>
             <ItemList />
         </div>

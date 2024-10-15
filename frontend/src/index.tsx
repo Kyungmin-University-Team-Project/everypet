@@ -39,11 +39,7 @@ const router = createBrowserRouter([
         children: [
             {path: 'exhibitions', element: <Exhibitions category={'coupon'}/>},
             {path: 'timeDeal', element: <TimeDeal category={'timeDeal'}/>},
-            {path: 'dog', element: <ProductPage category={'dog'}/>},
-            {path: 'cat', element: <ProductPage category={'cat'}/>},
-            {path: 'rat', element: <ProductPage category={'rat'}/>},
-            {path: 'bird', element: <ProductPage category={'bird'}/>},
-            {path: 'reptiles', element: <ProductPage category={'reptiles'}/>},
+            { path: ':category/:subcategory?', element: <ProductPage /> },  // 동적 경로 설정,
             {
                 path: 'moreInformation',
                 element: <MoreInformation/>,

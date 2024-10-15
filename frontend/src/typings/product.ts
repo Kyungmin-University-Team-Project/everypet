@@ -34,4 +34,5 @@ export interface CategoryProductList {
 export interface DetailedCategoryList {
     name: string;
     tag: string;
+    link:string;
 }

@@ -34,7 +34,6 @@ const ItemList = () => {
             page: page,
             pageSize: pageSize,
         };
-        console.log("Fetching items with params:", params);
         return await fetchProductList(params);
     };
 
@@ -54,6 +53,14 @@ const ItemList = () => {
 
     if (error) {
         return <ErrorComponent message={error.message} />;
+    }
+
+    if (!data || data.length === 0) {
+        return (
+            <div>
+                검색결과가 없습니다
+            </div>
+        );
     }
 
     return (

@@ -23,6 +23,19 @@
     color: white;
 }
 
+.active{
+    background-color: #669AFF;
+    color: white;
+
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    min-width: 120px;
+
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
 @media screen and (min-width: 769px) {
     .container {
         display: grid;

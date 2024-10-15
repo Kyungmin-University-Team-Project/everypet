@@ -2,27 +2,33 @@
   "detailedCategories": [
     {
       "name": "파충류 먹이",
-      "tag": "feed"
+      "tag": "feed",
+      "link": "/reptiles/feed"
     },
     {
       "name": "파충류 장난감",
-      "tag": "toy"
+      "tag": "toy",
+      "link": "/reptiles/toy"
     },
     {
       "name": "파충류 건강",
-      "tag": "health"
+      "tag": "health",
+      "link": "/reptiles/health"
     },
     {
       "name": "파충류 집",
-      "tag": "house"
+      "tag": "house",
+      "link": "/reptiles/house"
     },
     {
       "name": "파충류 히터",
-      "tag": "heater"
+      "tag": "heater",
+      "link": "/reptiles/heater"
     },
     {
       "name": "파충류 간식",
-      "tag": "snack"
+      "tag": "snack",
+      "link": "/reptiles/snack"
     }
   ]
 }

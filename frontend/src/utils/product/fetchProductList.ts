@@ -8,5 +8,6 @@ export const fetchProductList = async (params: CategoryProductList): Promise<Pro
 
     const response = await axios.get(`/product/list/${productMainCategory}/${productSubCategory}/${orderBy}/${page}/${pageSize}`);
 
+    console.log(response.data)
     return response.data;
 };
