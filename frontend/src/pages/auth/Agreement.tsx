@@ -74,7 +74,7 @@ const Agreement: React.FC = () => {
             <form onSubmit={handleSubmit}>
                 <h3 className={styles.main_text}>
                     환영합니다!
-                    에브리펫에 가입하시려면 약관에 동의해 주세요
+                    에브리펫에 가입하시려면 약관에 동의해 주세요!
                 </h3>
                 <div>
                     <label>
