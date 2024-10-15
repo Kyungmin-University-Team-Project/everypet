@@ -1,22 +1,34 @@
 {
   "detailedCategories": [
     {
-      "name": "새 먹이"
+      "name": "새 먹이",
+      "tag": "feed",
+      "link": "/bird/feed"
     },
     {
-      "name": "새 장난감"
+      "name": "새 장난감",
+      "tag": "toy",
+      "link": "/bird/toy"
     },
     {
-      "name": "새 집"
+      "name": "새 집",
+      "tag": "house",
+      "link": "/bird/house"
     },
     {
-      "name": "새 미용"
+      "name": "새 미용",
+      "tag": "beauty",
+      "link": "/bird/beauty"
     },
     {
-      "name": "새 건강"
+      "name": "새 건강",
+      "tag": "health",
+      "link": "/bird/health"
     },
     {
-      "name": "새 케이지"
+      "name": "새 간식",
+      "tag": "snack",
+      "link": "/bird/snack"
     }
   ]
 }

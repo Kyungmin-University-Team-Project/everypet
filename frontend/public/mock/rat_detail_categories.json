@@ -1,19 +1,34 @@
 {
   "detailedCategories": [
     {
-      "name": "설치류 먹이"
+      "name": "설치류 먹이",
+      "tag": "feed",
+      "link": "/rat/feed"
     },
     {
-      "name": "설치류 장난감"
+      "name": "설치류 장난감",
+      "tag": "toy",
+      "link": "/rat/toy"
     },
     {
-      "name": "설치류 집"
+      "name": "설치류 집",
+      "tag": "house",
+      "link": "/rat/house"
     },
     {
-      "name": "설치류 옷"
+      "name": "설치류 옷",
+      "tag": "clothes",
+      "link": "/rat/clothes"
     },
     {
-      "name": "설치류 미용"
+      "name": "설치류 미용",
+      "tag": "beauty",
+      "link": "/rat/beauty"
+    },
+    {
+      "name": "설치류 간식",
+      "tag": "snack",
+      "link": "/rat/snack"
     }
   ]
 }

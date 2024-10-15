@@ -34,9 +34,9 @@ const Home: React.FC = () => {
                     pageSize: 2,
                     productCategory: '강아지%'
                 };
-                const data = await fetchProductList(params); // 유틸함수로 리스트 이미지 가져오기
-                console.log("연결은 성공 더미 현재 데이터 없음")
-                console.log(data); // 서버로부터 받은 데이터 출력
+                // const data = await fetchProductList(params); // 유틸함수로 리스트 이미지 가져오기
+                // console.log("연결은 성공 더미 현재 데이터 없음")
+                // console.log(data); // 서버로부터 받은 데이터 출력
             } catch (error) {
                 console.error('Error fetching data:', error);
             }

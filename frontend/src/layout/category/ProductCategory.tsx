@@ -11,13 +11,13 @@ import Categorybarbtn from './Categorybarbtn';
 import Realtimekeyword from '../Header/Realtimekeyword';
 
 const categories = [
-    {name: '기획전', link: '/exhibitions'},
-    {name: '타임딜', link: '/timeDeal'},
-    {name: '강아지', link: '/dog'},
-    {name: '고양이', link: '/cat'},
-    {name: '설치류', link: '/rat'},
-    {name: '조류', link: '/bird'},
-    {name: '파충류', link: '/reptiles'},
+    {name: '기획전', link: '/exhibitions', tag: 'exhibitions'},
+    {name: '타임딜', link: '/timeDeal', tag: 'timeDeal'},
+    {name: '강아지', link: '/dog', tag: 'dog'},
+    {name: '고양이', link: '/cat', tag: 'cat'},
+    {name: '설치류', link: '/rat', tag: 'rat'},
+    {name: '조류', link: '/bird', tag: 'bird'},
+    {name: '파충류', link: '/reptiles', tag: 'reptiles'},
 ];
 
 const ProductCategory = () => {
@@ -91,6 +91,7 @@ const ProductCategory = () => {
                                 isActive={clickedCategory === category.name}
                                 onClick={handleClick}
                                 link={category.link}
+                                tag={category.tag}
                             />
                         ))}
                     </ul>
