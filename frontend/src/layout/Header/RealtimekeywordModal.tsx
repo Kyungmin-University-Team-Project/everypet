@@ -19,24 +19,26 @@ const RealtimekeywordModal: React.FC<ModalProps> = ({isOpen, onClose, rankings})
 
     if (!isOpen) return null;
 
-    // 현재 실시간으로 시간을 계산중 나중에 최적화 필요
-    // 서버에서 현재 시간을 불러오는 api를 만들어서 시간 계산후 10분마다 데이터 수정하는 코드 작성해야함
+    // 현재 시간을 10분 단위로 반올림
     const currentDate = new Date();
     const minutes = currentDate.getMinutes();
-    const roundedMinutes = Math.floor(minutes / 10) * 10; // 10분 단위로 올림
-    const roundedDate = addMinutes(currentDate, roundedMinutes - minutes); // 현재 시간에서 10분 단위로 올림한 시간으로 변경
+    const roundedMinutes = Math.floor(minutes / 10) * 10;
+    const roundedDate = addMinutes(currentDate, roundedMinutes - minutes);
     const formattedDate = format(roundedDate, 'yyyy.MM.dd HH:mm', {locale: ko});
 
-    const renderTrendIcon = (trend: 'up' | 'down' | 'steady') => {
-        if (trend === 'up') {
-            return <FaLongArrowAltUp className={styles.upArrow}/>;
-        } else if (trend === 'down') {
-            return <FaLongArrowAltDown className={styles.downArrow}/>;
+
+    // 순위 변동 아이콘 렌더링
+    const renderTrendIcon = (rankingGap: number) => {
+        if (rankingGap > 0) {
+            return <FaLongArrowAltUp className={styles.upArrow}/>
+        } else if ((rankingGap < 0)) {
+            return <FaLongArrowAltDown className={styles.downArrow}/>
         } else {
             return <CgBorderStyleSolid className={styles.steady}/>;
         }
     };
 
+    // 검색 페이지로 이동
     const navigateToSearchResults = (query: string) => {
         navigate(`/search?query=${encodeURIComponent(query)}`);
         onClose(); // 모달 닫기
@@ -52,19 +54,17 @@ const RealtimekeywordModal: React.FC<ModalProps> = ({isOpen, onClose, rankings})
                 </div>
                 <ul className={styles.modalList}>
                     {rankings.map((ranking) => (
-                        <li key={ranking.rank} className={styles.modalListItem}>
-                            <div className={styles.modalList__inner}
-                                 onClick={() => navigateToSearchResults(ranking.keyword)}>
+                        <li key={ranking.ranking} className={styles.modalListItem}>
+                            <div
+                                className={styles.modalList__inner}
+                                onClick={() => navigateToSearchResults(ranking.keyword)}
+                            >
                                 <div className={styles.rank__inner}>
-                                    <span className={styles.rank}>
-                                        {ranking.rank}
-                                    </span>
-                                    <span className={styles.rank__text}>
-                                        {ranking.keyword}
-                                    </span>
+                                    <span className={styles.rank}>{ranking.ranking}</span>
+                                    <span className={styles.rank__text}>{ranking.keyword}</span>
                                 </div>
                                 <span className={styles.trend}>
-                                    {renderTrendIcon(ranking.trend)}
+                                    {renderTrendIcon(ranking.rankingGap)}
                                 </span>
                             </div>
                         </li>

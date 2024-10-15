@@ -1,10 +1,10 @@
 package com.everypet.keyword.model.dto;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
-
-import java.time.LocalDateTime;
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
@@ -25,23 +25,6 @@ public class KeywordRankDTO {
     @Data
     @Builder
     public static class TopKeywordRank {
-
-        @ApiModelProperty(value = "날짜", example = "2021-08-01T00:00:00")
-        LocalDateTime date;
-
-        List<TopKeywordRankDetail> topKeywordRankList;
-
-        public static TopKeywordRank of(LocalDateTime date, List<TopKeywordRankDetail> topKeywordRankList) {
-            return TopKeywordRank.builder()
-                    .date(date)
-                    .topKeywordRankList(topKeywordRankList)
-                    .build();
-        }
-    }
-
-    @Data
-    @Builder
-    public static class TopKeywordRankDetail {
 
         @ApiModelProperty(value = "검색어", example = "강아지")
         private String keyword; // 검색어

@@ -1,11 +1,10 @@
-import React, {useEffect, useState, useRef, useCallback} from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import styles from './Realtimekeyword.module.css';
-
 import RealtimekeywordModal from './RealtimekeywordModal';
-import {Ranking} from '../../typings/layout';
-import {IoIosArrowDown} from 'react-icons/io';
-import {useNavigate} from "react-router-dom";
-import axios from "axios";
+import { Ranking } from '../../typings/layout';
+import { IoIosArrowDown } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Realtimekeyword = () => {
     const [rankings, setRankings] = useState<Ranking[]>([]);
@@ -14,34 +13,27 @@ const Realtimekeyword = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const modalRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
-    
-    useEffect(() => {
-        // mock 데이터 로드
-        fetch('/mock/real_rank.json')
-            .then((response) => response.json())
-            .then((data) => setRankings(data))
-            .catch((error) => console.error('Error fetching real_rank.json:', error));
-
-        // 실시간 순위 업데이트
-        const intervalId = setInterval(() => {
-            // 1~10 까지
-            setCurrentRank((prevRank) => (prevRank % 10) + 1);
-        }, 2000);
-
-        return () => clearInterval(intervalId);
-    }, []);
 
     useEffect(() => {
-        const fetchData = async () => {
+        // 실시간 순위 데이터를 불러오는 함수
+        const fetchRankings = async () => {
             try {
-                const response = await axios.post('/real-time-keyword');
-                console.log(response.data);
+                const response = await axios.post('/keyword-rank/real-time-rank');
+                setRankings(response.data);  // 응답 데이터에 맞게 상태 업데이트
             } catch (error) {
-                console.error('Error:', error);
+                console.error('Error fetching real-time keyword rankings:', error);
             }
         };
 
-        fetchData();
+        // 데이터 불러오기
+        fetchRankings();
+
+        // 실시간 순위 업데이트 (2초마다 순위 변경)
+        const intervalId = setInterval(() => {
+            setCurrentRank((prevRank) => (prevRank % 10) + 1);
+        }, 2000);
+
+        return () => clearInterval(intervalId);  // 컴포넌트 언마운트 시 인터벌 클리어
     }, []);
 
     const handleClickOutside = useCallback((event: MouseEvent) => {
@@ -71,7 +63,7 @@ const Realtimekeyword = () => {
         setIsModalOpen(false);
     };
 
-    const currentRanking = rankings.find((item) => item.rank === currentRank);
+    const currentRanking = rankings.find((item) => item.ranking === currentRank);
 
     // 실시간 검색어 누르면 해당 키워드로 검색
     const searchKeyword = () => {
@@ -79,15 +71,16 @@ const Realtimekeyword = () => {
             navigate(`/search?query=${encodeURIComponent(currentRanking.keyword)}`);
         }
     };
+
     return (
         <div className={styles.container} ref={containerRef}>
             {currentRanking && (
                 <div className={styles.rank__container} onClick={searchKeyword}>
-                    <span className={styles.rank}>{currentRanking.rank}</span>
+                    <span className={styles.rank}>{currentRanking.ranking}</span>
                     <span className={styles.keyword}>{currentRanking.keyword}</span>
                 </div>
             )}
-            <IoIosArrowDown onClick={openRankModal} className={styles.open}/>
+            <IoIosArrowDown onClick={openRankModal} className={styles.open} />
 
             {isModalOpen && (
                 <div className={styles.modalWrapper} ref={modalRef}>

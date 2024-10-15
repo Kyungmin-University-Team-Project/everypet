@@ -3,6 +3,8 @@ package com.everypet.keyword.service;
 import com.everypet.keyword.model.dto.KeywordRankDTO;
 import com.everypet.keyword.model.dto.KeywordRankDTO.TopKeywordRank;
 
+import java.util.List;
+
 public interface KeywordRankService {
 
     /**
@@ -14,7 +16,7 @@ public interface KeywordRankService {
      */
     void keywordRedisSave(String ip, String keyword);
 
-    TopKeywordRank findAllTopKeywordRank();
+    List<TopKeywordRank> findAllTopKeywordRank();
 
     KeywordRankDTO findKeywordRank(String keyword);
 
