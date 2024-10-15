@@ -7,6 +7,7 @@ import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
 import ErrorComponent from "../../utils/reactQuery/ErrorComponent";
 import { fetchProductList } from "../../utils/product/fetchProductList";
 import { CategoryProductList, Product } from "../../typings/product";
+import DropDown from "./DropDown";
 
 const ItemList = () => {
     const { pathname } = useLocation();
@@ -65,18 +66,7 @@ const ItemList = () => {
 
     return (
         <>
-            <div className={styles.selectContainer}>
-                {/* 정렬 드롭다운 */}
-                <select className={styles.select} id="sort" value={orderBy} onChange={handleSortChange}>
-                    <option value="popularity">인기순</option>
-                    <option value="sales_high">판매량 높은 순</option>
-                    <option value="sales_low">판매량 낮은 순</option>
-                    <option value="price_high">가격 높은 순</option>
-                    <option value="price_low">가격 낮은 순</option>
-                    <option value="latest">최신순</option>
-                    <option value="oldest">오래된 순</option>
-                </select>
-            </div>
+            <DropDown orderBy={orderBy} handleSortChange={handleSortChange}/>
 
             <div className={styles.container}>
                 {data?.map((item) => (
