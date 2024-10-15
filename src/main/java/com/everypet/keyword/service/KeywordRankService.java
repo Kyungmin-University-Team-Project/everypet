@@ -22,7 +22,9 @@ public interface KeywordRankService {
 
     void updateRanking();
 
-    void saveKeywordRank(String keyword);
+    void saveKeyword(String keyword);
+
+    void updateKeywordRank();
 
     void updateTotalScore(KeywordRankDTO keyword);
 
