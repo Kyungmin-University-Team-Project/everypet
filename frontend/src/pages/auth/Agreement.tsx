@@ -1,7 +1,8 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {ChangeEvent, useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import styles from "./Agreement.module.css";
 import {AgreementJoin} from "../../typings/signup";
+import axios from "axios";
 
 const Agreement: React.FC = () => {
     const [allIsChecked, setAllIsChecked] = useState<boolean>(false);
@@ -14,19 +15,23 @@ const Agreement: React.FC = () => {
         setAgreement((prevAgreement) =>
             prevAgreement.map((item) =>
                 targetValue === item.value
-                    ? { ...item, checked: !item.checked }
+                    ? {...item, checked: !item.checked}
                     : item
             )
         );
     };
 
     useEffect(() => {
-        fetch("/mock/agreements.json")
-            .then((response) => response.json())
-            .then((data: AgreementJoin[]) => {
-                setAgreement(data.map((agreement) => ({ ...agreement, checked: false, showDetails: false })));
-            })
-            .catch((error) => console.error("Error fetching agreements:", error));
+        const responseData = async () => {
+            try {
+                const response = await axios.get('/mock/agreements.json');
+                const data: AgreementJoin[] = response.data;
+                setAgreement(data.map((agreement) => ({...agreement, checked: false, showDetails: false})));
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        responseData()
     }, []);
 
     useEffect(() => {
@@ -40,14 +45,14 @@ const Agreement: React.FC = () => {
         const checked = e.target.checked;
         setAllIsChecked(checked);
         setAgreement((prevAgreement) =>
-            prevAgreement.map((item) => ({ ...item, checked }))
+            prevAgreement.map((item) => ({...item, checked}))
         );
     };
 
     const toggleDetails = (index: number) => {
         setAgreement((prevAgreement) =>
             prevAgreement.map((item, i) =>
-                i === index ? { ...item, showDetails: !item.showDetails } : item
+                i === index ? {...item, showDetails: !item.showDetails} : item
             )
         );
     };
@@ -69,7 +74,7 @@ const Agreement: React.FC = () => {
             <form onSubmit={handleSubmit}>
                 <h3 className={styles.main_text}>
                     환영합니다!
-                    에브리펫에 가입하시려면 약관에 동의해 주세요
+                    에브리펫에 가입하시려면 약관에 동의해 주세요!
                 </h3>
                 <div>
                     <label>

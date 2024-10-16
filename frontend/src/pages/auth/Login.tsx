@@ -5,7 +5,7 @@ import {loginState} from '../../redux/auth/authSlice';
 
 import styles from './Login.module.css';
 import Signup from './Signup';
-import Findauth from './Findauth';
+import IdFind from './IdFind';
 import Agreement from './Agreement';
 import '@fortawesome/fontawesome-free/css/all.css';
 import {login} from "../../utils/auth/AuthAPI";
@@ -106,14 +106,14 @@ const Login = () => {
                             <button className={styles.login_btn}>홈으로 가기</button>
                         </Link>
                         <p className={styles.login_link}>
-                            <Link to="/login/forgot-password">아이디/비밀번호 찾기 |</Link>
+                            <Link to="/login/idFind">아이디/비밀번호 찾기 |</Link>
                             <Link to="/login/agreement">회원가입</Link>
                         </p>
                     </form>
                 )}
             </section>
             {location.pathname === '/login/signup' ? <Signup/> : null}
-            {location.pathname === '/login/forgot-password' ? <Findauth/> : null}
+            {location.pathname === '/login/forgot-password' ? <IdFind/> : null}
             {location.pathname === '/login/agreement' ? <Agreement/> : null}
         </div>
     );
