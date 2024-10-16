@@ -9,7 +9,7 @@ import ProductPage from './pages/category/ProductPage';
 import Root from './pages/home/Root';
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
-import Findauth from './pages/auth/Findauth';
+import IdFind from './pages/auth/IdFind';
 import store from './redux/store/store';
 import Agreement from './pages/auth/Agreement';
 import Exhibitions from './pages/category/Exhibitions';
@@ -30,6 +30,7 @@ import OrderManagement from "./pages/userService/mySubPage/OrderManagement";
 import AddressManagement from "./pages/userService/mySubPage/AddressManagement";
 import PointsAndCoupons from "./pages/userService/mySubPage/PointsAndCoupons";
 import InquiryHistory from "./pages/userService/mySubPage/InquiryHistory";
+import PasswordFind from "./pages/auth/PasswordFind";
 
 const router = createBrowserRouter([
     // 모두 접속 가능
@@ -60,13 +61,13 @@ const router = createBrowserRouter([
         children: [
             {
                 path: 'myPage',
-                element: <MyPage />,
+                element: <MyPage/>,
                 children: [
-                    {path: 'userInfo', element: <UserInfo />},
-                    {path: 'orderManagement', element: <OrderManagement />},
-                    {path: 'addressManagement', element: <AddressManagement />},
-                    {path: 'pointsAndCoupons', element: <PointsAndCoupons />},
-                    {path: 'inquiryHistory', element: <InquiryHistory />},
+                    {path: 'userInfo', element: <UserInfo/>},
+                    {path: 'orderManagement', element: <OrderManagement/>},
+                    {path: 'addressManagement', element: <AddressManagement/>},
+                    {path: 'pointsAndCoupons', element: <PointsAndCoupons/>},
+                    {path: 'inquiryHistory', element: <InquiryHistory/>},
                 ],
             },
             {path: 'deliveryInquiry', element: <DeliveryInquiry/>},
@@ -83,7 +84,8 @@ const router = createBrowserRouter([
             {path: '', element: <Login/>},
             {path: 'agreement', element: <Agreement/>},
             {path: 'signup', element: <Signup/>},
-            {path: 'forgot-password', element: <Findauth/>},
+            {path: 'idFind', element: <IdFind/>},
+            {path: "passwordFind", element: <PasswordFind/>}
         ],
     },
 ]);
