@@ -39,6 +39,11 @@ jobs:
 
           echo "point.signup=500" >> src/main/resources/application.properties
           echo "point.referral=1000" >> src/main/resources/application.properties
+          
+          echo "spring.security.oauth2.client.registration.naver.client-id=${{ secrets.NAVER_CLIENT_ID }}" >> src/main/resources/application.properties
+          echo "spring.security.oauth2.client.registration.naver.client-secret=${{ secrets.NAVER_CLIENT_SECRET }}" >> src/main/resources/application.properties
+          echo "spring.security.oauth2.client.registration.google.client-id=${{ secrets.GOOGLE_CLIENT_ID }}" >> src/main/resources/application.properties
+          echo "spring.security.oauth2.client.registration.google.client-secret=${{ secrets.GOOGLE_CLIENT_SECRET }}" >> src/main/resources/application.properties
 
       - name: Create database.properties
         run: |
