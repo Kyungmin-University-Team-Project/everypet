@@ -19,7 +19,7 @@ public class KeywordScheduler {
      * 10분마다 랭크 기록을 업데이트 혹은 랭크기록이 없으면 새로 저장합니다.
      * Redis에 저장된 랭크 기록을 가져와서 랭크 기록으로 저장합니다.
      */
-    @Scheduled(cron = "0 */1 * * * *", zone = "Asia/Seoul")
+    @Scheduled(cron = "0 */10 * * * *", zone = "Asia/Seoul")
     public void updateKeywordRank() {
         keywordRankService.updateKeywordRank();
     }
