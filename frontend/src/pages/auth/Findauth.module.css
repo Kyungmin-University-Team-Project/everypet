@@ -1,3 +1,12 @@
+/* 공통 스타일 적용 */
+input, button {
+    box-sizing: border-box;
+    height: 50px; /* 동일한 높이 설정 */
+    padding: 10px 15px; /* 동일한 패딩 설정 */
+    font-size: 16px; /* 글자 크기도 통일 */
+}
+
+/* 기존 스타일 유지 */
 ul {
     list-style: none;
     padding: 0;
@@ -46,7 +55,7 @@ button {
 
 .find_container {
     border: 1px solid #e6e6e6;
-    padding: 20px;
+    padding: 40px;
 }
 
 .find_text {
@@ -78,24 +87,31 @@ button {
 
 .find_input {
     flex: 1;
-    padding: 10px;
-    margin-bottom: 1rem;
-    width: 95%;
+    width: 100%;
     font-size: 14px;
     color: #333;
     background-color: #ffffff;
     border: 1px solid #e6e6e6;
     border-radius: 4px;
     outline: none;
+    margin-bottom: 1rem;
+}
+
+.find_id {
+    border: 1px solid #e6e6e6;
+    outline: none;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    color: #333;
+    font-size: 14px;
+    border-radius: 5px;
 }
 
 .find_request_btn {
     margin-left: 10px;
-    padding: 10px 15px;
-    font-size: 14px;
     background-color: #1351f9;
     color: #ffffff;
-    width: 95%;
+    width: 100%;
     margin-bottom: 1rem;
     border: none;
     border-radius: 4px;
@@ -111,7 +127,6 @@ button {
 .ul_form_btn {
     display: block;
     width: 100%;
-    padding: 15px 0;
     background: #1351f9;
     border-radius: 4px;
     margin-bottom: 1rem;
@@ -121,6 +136,11 @@ button {
     border: none;
     outline: none;
     cursor: pointer;
+}
+
+.ul_form_btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
 }
 
 @media (max-width: 768px) {
