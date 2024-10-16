@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.everypet.review.model.dao.ReviewHelpfulMapper">
+
+    <!-- 리뷰가 도움이 됐다/안 됐다 추가 -->
+    <insert id="insertHelpfulReview" parameterType="map">
+        INSERT INTO TBL_REVIEW_HELPFUL (REVIEW_ID, MEMBER_ID, IS_HELPFUL_YN)
+        VALUES (#{reviewId}, #{memberId}, #{isHelpfulYn})
+    </insert>
+
+    <!-- 리뷰가 도움이 됐다/안 됐다 수정 -->
+    <update id="updateHelpfulReview" parameterType="map">
+        UPDATE TBL_REVIEW_HELPFUL
+        SET IS_HELPFUL_YN = #{isHelpfulYn}
+        WHERE REVIEW_ID = #{reviewId} AND MEMBER_ID = #{memberId}
+    </update>
+
+    <!-- 리뷰 도움이 여부 삭제 (취소) -->
+    <delete id="deleteHelpfulReview" parameterType="map">
+        DELETE FROM TBL_REVIEW_HELPFUL
+        WHERE REVIEW_ID = #{reviewId} AND MEMBER_ID = #{memberId}
+    </delete>
+
+    <!-- 해당 리뷰에 회원이 이미 도움이 여부를 표시했는지 확인 -->
+    <select id="checkIfAlreadyHelpful" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM TBL_REVIEW_HELPFUL
+        WHERE REVIEW_ID = #{reviewId} AND MEMBER_ID = #{memberId}
+    </select>
+
+</mapper>

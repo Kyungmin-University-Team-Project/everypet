@@ -2,15 +2,16 @@ import React, {useEffect, useState} from 'react';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {loginState} from '../../redux/auth/authSlice';
-import {LoginData} from '../../typings/Login';
 
 import styles from './Login.module.css';
 import Signup from './Signup';
-import Findauth from './Findauth';
+import IdFind from './IdFind';
 import Agreement from './Agreement';
 import '@fortawesome/fontawesome-free/css/all.css';
-import {login} from "../../typings/AuthAPI";
-import {encryptToken} from "../../utils/token/token";
+import {login} from "../../utils/auth/AuthAPI";
+import {encryptToken} from "../../utils/auth/token";
+import {LoginData} from "../../typings/login";
+
 
 const Login = () => {
     const navigate = useNavigate();
@@ -105,14 +106,14 @@ const Login = () => {
                             <button className={styles.login_btn}>홈으로 가기</button>
                         </Link>
                         <p className={styles.login_link}>
-                            <Link to="/login/forgot-password">아이디/비밀번호 찾기 |</Link>
+                            <Link to="/login/idFind">아이디/비밀번호 찾기 |</Link>
                             <Link to="/login/agreement">회원가입</Link>
                         </p>
                     </form>
                 )}
             </section>
             {location.pathname === '/login/signup' ? <Signup/> : null}
-            {location.pathname === '/login/forgot-password' ? <Findauth/> : null}
+            {location.pathname === '/login/forgot-password' ? <IdFind/> : null}
             {location.pathname === '/login/agreement' ? <Agreement/> : null}
         </div>
     );

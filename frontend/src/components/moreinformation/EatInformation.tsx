@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { EatWellAndEatWellItem } from "../../typings/MoreInformation";
 import styles from '../moreinformation/eatInformation.module.css';
+
+interface EatWellAndEatWellItem {
+    imageUrl: string;
+}
 
 const EatInformation: React.FC = () => {
     const [eat, setEat] = useState<EatWellAndEatWellItem[]>([]);

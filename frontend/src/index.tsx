@@ -9,14 +9,13 @@ import ProductPage from './pages/category/ProductPage';
 import Root from './pages/home/Root';
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
-import Findauth from './pages/auth/Findauth';
+import IdFind from './pages/auth/IdFind';
 import store from './redux/store/store';
 import Agreement from './pages/auth/Agreement';
 import Exhibitions from './pages/category/Exhibitions';
 import MoreInformation from "./pages/moreInformation/MoreInformation";
 import DeliveryInquiry from "./pages/userService/DeliveryInquiry";
 import Information from "./pages/moreInformation/Information";
-import ProductInquiry from "./pages/moreInformation/ProductInquiry";
 import SellerInformation from "./pages/moreInformation/SellerInformation";
 import Cart from "./pages/userService/Cart";
 import SearchPage from "./pages/category/SearchPage";
@@ -31,6 +30,7 @@ import OrderManagement from "./pages/userService/mySubPage/OrderManagement";
 import AddressManagement from "./pages/userService/mySubPage/AddressManagement";
 import PointsAndCoupons from "./pages/userService/mySubPage/PointsAndCoupons";
 import InquiryHistory from "./pages/userService/mySubPage/InquiryHistory";
+import PasswordFind from "./pages/auth/PasswordFind";
 
 const router = createBrowserRouter([
     // 모두 접속 가능
@@ -40,11 +40,7 @@ const router = createBrowserRouter([
         children: [
             {path: 'exhibitions', element: <Exhibitions category={'coupon'}/>},
             {path: 'timeDeal', element: <TimeDeal category={'timeDeal'}/>},
-            {path: 'dog', element: <ProductPage category={'dog'}/>},
-            {path: 'cat', element: <ProductPage category={'cat'}/>},
-            {path: 'rat', element: <ProductPage category={'rat'}/>},
-            {path: 'bird', element: <ProductPage category={'bird'}/>},
-            {path: 'reptiles', element: <ProductPage category={'reptiles'}/>},
+            { path: ':category/:subcategory?', element: <ProductPage /> },  // 동적 경로 설정,
             {
                 path: 'moreInformation',
                 element: <MoreInformation/>,
@@ -65,13 +61,13 @@ const router = createBrowserRouter([
         children: [
             {
                 path: 'myPage',
-                element: <MyPage />,
+                element: <MyPage/>,
                 children: [
-                    {path: 'userInfo', element: <UserInfo />},
-                    {path: 'orderManagement', element: <OrderManagement />},
-                    {path: 'addressManagement', element: <AddressManagement />},
-                    {path: 'pointsAndCoupons', element: <PointsAndCoupons />},
-                    {path: 'inquiryHistory', element: <InquiryHistory />},
+                    {path: 'userInfo', element: <UserInfo/>},
+                    {path: 'orderManagement', element: <OrderManagement/>},
+                    {path: 'addressManagement', element: <AddressManagement/>},
+                    {path: 'pointsAndCoupons', element: <PointsAndCoupons/>},
+                    {path: 'inquiryHistory', element: <InquiryHistory/>},
                 ],
             },
             {path: 'deliveryInquiry', element: <DeliveryInquiry/>},
@@ -88,7 +84,8 @@ const router = createBrowserRouter([
             {path: '', element: <Login/>},
             {path: 'agreement', element: <Agreement/>},
             {path: 'signup', element: <Signup/>},
-            {path: 'forgot-password', element: <Findauth/>},
+            {path: 'idFind', element: <IdFind/>},
+            {path: "passwordFind", element: <PasswordFind/>}
         ],
     },
 ]);

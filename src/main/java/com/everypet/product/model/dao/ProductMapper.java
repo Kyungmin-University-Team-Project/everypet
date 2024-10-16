@@ -11,12 +11,12 @@ public interface ProductMapper {
 
     int insertProduct(Map<String, Object> map);
     int deleteProductByProductId(String productId);
-    List<ProductListDTO> selectProduct(SelectProductDTO selectProductDTO);
-    ProductDTO selectProductByProductId(String productId);
+    List<ProductListDTO> selectProductList(Map<String, Object> map);
+    ProductListDTO selectProductByProductId(String productId);
     String selectMemberIdByProductId(String productId);
-    int updateProduct(ProductUpdateDTO productDTO);
+    int updateProduct(Map<String, Object> map);
     boolean incrementProductViews(String productId);
-    List<ProductListDTO> searchProductListByKeyword(SearchProductDTO searchProductDTO);
+    List<ProductListDTO> searchProductListByKeyword(Map<String, Object> map);
     List<String> autocompleteKeyword(String keyword);
     int insertProductKeyword(Map<String, Object> map);
     int deleteProductKeyword(Map<String, Object> map);

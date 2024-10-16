@@ -1,14 +1,14 @@
 package com.everypet.global.config;
 
-import com.everypet.global.auth.jwt.filter.CustomLogoutFilter;
-import com.everypet.global.auth.jwt.filter.JWTFilter;
-import com.everypet.global.auth.jwt.filter.LoginFilter;
-import com.everypet.global.auth.jwt.repository.RefreshTokenRepository;
-import com.everypet.global.auth.oauth2.config.CustomClientRegistrationRepo;
-import com.everypet.global.auth.oauth2.handler.CustomSuccessHandler;
-import com.everypet.global.auth.oauth2.service.CustomOAuth2UserService;
-import com.everypet.global.auth.util.CookieManager;
-import com.everypet.global.auth.util.JWTManager;
+import com.everypet.auth.jwt.filter.CustomLogoutFilter;
+import com.everypet.auth.jwt.filter.JWTFilter;
+import com.everypet.auth.jwt.filter.LoginFilter;
+import com.everypet.auth.repository.RefreshTokenRepository;
+import com.everypet.auth.oauth2.config.CustomClientRegistrationRepo;
+import com.everypet.auth.oauth2.handler.CustomSuccessHandler;
+import com.everypet.auth.oauth2.service.CustomOAuth2UserService;
+import com.everypet.global.util.CookieManager;
+import com.everypet.auth.jwt.JWTManager;
 import com.everypet.member.service.UserLoginFailHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
