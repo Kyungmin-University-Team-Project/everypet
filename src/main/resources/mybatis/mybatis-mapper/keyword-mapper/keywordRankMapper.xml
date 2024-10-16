@@ -11,8 +11,13 @@
     <update id="updateTotalScore" parameterType="KeywordRankDTO">
         UPDATE TBL_RANKING
         SET TOTAL_SCORE = #{totalScore}, ONE_HOUR_SCORE = #{oneHourScore}, DAILY_SCORE = #{dailyScore},
-            WEEKLY_SCORE = #{weeklyScore}, TOTAL_COUNT = #{totalCount}, RANKING = #{ranking},
-            PREVIOUS_RANK = #{previousRank}, RANKING_GAP = #{rankingGap}
+            WEEKLY_SCORE = #{weeklyScore}, TOTAL_COUNT = #{totalCount}
+        WHERE KEYWORD = #{keyword}
+    </update>
+
+    <update id="updateRanking" parameterType="KeywordRankDTO">
+        UPDATE TBL_RANKING
+        SET RANKING = #{ranking}, PREVIOUS_RANK = #{previousRank}, RANKING_GAP = #{rankingGap}
         WHERE KEYWORD = #{keyword}
     </update>
 

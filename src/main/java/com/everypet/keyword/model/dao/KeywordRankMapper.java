@@ -15,6 +15,7 @@ public interface KeywordRankMapper {
     List<TopKeywordRank> findTopKeywordRank();
     void saveKeywordRank(KeywordRankDTO keyword);
     void updateTotalScore(KeywordRankDTO keyword);
+    void updateRanking(KeywordRankDTO keyword);
     KeywordRankDTO findKeywordRank(String keyword);
     void deleteRecordsWithZeroScore();
 
