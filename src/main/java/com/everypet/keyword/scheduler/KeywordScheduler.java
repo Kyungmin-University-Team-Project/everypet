@@ -1,25 +1,17 @@
 package com.everypet.keyword.scheduler;
 
-import com.everypet.keyword.model.dto.KeywordRankDTO;
 import com.everypet.keyword.service.KeywordRankService;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.data.redis.core.Cursor;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class KeywordScheduler {
 
     private static final Logger log = LogManager.getLogger(KeywordScheduler.class);
-
-    private final RedisTemplate<String, String> redisTemplate;
 
     private final KeywordRankService keywordRankService;
 
@@ -29,32 +21,7 @@ public class KeywordScheduler {
      */
     @Scheduled(cron = "0 */10 * * * *", zone = "Asia/Seoul")
     public void updateKeywordRank() {
-
-        // "search:*" 패턴에 해당하는 모든 키를 가져와서 검색 기록으로 저장 (scan 사용) - 대용량 데이터 처리 할떄 권장
-        Cursor<byte[]> cursor = redisTemplate.getConnectionFactory().getConnection().scan(
-                new ScanOptions.ScanOptionsBuilder().match("search:*").build()
-        );
-
-        while (cursor.hasNext()) {
-            String key = new String(cursor.next());
-            String keyword = redisTemplate.opsForValue().get(key);
-
-            KeywordRankDTO keywordRankDTO = keywordRankService.findKeywordRank(keyword);
-            if (keywordRankDTO != null) {
-                keywordRankService.updateTotalScore(keywordRankDTO);
-            } else {
-                keywordRankService.saveKeywordRank(keyword);
-            }
-        }
-
-        keywordRankService.updateRanking();
-
-        // "search:*" 패턴에 해당하는 모든 키 삭제
-        Set<String> keys = redisTemplate.keys("search:*");
-        if (keys != null && !keys.isEmpty()) {
-            redisTemplate.delete(keys);
-        }
-
+        keywordRankService.updateKeywordRank();
     }
 
     /**
