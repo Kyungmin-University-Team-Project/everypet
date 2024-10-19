@@ -1,0 +1,24 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40vh;
+}
+
+.noResults {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    color: #8f8f8f;
+}
+
+.noResults__icon {
+    font-size: 100px;
+}
+
+.noResults__text {
+    font-size: 48px;
+}

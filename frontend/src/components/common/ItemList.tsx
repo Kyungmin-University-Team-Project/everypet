@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
-import { useParams, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Item from './Item';
 import styles from './ItemList.module.css';
 import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
@@ -8,6 +8,7 @@ import ErrorComponent from "../../utils/reactQuery/ErrorComponent";
 import { fetchProductList } from "../../utils/product/fetchProductList";
 import { CategoryProductList, Product } from "../../typings/product";
 import DropDown from "./DropDown";
+import NotFoundProduct from "../../utils/reactQuery/NotFoundProduct";
 
 const ItemList = () => {
     const { pathname } = useLocation();
@@ -58,9 +59,7 @@ const ItemList = () => {
 
     if (!data || data.length === 0) {
         return (
-            <div>
-                검색결과가 없습니다
-            </div>
+            <NotFoundProduct/>
         );
     }
 

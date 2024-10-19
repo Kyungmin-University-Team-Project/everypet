@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, {useEffect, useRef, useState} from 'react';
+import {useLocation, useNavigate} from 'react-router-dom';
 import styles from './SearchInput.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../redux/store/store';
-import { setSearchInput } from '../../redux/features/searchSlice';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppDispatch, RootState} from '../../redux/store/store';
+import {setSearchInput} from '../../redux/features/searchSlice';
 
 const SearchInput = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -84,11 +84,11 @@ const SearchInput = () => {
                 value={inputValue}
                 onChange={handleInputChange}
                 onClick={handleInputToggle}
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyPress}
                 placeholder="검색어를 입력해 주세요"
             />
             <button className={styles.search__btn} onClick={handleSearchClick}>
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
+                <FontAwesomeIcon icon={faMagnifyingGlass}/>
             </button>
 
             {isInputClicked && (
@@ -99,12 +99,16 @@ const SearchInput = () => {
                                 <span>최근검색어</span>
                                 <button className={styles.close__btn} onClick={handleInputToggle}>전체삭제</button>
                             </div>
-                            {filteredSearches.map((search) => (
-                                <li key={search} className={styles.historyItem} onClick={() => handleSearchItemClick(search)}>
-                                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                                    {search}
-                                </li>
-                            ))}
+                            <div className={styles.historyItem__container}>
+
+                                {filteredSearches.map((search) => (
+                                    <li key={search} className={styles.historyItem}
+                                        onClick={() => handleSearchItemClick(search)}>
+                                        <FontAwesomeIcon icon={faMagnifyingGlass}/>
+                                        {search}
+                                    </li>
+                                ))}
+                            </div>
                             <div className={styles.historyList__footer}>
                                 <button className={styles.auto__save}>자동 저장 끄기</button>
                                 <button className={styles.close__btn} onClick={handleInputToggle}>닫기</button>
