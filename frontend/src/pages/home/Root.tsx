@@ -31,14 +31,22 @@ const Root = () => {
     }, []);
 
     return (
-        <>
+        <div style={{
+            display: "flex",
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            height: '100vh',
+        }}>
             <Fixedheader/>
-            <Header/>
-            <Productcategory/>
-            {location.pathname === '/' ? <Home/> : <Outlet/>}
-            <ScrollToTopButton/>
+            <div>
+
+                <Header/>
+                <Productcategory/>
+                {location.pathname === '/' ? <Home/> : <Outlet/>}
+                <ScrollToTopButton/>
+            </div>
             <Footer/>
-        </>
+        </div>
     );
 };
 

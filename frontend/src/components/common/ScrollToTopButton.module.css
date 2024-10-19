@@ -29,27 +29,13 @@
     animation: enterAnimation 0.5s forwards;
 }
 
-/* Media Queries */
 
-/* Tablet */
-@media (min-width: 600px) {
+@media (min-width: 789px) {
     .scrollButton {
         padding: 15px;
     }
 }
 
-/* Desktop */
-@media (min-width: 1024px) {
-    .scrollButton {
-        padding: 20px;
-    }
-
-    .icon {
-        font-size: 1.6rem;
-    }
-}
-
-/* Keyframes for Animations */
 @keyframes enterAnimation {
     from {
         transform: translateY(100%);

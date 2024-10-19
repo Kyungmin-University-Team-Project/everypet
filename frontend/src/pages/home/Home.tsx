@@ -30,8 +30,10 @@ const Home: React.FC = () => {
 
     return (
         <div className={styles.container}>
-            <Maincarousel/>
-            <Quicknav/>
+            <div className={styles.home__top}>
+                <Maincarousel/>
+                <Quicknav/>
+            </div>
             <div className={styles.brand__ad}>
                 {adsData.map((ad) => (
                     <HomeAd key={ad.title} title={ad.title} imageUrl={ad.imageUrl} brandName={ad.brandName}/>
