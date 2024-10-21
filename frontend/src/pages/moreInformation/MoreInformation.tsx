@@ -108,7 +108,8 @@ const MoreInformation: React.FC = () => {
             <section className={styles.section_box}>
                 <article className={styles.article_moreInformation}>
                     <div className={styles.box_moreInformation}>
-                        <img src={productList?.productImg} className={styles.moreInformation_img}/>
+                        <img src={productList?.productImg} alt={productList?.name}
+                             className={styles.moreInformation_img}/>
                         <div className={styles.info_container}>
                             <div className={styles.breadcrumb}>
                                 <span className={styles.headingText}>{productList?.productMainCategory}</span>
@@ -162,7 +163,8 @@ const MoreInformation: React.FC = () => {
                         </button>
                     </div>
                     <div ref={informationRef}>
-                        <img src={productList?.productDescriptionImg} className={styles.moreInformation_imgTab}
+                        <img src={productList?.productDescriptionImg} alt={productList?.productName}
+                             className={styles.moreInformation_imgTab}
                         />
                     </div>
                     <div ref={purchaseInfoRef}>
