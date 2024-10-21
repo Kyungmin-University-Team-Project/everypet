@@ -44,8 +44,10 @@
 
 }
 
-
 @media screen and (min-width: 769px) {
+    .quick__nav__container{
+        height: 200px;
+    }
     .img {
         max-width: 50px; /* Original size for desktop */
     }
