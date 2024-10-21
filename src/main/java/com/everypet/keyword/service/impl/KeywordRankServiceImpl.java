@@ -11,19 +11,42 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
+
+import static com.everypet.global.util.RedisKeyUtils.deleteRedisKeys;
+import static com.everypet.global.util.RedisKeyUtils.scanRedisKeys;
 
 @Service
 @RequiredArgsConstructor
 public class KeywordRankServiceImpl implements KeywordRankService {
 
     private static final Logger log = LogManager.getLogger(KeywordRankServiceImpl.class);
+
     private final RedisTemplate<String, String> redisTemplate;
 
     private final KeywordRankMapper keywordRankMapper;
+
+    @Override
+    public void updateKeywordRank() {
+
+        Set<String> keys = scanRedisKeys("search:*");
+
+        for (String key : keys) {
+
+            String keyword = redisTemplate.opsForValue().get(key);
+
+            KeywordRankDTO keywordRankDTO = findKeywordRank(keyword); // 검색어 랭킹 조회
+            if (keywordRankDTO != null) {
+                updateTotalScore(keywordRankDTO); // 검색어 랭킹 업데이트
+            } else {
+                saveKeyword(keyword); // 존재하지 않다면 검색어 랭킹 저장
+            }
+
+        }
+
+        updateRanking();
+        deleteRedisKeys(keys);
+    }
 
     @Override
     public void updateRanking() {
@@ -36,7 +59,7 @@ public class KeywordRankServiceImpl implements KeywordRankService {
 
         rankingQueue.addAll(keywordList);
 
-        for(int i = 1; !rankingQueue.isEmpty(); i++) {
+        for (int i = 1; !rankingQueue.isEmpty(); i++) {
             KeywordRankDTO keywordRankDTO = rankingQueue.poll();
 
             keywordRankDTO.setRanking(i);
@@ -48,9 +71,10 @@ public class KeywordRankServiceImpl implements KeywordRankService {
             // 이전 순위와 현재 순위의 차이를 계산
             keywordRankDTO.setRankingGap(keywordRankDTO.getPreviousRank() - keywordRankDTO.getRanking());
 
-            keywordRankMapper.updateTotalScore(keywordRankDTO);
-
             keywordRankDTO.setPreviousRank(i);
+
+            keywordRankMapper.updateRanking(keywordRankDTO);
+
         }
     }
 
@@ -72,7 +96,7 @@ public class KeywordRankServiceImpl implements KeywordRankService {
     }
 
     @Override
-    public void saveKeywordRank(String keyword) {
+    public void saveKeyword(String keyword) {
         KeywordRankDTO keywordRankDTO = MsKeywordRankMapper.INSTANCE.toSearchRecord(keyword);
         keywordRankMapper.saveKeywordRank(keywordRankDTO);
     }
@@ -110,8 +134,8 @@ public class KeywordRankServiceImpl implements KeywordRankService {
         keywordRankDTO.setWeeklyScore(keywordRankDTO.getWeeklyScore() + 1);
         keywordRankDTO.setTotalScore(calculateScore(keywordRankDTO));
     }
-
     // 최근 1시간, 하루, 일주일간의 검색량을 반영하여 검색어의 점수를 계산
+
     // 1시간, 하루 시간이 지나면 스케줄링이 0으로 초기화되기 때문에 검색량이 반영되지 않음
     private double calculateScore(KeywordRankDTO keywordRankDTO) {
         double recentlyScore = keywordRankDTO.getOneHourScore() * 0.15 + keywordRankDTO.getTotalCount() * 0.05;

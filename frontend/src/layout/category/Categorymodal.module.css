@@ -13,7 +13,7 @@
     display: flex;
     width: 100%;
 
-    top: 120px;
+    top: 141px;
 
     background-color: white;
 
@@ -35,8 +35,7 @@
 
     background-color: white;
 
-    border-top: 1px solid #ccc; /* 상단 보더만 추가 */
-    border-bottom: 1px solid #ccc; /* 하단 보더만 추가 */
+    border-bottom: 1px solid #ccc;
 
     padding: 20px 0 20px 0;
 
@@ -128,11 +127,29 @@
 
     cursor: pointer;
 
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .category ul li:hover {
     color: #4a8cf0;
+    font-size: 18px;
+}
+
+.category__content.active .category__title {
+    color: #4a8cf0; /* 활성화된 카테고리의 제목 색상 */
+}
+
+.category__content.active .ul__line {
+    height: 100%; /* 활성화된 카테고리의 세로선 전체 높이 */
+}
+
+.category__content.active .ul__line__bg {
+    background-color: #4a8cf0; /* 활성화된 카테고리의 세로선 색상 */
+}
+
+.category ul li.active {
+    color: #4a8cf0;
+    font-size: 18px;
 }
 
 @media screen and (min-width: 1600px) {

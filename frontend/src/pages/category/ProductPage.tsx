@@ -5,13 +5,7 @@ import styles from './ProductPage.module.css';
 import DetailedCategory from '../../components/common/DetailedCategory';
 import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
 import { DetailedCategoryList } from "../../typings/product";
-
-const fetchCategoryDetails = async (category: string): Promise<{ detailedCategories: DetailedCategoryList[] }> => {
-    const response = await fetch(`/mock/${category}_detail_categories.json`);
-
-    if (!response.ok) throw new Error('Network response was not ok');
-    return response.json();
-};
+import {fetchCategoryDetails} from "../../utils/product/category";
 
 const ProductPage = () => {
     const { category } = useParams<{ category: string }>(); // URL 파라미터에서 카테고리 읽기

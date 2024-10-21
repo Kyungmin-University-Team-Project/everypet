@@ -2,7 +2,6 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-bottom: 40px;
 }
 
 .quick__nav {
@@ -46,11 +45,10 @@
 }
 
 
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 769px) {
     .img {
         max-width: 50px; /* Original size for desktop */
     }
-
     .quick__nav__item {
         flex: none;
         max-width: none;
@@ -61,8 +59,3 @@
     }
 }
 
-@media screen and (min-width: 1600px) {
-    .quick__nav {
-        width: 1250px;
-    }
-}

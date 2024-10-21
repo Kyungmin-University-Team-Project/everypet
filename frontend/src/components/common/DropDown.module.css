@@ -1,13 +1,44 @@
-.selectContainer{
+.selectContainer {
     display: flex;
     width: 100%;
-
     justify-content: end;
+    margin-bottom: 30px;
 }
 
 .select {
-    padding: 16px;
-    margin-bottom: 20px;
+    width: 180px; /* 드롭다운 너비 */
+    padding: 12px 16px;
+    font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 8px; /* 둥근 모서리 */
+    background-color: #ffffff;
+    color: #333;
+    appearance: none; /* 기본 드롭다운 화살표 제거 */
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 살짝 그림자 추가 */
+    transition: all 0.3s ease;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>'); /* 화살표 추가 */
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* 화살표 위치 */
+    background-size: 16px;
+}
+
+
+.select:hover {
+    border-color: #669AFF; /* 호버 시 경계선 색상 */
+}
+
+.select:focus {
+    outline: none; /* 기본 포커스 스타일 제거 */
+    border-color: #669AFF; /* 포커스 시 경계선 색상 */
+    box-shadow: 0 0 5px rgba(102, 154, 255, 0.5); /* 포커스 시 그림자 강조 */
+}
+
+.selectContainer select option {
+    padding: 10px;
+}
+
+@media screen and (min-width: 769px) {
+    .selectContainer{
+    }
 }

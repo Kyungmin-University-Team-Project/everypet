@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import {useQuery} from 'react-query';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Item from './Item';
 import styles from './SearchItemList.module.css';
@@ -13,25 +12,32 @@ interface SearchItemListProps {
     searchQuery: string;
 }
 
-
 // home에서 보여주는 리스트에선 keyword에 브랜드 명을 넣어주기
 const SearchItemList: React.FC<SearchItemListProps> = ({searchQuery}) => {
     const [orderBy, setOrderBy] = useState<string>('popularity'); // 기본 정렬 기준
     const [page, setPage] = useState<number>(1); // 기본 페이지
+    const [data, setData] = useState<Product[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
     const pageSize = 10; // 페이지 당 아이템 수
 
-    const fetchItems = async (): Promise<Product[]> => {
-        const params = {
-            keyword: searchQuery,
-            orderBy,
-            page,
-            pageSize,
-        };
-        const response = await axios.get(`/product/search/${searchQuery}/${orderBy}/${page}/${pageSize}`);
-        return response.data;
+    const fetchItems = async () => {
+        setLoading(true);
+        setError(null); // 초기화
+        try {
+            const response = await axios.get(`/product/search/${searchQuery}/${orderBy}/${page}/${pageSize}`);
+            console.log(response)
+            setData(response.data);
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'Unknown error occurred');
+        } finally {
+            setLoading(false);
+        }
     };
 
-    const { data, error, isLoading } = useQuery<Product[], Error>(['searchProducts', searchQuery, orderBy, page], fetchItems);
+    useEffect(() => {
+        fetchItems();
+    }, [searchQuery, page]);
 
     const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setOrderBy(event.target.value);
@@ -42,12 +48,12 @@ const SearchItemList: React.FC<SearchItemListProps> = ({searchQuery}) => {
         setPage(newPage);
     };
 
-    if (isLoading) {
-        return <LoadingSpinner />;
+    if (loading) {
+        return <LoadingSpinner/>;
     }
 
     if (error) {
-        return <ErrorComponent message={error.message} />;
+        return <ErrorComponent message={error}/>;
     }
 
     return (

@@ -42,7 +42,7 @@ const MobileSearchModal: React.FC<MobileSearchModalProps> = ({ isOpen, onClose }
                         placeholder="검색어를 입력해 주세요."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        onKeyPress={handleKeyPress}
+                        onKeyDown={handleKeyPress}
                     />
                     <button className={styles.searchButton} onClick={handleSearchClick}>
                         <FontAwesomeIcon icon={faMagnifyingGlass} />

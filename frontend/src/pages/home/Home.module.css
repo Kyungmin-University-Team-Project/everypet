@@ -1,7 +1,15 @@
-.brand__ad {
+.home__top{
     display: flex;
     flex-direction: column;
 
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+}
+
+.brand__ad {
+    display: flex;
+    flex-direction: column;
 
     gap: 100px;
 }

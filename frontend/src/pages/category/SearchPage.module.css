@@ -1,11 +1,9 @@
-/* SearchPage.module.css */
-
 .container {
     display: flex;
     flex-direction: column;
     width: 100%;
-    min-height: 300px;
     align-items: center;
+
 }
 
 .searchWord {
@@ -20,11 +18,19 @@
 
 .inner {
     width: 100%;
-    margin: 40px 0;
 }
 
+.itemList {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+
 /* 노트북 환경 */
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 769px) {
     .container {
         min-height: 400px;
     }
@@ -37,19 +43,4 @@
     .searchWord {
         width: 1100px;
     }
-}
-
-/* 데스크탑 환경 */
-@media screen and (min-width: 1600px) {
-    .inner,
-    .searchWord {
-        width: 1250px;
-    }
-}
-
-.itemList {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
 }

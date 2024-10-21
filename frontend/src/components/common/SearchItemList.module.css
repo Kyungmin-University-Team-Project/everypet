@@ -3,6 +3,8 @@
     width: 100%;
     grid-template-columns: repeat(2, 1fr); /* 기본적으로 2개씩 보여줌 */
     gap: 20px 0;
+
+    margin-bottom: 40px;
 }
 
 .noResultsContainer {

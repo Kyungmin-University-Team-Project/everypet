@@ -120,14 +120,12 @@
 }
 
 .slick-dots {
-    position: absolute;
-    bottom: -30px;
     width: 100%;
     display: flex !important;
     justify-content: center;
-    padding: 0;
-    margin: 0;
     list-style: none;
+
+    padding: 20px 0;
 }
 
 .slick-dots li {
@@ -173,5 +171,5 @@
 
 .slick-dots li.slick-active button:before {
     opacity: 0.75;
-    color: black;
+    color: #5689e7;
 }
