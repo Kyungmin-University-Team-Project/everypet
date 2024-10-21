@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Item from './Item';
 import styles from './SearchItemList.module.css';
 import LoadingSpinner from '../../utils/reactQuery/LoadingSpinner';
 import ErrorComponent from '../../utils/reactQuery/ErrorComponent';
-import { Product } from '../../typings/product';
-import { VscSearchStop } from 'react-icons/vsc';
+import {Product} from '../../typings/product';
+import {VscSearchStop} from 'react-icons/vsc';
 import DropDown from "./DropDown";
 
 interface SearchItemListProps {
@@ -13,7 +13,7 @@ interface SearchItemListProps {
 }
 
 // home에서 보여주는 리스트에선 keyword에 브랜드 명을 넣어주기
-const SearchItemList: React.FC<SearchItemListProps> = ({ searchQuery }) => {
+const SearchItemList: React.FC<SearchItemListProps> = ({searchQuery}) => {
     const [orderBy, setOrderBy] = useState<string>('popularity'); // 기본 정렬 기준
     const [page, setPage] = useState<number>(1); // 기본 페이지
     const [data, setData] = useState<Product[]>([]);
@@ -37,7 +37,7 @@ const SearchItemList: React.FC<SearchItemListProps> = ({ searchQuery }) => {
 
     useEffect(() => {
         fetchItems();
-    }, [page]);
+    }, [searchQuery, page]);
 
     const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setOrderBy(event.target.value);
@@ -49,16 +49,16 @@ const SearchItemList: React.FC<SearchItemListProps> = ({ searchQuery }) => {
     };
 
     if (loading) {
-        return <LoadingSpinner />;
+        return <LoadingSpinner/>;
     }
 
     if (error) {
-        return <ErrorComponent message={error} />;
+        return <ErrorComponent message={error}/>;
     }
 
     return (
         <>
-            <DropDown orderBy={orderBy} handleSortChange={handleSortChange} />
+            <DropDown orderBy={orderBy} handleSortChange={handleSortChange}/>
 
             <div className={`${styles.container} ${data && data.length === 0 ? styles.noResultsContainer : ''}`}>
                 {data && data.length > 0 ? (
@@ -76,7 +76,7 @@ const SearchItemList: React.FC<SearchItemListProps> = ({ searchQuery }) => {
                     ))
                 ) : (
                     <div className={styles.noResults}>
-                        <VscSearchStop className={styles.noResults__icon} />
+                        <VscSearchStop className={styles.noResults__icon}/>
                         <span className={styles.noResults__text}>검색 결과가 없습니다.</span>
                     </div>
                 )}
