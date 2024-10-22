@@ -26,10 +26,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    background-color: #f4f4f4;
     border-radius: 50%;
-    padding: 20px;
+    padding: 5px;
 
     margin-bottom: 10px;
     transition: background-color 0.3s ease;
@@ -40,15 +38,16 @@
 }
 
 .img {
-    max-width: 40px; /* Reduced size for mobile view */
-
+    width: 65px; /* 모든 화면에서 고정 크기 */
+    height: auto; /* 비율 유지 */
 }
 
 
 @media screen and (min-width: 769px) {
     .img {
-        max-width: 50px; /* Original size for desktop */
+        width: 55px;
     }
+
     .quick__nav__item {
         flex: none;
         max-width: none;
