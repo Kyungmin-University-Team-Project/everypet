@@ -62,3 +62,19 @@
     }
 }
 
+@media screen and (min-width: 375px) and (max-width: 768px) {
+    .img {
+        width: 30px;
+    }
+
+
+    .quick__nav {
+        width: 1100px;
+    }
+
+    .img__container {
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+}
+
