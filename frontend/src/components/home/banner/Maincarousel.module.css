@@ -80,7 +80,7 @@
 
     .img {
         width: 100%; /* 이미지 크기를 컨테이너 너비에 맞춤 */
-        object-fit: inherit;
+        object-fit: cover;
     }
 
     .left__arrow {
