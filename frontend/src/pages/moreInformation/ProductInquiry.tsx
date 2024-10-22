@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, {useRef, useState} from 'react';
 import styles from '../moreInformation/productInqulry.module.css';
 
 const ProductInquiry: React.FC = () => {
@@ -37,13 +37,19 @@ const ProductInquiry: React.FC = () => {
                     }
                 }}>
                     <div className={styles.modal_content}>
-                        <div className={styles.modal_close_btn} >
-                            <p >상품문의</p>
-                            <button onClick={() => setModalOpen(false)} >
+                        <div className={styles.modal_close_btn}>
+                            <p>상품문의</p>
+                            <button onClick={() => setModalOpen(false)}>
                                 X
                             </button>
                         </div>
                         <form>
+                            <div>
+                                <label>
+                                    상품 정보
+                                    <input className={styles.modal_input} placeholder='예)수량 5개 주문이 가능한가요?'/>
+                                </label>
+                            </div>
                             <textarea className={styles.modal_textarea}
                                       placeholder="문의하실 내용을 입력하세요"
                                       cols={30}

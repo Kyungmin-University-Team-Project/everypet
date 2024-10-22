@@ -134,6 +134,8 @@
     width: 10px;
     height: 10px;
     margin: 0 5px;
+    opacity: 0.5;
+    bottom: 50px;
     padding: 0;
     cursor: pointer;
 }

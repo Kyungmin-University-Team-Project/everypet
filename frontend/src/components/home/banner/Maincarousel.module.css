@@ -2,8 +2,6 @@
 .container {
     position: relative;
     width: 100%;
-    height: 100%;
-
 }
 
 .item {
@@ -13,8 +11,8 @@
 .img {
     display: flex;
     margin: auto;
-    width: 100%; /* 이미지 크기를 컨테이너 너비에 맞춤 */
-    height: auto; /* 높이는 자동으로 조정 */
+    height: 340px;
+    object-fit: cover;
 }
 
 .controls {
@@ -35,20 +33,27 @@
     border: none;
     cursor: pointer;
     color: white;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
     padding: 10px;
-    opacity: 0;
-    transition: opacity 0.3s;
+    background-color: transparent;
 }
 
 .left__arrow {
-    margin-left: 10px;
+    max-width: 150px;
+    margin-left: 30rem; /* 오른쪽에 간격 추가 */
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: opacity 0.3s;
 }
 
 .right__arrow {
-    margin-right: 10px;
+    max-width: 150px;
+    margin-right: 30rem; /* 왼쪽에 간격 추가 */
+    padding: 10px;
+    cursor: pointer;
+    transition: opacity 0.3s;
 }
+
 
 .container:hover .left__arrow,
 .container:hover .right__arrow {
@@ -57,12 +62,13 @@
 
 .left__arrow:hover,
 .right__arrow:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    opacity: 1;
 }
 
 
 /* 노트북 환경에 적용 */
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 769px) and (max-width: 1023px) {
     .left__arrow,
     .right__arrow {
         display: block;
@@ -74,6 +80,83 @@
 
     .img {
         width: 100%; /* 이미지 크기를 컨테이너 너비에 맞춤 */
-        height: 330px /* 높이는 자동으로 조정 */
+        object-fit: cover;
+    }
+
+    .left__arrow {
+        max-width: 300px;
+        margin-left: 30rem; /* 오른쪽에 간격 추가 */
+        cursor: pointer;
+        transition: opacity 0.3s;
+
+    }
+
+    .right__arrow {
+        max-width: 300px;
+        margin-right: 30rem; /* 왼쪽에 간격 추가 */
+        cursor: pointer;
+        transition: opacity 0.3s;
+    }
+}
+
+@media screen and (min-width: 368px) {
+    .left__arrow,
+    .right__arrow {
+        display: block;
+    }
+
+    .container {
+        height: 400px; /* 높이를 노트북 환경에 맞춰 조정 */
+    }
+
+    .img {
+        width: 100%; /* 이미지 크기를 컨테이너 너비에 맞춤 */
+        object-fit: inherit;
+    }
+
+    .left__arrow {
+        max-width: 300px;
+        margin-left: 1rem; /* 오른쪽에 간격 추가 */
+        cursor: pointer;
+        transition: opacity 0.3s;
+
+    }
+
+    .right__arrow {
+        max-width: 300px;
+        margin-right: 1rem; /* 왼쪽에 간격 추가 */
+        cursor: pointer;
+        transition: opacity 0.3s;
+    }
+}
+
+@media screen and (min-width: 1024px)  and (max-width: 1279px) {
+    .left__arrow,
+    .right__arrow {
+        display: block;
+    }
+
+    .container {
+        height: 400px; /* 높이를 노트북 환경에 맞춰 조정 */
+    }
+
+    .img {
+        width: 100%; /* 이미지 크기를 컨테이너 너비에 맞춤 */
+        object-fit: cover;
+    }
+
+    .left__arrow {
+        max-width: 300px;
+        margin-left: 1rem; /* 오른쪽에 간격 추가 */
+        cursor: pointer;
+        transition: opacity 0.3s;
+
+    }
+
+    .right__arrow {
+        max-width: 300px;
+        margin-right: 1rem; /* 왼쪽에 간격 추가 */
+        cursor: pointer;
+        transition: opacity 0.3s;
     }
 }
