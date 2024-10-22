@@ -136,15 +136,15 @@
 }
 
 .category__content.active .category__title {
-    color: #4a8cf0; /* 활성화된 카테고리의 제목 색상 */
+    color: #4a8cf0;
 }
 
 .category__content.active .ul__line {
-    height: 100%; /* 활성화된 카테고리의 세로선 전체 높이 */
+    height: 100%;
 }
 
 .category__content.active .ul__line__bg {
-    background-color: #4a8cf0; /* 활성화된 카테고리의 세로선 색상 */
+    background-color: #4a8cf0;
 }
 
 .category ul li.active {
@@ -152,8 +152,8 @@
     font-size: 18px;
 }
 
-@media screen and (min-width: 1600px) {
+@media screen and (min-width: 769px) {
     .categories__container {
-        gap: 150px;
+        gap: 110px;
     }
 }

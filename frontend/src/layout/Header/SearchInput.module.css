@@ -1,4 +1,3 @@
-/* 기본 스타일 - 모바일 환경에 적용 */
 .search__container {
     display: flex;
     width: 100%;
@@ -6,7 +5,7 @@
     font-size: 16px;
     border: solid 2px #4a8cf0;
     border-radius: 20px;
-    padding: 0 10px;
+    padding: 0 15px;
 }
 
 .search__input {
@@ -16,8 +15,6 @@
     outline: none;
 
     font-size: 14px; /* 폰트 크기 조정 */
-    border-radius: 20px; /* 둥근 모서리 */
-
 }
 
 .search__input::placeholder {
@@ -43,9 +40,10 @@
         width: 40%;
         height: 40px; /* 높이 복원 */
         border-radius: 20px;
+
+        background-color: #28a745;
     }
 
-    /*웹에서만 적용*/
     .search__container__write {
         display: flex;
         position: relative; /* 상대 위치 지정 */
@@ -53,32 +51,31 @@
         height: 40px; /* 높이 복원 */
 
         font-size: 16px;
-        padding: 0;
+        padding: 0 15px;
 
         border-radius: 10px 10px 0 0;
         box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
     }
 
     .search__input {
-
         font-size: 16px; /* 폰트 크기 복원 */
     }
 
     .historyContainer {
         width: 100%;
-        background-color: white;
-        border-top: none;
+        background-color: #ffffff;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         position: absolute;
         top: 100%;
         z-index: 1000;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
+
     }
 
     .historyList {
         list-style: none;
-        padding: 0 20px;
+        padding: 0 25px;
 
     }
 
