@@ -21,6 +21,7 @@
     box-shadow: 1px 4px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
 }
+
 .modal_close_btn {
     display: flex;
     justify-content: space-between;
@@ -44,8 +45,9 @@
 .modal_content {
     background-color: #ffffff;
     width: 500px;
-    height: 700px;
+    height: 750px;
     padding: 15px;
+    border-radius: 1rem;
 }
 
 .modal_textarea {
@@ -56,6 +58,16 @@
     resize: none;
     box-sizing: border-box;
     margin-top: 1rem;
+}
+
+.modal_input {
+    width: 100%;
+    margin-top: 10px;
+    height: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    box-sizing: border-box;
 }
 
 .modal_form_btn {
@@ -69,7 +81,6 @@
     cursor: pointer;
     border: none;
     outline: none;
-    box-shadow: 1px 4px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
 
 }

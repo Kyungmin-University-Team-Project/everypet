@@ -12,7 +12,7 @@ interface Category {
 
 const categories: Category[] = [
     {name: '기획전', image: require('../../../assets/img/quicknav/Exhibitions.png'), link: '/exhibitions'},
-    {name: '타임딜', image: require('../../../assets/img/quicknav/imminent.png'), link: '/timeDeal'},
+    {name: '타임딜', image: require('../../../assets/img/quicknav/imminent.gif'), link: '/timeDeal'},
     {name: '강아지', image: require('../../../assets/img/quicknav/dog.png'), link: '/dog'},
     {name: '고양이', image: require('../../../assets/img/quicknav/cat.png'), link: '/cat'},
     {name: '설치류', image: require('../../../assets/img/quicknav/hamster.png'), link: '/rat'},
