@@ -14,5 +14,13 @@ public interface OrderDetailMapper {
     int updateReviewStatusToY(Long orderDetailId);
     int updateReviewStatusToN(Long reviewId);
 
+    // 판매자 체크
+    int checkSeller(Map<String, Object> map);
+
+    // 운송장 번호 업데이트
+    int updateTrackingNumber(Map<String, Object> map);
+
+
+
 
 }

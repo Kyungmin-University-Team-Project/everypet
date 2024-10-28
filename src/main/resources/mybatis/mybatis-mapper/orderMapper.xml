@@ -15,7 +15,7 @@
     </insert>
 
     <!-- 자신이 주문한 주문 리스트 조회 -->
-    <select id="selectOrderListByMember" resultType="MyOrderListDTO" parameterType="String">
+    <select id="selectOrderListByMember" resultType="MyOrderListDTO" parameterType="Map">
         SELECT
             o.ORDER_ID,
             o.ORDER_DATE,
@@ -29,7 +29,8 @@
             od.DISCOUNT_RATE,
             p.PRODUCT_NAME,
             p.PRODUCT_IMG,
-            p.PRODUCT_CATEGORY,
+            p.PRODUCT_MAIN_CATEGORY,
+            p.PRODUCT_SUB_CATEGORY,
             -- 리뷰 작성 여부
             od.REVIEW_STATUS_YN
         FROM
