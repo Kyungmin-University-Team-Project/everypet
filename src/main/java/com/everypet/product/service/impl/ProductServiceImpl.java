@@ -204,6 +204,21 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
+    @Override
+    public List<ProductListDTO> selectProductBrandList(String brand, String orderBy, int page, int pageSize) {
+
+        // 페이지 번호와 페이지 크기를 이용하여 페이지의 시작 인덱스를 계산
+        int pageStart = (page - 1) * pageSize;
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("brand", brand);
+        params.put("orderBy", convertOrderByKeywordToQuery(orderBy));
+        params.put("pageStart", pageStart);
+        params.put("pageSize", pageSize);
+
+        return productMapper.selectProductListByBrand(params);
+    }
+
     // 상품 권한 확인
     public void validateProductDeletionPermission(String productId, String memberId) {
         String selectMemberId = productMapper.selectMemberIdByProductId(productId);

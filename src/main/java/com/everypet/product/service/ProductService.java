@@ -30,4 +30,6 @@ public interface ProductService {
 
     void deleteProductKeyword(ProductKeywordDTO deleteProductKeywordDTO, String memberId);
 
+    // 상품 브랜드 리스트 조회
+    List<ProductListDTO> selectProductBrandList(String brand, String orderBy, int page, int pageSize);
 }
