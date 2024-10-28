@@ -58,7 +58,7 @@ public class ProductController {
             "대분류 : dog, cat, bird\n소분류 : all, snack, sand, feed, cage, health, toy, restroom\n" +
             "정렬 : popularity(인기순), sales_high(판매량 높은 순), sales_low(판매량 낮은 순), price_high(가격 높은 순), price_low(가격 낮은 순), latest(최신순), oldest(오래된순)")
     @GetMapping("/list/{productMainCategory}/{productSubCategory}/{orderBy}/{page}/{pageSize}")
-    public ResponseEntity<List<ProductListDTO>> selectProduct(
+    public ResponseEntity<List<ProductListDTO>> selectProductCategory(
             @PathVariable String orderBy,
             @PathVariable int page,
             @PathVariable int pageSize,
@@ -67,6 +67,21 @@ public class ProductController {
         try {
 
             return ResponseEntity.ok().body(productService.selectProductList(productMainCategory, productSubCategory, orderBy, page, pageSize));
+        }catch (RuntimeException e){
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+    @ApiOperation(value = "브랜드 별 상품 리스트 출력", notes = "브랜드, 정렬 기준, 페이지 번호, 페이지 사이즈를 경로로 받아서 상품 리스트를 출력합니다.\n" +
+            "정렬 : popularity(인기순), sales_high(판매량 높은 순), sales_low(판매량 낮은 순), price_high(가격 높은 순), price_low(가격 낮은 순), latest(최신순), oldest(오래된순)")
+    @GetMapping("/list/{brand}/{orderBy}/{page}/{pageSize}")
+    public ResponseEntity<List<ProductListDTO>> selectProductBrand(
+            @PathVariable String orderBy,
+            @PathVariable int page,
+            @PathVariable int pageSize,
+            @PathVariable String brand){
+        try {
+            return ResponseEntity.ok().body(productService.selectProductBrandList(brand, orderBy, page, pageSize));
         }catch (RuntimeException e){
             return ResponseEntity.badRequest().body(null);
         }

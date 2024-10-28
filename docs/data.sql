@@ -141,6 +141,7 @@ CREATE TABLE TBL_ORDER_DETAIL
     PRODUCT_PRICE            INT NOT NULL,                           -- 상품 가격
     QUANTITY                 INT NOT NULL,                           -- 구매 수량
     DISCOUNT_RATE            INT NOT NULL DEFAULT 0,                 -- 할인율
+    TRACKING_NUMBER          VARCHAR(50) DEFAULT NULL,               -- 운송장 번호
     REVIEW_STATUS_YN            VARCHAR(1) DEFAULT 'N',                 -- 리뷰 작성 여부 (Y/N)
     FOREIGN KEY (ORDER_ID) REFERENCES TBL_ORDER(ORDER_ID),           -- 주문 ID 외래 키
     FOREIGN KEY (PRODUCT_ID) REFERENCES TBL_PRODUCT(PRODUCT_ID)      -- 상품 ID 외래 키

@@ -53,7 +53,7 @@ public class OrderController {
     // 주문 조회
     @ApiOperation(value = "주문 조회", notes = "주문을 조회합니다.")
     @PostMapping("/select")
-    public ResponseEntity<Order> selectOrder(String orderId) {
+    public ResponseEntity<Order> selectOrder(@RequestBody String orderId) {
         try {
             return ResponseEntity.ok().body(orderService.selectOrder(orderId));
         }catch (RuntimeException e){
@@ -64,17 +64,30 @@ public class OrderController {
     // 자신이 주문한 상품 리스트 조회
     @ApiOperation(value = "자신이 주문한 주문 리스트 조회", notes = "토큰, page, pageSize를 받아서 자신이 주문한 주문 리스트를 최신순으로 조회합니다.")
     @PostMapping("/list/my")
-    public ResponseEntity<List<OrderDTO.MyOrderListDTO>> getMyOrderList(@RequestBody int page,@RequestBody int pageSize) {
+    public ResponseEntity<List<OrderDTO.MyOrderListDTO>> getMyOrderList(@RequestBody OrderDTO.GetMyOrderListDTO request) {
         try {
             String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
 
             // 페이지 시작점 계산
-            int pageStart = (page - 1) * pageSize;
+            int pageStart = (request.getPage() - 1) * request.getPageSize();
 
-            return ResponseEntity.ok().body(orderService.getMyOrderList(memberId, pageStart, pageSize));
+            return ResponseEntity.ok().body(orderService.getMyOrderList(memberId, pageStart, request.getPageSize()));
         }catch (RuntimeException e){
+            System.out.println("에러" + e.getMessage());
             return ResponseEntity.badRequest().body(null);
         }
+    }
 
+    // 운송장 번호 추가
+    @ApiOperation(value = "운송장 번호 추가", notes = "토큰(판매자 토큰), orderDetailId, trackingNumber(운송장 번호)를 받아서 운송장 번호를 추가합니다.")
+    @PostMapping("/update/tracking-number")
+    public ResponseEntity<String> updateTrackingNumber(@RequestBody OrderDTO.UpdateTrackingNumberDTO request) {
+        try {
+            String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
+            orderService.updateTrackingNumber(memberId, request.getOrderDetailId(), request.getTrackingNumber());
+            return ResponseEntity.ok().body("운송장 번호 추가 완료");
+        }catch (RuntimeException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

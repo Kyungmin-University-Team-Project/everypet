@@ -16,4 +16,6 @@ public interface OrderService {
     void updateOrderStatus(String orderId, String status);
 
     List<OrderDTO.MyOrderListDTO> getMyOrderList(String memberId, int pageStart, int pageSize);
+
+    void updateTrackingNumber(String memberId, int orderDetailId, int trackingNumber);
 }
