@@ -61,6 +61,18 @@ public class OrderController {
         }
     }
 
+    // 주문 조회
+    @ApiOperation(value = "주문 상세 조회", notes = "orderDetailId를 보내면 주문을 상세 조회합니다.")
+    @PostMapping("/detail/select")
+    public ResponseEntity<OrderDTO.OrderDetailDTO> selectOrderDetail(@RequestBody OrderDTO.OrderDetailId orderDetailId) {
+        try {
+            return ResponseEntity.ok().body(orderService.getOrderDetail(orderDetailId));
+        }catch (RuntimeException e){
+            System.out.println("에러" + e.getMessage());
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
     // 자신이 주문한 상품 리스트 조회
     @ApiOperation(value = "자신이 주문한 주문 리스트 조회", notes = "토큰, page, pageSize를 받아서 자신이 주문한 주문 리스트를 최신순으로 조회합니다.")
     @PostMapping("/list/my")

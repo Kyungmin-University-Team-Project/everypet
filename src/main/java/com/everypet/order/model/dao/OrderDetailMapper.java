@@ -1,5 +1,6 @@
 package com.everypet.order.model.dao;
 
+import com.everypet.order.model.dto.OrderDTO;
 import com.everypet.order.model.vo.OrderDetail;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -19,6 +20,9 @@ public interface OrderDetailMapper {
 
     // 운송장 번호 업데이트
     int updateTrackingNumber(Map<String, Object> map);
+
+    // 주문 디테일 정보 검색
+    OrderDTO.OrderDetailDTO getOrderDetailByOrderDetailId(Long orderDetailId);
 
 
 

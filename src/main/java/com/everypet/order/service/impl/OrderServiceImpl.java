@@ -139,5 +139,10 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    @Override
+    public OrderDTO.OrderDetailDTO getOrderDetail(OrderDTO.OrderDetailId orderDetailId) {
+        return orderDetailMapper.getOrderDetailByOrderDetailId(orderDetailId.getOrderDetailId());
+    }
+
 
 }
