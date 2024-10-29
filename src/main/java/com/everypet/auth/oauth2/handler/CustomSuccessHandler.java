@@ -4,6 +4,7 @@ import com.everypet.auth.oauth2.data.dto.CustomOAuth2User;
 import com.everypet.global.util.CookieManager;
 import com.everypet.auth.jwt.TokenExpirationTime;
 import com.everypet.auth.jwt.JWTManager;
+import com.everypet.global.util.IpUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -47,8 +48,11 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String access = jwtManager.createJwt("access", username, roles, accessTime);
         String refresh = jwtManager.createJwt("refresh", username, roles, refreshTime);
 
+        // 로컬 IP 가져오기
+        String ip = IpUtil.getClientIpAddress(request);
+
         // Refresh token 저장
-        jwtManager.addRefreshToken(username, refresh, refreshTime);
+        jwtManager.addRefreshToken(username, refresh, refreshTime, ip);
 
         response.setHeader("access", access);
         response.addCookie(cookieManager.createCookie("refresh", refresh));
