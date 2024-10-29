@@ -132,7 +132,6 @@ CREATE TABLE TBL_ORDER
     FOREIGN KEY (MEMBER_ID) REFERENCES TBL_MEMBER(MEMBER_ID)             -- 회원 ID 외래 키
 );
 
-
 CREATE TABLE TBL_ORDER_DETAIL
 (
     ORDER_DETAIL_ID          BIGINT AUTO_INCREMENT PRIMARY KEY,      -- 주문 상세 ID
@@ -142,6 +141,7 @@ CREATE TABLE TBL_ORDER_DETAIL
     QUANTITY                 INT NOT NULL,                           -- 구매 수량
     DISCOUNT_RATE            INT NOT NULL DEFAULT 0,                 -- 할인율
     TRACKING_NUMBER          VARCHAR(50) DEFAULT NULL,               -- 운송장 번호
+    PARCEL_COMPANY           VARCHAR(50) DEFAULT NULL,               -- 택배사
     REVIEW_STATUS_YN            VARCHAR(1) DEFAULT 'N',                 -- 리뷰 작성 여부 (Y/N)
     FOREIGN KEY (ORDER_ID) REFERENCES TBL_ORDER(ORDER_ID),           -- 주문 ID 외래 키
     FOREIGN KEY (PRODUCT_ID) REFERENCES TBL_PRODUCT(PRODUCT_ID)      -- 상품 ID 외래 키
