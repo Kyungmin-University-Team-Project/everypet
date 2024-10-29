@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.everypet.support.model.dao.SellerInquiryMapper">
+    
+    <insert id="insertSellInquiry" parameterType="InsertSellInquiry">
+        INSERT INTO TBL_SELLER_INQUIRY (MEMBER_ID, PRODUCT_ID, INQUIRY_TITLE, INQUIRY_CONTENTS)
+        VALUES (#{memberId}, #{productId}, #{title}, #{content})
+    </insert>
+
+    <select id="selectSellInquiryList" parameterType="PageableList" resultType="SellerInquiry">
+        SELECT * FROM TBL_SELLER_INQUIRY
+        WHERE PRODUCT_ID = #{data}
+        <foreach collection="pageable.sort.orders" item="order" separator=",">
+            ORDER BY ${order.property} ${order.direction}
+        </foreach>
+        LIMIT ${pageable.offset}, ${pageable.pageSize}
+    </select>
+
+</mapper>
