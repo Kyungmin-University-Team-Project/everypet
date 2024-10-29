@@ -147,6 +147,43 @@
         WHERE p.PRODUCT_ID = #{productId} -- 상품 ID로 조회
     </select>
 
+    <!--    상품 상세 조회   -->
+    <select id="selectProductListByBrand" resultType="ProductListDTO" parameterType="map">
+        SELECT
+            p.PRODUCT_ID,
+            p.MEMBER_ID,
+            m.NAME AS name, -- 판매자 이름
+            p.PRODUCT_NAME,
+            p.PRODUCT_IMG,
+            p.PRODUCT_DESCRIPTION_IMG,
+            p.PRODUCT_PRICE,
+            p.PRODUCT_DISCOUNT_RATE,
+            p.PRODUCT_REGISTRATION_DATE,
+            p.PRODUCT_VIEWS,
+            p.PRODUCT_MAIN_CATEGORY,
+            p.PRODUCT_SUB_CATEGORY,
+            p.NUMBER_OF_PRODUCT,
+            p.PRODUCT_SALES_STATUS_YN,
+            -- 리뷰 평점 평균
+            (SELECT IFNULL(AVG(r.PRODUCT_RATING), 0)
+             FROM TBL_REVIEW r
+             WHERE r.PRODUCT_ID = p.PRODUCT_ID) AS productRatingAvg,
+            -- 리뷰 개수
+            (SELECT COUNT(r.REVIEW_ID)
+             FROM TBL_REVIEW r
+             WHERE r.PRODUCT_ID = p.PRODUCT_ID) AS reviewCount,
+            -- 상품 판매량 합계
+            (SELECT IFNULL(SUM(od.QUANTITY), 0)
+             FROM TBL_ORDER_DETAIL od
+             WHERE od.PRODUCT_ID = p.PRODUCT_ID) AS salesCount
+        FROM TBL_PRODUCT p
+                 LEFT JOIN TBL_MEMBER m ON p.MEMBER_ID = m.MEMBER_ID -- 판매자 이름 조회를 위한 조인
+        WHERE p.PRODUCT_SALES_STATUS_YN = 'Y'
+          AND m.NAME = #{brand}  -- 브랜드 이름 필터 추가
+        ORDER BY ${orderBy}
+            LIMIT #{pageStart}, #{pageSize}
+    </select>
+
 
 
     <!--    상품 관리자 검색(권한 검색)   -->

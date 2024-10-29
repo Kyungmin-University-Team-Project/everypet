@@ -43,4 +43,19 @@
         WHERE r.REVIEW_ID = #{reviewId}
     </update>
 
+    <!-- 판매자 확인 쿼리 -->
+    <select id="checkSeller" resultType="int" parameterType="Map">
+        SELECT COUNT(*)
+        FROM TBL_PRODUCT p
+                 JOIN TBL_ORDER_DETAIL od ON p.PRODUCT_ID = od.PRODUCT_ID
+        WHERE p.MEMBER_ID = #{memberId}
+          AND od.ORDER_DETAIL_ID = #{orderDetailId};
+    </select>
+
+    <!-- 운송장 번호 업데이트 쿼리 -->
+    <update id="updateTrackingNumber" parameterType="Map">
+        UPDATE TBL_ORDER_DETAIL
+        SET TRACKING_NUMBER = #{trackingNumber}
+        WHERE ORDER_DETAIL_ID = #{orderDetailId};
+    </update>
 </mapper>
