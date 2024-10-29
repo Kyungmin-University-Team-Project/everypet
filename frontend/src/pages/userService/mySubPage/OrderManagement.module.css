@@ -32,6 +32,7 @@
 
 .orderDate {
     padding-bottom: 10px;
+    font-size: 1.2rem;
     border-bottom: 1px solid black;
 }
 
@@ -69,9 +70,6 @@
     color: #333;
 }
 
-.deliveryDate {
-    color: green;
-}
 
 .productInfo {
     display: flex;
@@ -80,6 +78,8 @@
 
 .productImage {
     margin-right: 10px;
+    width: 100px;
+    height: 100px;
 }
 
 .productText {
@@ -102,8 +102,27 @@
 
 .buttonGroup {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.option_btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.option_btn button {
+    padding: 8px;
+    outline: none;
+    background-color: white;
+    border: 1px solid #8f8f8f;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .actionButton,
@@ -169,6 +188,8 @@
 
     .productImage {
         margin-bottom: 10px;
+        width: 100px;
+        height: 100px;
     }
 
     .buttonGroup {
@@ -189,6 +210,7 @@
     .orderItem {
         padding: 15px;
     }
+
 
     .orderHeader {
         font-size: 14px;
