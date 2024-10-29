@@ -27,6 +27,18 @@ code {
   src: url('./assets/font/Pretendard-Regular.woff') format('truetype');
 }
 
+@font-face {
+  font-family: 'pretendard-medium';
+  font-weight: normal;
+  src: url('./assets/font/Pretendard-Medium.woff') format('truetype');
+}
+
+@font-face {
+  font-family: 'SF-Pro';
+  font-weight: normal;
+  src: url('./assets/font/SF-Pro.ttf') format('truetype');
+}
+
 body {
-  font-family: 'pretendard-regular';
+  font-family: 'SF-Pro', sans-serif;
 }

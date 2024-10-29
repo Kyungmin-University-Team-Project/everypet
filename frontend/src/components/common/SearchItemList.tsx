@@ -12,7 +12,6 @@ interface SearchItemListProps {
     searchQuery: string;
 }
 
-// home에서 보여주는 리스트에선 keyword에 브랜드 명을 넣어주기
 const SearchItemList: React.FC<SearchItemListProps> = ({searchQuery}) => {
     const [orderBy, setOrderBy] = useState<string>('popularity'); // 기본 정렬 기준
     const [page, setPage] = useState<number>(1); // 기본 페이지
@@ -25,7 +24,7 @@ const SearchItemList: React.FC<SearchItemListProps> = ({searchQuery}) => {
         setLoading(true);
         setError(null); // 초기화
         try {
-            const response = await axios.get(`/product/search/${searchQuery}/${orderBy}/${page}/${pageSize}`);
+            const response = await axios.get(`/product/search/${searchQuery}/${orderBy}/${page}/${pageSize}`,{},);
             console.log(response)
             setData(response.data);
         } catch (err) {

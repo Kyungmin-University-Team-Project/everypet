@@ -42,8 +42,10 @@
     height: auto; /* 비율 유지 */
 }
 
-
 @media screen and (min-width: 769px) {
+    .quick__nav__container{
+        height: 200px;
+    }
     .img {
         width: 38px;
     }
