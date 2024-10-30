@@ -357,6 +357,13 @@
             <version>1.9.6</version>
         </dependency>
 
+        <!-- pageable 사용 하기 위해 -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+            <version>2.3.9.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
     <build>
