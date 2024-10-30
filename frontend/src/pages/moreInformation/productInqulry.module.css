@@ -1,3 +1,7 @@
+p {
+    padding: 0;
+    margin: 0;
+}
 .btn_wrapper {
     display: flex;
     justify-content: space-between;
@@ -8,10 +12,14 @@
     font-weight: bold;
 }
 
+.modal_close_box {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .modal_open_button {
     text-align: center;
     width: 10%;
-    border-radius: 5px;
     color: white;
     height: 2.5rem;
     background-color: #5a99fa;
@@ -45,9 +53,9 @@
 .modal_content {
     background-color: #ffffff;
     width: 500px;
-    height: 750px;
+    height: 550px;
     padding: 15px;
-    border-radius: 1rem;
+    border-radius: 4px;
 }
 
 .modal_textarea {
@@ -57,7 +65,7 @@
     border-radius: 4px;
     resize: none;
     box-sizing: border-box;
-    margin-top: 1rem;
+    margin-top: 10px;
 }
 
 .modal_input {
@@ -73,11 +81,11 @@
 .modal_form_btn {
     text-align: center;
     width: 100%;
-    margin-top: 1rem;
+    margin-top: 10px;
     border-radius: 5px;
     color: white;
-    height: 2.5rem;
-    background-color: #5a99fa;
+    padding: 1rem;
+    background-color: black;
     cursor: pointer;
     border: none;
     outline: none;
@@ -95,6 +103,52 @@
     font-size: 14px;
     color: #8f8f8f;
 }
+
+.form_textMain {
+    margin-top: 10px;
+}
+
+.form_star {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #ff8a00;
+}
+
+.form_starText {
+    color: black;
+    font-size: 14px;
+}
+
+
+.character_count {
+    margin-bottom: 10px;
+}
+
+.file_box {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.file_box div {
+    margin-top: 10px;
+}
+
+.file_box input {
+    width: 98%;
+    outline: none;
+    border: 1px solid #cccccc;
+}
+
+.file_box-text {
+    font-size: 14px;
+}
+
+.form_text {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
 
 ul {
     padding: 0;
