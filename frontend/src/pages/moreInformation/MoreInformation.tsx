@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Link, Outlet, useLocation} from 'react-router-dom';
+import {Outlet, useLocation} from 'react-router-dom';
 import {FaAngleRight} from 'react-icons/fa';
 import {IoIosInformationCircleOutline} from 'react-icons/io';
 import styles from './moreInformation.module.css';
@@ -7,6 +7,7 @@ import Review from "./review";
 import ProductInquiry from "./ProductInquiry";
 import SellerInformation from "./SellerInformation";
 import axios from "axios";
+import {addToCart} from "../../utils/product/cart";
 
 //  productRatingAvg 별점
 //  productViews 클릭 수
@@ -88,6 +89,13 @@ const MoreInformation: React.FC = () => {
         }
     }
 
+    const handleOnClick = async () => {
+        if (!productList?.productId) {
+            return;
+        }
+        await addToCart(productList.productId, number);
+    };
+
 
     useEffect(() => {
         const salePrice = () => {
@@ -148,13 +156,8 @@ const MoreInformation: React.FC = () => {
                                            value={number} onChange={handleNumberOfProduct}/>
                                     <button className={styles.increment} onClick={handlePlus}>+</button>
                                 </div>
-                                <Link to='/cart'
-                                      state={{productList, finalPrice}}>
-                                    <button className={styles.cart_button}>장바구니</button>
-                                </Link>
-                                <Link to='/cart'>
-                                    <button className={styles.purchase_button}>구매하기</button>
-                                </Link>
+                                <button onClick={handleOnClick} className={styles.cart_button}>장바구니</button>
+                                <button onClick={handleOnClick} className={styles.purchase_button}>구매하기</button>
                             </div>
                         </div>
                     </div>

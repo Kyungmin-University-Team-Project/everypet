@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useLocation, useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {FaTrashAlt} from 'react-icons/fa';
 import styles from './Cart.module.css';
 import {CartItem, deleteCartItem, fetchCartItems} from '../../utils/product/cart';
@@ -15,9 +15,6 @@ const Cart: React.FC = () => {
     const [selectAll, setSelectAll] = useState(false);
     const [deleteTrigger, setDeleteTrigger] = useState(false);
     const [totalPrice, setTotalPrice] = useState(0);
-    const [finalPrices, setFinalPrices] = useState(0);
-    const location = useLocation();
-    const {productList, finalPrice} = location.state || null;
     const navigate = useNavigate();
 
     const loadCartItems = async () => {
@@ -34,8 +31,7 @@ const Cart: React.FC = () => {
 
     useEffect(() => {
         loadCartItems();
-        setFinalPrices(finalPrice)
-    }, [finalPrice]);
+    }, []);
 
     useEffect(() => {
         if (deleteTrigger) {
@@ -44,8 +40,8 @@ const Cart: React.FC = () => {
         }
     }, [deleteTrigger]);
 
-    const formatPrice = (price: number, productListPrice2: number = 0): string => {
-        return price.toLocaleString() + productListPrice2.toLocaleString() + '원';
+    const formatPrice = (price: number) => {
+        return price.toLocaleString() + '원';
     };
 
     const calculateTotalPrice = (items: CartItem[], selected: string[]) => {
@@ -58,7 +54,6 @@ const Cart: React.FC = () => {
                 }, 0);
             const totalPrice = selectedProductPrice + (selectedProductPrice > 0 ? shippingFee : 0);
             setTotalPrice(totalPrice);
-
         }
     };
 
@@ -137,27 +132,6 @@ const Cart: React.FC = () => {
                             />
                         </div>
                     </div>
-                    <article className={styles.article_moreInformation}>
-                        <div className={styles.box_moreInformation}>
-                            <img
-                                src={productList.productImg}
-                                alt={productList.productName}
-                                className={styles.moreInformation_img}
-                            />
-                            <div className={styles.info_container}>
-                                <div className={styles.breadcrumb}>
-                                    <span className={styles.headingText}>{productList.productMainCategory}</span>
-                                    <strong>{productList.productName}</strong>
-                                </div>
-                                <h2>{productList.name}</h2> {/* 특정 속성 사용 */}
-                                <p className={styles.price_original}>{productList.productPrice.toLocaleString()}원</p>
-                                <p className={styles.dynamic_price}>
-                                    <strong className={styles.discount_info}>{productList.productDiscountRate}%</strong>
-                                </p>
-                                {/* 필요한 만큼 더 많은 특정 속성을 추가하세요 */}
-                            </div>
-                        </div>
-                    </article>
                     {cartItems.map((item) => (
                         <div className={styles.item__wrap} key={item.cartId}>
                             <div className={styles.icon__btn}>
@@ -217,7 +191,7 @@ const Cart: React.FC = () => {
 
                         <div className={styles.summaryTotal}>
                             <span>합계:</span>
-                            <span>{formatPrice(totalPrice + finalPrices)}</span>
+                            <span>{formatPrice(totalPrice)}</span>
                         </div>
 
                         <button
