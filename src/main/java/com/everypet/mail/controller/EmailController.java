@@ -1,6 +1,5 @@
 package com.everypet.mail.controller;
 
-import com.everypet.global.util.ResponseEntityUtil;
 import com.everypet.mail.model.dto.EmailMessageDTO;
 import com.everypet.mail.model.dto.VerificationDTO;
 import com.everypet.mail.service.EmailService;
@@ -9,7 +8,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,22 +34,21 @@ public class EmailController {
 
         emailService.sendCode(emailMessageDTO.getTo(), emailMessageDTO.getPurpose(), request);
 
-        return ResponseEntityUtil.response("이메일이 발송되었습니다.", HttpStatus.OK);
+        return ResponseEntity.ok("email send success");
     }
     
     @ApiOperation(value = "코드 인증", notes = "코드를 인증합니다.")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "코드가 일치합니다."),
-            @ApiResponse(code = 400, message = "코드가 일치하지 않습니다.")
+            @ApiResponse(code = 200, message = "true"),
+            @ApiResponse(code = 400, message = "false"),
     })
     @PostMapping("/code/verify")
     public ResponseEntity<Boolean> verifyCode(@RequestBody VerificationDTO verificationDTO, @ApiIgnore HttpServletRequest request) {
 
         if(emailService.verifyCode(verificationDTO, request)) {
-            return ResponseEntityUtil.response(true, HttpStatus.OK);
+            return ResponseEntity.ok(true);
         }
 
-        return ResponseEntityUtil.response(false, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.badRequest().body(false);
     }
-
 }
