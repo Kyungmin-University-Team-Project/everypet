@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {FaTrashAlt} from 'react-icons/fa';
 import styles from './Cart.module.css';
@@ -8,8 +8,8 @@ import {AxiosError} from 'axios';
 
 const shippingFee = 3000;
 
-const Cart: React.FC = () => {
 
+const Cart: React.FC = () => {
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
     const [selectAll, setSelectAll] = useState(false);
@@ -27,6 +27,7 @@ const Cart: React.FC = () => {
             handleAxiosError(error as AxiosError);
         }
     };
+
 
     useEffect(() => {
         loadCartItems();
@@ -87,6 +88,7 @@ const Cart: React.FC = () => {
         setSelectedItems(newSelectedItems);
         calculateTotalPrice(cartItems, newSelectedItems);
     };
+
 
     const handleQuantityChange = (cartId: string, change: number) => {
         const item = cartItems.find(item => item.cartId === cartId);
@@ -186,10 +188,12 @@ const Cart: React.FC = () => {
                             <span>배송비:</span>
                             <span>{formatPrice(shippingFee)}</span>
                         </div>
+
                         <div className={styles.summaryTotal}>
                             <span>합계:</span>
                             <span>{formatPrice(totalPrice)}</span>
                         </div>
+
                         <button
                             className={styles.checkoutButton}
                             onClick={handleCheckout}

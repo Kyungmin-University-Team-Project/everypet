@@ -1,35 +1,62 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './OrderManagement.module.css';
+import axiosInstance from "../../../utils/error/axiosInstance";
 
-const orders = [
-    {
-        orderId: '123456',
-        orderDate: '2024. 8. 23 주문',
-        deliveryStatus: '배송완료',
-        deliveryDate: '오늘(토) 도착 (문앞 전달)',
-        productName: '홀리데이즈 관절건강 미국산 MSM2000, 120정, 1개',
-        imageUrl: '/sam.jpg',
-        price: '9,250 원',
-        quantity: '1개'
-    },
-    {
-        orderId: '654321',
-        orderDate: '2024. 8. 22 주문',
-        deliveryStatus: '배송완료',
-        deliveryDate: '어제(금) 도착',
-        productName: '삼대오백 에너지 통 흑마늘, 500g, 1개',
-        imageUrl: '/sam.jpg',
-        price: '19,900 원',
-        quantity: '1개'
-    }
-];
+interface OrderList {
+    deliveryAmount: number;
+    discountAmount: number;
+    orderDate: string;
+    orderDetailId: number;
+    orderId: string;
+    productAmount: number;
+    productCategory: string;
+    productId: string;
+    productImg: string;
+    productName: string;
+    productPrice: number;
+    quantity: number;
+    reviewStatusYN: string;
+    totalAmount: number;
+}
 
 const OrderManagement = () => {
+    const [orderList, setOrderList] = React.useState<OrderList[]>([]);
+    const [list, setList] = useState(1);
+    //  pageSize 고정
+    const PAGE_SIZE = 5;
+    // page가 몇 번째 페이지인지
+    // pageSize 한 페이지에 몇 개씩 보여줄건지
+    useEffect(() => {
+        const orderList = async (page: number) => {
+            try {
+                const response = await axiosInstance.post('/order/list/my', {
+                    page,
+                    pageSize: PAGE_SIZE,
+                })
+                setOrderList(response.data);
+                console.log(response.data);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        orderList(list)
+    }, [list]);
+
+    const handleOnClickList = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setList(prev => prev + 1);
+    }
+
+    const handleOnClickListMinus = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setList(prev => {
+            if (prev > 1) return prev - 1;
+            return prev;
+        })
+    }
     return (
         <section className={styles.section}>
             <div className={styles.header}>
                 <h3>주문목록</h3>
-                <input placeholder="주문한 상품을 검색할 수 있어요!" className={styles.searchBox} />
+                <input placeholder="주문한 상품을 검색할 수 있어요!" className={styles.searchBox}/>
             </div>
             <div className={styles.filterContainer}>
                 <button className={styles.filterButton}>최근 6개월</button>
@@ -38,21 +65,22 @@ const OrderManagement = () => {
                 <button className={styles.filterButton}>2020</button>
                 <button className={styles.filterButton}>2019</button>
             </div>
-            {orders.map(order => (
-                <div key={order.orderId} className={styles.orderItem}>
-                    <div className={styles.orderHeader}>
-                        <h2 className={styles.orderDate}>{order.orderDate}</h2>
-                    </div>
-                    <div className={styles.orderContent}>
-                        <div className={styles.orderDetails}>
-                            <div className={styles.deliveryStatus}>
-                                <span className={styles.deliveryStatusText}>{order.deliveryStatus}</span> · <span className={styles.deliveryDate}>{order.deliveryDate}</span>
-                            </div>
-                            <div className={styles.productInfo}>
-                                <img src={order.imageUrl} alt="product" className={styles.productImage}/>
-                                <div className={styles.productText}>
-                                    <p className={styles.productName}>{order.productName}</p>
-                                    <p className={styles.price}>{order.price} - {order.quantity}</p>
+            {orderList.length < 5 ? (
+                orderList.map(order => (
+                    <div key={order.orderId} className={styles.orderItem}>
+                        <div className={styles.orderHeader}>
+                            <h2 className={styles.orderDate}>{order.orderDate} 주문</h2>
+                        </div>
+                        <div className={styles.orderContent}>
+                            <div className={styles.orderDetails}>
+                                <div className={styles.productInfo}>
+                                    <div>
+                                        <img src={order.productImg} alt="product" className={styles.productImage}/>
+                                    </div>
+                                    <div>
+                                        <p className={styles.productName}>{order.productName}</p>
+                                        <p className={styles.price}>{order.totalAmount}원 - {order.quantity}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -62,8 +90,18 @@ const OrderManagement = () => {
                             <button className={styles.actionButton}>리뷰 작성하기</button>
                         </div>
                     </div>
-                </div>
-            ))}
+                ))
+            ) : (
+                <p>123</p>
+            )}
+            <div className={styles.option_btn}>
+                <button onClick={handleOnClickListMinus}>
+                    이전
+                </button>
+                <button onClick={handleOnClickList}>
+                    다음
+                </button>
+            </div>
         </section>
     );
 };
