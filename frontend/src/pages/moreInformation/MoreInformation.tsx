@@ -67,6 +67,8 @@ const MoreInformation: React.FC = () => {
         productAsync();
     }, []);
 
+
+
     const handlePlus = (e: React.MouseEvent<HTMLButtonElement>) => {
         setNumberOfProduct(prevState => prevState + 1);
         setFinalPrice(finalPrice + originalPrice)
@@ -179,7 +181,7 @@ const MoreInformation: React.FC = () => {
                         <Review/>
                     </div>
                     <div ref={reviewsRef}>
-                        <ProductInquiry/>
+                        <ProductInquiry productId={productList?.productId ?? null} />
                     </div>
                     <div ref={productInquiryRef}>
                         <SellerInformation/>
