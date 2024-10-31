@@ -1,4 +1,4 @@
-import React, { useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import styles from '../moreInformation/productInqulry.module.css';
 import axiosInstance from "../../utils/error/axiosInstance";
 
@@ -23,7 +23,6 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
     console.log(productId)
 
 
-
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         const {value, name} = e.target;
 
@@ -39,17 +38,12 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
     const handleOnSubmitClick = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
-            const response = axiosInstance.get('/support/seller/inquiry/create', {
-                params: {
-                    ...text
-                }
-            });
+            const response = axiosInstance.post('/support/seller/inquiry', {...text});
             console.log(response)
-        }catch (e) {
+        } catch (e) {
             console.log(e)
         }
     }
-
 
 
     return (
@@ -84,7 +78,8 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
                             <div>
                                 <label>
                                     상품 정보
-                                    <input className={styles.modal_input} placeholder='예)수량 5개 주문이 가능한가요?' name='title' value={text.title} onChange={handleTextChange}/>
+                                    <input className={styles.modal_input} placeholder='예)수량 5개 주문이 가능한가요?' name='title'
+                                           value={text.title} onChange={handleTextChange}/>
                                 </label>
                             </div>
                             <textarea className={styles.modal_textarea}
@@ -97,7 +92,7 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
                                       onChange={handleTextChange}></textarea>
                             <div className={styles.character_count}>/1000</div>
                             <p>문의하신 내용에 대한 답변은 해당 상품의 상세페이지 또는 '쇼핑MY 상품Q&A'에서 확인하실 수 있습니다.</p>
-                            <button  className={styles.modal_form_btn}>
+                            <button className={styles.modal_form_btn}>
                                 das
                             </button>
                         </form>
