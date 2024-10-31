@@ -1,9 +1,11 @@
 package com.everypet.support.service.impl;
 
 import com.everypet.global.util.PageableList;
+import com.everypet.member.exception.MemberIdNotFoundException;
 import com.everypet.member.model.vo.Member;
 import com.everypet.support.model.dao.SellerInquiryMapper;
-import com.everypet.support.model.dto.SellInquirtyDTO.InsertSellInquiry;
+import com.everypet.support.model.dto.SellerInquirtyDTO.InsertSellerInquiry;
+import com.everypet.support.model.dto.SellerInquirtyDTO.UpdateSellerInquiry;
 import com.everypet.support.model.vo.SellerInquiry;
 import com.everypet.support.service.SellerInquiryService;
 import lombok.RequiredArgsConstructor;
@@ -24,16 +26,14 @@ public class SellerInquiryServiceImpl implements SellerInquiryService {
     private final SellerInquiryMapper sellerInquiryMapper;
 
     @Override
-    public void createSellerInquiry(InsertSellInquiry insertSellInquiry, Member member) {
+    public void createSellerInquiry(InsertSellerInquiry insertSellerInquiry, Member member) {
 
         if(member == null) {
-            log.error("로그인이 필요합니다.");
-            // 나중에 수정
-            throw new RuntimeException("로그인이 필요합니다.");
+            throw new MemberIdNotFoundException("로그인이 필요합니다.");
         }
 
-        insertSellInquiry.setMemberId(member.getMemberId());
-        sellerInquiryMapper.insertSellInquiry(insertSellInquiry);
+        insertSellerInquiry.setMemberId(member.getMemberId());
+        sellerInquiryMapper.insertSellerInquiry(insertSellerInquiry);
     }
 
     @Override
@@ -41,11 +41,41 @@ public class SellerInquiryServiceImpl implements SellerInquiryService {
 
         PageableList<?> pageableList = PageableList.of(productId, pageable);
 
-        List<SellerInquiry> inquiries = sellerInquiryMapper.selectSellInquiryList(pageableList);
+        List<SellerInquiry> inquiries = sellerInquiryMapper.selectSellerInquiryList(pageableList);
 
         return new PageImpl<>(inquiries, pageable, inquiries.size());
 
 
+    }
+
+    @Override
+    public Page<SellerInquiry> getAllSellerInquiryList(Pageable pageable) {
+
+        //PageableList<?> pageableList = PageableList.of(null, pageable);
+
+        List<SellerInquiry> inquiries = sellerInquiryMapper.selectAllSellerInquiryList(pageable);
+
+        return new PageImpl<>(inquiries, pageable, inquiries.size());
+    }
+
+    @Override
+    public void deleteSellerInquiry(Long inquiryId, Member member) {
+
+        if(member == null) {
+            throw new MemberIdNotFoundException("로그인이 필요합니다.");
+        }
+
+        sellerInquiryMapper.deleteSellerInquiry(inquiryId, member.getMemberId());
+    }
+
+    @Override
+    public void updateSellerInquiry(Long inquiryId, UpdateSellerInquiry updateSellerInquiry, Member member) {
+
+        if(member == null) {
+            throw new MemberIdNotFoundException("로그인이 필요합니다.");
+        }
+
+        sellerInquiryMapper.updateSellerInquiry(inquiryId, updateSellerInquiry, member.getMemberId());
     }
 
 }

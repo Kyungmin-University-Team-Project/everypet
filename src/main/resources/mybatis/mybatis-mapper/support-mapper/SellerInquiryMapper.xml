@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.everypet.support.model.dao.SellerInquiryMapper">
     
-    <insert id="insertSellInquiry" parameterType="InsertSellInquiry">
+    <insert id="insertSellerInquiry" parameterType="com.everypet.support.model.dto.SellerInquirtyDTO$InsertSellerInquiry">
         INSERT INTO TBL_SELLER_INQUIRY (MEMBER_ID, PRODUCT_ID, INQUIRY_TITLE, INQUIRY_CONTENTS)
         VALUES (#{memberId}, #{productId}, #{title}, #{content})
     </insert>
 
-    <select id="selectSellInquiryList" parameterType="PageableList" resultType="SellerInquiry">
+    <select id="selectSellerInquiryList" parameterType="PageableList" resultType="SellerInquiry">
         SELECT * FROM TBL_SELLER_INQUIRY
         WHERE PRODUCT_ID = #{data}
         <foreach collection="pageable.sort.orders" item="order" separator=",">
@@ -15,5 +15,24 @@
         </foreach>
         LIMIT ${pageable.offset}, ${pageable.pageSize}
     </select>
+
+    <select id="selectAllSellerInquiryList" parameterType="String" resultType="SellerInquiry">
+        SELECT * FROM TBL_SELLER_INQUIRY
+        <foreach collection="sort.orders" item="order" separator=",">
+            ORDER BY ${order.property} ${order.direction}
+        </foreach>
+        LIMIT ${offset}, ${pageSize}
+    </select>
+
+    <delete id="deleteSellerInquiry" parameterType="map">
+        DELETE FROM TBL_SELLER_INQUIRY
+        WHERE SELLER_INQUIRY_ID = #{inquiryId} AND MEMBER_ID = #{memberId}
+    </delete>
+
+    <update id="updateSellerInquiry">
+        UPDATE TBL_SELLER_INQUIRY
+        SET INQUIRY_TITLE = #{updateSellerInquiry.title}, INQUIRY_CONTENTS = #{updateSellerInquiry.content}
+        WHERE SELLER_INQUIRY_ID = #{inquiryId} AND MEMBER_ID = #{memberId}
+    </update>
 
 </mapper>
