@@ -44,7 +44,7 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
     const [currentPage, setCurrentPage] = useState(0);
     // slice 담을 데이터
     const [currentList, setCurrentList] = useState<List[]>([]);
-    const itemsPerPage = 10; // 페이지당 항목 수
+    const itemsPerPage = 12; // 페이지당 항목 수
 
     useEffect(() => {
         const fetchList = async () => {
