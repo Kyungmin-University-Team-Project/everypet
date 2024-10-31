@@ -3,6 +3,7 @@ import styles from '../moreInformation/productInqulry.module.css';
 import axiosInstance from "../../utils/error/axiosInstance";
 import axios from "axios";
 import Pagination from 'react-js-pagination';
+import "./Paging.css"
 
 interface ProductInquiryProps {
     productId: string | null;
@@ -44,7 +45,7 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
     const [currentPage, setCurrentPage] = useState(0);
     // slice 담을 데이터
     const [currentList, setCurrentList] = useState<List[]>([]);
-    const itemsPerPage = 12; // 페이지당 항목 수
+    const itemsPerPage = 10; // 페이지당 항목 수
 
     useEffect(() => {
         const fetchList = async () => {
@@ -68,6 +69,7 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
+    // 페이지 이동
     const handleChangePage = (page: number) => {
         setCurrentPage(page);
     }
@@ -105,17 +107,19 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
         <div>
             <div>
                 {currentList.map((item) => (
-                    <li key={item.sellerInquiryId}>
-                        <p>{item.inquiryDate}</p>
-                        <p>제목: {item.inquiryTitle}</p>
-                        <p>내용: {item.inquiryContents}</p>
-                    </li>
+                    <ul className={styles.seller_box}>
+                        <li key={item.sellerInquiryId} className={styles.seller_box}>
+                            <p className={styles.date}>{item.inquiryDate}</p>
+                            <p className={styles.title}>제목: {item.inquiryTitle}</p>
+                            <p>내용: {item.inquiryContents}</p>
+                        </li>
+                    </ul>
                 ))}
                 <Pagination
                     activePage={currentPage}
                     itemsCountPerPage={itemsPerPage}
                     totalItemsCount={listType.length}
-                    pageRangeDisplayed={5}
+                    pageRangeDisplayed={10}
                     prevPageText={"<"}
                     nextPageText={">"}
                     onChange={handleChangePage}
