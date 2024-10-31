@@ -1,7 +1,14 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {JSX, useEffect, useRef, useState} from 'react';
 import axiosInstance from "../../utils/error/axiosInstance";
-import {ProductDetails} from "./SaleInformation";
 import styles from "./productInqulry.module.css";
+import {FaRegStar, FaStar} from "react-icons/fa";
+
+// 1. 리뷰 상세
+// 2. 리뷰 한줄
+// 3. 상세주문 아이디
+// 4.상품아이디
+// 5. 별점
+// 6. 리뷰 이미지
 
 interface insertReview {
     detailedProductReviewContents: string
@@ -12,10 +19,18 @@ interface insertReview {
     productReviewImages: string
 }
 
+
 const Review = () => {
-    const [data, setData] = useState<ProductDetails[]>([]);
+    const [data, setData] = useState<insertReview[]>([]);
     const [trueAnFalse, setTrueAnFalse] = useState<boolean>(false);
     const modalBackground = useRef<HTMLDivElement>(null);
+    const [star, setStar] = useState<JSX.Element[]>([]);
+    const [rating, setRating] = useState<number>(0);
+    const [text, setText] = useState("");
+    const [oneLine, setOneLine] = useState<string>("");
+    const MAX_CHARS = 500;
+    const ONE_MAX_CHARS = 30;
+
     useEffect(() => {
         const handleInsertOnClick = async () => {
             try {
@@ -31,6 +46,41 @@ const Review = () => {
         setTrueAnFalse(prev => !prev);
     }
 
+    useEffect(() => {
+        const stars: JSX.Element[] = [];
+        for (let i = 1; i <= 5; i++) {
+            stars.push(
+                <span onClick={() => handleOnStarClick(i)} >
+                    {i < rating ? <FaStar/>: <FaRegStar/>}
+                </span>
+            )
+        }
+        setStar(stars);
+    }, [rating]);
+
+    const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const value = e.target.value;
+        if (value.length <=MAX_CHARS) {
+            setText(value)
+        }
+    }
+
+    const handleOneTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        if (value.length <= ONE_MAX_CHARS) {
+            setOneLine(value)
+        }
+    }
+
+    const handleOnStarClick = (index: number) => {
+        setRating(index + 1)
+    }
+
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+    }
+
 
     return (
         <div>
@@ -43,36 +93,43 @@ const Review = () => {
                 }}>
                     <div className={styles.modal_content}>
                         <div className={styles.modal_close_btn}>
-                            <p>상품문의</p>
+                            <div className={styles.modal_close_box}>
+                                <p>상품 품질 리뷰</p>
+                            </div>
                             <button onClick={() => setTrueAnFalse(false)}>
                                 X
                             </button>
                         </div>
-                        <form>
+                        <form onSubmit={handleSubmit}>
+                            <p className={styles.form_textMain}>상세리뷰</p>
                             <textarea className={styles.modal_textarea}
                                       placeholder="문의하실 내용을 입력하세요"
                                       cols={30}
                                       rows={5}
-                                      maxLength={1000}
+                                      maxLength={500}
+                                      onChange={handleTextChange}
                             ></textarea>
-                            <div className={styles.character_count}>/1000</div>
-                            <p>문의하신 내용에 대한 답변은 해당 상품의 상세페이지 또는 '쇼핑MY 상품Q&A'에서 확인하실 수 있습니다.</p>
-                            <button onClick={handleModal} className={styles.modal_form_btn}>
-                                취소하기
-                            </button>
-                            <div>
-                                <p className={styles.modal_form_text}>상품 Q&A 작성 유의사항</p>
-                                <div className={styles.modal_form_qa}>
-                                    <p>* 개인정보(주민번호, 연락처, 주소, 계좌번호, 카드번호 등)가 포함되지 않도록 유의해주세요.</p>
-                                    <p>상품 Q&A는 상품 및 상품 구매 과정(배송, 반품/취소, 교환/변경)에 대해 판매자에게 문의하는 ​게시판입니다.</p>
-                                    <p>상품 및 상품 구매 과정과 관련 없는 비방/욕설/명예훼손성 게시글 및 상품과 관련 없는 광고글 등 부적절한 게시글 등록 시 글쓰기 제한 및
-                                        게시글이 삭제
-                                        조치
-                                        될 수 있습니다</p>
-                                    <p>전화번호, 이메일 등 개인 정보가 포함된 글 작성이 필요한 경우 판매자만 볼 수 있도록 비밀글로 문의해 주시기 바랍니다.</p>
-                                    <p>상품에 대한 이용 후기는 리뷰에 남겨 주세요.</p>
-                                </div>
+                            <div className={styles.character_count}>{text.length}/{MAX_CHARS}</div>
+                            <div className={styles.form_star}>
+                                <span className={styles.form_starText}>별점: </span>
+                                {star}
                             </div>
+                            <p className={styles.form_text}>문의하신 내용에 대한 답변은 해당 상품의 상세페이지 또는 '마이페이지 문의내역'에서 확인하실 수
+                                있습니다.</p>
+                            <label htmlFor="" className={styles.file_boxText}>
+                                사진 첨부하기 :
+                                <input type="file" accept="image/*"/>
+                            </label>
+                            <label htmlFor="" className={styles.file_box}>
+                                <p className={styles.file_box}>한줄요약</p>
+                                <input type="text" placeholder='한 줄 요약을 입력해주세요'
+                                       onChange={handleOneTextChange} maxLength={30}/>
+                                <div className={styles.character_count}>{oneLine.length}/{ONE_MAX_CHARS}</div>
+                            </label>
+
+                            <button onClick={handleModal} className={styles.modal_form_btn}>
+                                등록하기
+                            </button>
                         </form>
                     </div>
                 </div>
