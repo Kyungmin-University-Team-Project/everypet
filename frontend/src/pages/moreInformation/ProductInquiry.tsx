@@ -12,6 +12,9 @@ interface Inquiry {
     title: string;
 }
 
+const MAX = 500;
+const TITLE = 30;
+
 const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [text, setText] = useState<Inquiry>({
@@ -20,7 +23,8 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
         title: '',
     });
     const modalBackground = useRef<HTMLDivElement>(null);
-    console.log(productId)
+    const [content, setContent] = useState<number>(0)
+    const [oneText, setOneText] = useState<number>(0);
 
 
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -31,6 +35,8 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
             productId: productId || '',
             [name]: value
         }));
+        if (text.content.length - 1 < MAX) setContent(text.content.length)
+        if (text.title.length - 1 < TITLE) setOneText(text.title.length)
         console.log(text)
     };
 
@@ -81,7 +87,8 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
                                         제목
                                     </p>
                                     <input className={styles.modal_input} placeholder='예)수량 5개 주문이 가능한가요?' name='title'
-                                           value={text.title} onChange={handleTextChange}/>
+                                           value={text.title} onChange={handleTextChange} maxLength={30}/>
+                                    <div className={styles.character_count}>{oneText}/{TITLE}</div>
                                 </label>
                             </div>
                             <p className={styles.modal_textarea_p}>문의 내용</p>
@@ -90,10 +97,10 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
                                       cols={30}
                                       rows={5}
                                       name="content"
-                                      maxLength={1000}
+                                      maxLength={500}
                                       value={text.content}
                                       onChange={handleTextChange}></textarea>
-                            <div className={styles.character_count}>/1000</div>
+                            <div className={styles.character_count}>{content}/{MAX}</div>
                             <p className={styles.modal_p_text}>문의하신 내용에 대한 답변은 해당 상품의 상세페이지 또는 '쇼핑MY 상품Q&A'에서 확인하실 수
                                 있습니다.</p>
                             <button className={styles.modal_form_btn}>
