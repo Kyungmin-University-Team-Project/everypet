@@ -7,13 +7,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-public class SellInquirtyDTO {
+public class SellerInquirtyDTO {
 
     @Data
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class InsertSellInquiry {
+    public static class InsertSellerInquiry {
 
         @ApiModelProperty(example = "uuid", notes = "상품의 아이디")
         private String productId; // 상품 아이디
@@ -38,12 +38,18 @@ public class SellInquirtyDTO {
 
     }
 
-    /*@Data
+    @Data
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class SelectSellInquiryList {
+    public static class UpdateSellerInquiry {
 
-    }*/
+        @ApiModelProperty(example = "제목을 입력해주세요", notes = "문의 제목")
+        private String title; // 제목
+
+        @ApiModelProperty(example = "내용을 입력해주세요", notes = "문의 내용")
+        private String content; // 내용
+
+    }
 
 }

@@ -1,7 +1,8 @@
 package com.everypet.support.controller;
 
 import com.everypet.member.model.vo.Member;
-import com.everypet.support.model.dto.SellInquirtyDTO.InsertSellInquiry;
+import com.everypet.support.model.dto.SellerInquirtyDTO;
+import com.everypet.support.model.dto.SellerInquirtyDTO.UpdateSellerInquiry;
 import com.everypet.support.service.SellerInquiryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,10 +21,10 @@ public class SellerInquiryController {
 
     private final SellerInquiryService sellerInquiryService;
 
-    @GetMapping("/create")
+    @PostMapping
     @ApiOperation(value = "판매자 문의 작성", notes = "로그인 한 상태로 판매자 문의를 작성해야 합니다. (access_token 필요)")
-    public ResponseEntity<String> createSellerInquiry(@RequestBody InsertSellInquiry insertSellInquiry, @ApiIgnore @AuthenticationPrincipal Member member) {
-        sellerInquiryService.createSellerInquiry(insertSellInquiry, member);
+    public ResponseEntity<String> createSellerInquiry(@RequestBody SellerInquirtyDTO.InsertSellerInquiry insertSellerInquiry, @ApiIgnore @AuthenticationPrincipal Member member) {
+        sellerInquiryService.createSellerInquiry(insertSellerInquiry, member);
         return ResponseEntity.ok("success");
     }
 
@@ -38,6 +39,33 @@ public class SellerInquiryController {
                     "예시: `/support/seller/inquiry/list/{productId}?page=0&size=10&sort=createdDate,desc`")
     public ResponseEntity<?> getSellerInquiry(@PathVariable String productId, Pageable pageable) {
         return ResponseEntity.ok(sellerInquiryService.getSellInquiryList(productId, pageable));
+    }
+
+    @GetMapping("/list/all")
+    @ApiOperation(
+            value = "판매자 문의 전체 리스트 조회",
+            notes = "모든 판매자 문의 리스트를 조회합니다.\n" +
+                    "페이징 처리를 위해 다음 쿼리 파라미터를 사용할 수 있습니다:\n" +
+                    "- **page**: 조회할 페이지 번호 (기본값: 0)\n" +
+                    "- **size**: 한 페이지에 표시할 항목 수 (기본값: 10)\n" +
+                    "- **sort**: 정렬 기준 (예: `createdDate,desc`)\n\n" +
+                    "예시: `/support/seller/inquiry/list/all?page=0&size=10&sort=createdDate,desc`")
+    public ResponseEntity<?> getAllSellerInquiry(Pageable pageable) {
+        return ResponseEntity.ok((sellerInquiryService.getAllSellerInquiryList(pageable)));
+    }
+
+    @DeleteMapping("/{inquiryId}")
+    @ApiOperation(value = "판매자 문의 삭제", notes = "로그인 한 상태로 판매자 문의를 삭제해야 합니다. (access_token 필요)")
+    public ResponseEntity<String> deleteSellerInquiry(@PathVariable Long inquiryId, @ApiIgnore @AuthenticationPrincipal Member member) {
+        sellerInquiryService.deleteSellerInquiry(inquiryId, member);
+        return ResponseEntity.ok("success");
+    }
+
+    @PatchMapping("/{inquiryId}")
+    @ApiOperation(value = "판매자 문의 수정", notes = "로그인 한 상태로 판매자 문의를 수정해야 합니다. (access_token 필요)")
+    public ResponseEntity<String> updateSellerInquiry(@PathVariable Long inquiryId, @RequestBody UpdateSellerInquiry updateSellerInquiry, @ApiIgnore @AuthenticationPrincipal Member member) {
+        sellerInquiryService.updateSellerInquiry(inquiryId, updateSellerInquiry, member);
+        return ResponseEntity.ok("success");
     }
 
 }
