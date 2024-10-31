@@ -25,9 +25,9 @@ const Header: React.FC = () => {
     }, []);
 
     return (
-        <>
+        <div className={styles.container}>
             {!isMobile && <TopMenu/>}
-            <header className={styles.container}>
+            <header className={styles.innerContainer}>
                 <div className={isMobile ? styles.innerMobile : styles.inner}>
 
                     <div className={styles.top__menu}>
@@ -49,7 +49,7 @@ const Header: React.FC = () => {
 
             <Categorymodal isOpen={isOpen} setOpen={toggleOn} setClose={toggleOff}/>
             <MobileSearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)}/>
-        </>
+        </div>
     );
 };
 

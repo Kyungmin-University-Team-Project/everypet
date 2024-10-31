@@ -37,9 +37,7 @@ const Root = () => {
             justifyContent: 'space-between',
             height: '100vh',
         }}>
-            <Fixedheader/>
             <div>
-
                 <Header/>
                 <Productcategory/>
                 {location.pathname === '/' ? <Home/> : <Outlet/>}

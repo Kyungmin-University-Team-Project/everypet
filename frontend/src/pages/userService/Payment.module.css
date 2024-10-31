@@ -28,6 +28,7 @@
 .logo {
     color: #75acff;
     font-family: 'WAGURI', sans-serif;
+    font-size: 36px;
 }
 
 .section {
@@ -45,8 +46,8 @@
     position: sticky;
     top: 0;
     display: flex;
-    padding: 15px;
     justify-content: space-between;
+    padding: 20px 0;
     align-items: center;
     border-bottom: 1px solid #b6b6b6;
     background-color: white;
@@ -55,12 +56,11 @@
 
 .paymentHeader h2 {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 32px;
 }
 
 .orderInfo {
     padding: 0 15px;
-    margin-bottom: 30px;
 
     border-bottom: 1px solid #757575;
 }
@@ -319,13 +319,9 @@
 }
 
 /* 노트북 및 데스크탑 환경 */
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 769px) {
     .inner {
         width: 1100px;
-    }
-
-    .logo {
-        font-size: 32px;
     }
 
     .section {

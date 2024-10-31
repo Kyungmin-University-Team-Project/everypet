@@ -1,12 +1,22 @@
 /* 기본 스타일 - 모바일 환경에 적용 */
-.container {
+.container{
     display: flex;
+    flex-direction: column;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 9999;
+}
+
+.innerContainer {
     height: 20vh;
     background-color: white;
     justify-content: center;
     align-items: center;
     border-bottom: solid 1px rgb(205, 205, 205);
     padding: 0 15px;
+
 
 }
 
@@ -48,11 +58,12 @@
     border: none;
     cursor: pointer;
     width: 100%;
+    padding: 0;
 }
 
 
 @media screen and (min-width: 769px) {
-    .container {
+    .innerContainer {
         height: 80px;
     }
 

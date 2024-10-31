@@ -1,8 +1,7 @@
-/* 기본 스타일 - 모바일 환경에 적용 */
 .open {
     position: relative;
     top: 0;
-    transition: top 0.3s ease; /* 오픈 상태일 때 애니메이션 효과 추가 */
+    transition: top 0.3s ease;
 }
 
 .close {
@@ -93,7 +92,7 @@
     }
 
     .title {
-        font-size: 28px;
+        font-size: 36px;
     }
 
 }
