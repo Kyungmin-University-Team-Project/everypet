@@ -42,7 +42,7 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
     const [titleLength, setTitleLength] = useState<number>(0);
     const [listType, setListType] = useState<List[]>([]);
     // slice 보여줄 리스트
-    const [currentPage, setCurrentPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
     // slice 담을 데이터
     const [currentList, setCurrentList] = useState<List[]>([]);
     const itemsPerPage = 10; // 페이지당 항목 수
@@ -63,7 +63,7 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
         if (productId) { // productId가 유효할 때만 데이터 가져오기
             fetchList();
         }
-    }, [productId, currentPage, modalOpen]); // productId 또는 currentPage가 변경될 때 데이터 가져오기
+    }, [productId, modalOpen]); // productId 또는 currentPage가 변경될 때 데이터 가져오기
 
     // slice할 index에 범위
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -76,7 +76,7 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
     // 페이지 네이션
     useEffect(() => {
         setCurrentList(listType.slice(indexOfFirstItem, indexOfLastItem));
-    }, [currentPage]);
+    }, [listType, currentPage, itemsPerPage]);
 
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         const {value, name} = e.target;
