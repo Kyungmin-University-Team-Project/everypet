@@ -69,19 +69,22 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
                 }}>
                     <div className={styles.modal_content}>
                         <div className={styles.modal_close_btn}>
-                            <p>상품문의</p>
-                            <button onClick={() => setModalOpen(false)}>
+                            <p className={styles.modal_close_text}>상품문의</p>
+                            <button className={styles.modal_close_x} onClick={() => setModalOpen(false)}>
                                 X
                             </button>
                         </div>
                         <form onSubmit={handleOnSubmitClick}>
                             <div>
                                 <label>
-                                    상품 정보
+                                    <p className={styles.modal_input_text}>
+                                        제목
+                                    </p>
                                     <input className={styles.modal_input} placeholder='예)수량 5개 주문이 가능한가요?' name='title'
                                            value={text.title} onChange={handleTextChange}/>
                                 </label>
                             </div>
+                            <p className={styles.modal_textarea_p}>문의 내용</p>
                             <textarea className={styles.modal_textarea}
                                       placeholder="문의하실 내용을 입력하세요"
                                       cols={30}
@@ -91,9 +94,10 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
                                       value={text.content}
                                       onChange={handleTextChange}></textarea>
                             <div className={styles.character_count}>/1000</div>
-                            <p>문의하신 내용에 대한 답변은 해당 상품의 상세페이지 또는 '쇼핑MY 상품Q&A'에서 확인하실 수 있습니다.</p>
+                            <p className={styles.modal_p_text}>문의하신 내용에 대한 답변은 해당 상품의 상세페이지 또는 '쇼핑MY 상품Q&A'에서 확인하실 수
+                                있습니다.</p>
                             <button className={styles.modal_form_btn}>
-                                das
+                                완료
                             </button>
                         </form>
                     </div>
