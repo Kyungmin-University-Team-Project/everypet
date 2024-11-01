@@ -63,18 +63,21 @@ public class PaymentController {
                         break;
                     default:
                         orderService.deleteOrder(orderId);
+                        System.err.println("Unhandled payment status: " + payment.getStatus());
                         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unhandled payment status: " + payment.getStatus());
                 }
                 return ResponseEntity.ok("Payment completed successfully");
             } else {
                 // 결제 금액이 불일치하여 위/변조 시도가 의심됩니다.
                 orderService.deleteOrder(orderId);
+                System.err.println("Payment amount mismatch");
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Payment amount mismatch");
             }
 
         } catch (Exception e) {
             // 결제 검증에 실패했습니다.
             orderService.deleteOrder(orderId);
+            System.err.println("Exception 에러 : " + e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Payment verification failed: " + e.getMessage());
         }
     }
