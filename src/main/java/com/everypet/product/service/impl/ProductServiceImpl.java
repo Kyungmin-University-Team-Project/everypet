@@ -45,9 +45,9 @@ public class ProductServiceImpl implements ProductService {
         productInsertMap.put("productName", productInsertDTO.getProductName());
         productInsertMap.put("productImg",  imageCloudService.getGOOGLE_IMAGE_CLOUD_URL()+ productId);
         productInsertMap.put("productDescriptionImg", imageCloudService.getGOOGLE_IMAGE_CLOUD_URL() + productId + "-description");
-        productInsertMap.put("productPrice", productInsertDTO.getProductPrice());
-        productInsertMap.put("productDiscountRate", productInsertDTO.getProductDiscountRate());
-        productInsertMap.put("numberOfProduct", productInsertDTO.getNumberOfProduct());
+        productInsertMap.put("productPrice", Integer.parseInt(productInsertDTO.getProductPrice()));
+        productInsertMap.put("productDiscountRate", Integer.parseInt(productInsertDTO.getProductDiscountRate()));
+        productInsertMap.put("numberOfProduct", Integer.parseInt(productInsertDTO.getNumberOfProduct()));
         productInsertMap.put("productSalesStatusYN", productInsertDTO.getProductSalesStatusYN());
         productInsertMap.put("productMainCategory", productInsertDTO.getProductMainCategory());
         productInsertMap.put("productSubCategory", productInsertDTO.getProductSubCategory());

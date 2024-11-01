@@ -40,11 +40,11 @@ public class ProductDTO {
 
         @NotBlank
         @ApiModelProperty(example = "30000", notes = "상품 가격")
-        private Long productPrice; // 상품 가격
+        private String productPrice; // 상품 가격
 
         @NotBlank
         @ApiModelProperty(example = "10", notes = "상품 할인율, 0 ~ 100")
-        private int productDiscountRate; // 상품 할인율
+        private String productDiscountRate; // 상품 할인율
 
         @NotBlank
         @ApiModelProperty(example = "상품 대표 이미지 삽입", notes = "상품의 대표 이미지 넣기")
@@ -52,7 +52,7 @@ public class ProductDTO {
 
         @NotBlank
         @ApiModelProperty(example = "500", notes = "상품 수량")
-        private long numberOfProduct; // 상품 수량
+        private String numberOfProduct; // 상품 수량
 
         @NotBlank
         @ApiModelProperty(example = "상품 설명 이미지 삽입", notes = "상품을 설명하는 이미지를 넣기")
