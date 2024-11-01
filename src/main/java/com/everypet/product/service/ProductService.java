@@ -20,7 +20,7 @@ public interface ProductService {
     // 단일 상품 상세 조회
     ProductListDTO selectProductByProductId(String productId);
 
-    void updateProduct(ProductDTO.ProductInsertDTO productUpdateDTO, String memberId);
+    void updateProduct(ProductDTO.ProductUpdateDTO productUpdateDTO, String memberId);
 
     List<ProductListDTO> selectProductListByKeyword(String keyword, String orderBy, int page, int pageSize, Member member, HttpServletRequest request);
 
