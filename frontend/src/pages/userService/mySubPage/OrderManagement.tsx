@@ -34,7 +34,7 @@ const OrderManagement = () => {
                     pageSize: PAGE_SIZE,
                 })
                 setOrderList(response.data);
-                console.log(response.data);
+                console.log(response.data, 'asdas');
             } catch (e) {
                 console.error(e);
             }
@@ -65,7 +65,7 @@ const OrderManagement = () => {
                 <button className={styles.filterButton}>2020</button>
                 <button className={styles.filterButton}>2019</button>
             </div>
-            {orderList.length < 5 ? (
+            {orderList.length > 0 ? (
                 orderList.map(order => (
                     <div key={order.orderId} className={styles.orderItem}>
                         <div className={styles.orderHeader}>

@@ -20,15 +20,15 @@ api.interceptors.request.use(
         if (error.response && error.response.status === 401) {
             try {
                 let errorConfig: AxiosRequestConfig = error.config || {}; // errorConfig가 undefined인 경우 빈 객체로 설정
-                const {data} = await axios.post('access/refresh'); // axios로 요청 보내기
+                const {data} = await axios.post('/refresh'); // axios로 요청 보내기
                 if (data) {
                     const {access} = data;
                     localStorage.removeItem('access');
                     localStorage.setItem('access', access);
                     if (errorConfig.headers) {
-                        errorConfig.headers['Authorization'] = `Bearer ${access}`; // 새로운 토큰으로 헤더 업데이트
+                        errorConfig.headers['Authorization'] = ` ${access}`; // 새로운 토큰으로 헤더 업데이트
                     } else {
-                        errorConfig.headers = {Authorization: `Bearer ${access}`}; // 헤더가 없는 경우 새로 생성
+                        errorConfig.headers = {Authorization: ` ${access}`}; // 헤더가 없는 경우 새로 생성
                     }
                     return axios.request(errorConfig); // 기존 요청 재시도
                 }
