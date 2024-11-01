@@ -1,5 +1,6 @@
 package com.everypet.member.service.impl;
 
+import com.everypet.member.exception.AddressLimitExceededException;
 import com.everypet.member.mapper.MsAddressMapper;
 import com.everypet.member.model.dao.AddressMapper;
 import com.everypet.member.model.dto.address.AddressRegisterDTO;
@@ -7,6 +8,7 @@ import com.everypet.member.model.dto.address.AddressUpdateDTO;
 import com.everypet.member.model.vo.Address;
 import com.everypet.member.service.AddressService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +16,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class AddressServiceImpl implements AddressService {
+
+    @Value("${address.limit}")
+    private int addressLimit;
 
     private final AddressMapper addressMapper;
 
@@ -25,13 +30,16 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public void addressRegister(AddressRegisterDTO address, String memberId) {
 
+        if(addressMapper.findAddressCountByMemberId(memberId) >= addressLimit)
+            throw new AddressLimitExceededException("주소는 최대 " + addressLimit + "개까지 등록 가능합니다.");
+
         Address addressEntity = MsAddressMapper.INSTANCE.toVo(address, memberId);
 
         int rowAffected = addressMapper.insertAddress(addressEntity);
 
-        if (rowAffected == 0) {
+        if (rowAffected == 0)
             throw new IllegalArgumentException("주소 추가에 실패했습니다.");
-        }
+
     }
 
     @Override
@@ -50,9 +58,9 @@ public class AddressServiceImpl implements AddressService {
         
         int rowsAffected = addressMapper.updateAddress(address);
 
-        if (rowsAffected == 0) {
+        if (rowsAffected == 0)
             throw new IllegalArgumentException("주소 수정에 실패했습니다.");
-        }
+
 
     }
 
@@ -63,8 +71,8 @@ public class AddressServiceImpl implements AddressService {
 
         int rowAffected = addressMapper.deleteAddress(address);
 
-        if (rowAffected == 0) {
+        if (rowAffected == 0)
             throw new IllegalArgumentException("주소 삭제에 실패했습니다.");
-        }
+
     }
 }
