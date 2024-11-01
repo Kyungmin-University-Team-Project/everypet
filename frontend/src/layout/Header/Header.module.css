@@ -16,14 +16,13 @@
     align-items: center;
     border-bottom: solid 1px rgb(205, 205, 205);
     padding: 0 15px;
-
-
 }
 
 .inner {
     display: flex;
-    align-items: center; /* 수직 가운데 정렬 */
+    align-items: center;
     justify-content: space-between;
+
 
 }
 
@@ -65,13 +64,13 @@
 @media screen and (min-width: 769px) {
     .innerContainer {
         height: 80px;
+        padding: 0;
     }
 
     .inner {
-        width: 1100px;
+        max-width: 1100px;
 
         margin: 0 auto;
-        justify-content: space-between;
     }
 
     .title {

@@ -73,7 +73,7 @@ const ProductCategory = () => {
     };
 
     return (
-        <div>
+        <>
             <nav className={styles.container}>
                 <div className={styles.inner}>
                     {!isMobile && (
@@ -99,7 +99,7 @@ const ProductCategory = () => {
                 </div>
             </nav>
             <Categorymodal isOpen={isOpen} setOpen={toggleOn} setClose={toggleOff}/>
-        </div>
+        </>
     );
 };
 
