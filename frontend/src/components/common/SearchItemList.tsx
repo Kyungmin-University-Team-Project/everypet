@@ -27,7 +27,6 @@ const SearchItemList: React.FC<SearchItemListProps> = ({searchQuery}) => {
         try {
             if (localStorage.getItem("access")) {
                 const token = decryptToken();
-                console.log(token)
                 const response = await axios.get(`/product/search/${searchQuery}/${orderBy}/${page}/${pageSize}`, {
                     headers: {
                         access: token
