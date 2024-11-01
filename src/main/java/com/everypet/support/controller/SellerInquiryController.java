@@ -30,26 +30,26 @@ public class SellerInquiryController {
 
     @GetMapping("/list/{productId}")
     @ApiOperation(
-            value = "판매자 문의 리스트 조회",
+            value = "상품 별 판매자 문의 리스트 조회",
             notes = "지정된 product_id로 판매자 문의 리스트를 조회합니다.\n" +
                     "페이징 처리를 위해 다음 쿼리 파라미터를 사용할 수 있습니다:\n" +
                     "- **page**: 조회할 페이지 번호 (기본값: 0)\n" +
                     "- **size**: 한 페이지에 표시할 항목 수 (기본값: 10)\n" +
-                    "- **sort**: 정렬 기준 (예: `createdDate,desc`)\n\n" +
-                    "예시: `/support/seller/inquiry/list/{productId}?page=0&size=10&sort=createdDate,desc`")
+                    "- **sort**: DB에 정의된 컬럼명을 기준으로 정렬할 수 있습니다 (예: `INQUIRY_DATE,desc`)\n\n" +
+                    "예시: `/support/seller/inquiry/list/{productId}?page=0&size=10&sort=INQUIRY_DATE,desc`")
     public ResponseEntity<?> getSellerInquiry(@PathVariable String productId, Pageable pageable) {
         return ResponseEntity.ok(sellerInquiryService.getSellInquiryList(productId, pageable));
     }
 
-    @GetMapping("/list/all")
+    @GetMapping("/list")
     @ApiOperation(
             value = "판매자 문의 전체 리스트 조회",
             notes = "모든 판매자 문의 리스트를 조회합니다.\n" +
                     "페이징 처리를 위해 다음 쿼리 파라미터를 사용할 수 있습니다:\n" +
                     "- **page**: 조회할 페이지 번호 (기본값: 0)\n" +
                     "- **size**: 한 페이지에 표시할 항목 수 (기본값: 10)\n" +
-                    "- **sort**: 정렬 기준 (예: `createdDate,desc`)\n\n" +
-                    "예시: `/support/seller/inquiry/list/all?page=0&size=10&sort=createdDate,desc`")
+                    "- **sort**: DB에 정의된 컬럼명을 기준으로 정렬할 수 있습니다 (예: `INQUIRY_DATE,desc`)\n\n" +
+                    "예시: `/support/seller/inquiry/list/all?page=0&size=10&sort=INQUIRY_DATE,desc`")
     public ResponseEntity<?> getAllSellerInquiry(Pageable pageable) {
         return ResponseEntity.ok((sellerInquiryService.getAllSellerInquiryList(pageable)));
     }

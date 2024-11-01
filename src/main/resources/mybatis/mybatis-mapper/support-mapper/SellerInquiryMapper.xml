@@ -1,19 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.everypet.support.model.dao.SellerInquiryMapper">
-    
-    <insert id="insertSellerInquiry" parameterType="com.everypet.support.model.dto.SellerInquirtyDTO$InsertSellerInquiry">
+
+    <resultMap id="SellerInquiryMap" type="com.everypet.support.model.entity.SellerInquiry">
+        <id property="sellerInquiryId" column="SELLER_INQUIRY_ID"/>
+        <result property="productId" column="PRODUCT_ID"/>
+        <result property="memberId" column="MEMBER_ID"/>
+        <result property="inquiryTitle" column="INQUIRY_TITLE"/>
+        <result property="inquiryContents" column="INQUIRY_CONTENTS"/>
+        <result property="inquiryDate" column="INQUIRY_DATE"/>
+        <result property="inquiryUpdateDate" column="INQUIRY_UPDATE_DATE"/>
+        <result property="inquiryDeleteDate" column="INQUIRY_DELETE_DATE"/>
+        <result property="inquiryStatus" column="INQUIRY_STATUS"/>
+        <association property="replyId" column="REPLY_ID" resultMap="SellerInquiryReplyIdMap"/>
+    </resultMap>
+
+    <resultMap id="SellerInquiryReplyIdMap" type="com.everypet.support.model.entity.SellerInquiryReply">
+        <id property="sellerInquiryReplyId" column="SELLER_INQUIRY_REPLY_ID"/>
+        <result property="memberId" column="MEMBER_ID"/>
+        <result property="replyContents" column="REPLY_CONTENTS"/>
+        <result property="replyDate" column="REPLY_DATE"/>
+        <result property="replyUpdateDate" column="REPLY_UPDATE_DATE"/>
+    </resultMap>
+
+    <insert id="insertSellerInquiry"
+            parameterType="com.everypet.support.model.dto.SellerInquirtyDTO$InsertSellerInquiry">
         INSERT INTO TBL_SELLER_INQUIRY (MEMBER_ID, PRODUCT_ID, INQUIRY_TITLE, INQUIRY_CONTENTS)
         VALUES (#{memberId}, #{productId}, #{title}, #{content})
     </insert>
 
-    <select id="selectSellerInquiryList" parameterType="PageableList" resultType="SellerInquiry">
+    <select id="selectSellerInquiryList" parameterType="PageableList" resultMap="SellerInquiryMap">
         SELECT * FROM TBL_SELLER_INQUIRY
+        LEFT JOIN TBL_SELLER_INQUIRY_REPLY ON TBL_SELLER_INQUIRY.REPLY_ID =
+        TBL_SELLER_INQUIRY_REPLY.SELLER_INQUIRY_REPLY_ID
         WHERE PRODUCT_ID = #{data}
         <foreach collection="pageable.sort.orders" item="order" separator=",">
             ORDER BY ${order.property} ${order.direction}
         </foreach>
-        LIMIT ${pageable.offset}, ${pageable.pageSize}
+        LIMIT #{pageable.offset}, #{pageable.pageSize}
     </select>
 
     <select id="selectAllSellerInquiryList" parameterType="String" resultType="SellerInquiry">
@@ -25,14 +49,43 @@
     </select>
 
     <delete id="deleteSellerInquiry" parameterType="map">
-        DELETE FROM TBL_SELLER_INQUIRY
-        WHERE SELLER_INQUIRY_ID = #{inquiryId} AND MEMBER_ID = #{memberId}
+        DELETE
+        FROM TBL_SELLER_INQUIRY
+        WHERE SELLER_INQUIRY_ID = #{inquiryId}
+          AND MEMBER_ID = #{memberId}
     </delete>
 
     <update id="updateSellerInquiry">
         UPDATE TBL_SELLER_INQUIRY
-        SET INQUIRY_TITLE = #{updateSellerInquiry.title}, INQUIRY_CONTENTS = #{updateSellerInquiry.content}
-        WHERE SELLER_INQUIRY_ID = #{inquiryId} AND MEMBER_ID = #{memberId}
+        SET INQUIRY_TITLE    = #{updateSellerInquiry.title},
+            INQUIRY_CONTENTS = #{updateSellerInquiry.content}
+        WHERE SELLER_INQUIRY_ID = #{inquiryId}
+          AND MEMBER_ID = #{memberId}
     </update>
+
+    <update id="completeSellerInquiry" parameterType="Long">
+        UPDATE TBL_SELLER_INQUIRY
+        SET INQUIRY_STATUS = '답변완료',
+            REPLY_ID = #{sellerInquiryReplyId}
+        WHERE SELLER_INQUIRY_ID = #{sellerInquiryId}
+    </update>
+
+    <select id="isReplyExist" resultType="boolean">
+        SELECT CASE
+                   WHEN REPLY_ID IS NOT NULL THEN TRUE
+                   ELSE FALSE
+                   END
+        FROM TBL_SELLER_INQUIRY
+        WHERE SELLER_INQUIRY_ID = #{sellerInquiryId}
+    </select>
+
+    <select id="isSellerInquiryExist" resultType="boolean">
+        SELECT CASE
+                   WHEN SELLER_INQUIRY_ID IS NOT NULL THEN TRUE
+                   ELSE FALSE
+                   END
+        FROM TBL_SELLER_INQUIRY
+        WHERE SELLER_INQUIRY_ID = #{sellerInquiryId}
+    </select>
 
 </mapper>
