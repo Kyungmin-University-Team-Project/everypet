@@ -33,7 +33,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void insertProduct(ProductDTO.ProductInsertDTO productInsertDTO, String memberId){
-
         // 이미지 업로드 관련 부분
         String productId = UUID.randomUUID().toString(); // UUID 생성
 
@@ -112,7 +111,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void updateProduct(ProductDTO.ProductInsertDTO productUpdateDTO, String memberId) {
+    public void updateProduct(ProductDTO.ProductUpdateDTO productUpdateDTO, String memberId) {
 
         // 수정 권한을 확인하는 메서드
         validateProductDeletionPermission(productUpdateDTO.getProductId(), memberId);
