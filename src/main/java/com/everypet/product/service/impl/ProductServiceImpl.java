@@ -33,7 +33,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void insertProduct(ProductDTO.ProductInsertDTO productInsertDTO, String memberId){
-
         // 이미지 업로드 관련 부분
         String productId = UUID.randomUUID().toString(); // UUID 생성
 
@@ -46,9 +45,9 @@ public class ProductServiceImpl implements ProductService {
         productInsertMap.put("productName", productInsertDTO.getProductName());
         productInsertMap.put("productImg",  imageCloudService.getGOOGLE_IMAGE_CLOUD_URL()+ productId);
         productInsertMap.put("productDescriptionImg", imageCloudService.getGOOGLE_IMAGE_CLOUD_URL() + productId + "-description");
-        productInsertMap.put("productPrice", productInsertDTO.getProductPrice());
-        productInsertMap.put("productDiscountRate", productInsertDTO.getProductDiscountRate());
-        productInsertMap.put("numberOfProduct", productInsertDTO.getNumberOfProduct());
+        productInsertMap.put("productPrice", Integer.parseInt(productInsertDTO.getProductPrice()));
+        productInsertMap.put("productDiscountRate", Integer.parseInt(productInsertDTO.getProductDiscountRate()));
+        productInsertMap.put("numberOfProduct", Integer.parseInt(productInsertDTO.getNumberOfProduct()));
         productInsertMap.put("productSalesStatusYN", productInsertDTO.getProductSalesStatusYN());
         productInsertMap.put("productMainCategory", productInsertDTO.getProductMainCategory());
         productInsertMap.put("productSubCategory", productInsertDTO.getProductSubCategory());
@@ -112,7 +111,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void updateProduct(ProductDTO.ProductInsertDTO productUpdateDTO, String memberId) {
+    public void updateProduct(ProductDTO.ProductUpdateDTO productUpdateDTO, String memberId) {
 
         // 수정 권한을 확인하는 메서드
         validateProductDeletionPermission(productUpdateDTO.getProductId(), memberId);

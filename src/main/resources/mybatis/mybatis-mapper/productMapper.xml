@@ -13,7 +13,7 @@
         VALUES (
                    #{productId}, #{memberId}, #{productName}, #{productImg}, #{productDescriptionImg},
                    #{productPrice}, NOW(), #{productChangedDate},
-                   #{productSalesStatusYn}, #{productDiscountRate}, #{numberOfProduct},
+                   #{productSalesStatusYN}, #{productDiscountRate}, #{numberOfProduct},
                    0, #{productMainCategory}, #{productSubCategory}
                )
     </insert>

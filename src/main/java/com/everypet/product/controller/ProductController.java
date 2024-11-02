@@ -1,7 +1,9 @@
 package com.everypet.product.controller;
 
 import com.everypet.member.model.vo.Member;
-import com.everypet.product.model.dto.*;
+import com.everypet.product.model.dto.ProductDTO;
+import com.everypet.product.model.dto.ProductKeywordDTO;
+import com.everypet.product.model.dto.ProductListDTO;
 import com.everypet.product.service.ProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,17 +28,18 @@ public class ProductController {
 
     @ApiOperation(value = "상품 추가", notes = "새로운 상품을 추가합니다.")
     @PostMapping("/insert")
-    public ResponseEntity<String> insertProductInfo(@RequestBody ProductDTO.ProductInsertDTO productDTO) throws UnsupportedEncodingException {
+    public ResponseEntity<String> insertProductInfo(@ModelAttribute ProductDTO.ProductInsertDTO productDTO) throws UnsupportedEncodingException {
         try {
             productDTO.setProductMainCategory(new String(productDTO.getProductMainCategory().getBytes("8859_1"), "UTF-8"));
             productDTO.setProductSubCategory(new String(productDTO.getProductSubCategory().getBytes("8859_1"), "UTF-8"));
             productDTO.setProductName(new String(productDTO.getProductName().getBytes("8859_1"), "UTF-8"));
 
-            //String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
+            String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
 
-            productService.insertProduct(productDTO, productDTO.getMemberId());
+            productService.insertProduct(productDTO, memberId);
             return ResponseEntity.ok().body("상품 추가 완료");
         }catch (RuntimeException e){
+            System.err.println("상품 추가 에러 : " + e.getMessage());
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
@@ -99,15 +102,15 @@ public class ProductController {
 
     @ApiOperation(value = "상품 정보 수정", notes = "상품의 정보를 수정합니다.")
     @PostMapping("/update")
-    public ResponseEntity<String> updateProductInfo(@RequestBody ProductDTO.ProductInsertDTO productInsertDTO) throws UnsupportedEncodingException {
+    public ResponseEntity<String> updateProductInfo(@RequestBody ProductDTO.ProductUpdateDTO productUpdateDTO) throws UnsupportedEncodingException {
         try {
-            productInsertDTO.setProductMainCategory(new String(productInsertDTO.getProductMainCategory().getBytes("8859_1"), "UTF-8"));
-            productInsertDTO.setProductSubCategory(new String(productInsertDTO.getProductSubCategory().getBytes("8859_1"), "UTF-8"));
-            productInsertDTO.setProductName(new String(productInsertDTO.getProductName().getBytes("8859_1"), "UTF-8"));
+            productUpdateDTO.setProductMainCategory(new String(productUpdateDTO.getProductMainCategory().getBytes("8859_1"), "UTF-8"));
+            productUpdateDTO.setProductSubCategory(new String(productUpdateDTO.getProductSubCategory().getBytes("8859_1"), "UTF-8"));
+            productUpdateDTO.setProductName(new String(productUpdateDTO.getProductName().getBytes("8859_1"), "UTF-8"));
 
             String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
 
-            productService.updateProduct(productInsertDTO, memberId);
+            productService.updateProduct(productUpdateDTO, memberId);
             return ResponseEntity.ok().body("상품 수정 완료");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
