@@ -1,14 +1,16 @@
 import React, {useEffect, useState} from 'react';
+import styles from './ProductCategory.module.css';
+
 import {useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import ProductcategoryItem from './ProductCategoryItem';
-import styles from './ProductCategory.module.css';
 import {setClickedCategory} from '../../redux/features/categorySlice';
 import {RootState} from '../../redux/store/rootReducer';
 import Categorymodal from './CategoryModal';
 import useToggle from '../../utils/common/ToggleUtil';
 import Categorybarbtn from './Categorybarbtn';
 import Realtimekeyword from '../Header/Realtimekeyword';
+import useResizeMobile from "../../hooks/useResizeMobile";
 
 const categories = [
     {name: '기획전', link: '/exhibitions', tag: 'exhibitions'},
@@ -28,18 +30,8 @@ const ProductCategory = () => {
 
     const [isOpen, toggleOn, toggleOff] = useToggle(false);
     const location = useLocation();
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    const isMobile = useResizeMobile();
 
-    useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth <= 768);
-        };
-
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
 
     useEffect(() => {
         const handleScroll = () => {

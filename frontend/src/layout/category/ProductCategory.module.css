@@ -2,6 +2,10 @@
     display: flex;
     width: 100%;
     height: 60px;
+
+    background-color: white;
+    border-top: 1px solid #cccccc;
+
     align-items: center;
     justify-content: center;
     box-shadow: rgba(0, 0, 0, 0.04) 0 3px 5px;
@@ -31,11 +35,6 @@
 
 .category__menu::-webkit-scrollbar {
     display: none; /* Hide scrollbar for WebKit browsers */
-}
-
-.category__menu {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
 }
 
 .category__menu li {

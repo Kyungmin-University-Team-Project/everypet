@@ -71,7 +71,7 @@
     background-color: #4c89ff;
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 768px) {
     .links {
         width: 1100px;
     }
