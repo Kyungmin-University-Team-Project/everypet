@@ -4,7 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
-import {QueryClient, QueryClientProvider} from 'react-query';
+import {QueryClient, QueryClientProvider,} from '@tanstack/react-query';
 import ProductPage from './pages/category/ProductPage';
 import Root from './pages/home/Root';
 import Login from './pages/auth/Login';
@@ -31,6 +31,7 @@ import AddressManagement from "./pages/userService/mySubPage/AddressManagement";
 import PointsAndCoupons from "./pages/userService/mySubPage/PointsAndCoupons";
 import InquiryHistory from "./pages/userService/mySubPage/InquiryHistory";
 import PasswordFind from "./pages/auth/PasswordFind";
+import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
 
 const router = createBrowserRouter([
     // 모두 접속 가능
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
         children: [
             {path: 'exhibitions', element: <Exhibitions category={'coupon'}/>},
             {path: 'timeDeal', element: <TimeDeal category={'timeDeal'}/>},
-            { path: ':category/:subcategory?', element: <ProductPage /> },  // 동적 경로 설정,
+            {path: ':category/:subcategory?', element: <ProductPage/>},  // 동적 경로 설정,
             {
                 path: 'moreInformation',
                 element: <MoreInformation/>,
@@ -99,6 +100,7 @@ root.render(
         <Provider store={store}>
             <QueryClientProvider client={queryClient}>
                 <RouterProvider router={router}/>
+                <ReactQueryDevtools/>
             </QueryClientProvider>
         </Provider>
     </React.StrictMode>

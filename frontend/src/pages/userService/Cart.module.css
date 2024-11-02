@@ -1,64 +1,54 @@
-/* 공통 스타일 */
 .container {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-.header {
+.header,
+.inner {
     width: 100%;
     height: 80px;
-    background-color: white;
+    background-color: var(--color-background);
     display: flex;
     justify-content: start;
     align-items: center;
-    border-bottom: solid 1px rgb(205, 205, 205);
+    border-bottom: solid 1px var(--color-border);
+
 }
 
-.header .inner {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 15px;
-}
-
-.header .title {
-    display: flex;
-    align-items: center;
+.title {
     font-size: 36px;
-    color: #75acff;
+    color: var(--color-primary);
     font-family: 'WAGURI', sans-serif;
+
+    margin-left: 10px;
 }
 
 .section {
     display: flex;
     flex-direction: column;
-    width: 100%;
-
 }
 
 .cartItems {
-    height: auto;
     width: 100%;
+    height: 100%;
 }
 
 .cartHeader {
+    display: flex;
     position: sticky;
     top: 0;
-    display: flex;
     padding: 15px;
     justify-content: space-between;
     align-items: center;
-    border-bottom: solid 1px #b6b6b6;
-    background-color: white;
+    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-background);
     z-index: 999;
 }
 
 .cartHeader h2 {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 24px;
 }
 
 .selectAll__wrap {
@@ -70,8 +60,8 @@
 }
 
 .selectAll {
-    font-size: 0.9em;
-    color: #007BFF;
+    font-size: 16px;
+    color: var(--color-primary);
     cursor: pointer;
     font-weight: bold;
 }
@@ -104,19 +94,19 @@
     display: flex;
     width: 20px;
     height: 20px;
+
     cursor: pointer;
 
-    margin-left: 20px;
-
+    margin-right: 20px;
+    border-radius: 20px;
 }
-
 
 .removeItemButton {
     cursor: pointer;
-    font-size: 1.4em;
-    color: #000000;
+    font-size: 20px;
+    color: black;
 
-    margin-right: 20px;
+    margin-left: 20px;
 }
 
 
@@ -128,7 +118,7 @@
     box-sizing: border-box;
     position: relative;
 
-    border-bottom: solid 1px #c5c5c5;
+    border-bottom: solid 1px var(--color-border);
 
 }
 
@@ -140,10 +130,10 @@
 
 
 .productImage {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
 
-    border: 1px solid #e6e6e6;
+    border: 1px solid var(--color-border);
     border-radius: 5px;
 }
 
@@ -152,7 +142,6 @@
     flex-direction: column;
 
     width: 100%;
-    height: 100px;
 
     align-items: start;
     justify-content: space-between;
@@ -170,36 +159,45 @@
 }
 
 .productDetails p {
-    margin: 0;
-    font-size: 1.2rem;
+    font-size: 16px;
+    height: 45px;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .quantity {
     display: flex;
-    align-items: center;
-    margin-top: 10px;
     width: 100%;
-    box-sizing: border-box;
+
+    align-items: center;
+
+    margin-bottom: 20px;
 }
 
 .quantityButton {
-    background: none;
-    border: 1px solid #ccc;
+    background: white;
+    border: none;
     padding: 5px 10px;
     cursor: pointer;
-    width: 30px;
-    height: 30px;
+
+    transition: all 0.2s ease;
 }
 
 .quantityInput {
     display: flex;
     max-width: 100px;
     text-align: center;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-border);
     margin: 0 5px;
     height: 30px;
     box-sizing: border-box;
     padding-left: 15px;
+
+    border-radius: 20px;
 }
 
 .total {
@@ -209,11 +207,9 @@
     font-weight: bold;
     box-sizing: border-box;
     text-align: right;
-
 }
 
 .price {
-    margin: 0;
     font-size: 20px;
 }
 
@@ -221,14 +217,12 @@
     width: 100%;
     bottom: 0;
     left: 0;
-    background: white;
+    background: var(--color-background);
     padding: 10px 20px;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    border-top: solid 1px darkgrey;
 }
 
 .summary {
@@ -256,13 +250,13 @@
     justify-content: space-between;
 
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 18px;
     margin-top: 10px;
 }
 
 .checkoutButton {
     padding: 10px 20px;
-    background-color: #679aff;
+    background-color: var(--color-primary);
     color: white;
     border: none;
     cursor: pointer;
@@ -273,10 +267,22 @@
     border-radius: 10px;
 
     font-weight: bold;
+
+    transition: all 0.2s ease;
 }
 
+.checkoutButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+
 /* 노트북 및 데스크탑 환경 */
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 768px) {
+    .header {
+        margin-left: 0;
+    }
+
     .header .title {
         margin: auto;
         width: 1100px;
@@ -290,29 +296,53 @@
         flex-direction: row;
         justify-content: space-between;
         padding-bottom: 20px;
+
     }
 
 
     .cartItems {
         width: 70%;
         margin: 0;
+
     }
 
     .cartHeader {
         padding: 17px;
     }
 
+
+    .removeItemButton{
+        font-size: 28px;
+    }
+
+    .check__all__Input,
+    .checkboxInput{
+        width: 28px;
+        height: 28px;
+    }
+
     .product {
-        height: 120px;
+        height: 160px;
+
+        margin-left: 20px;
+    }
+
+    .quantity{
+        margin-bottom: 0;
+    }
+
+    .price{
+        font-size:28px;
     }
 
     .productImage {
-        width: 120px;
-        height: 120px;
+        width: 160px;
+        height: 160px;
     }
 
     .productDetails p {
-        font-size: 1.6rem;
+        height: 70px;
+        font-size: 24px;
     }
 
     .summaryContainer {
@@ -320,13 +350,7 @@
         top: 0;
         height: 100%;
         width: 30%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        padding: 20px;
 
-        border-top: none;
     }
 
     .summaryTotal, .shippingFee {
@@ -335,26 +359,5 @@
 
     .checkoutButton {
         align-self: stretch;
-    }
-}
-
-/* 데스크탑 환경 */
-@media screen and (min-width: 1600px) {
-    .header {
-        font-size: 36px;
-        margin: auto;
-
-        width: 1250px;
-    }
-
-    .section {
-        width: 1250px;
-        margin: auto;
-        padding-bottom: 20px;
-    }
-
-    .productImage {
-        width: 140px;
-        height: 140px;
     }
 }

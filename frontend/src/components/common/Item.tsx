@@ -4,6 +4,7 @@ import styles from './Item.module.css';
 import { useNavigate } from "react-router-dom";
 import { addToCart } from "../../utils/product/cart";
 import { handleViewDetails as handleViewDetailsUtil } from "../../utils/product/detailNavigation";
+import {formatPrice} from "../../utils/product/product";
 
 interface ItemProps {
     productId: string;
@@ -24,6 +25,9 @@ const Item: React.FC<ItemProps> = ({
                                        reviewCount,
                                        imageUrl,
                                    }) => {
+
+    const discountedPrice = price - (price * (discount / 100));
+
     const navigate = useNavigate();
 
     const handleViewDetails = () => {
@@ -39,7 +43,7 @@ const Item: React.FC<ItemProps> = ({
     };
 
     const handleAddToCart = (event: React.MouseEvent) => {
-        event.stopPropagation(); // 이벤트 전파 중지
+        event.stopPropagation();
         addToCart(productId);
     };
 
@@ -50,12 +54,6 @@ const Item: React.FC<ItemProps> = ({
         }
         return stars;
     };
-
-    const formatPrice = (price: number) => {
-        return new Intl.NumberFormat('ko-KR').format(price);
-    };
-
-    const discountedPrice = price - (price * (discount / 100));
 
     return (
         <div className={styles.item} onClick={handleViewDetails}>
@@ -78,11 +76,11 @@ const Item: React.FC<ItemProps> = ({
                         <>
                             <span className={styles.discount}>{discount}%</span>
                             <span className={styles.un__discount}>{price}</span>
-                            <span className={styles.price}>{formatPrice(discountedPrice)}원</span>
+                            <span className={styles.price}>{formatPrice(discountedPrice)}</span>
                         </>
                     )}
                     {discount === 0 && (
-                        <span className={styles.price}>{formatPrice(price)}원</span>
+                        <span className={styles.price}>{formatPrice(price)}</span>
                     )}
                 </div>
                 <div className={styles.recommendationAndReviews}>

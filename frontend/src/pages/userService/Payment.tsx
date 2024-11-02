@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './Payment.module.css';
-import { CartItem } from "../../utils/product/cart";
 import { handleKaKaoPaymentRequest } from "../../utils/product/payment";
 import axios from 'axios';
 import {decryptToken} from "../../utils/auth/token";
 import axiosInstance from "../../utils/error/axiosInstance";
+import {CartItem} from "../../typings/product";
 
 const shippingFee = 3000;
 

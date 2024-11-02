@@ -1,6 +1,3 @@
-/**
- *  상품에 대한 정보
- * */
 export interface Product {
     memberId: string;
     name: string;
@@ -35,4 +32,14 @@ export interface DetailedCategoryList {
     name: string;
     tag: string;
     link:string;
+}
+
+export interface CartItem {
+    cartId: string;
+    productId:string;
+    cartQuantity: number;
+    discountRate: number;
+    productPrice: number;
+    productImg: string;
+    productName: string;
 }
