@@ -24,23 +24,23 @@ const Cart: React.FC = () => {
     const loadCartItems = async () => {
         try {
             setIsLoading(false)
+
             const items: CartItem[] = await fetchCartItems();
             setCartItems(items);
             setSelectedItems(items.map((item: CartItem) => item.cartId));
             calculateTotalPrice(items, items.map((item: CartItem) => item.cartId));
-            setIsLoading(true)
         } catch (error) {
             handleAxiosError(error as AxiosError);
+
+        }finally {
+            setIsLoading(true)
         }
     };
 
     useEffect(() => {
         loadCartItems();
+        console.log(cartItems)
     }, []);
-
-    if(!isLoading){
-        return <LoadingSpinner/>
-    }
 
 
     const calculateTotalPrice = (items: CartItem[], selected: string[]) => {
@@ -49,8 +49,11 @@ const Cart: React.FC = () => {
                 .filter(item => selected.includes(item.cartId))
                 .reduce((total, item) => {
                     const productPrice = item.productPrice ?? 0;
-                    return total + productPrice * item.cartQuantity;
+                    const discountRate = item.productDiscountRate ? item.productDiscountRate / 100 : 0;
+                    const discountedPrice = productPrice * (1 - discountRate);
+                    return total + discountedPrice * item.cartQuantity;
                 }, 0);
+
             const totalPrice = selectedProductPrice + (selectedProductPrice > 0 ? shippingFee : 0);
             setTotalPrice(totalPrice);
         }
@@ -65,9 +68,10 @@ const Cart: React.FC = () => {
             setCartItems(newCartItems);
             setSelectedItems(newSelectedItems);
             calculateTotalPrice(newCartItems, newSelectedItems);
-            setIsLoading(true)
         } catch (error) {
             handleAxiosError(error as AxiosError);
+        }finally {
+            setIsLoading(true)
         }
     };
 
@@ -107,6 +111,11 @@ const Cart: React.FC = () => {
         const selectedProducts = cartItems.filter(item => selectedItems.includes(item.cartId));
         navigate('/payment', {state: {selectedProducts, totalPrice}}); // 결제 페이지로 이동하면서 상태 전달
     };
+
+    if (!isLoading) {
+        return <LoadingSpinner/>
+    }
+
 
     return (
         <div className={styles.container}>
@@ -175,7 +184,10 @@ const Cart: React.FC = () => {
                                     </div>
                                     <div className={styles.total}>
                                         <p className={styles.price}>
-                                            {item.productPrice ? formatPrice(item.productPrice * item.cartQuantity) : '0원'}
+                                            {item.productDiscountRate
+                                                ? formatPrice(Math.round((item.productPrice * item.cartQuantity) * (1 - item.productDiscountRate / 100)))
+                                                : formatPrice(item.productPrice * item.cartQuantity)
+                                            }
                                         </p>
                                     </div>
                                 </div>
@@ -186,7 +198,7 @@ const Cart: React.FC = () => {
                 <div className={styles.summaryContainer}>
                     <div className={styles.summary}>
                         <div className={styles.shippingFee}>
-                            <span>배송비:</span>
+                        <span>배송비:</span>
                             <span>{formatPrice(shippingFee)}</span>
                         </div>
 

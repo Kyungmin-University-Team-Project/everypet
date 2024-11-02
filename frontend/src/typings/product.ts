@@ -18,6 +18,8 @@ export interface Product {
     salesCount: number;
 }
 
+export const shippingFee = 3000;
+
 
 export interface CategoryProductList {
     productMainCategory: string,
@@ -38,7 +40,7 @@ export interface CartItem {
     cartId: string;
     productId:string;
     cartQuantity: number;
-    discountRate: number;
+    productDiscountRate: number;
     productPrice: number;
     productImg: string;
     productName: string;

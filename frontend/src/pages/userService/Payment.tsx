@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './Payment.module.css';
 import { handleKaKaoPaymentRequest } from "../../utils/product/payment";
-import axios from 'axios';
-import {decryptToken} from "../../utils/auth/token";
 import axiosInstance from "../../utils/error/axiosInstance";
-import {CartItem} from "../../typings/product";
+import { CartItem } from "../../typings/product";
+import { formatPrice } from "../../utils/product/product";
 
 const shippingFee = 3000;
 
@@ -13,17 +12,26 @@ const Payment: React.FC = () => {
     const location = useLocation();
     const { selectedProducts, totalPrice } = location.state || { selectedProducts: [], totalPrice: 0 };
 
-    const [recipient, setRecipient] = useState('');
-    const [postalCode, setPostalCode] = useState('');
-    const [address, setAddress] = useState('');
-    const [detailedAddress, setDetailedAddress] = useState('');
-    const [phonePrefix, setPhonePrefix] = useState('010');
-    const [phoneNumber1, setPhoneNumber1] = useState('');
-    const [phoneNumber2, setPhoneNumber2] = useState('');
-    const [safeNumber, setSafeNumber] = useState(false);
-    const [request, setRequest] = useState('');
+    console.log(selectedProducts)
 
-    const formatPrice = (price: number) => price.toLocaleString('ko-KR') + '원';
+    const [orderInfo, setOrderInfo] = useState({
+        recipient: '',
+        postalCode: '',
+        address: '',
+        detailedAddress: '',
+        phonePrefix: '010',
+        phoneNumber1: '',
+        phoneNumber2: '',
+        safeNumber: false,
+        request: '',
+    });
+
+    const handleOrderInfoChange = (field: string, value: string | boolean) => {
+        setOrderInfo(prevState => ({
+            ...prevState,
+            [field]: value,
+        }));
+    };
 
     const handlePayment = async () => {
         const orderId = crypto.randomUUID();
@@ -38,12 +46,12 @@ const Payment: React.FC = () => {
                 quantity: item.cartQuantity
             })),
             delivery: shippingFee,
-            postalCode: postalCode,
-            address: address,
-            addressDetail: detailedAddress,
-            receiver: recipient,
-            phone: `${phonePrefix}${phoneNumber1}${phoneNumber2}`,
-            request: request
+            postalCode: orderInfo.postalCode,
+            address: orderInfo.address,
+            addressDetail: orderInfo.detailedAddress,
+            receiver: orderInfo.recipient,
+            phone: `${orderInfo.phonePrefix}${orderInfo.phoneNumber1}${orderInfo.phoneNumber2}`,
+            request: orderInfo.request
         };
 
         try {
@@ -76,7 +84,6 @@ const Payment: React.FC = () => {
         }
     };
 
-
     return (
         <div className={styles.container}>
             <header className={styles.header}>
@@ -93,22 +100,17 @@ const Payment: React.FC = () => {
                     </div>
                     <section className={styles.orderInfo}>
                         <div className={styles.orderHeader}>
-                            <h2 className={styles.orderTitle}>
-                                배송정보
-                            </h2>
-                            <button className={styles.orderSearch__btn}>
-                                배송지목록
-                            </button>
+                            <h2 className={styles.orderTitle}>배송정보</h2>
+                            <button className={styles.orderSearch__btn}>배송지목록</button>
                         </div>
                         <div className={styles.inputForm}>
                             <div className={styles.inputGroup}>
                                 <input
                                     type="text"
-                                    id="recipient"
                                     placeholder="받는사람"
                                     className={styles.inputField}
-                                    value={recipient}
-                                    onChange={(e) => setRecipient(e.target.value)}
+                                    value={orderInfo.recipient}
+                                    onChange={(e) => handleOrderInfoChange('recipient', e.target.value)}
                                 />
                             </div>
                             <div className={styles.inputGroup__address}>
@@ -117,8 +119,8 @@ const Payment: React.FC = () => {
                                     type="text"
                                     placeholder="우편번호"
                                     className={styles.inputField}
-                                    value={postalCode}
-                                    onChange={(e) => setPostalCode(e.target.value)}
+                                    value={orderInfo.postalCode}
+                                    onChange={(e) => handleOrderInfoChange('postalCode', e.target.value)}
                                 />
                             </div>
                             <div className={styles.inputGroup}>
@@ -126,8 +128,8 @@ const Payment: React.FC = () => {
                                     type="text"
                                     placeholder="기본 주소"
                                     className={styles.inputField}
-                                    value={address}
-                                    onChange={(e) => setAddress(e.target.value)}
+                                    value={orderInfo.address}
+                                    onChange={(e) => handleOrderInfoChange('address', e.target.value)}
                                 />
                             </div>
                             <div className={styles.inputGroup}>
@@ -135,15 +137,15 @@ const Payment: React.FC = () => {
                                     type="text"
                                     placeholder="상세 주소 및 상세 건물명"
                                     className={styles.inputField}
-                                    value={detailedAddress}
-                                    onChange={(e) => setDetailedAddress(e.target.value)}
+                                    value={orderInfo.detailedAddress}
+                                    onChange={(e) => handleOrderInfoChange('detailedAddress', e.target.value)}
                                 />
                             </div>
                             <div className={styles.inputGroup__phone}>
                                 <select
                                     className={styles.phoneSelect}
-                                    value={phonePrefix}
-                                    onChange={(e) => setPhonePrefix(e.target.value)}
+                                    value={orderInfo.phonePrefix}
+                                    onChange={(e) => handleOrderInfoChange('phonePrefix', e.target.value)}
                                 >
                                     <option value="010">010</option>
                                     <option value="011">011</option>
@@ -155,16 +157,16 @@ const Payment: React.FC = () => {
                                     maxLength={4}
                                     placeholder="휴대폰 앞자리"
                                     className={styles.phoneInput}
-                                    value={phoneNumber1}
-                                    onChange={(e) => setPhoneNumber1(e.target.value)}
+                                    value={orderInfo.phoneNumber1}
+                                    onChange={(e) => handleOrderInfoChange('phoneNumber1', e.target.value)}
                                 />
                                 <input
                                     type="text"
                                     maxLength={4}
                                     placeholder="휴대폰 뒷자리"
                                     className={styles.phoneInput}
-                                    value={phoneNumber2}
-                                    onChange={(e) => setPhoneNumber2(e.target.value)}
+                                    value={orderInfo.phoneNumber2}
+                                    onChange={(e) => handleOrderInfoChange('phoneNumber2', e.target.value)}
                                 />
                             </div>
                             <div className={styles.checkboxGroup}>
@@ -172,8 +174,8 @@ const Payment: React.FC = () => {
                                     type="checkbox"
                                     id="safeNumber"
                                     className={styles.checkbox}
-                                    checked={safeNumber}
-                                    onChange={(e) => setSafeNumber(e.target.checked)}
+                                    checked={orderInfo.safeNumber}
+                                    onChange={(e) => handleOrderInfoChange('safeNumber', e.target.checked)}
                                 />
                                 <label htmlFor="safeNumber">안심번호 사용</label>
                             </div>
@@ -182,8 +184,8 @@ const Payment: React.FC = () => {
                                 <select
                                     id="request"
                                     className={styles.requestSelect}
-                                    value={request}
-                                    onChange={(e) => setRequest(e.target.value)}
+                                    value={orderInfo.request}
+                                    onChange={(e) => handleOrderInfoChange('request', e.target.value)}
                                 >
                                     <option value="default">배송시 요청사항 선택하기</option>
                                     <option value="door">문 앞에 놔주세요</option>
@@ -222,7 +224,12 @@ const Payment: React.FC = () => {
                                             <p>{item.cartQuantity}개</p>
                                         </div>
                                         <div className={styles.total}>
-                                            <p className={styles.price}>{formatPrice(item.productPrice * item.cartQuantity)}</p>
+                                            <p className={styles.price}>
+                                                {item.productDiscountRate
+                                                    ? formatPrice(Math.round((item.productPrice * item.cartQuantity) * (1 - item.productDiscountRate / 100)))
+                                                    : formatPrice(item.productPrice * item.cartQuantity)
+                                                }
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -237,7 +244,7 @@ const Payment: React.FC = () => {
                             <span>{formatPrice(shippingFee)}</span>
                         </div>
                         <div className={styles.summaryTotal}>
-                            <span>합계:</span>
+                        <span>합계:</span>
                             <span>{formatPrice(totalPrice)}</span>
                         </div>
                         <button
