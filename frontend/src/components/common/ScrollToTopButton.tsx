@@ -1,48 +1,28 @@
-import React, {useEffect, useState} from 'react';
-import {FaArrowUp} from 'react-icons/fa';
+import React from 'react';
 import styles from './ScrollToTopButton.module.css';
+import { FaArrowUp } from 'react-icons/fa';
+import useScrollPosition from "../../hooks/useScrollPosition";
 
 const ScrollToTopButton: React.FC = () => {
-    const [isVisible, setIsVisible] = useState(false);
-    const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
-
-    const handleScroll = () => {
-        const currentScrollPos = window.scrollY;
-        const isScrollingUp = prevScrollPos > currentScrollPos;
-
-        if (currentScrollPos > 300 && isScrollingUp) {
-            setIsVisible(true);
-        } else {
-            setIsVisible(false);
-        }
-
-        setPrevScrollPos(currentScrollPos);
-    };
+    const isVisible = useScrollPosition(300); // 300px 이상 스크롤 시 버튼 표시
 
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
-            behavior: 'auto'
+            behavior: 'smooth'
         });
     };
 
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [prevScrollPos]);
-
     return (
         <div className={styles.scrollToTop}>
-            {isVisible &&
-              <button
-                onClick={scrollToTop}
-                className={`${styles.scrollButton} ${isVisible ? styles.enter : ""}`}
-              >
-                <FaArrowUp className={styles.icon}/>
-              </button>
-            }
+            {isVisible && (
+                <button
+                    onClick={scrollToTop}
+                    className={`${styles.scrollButton} ${isVisible ? styles.enter : ""}`}
+                >
+                    <FaArrowUp className={styles.icon}/>
+                </button>
+            )}
         </div>
     );
 };

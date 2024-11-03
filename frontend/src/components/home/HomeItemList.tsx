@@ -1,11 +1,11 @@
 import React from 'react';
 import {Product} from "../../typings/product";
-import {useQuery} from "react-query";
 import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
 import ErrorComponent from "../../utils/reactQuery/ErrorComponent";
 import Item from "../common/Item";
 import axios from "axios";
 import NotFoundProduct from "../../utils/reactQuery/NotFoundProduct";
+import {useQuery} from "@tanstack/react-query";
 
 const HomeItemList = ({brandName}: { brandName: string }) => {
     const orderBy = 'popularity';
@@ -18,12 +18,17 @@ const HomeItemList = ({brandName}: { brandName: string }) => {
     };
 
     const {
-        data,
+        data: product,
         error,
-        isLoading
-    } = useQuery<Product[], Error>(['searchProducts', brandName, orderBy, page], fetchItems);
+        isPending
+    } = useQuery<Product[], Error>({
+        // 동일한 키로 요청시 재호출 하지 않음(캐싱값 사용)
+        // 브랜드가 변경되지 않는이상 캐싱값 사용
+        queryKey: [brandName],
+        queryFn: fetchItems,
+    });
 
-    if (isLoading) {
+    if (isPending) {
         return <LoadingSpinner/>;
     }
 
@@ -33,8 +38,8 @@ const HomeItemList = ({brandName}: { brandName: string }) => {
 
     return (
         <>
-            {data && data.length > 0 ? (
-                data.map((item) => (
+            {product && product.length > 0 ? (
+                product.map((item) => (
                     <Item
                         key={item.productId}
                         productId={item.productId}

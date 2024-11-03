@@ -1,5 +1,46 @@
 :root {
+  /* Primary Colors */
+  --color-primary: #3d86f7; /* 메인 색상 */
+  --color-primary-light: #82b1ff; /* 밝은 메인 색상 */
+  --color-primary-dark: #0d47a1; /* 어두운 메인 색상 */
+
+  /* Secondary Colors */
+  --color-secondary: #ff6f61; /* 보조 색상 */
+  --color-secondary-light: #ffa094; /* 밝은 보조 색상 */
+  --color-secondary-dark: #c43e30; /* 어두운 보조 색상 */
+
+  /* Neutral Colors */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-gray-light: #f5f5f5;
+  --color-gray: #c0c0c0;
+  --color-gray-dark: #616161;
+
+  /* Text Colors */
+  --color-text-primary: #212121; /* 기본 텍스트 색상 */
+  --color-text-secondary: #757575; /* 보조 텍스트 색상 */
+  --color-text-light: #ffffff; /* 밝은 텍스트 색상 */
+
+  /* Background Colors */
+  --color-background: #ffffff; /* 기본 배경색 */
+  --color-background-alt: #f5f5f5; /* 보조 배경색 */
+  --color-background-dark: #e0e0e0; /* 어두운 배경색 */
+
+  /* Border Colors */
+  --color-border: #c5c5c5; /* 기본 테두리 색상 */
+  --color-border-dark: #bdbdbd; /* 어두운 테두리 색상 */
+
+  /* Alert Colors */
+  --color-success: #4caf50;
+  --color-warning: #ff9800;
+  --color-error: #f44336;
+  --color-info: #2196f3;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(45deg, #4e93f7, #82b1ff);
+  --gradient-secondary: linear-gradient(45deg, #ff6f61, #ffa094);
 }
+
 
 body {
   margin: 0;

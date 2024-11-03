@@ -1,6 +1,3 @@
-/**
- *  상품에 대한 정보
- * */
 export interface Product {
     memberId: string;
     name: string;
@@ -21,6 +18,8 @@ export interface Product {
     salesCount: number;
 }
 
+export const shippingFee = 3000;
+
 
 export interface CategoryProductList {
     productMainCategory: string,
@@ -35,4 +34,14 @@ export interface DetailedCategoryList {
     name: string;
     tag: string;
     link:string;
+}
+
+export interface CartItem {
+    cartId: string;
+    productId:string;
+    cartQuantity: number;
+    productDiscountRate: number;
+    productPrice: number;
+    productImg: string;
+    productName: string;
 }

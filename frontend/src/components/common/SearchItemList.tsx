@@ -7,6 +7,7 @@ import ErrorComponent from '../../utils/reactQuery/ErrorComponent';
 import {Product} from '../../typings/product';
 import {VscSearchStop} from 'react-icons/vsc';
 import DropDown from "./DropDown";
+import {decryptToken} from "../../utils/auth/token";
 
 interface SearchItemListProps {
     searchQuery: string;
@@ -24,9 +25,18 @@ const SearchItemList: React.FC<SearchItemListProps> = ({searchQuery}) => {
         setLoading(true);
         setError(null); // 초기화
         try {
-            const response = await axios.get(`/product/search/${searchQuery}/${orderBy}/${page}/${pageSize}`,{},);
-            console.log(response)
-            setData(response.data);
+            if (localStorage.getItem("access")) {
+                const token = decryptToken();
+                const response = await axios.get(`/product/search/${searchQuery}/${orderBy}/${page}/${pageSize}`, {
+                    headers: {
+                        access: token
+                    }
+                },);
+                setData(response.data);
+            } else {
+                const response = await axios.get(`/product/search/${searchQuery}/${orderBy}/${page}/${pageSize}`);
+                setData(response.data);
+            }
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Unknown error occurred');
         } finally {

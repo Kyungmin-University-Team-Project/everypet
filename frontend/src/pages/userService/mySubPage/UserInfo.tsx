@@ -50,7 +50,7 @@ const UserInfo = () => {
     }
 
     return (
-        <div className={styles.section}>
+        <>
             <h2>회원 정보</h2>
             <div className={styles.gridContainer}>
                 <div className={styles.label}>아이디</div>
@@ -85,7 +85,7 @@ const UserInfo = () => {
                 <div className={styles.label}>마케팅 동의</div>
                 <div className={styles.value}>{userInfo.agreeMarketingYn === "Y" ? "동의함" : "동의하지 않음"}</div>
             </div>
-        </div>
+        </>
     );
 };
 

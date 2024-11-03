@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
 import Item from './Item';
 import styles from './ItemList.module.css';
@@ -9,6 +8,7 @@ import { fetchProductList } from "../../utils/product/fetchProductList";
 import { CategoryProductList, Product } from "../../typings/product";
 import DropDown from "./DropDown";
 import NotFoundProduct from "../../utils/reactQuery/NotFoundProduct";
+import {useQuery} from "@tanstack/react-query";
 
 const ItemList = () => {
     const { pathname } = useLocation();
@@ -39,25 +39,29 @@ const ItemList = () => {
         return await fetchProductList(params);
     };
 
-    const { data, error, isLoading } = useQuery<Product[], Error>(['products', productMainCategory, productSubCategory, orderBy], () =>
-        fetchItems({
-            productMainCategory: productMainCategory, // URL에서 추출한 메인 카테고리
-            productSubCategory: productSubCategory, // URL에서 추출한 서브 카테고리 (없으면 'all')
-            orderBy: orderBy, // 정렬 기준에 따라 데이터를 다시 불러옴
-            page: 1,
-            pageSize: 10
-        })
-    );
+    const { data: product, isPending, isError, error } = useQuery<Product[]>({
+        queryKey: ['products', productMainCategory, productSubCategory, orderBy],
+        queryFn: (() =>
+            fetchItems({
+                productMainCategory: productMainCategory, // URL에서 추출한 메인 카테고리
+                productSubCategory: productSubCategory, // URL에서 추출한 서브 카테고리 (없으면 'all')
+                orderBy: orderBy, // 정렬 기준에 따라 데이터를 다시 불러옴
+                page: 1,
+                pageSize: 10
+            }
+    ))
 
-    if (isLoading) {
+    });
+
+    if (isPending) {
         return <LoadingSpinner />;
     }
 
-    if (error) {
+    if (isError) {
         return <ErrorComponent message={error.message} />;
     }
 
-    if (!data || data.length === 0) {
+    if (!product || product.length === 0) {
         return (
             <NotFoundProduct/>
         );
@@ -68,7 +72,7 @@ const ItemList = () => {
             <DropDown orderBy={orderBy} handleSortChange={handleSortChange}/>
 
             <div className={styles.container}>
-                {data?.map((item) => (
+                {product?.map((item) => (
                     <Item
                         key={item.productId}
                         productId={item.productId}
