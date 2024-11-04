@@ -1,6 +1,6 @@
 package com.everypet.review.service.impl;
 
-import com.everypet.global.util.GoogleImageCloudService;
+import com.everypet.clound.service.impl.GoogleBucketCloudService;
 import com.everypet.order.model.dao.OrderDetailMapper;
 import com.everypet.review.model.dao.ReviewHelpfulMapper;
 import com.everypet.review.model.dao.ReviewMapper;
@@ -23,7 +23,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewMapper reviewMapper;
     private final ReviewPhotoMapper reviewPhotoMapper;
-    private final GoogleImageCloudService googleImageCloudService;
+    private final GoogleBucketCloudService googleBucketCloudService;
     private final OrderDetailMapper orderDetailMapper;
     private final ReviewHelpfulMapper reviewHelpfulMapper;
     @Transactional(rollbackFor = Exception.class)
@@ -56,12 +56,12 @@ public class ReviewServiceImpl implements ReviewService {
                 String imageId = reviewId + "-" + imageNumber; // UUID 생성
 
                 // 클라우드에 이미지 업로드
-                googleImageCloudService.uploadImageToCloudStorage(imageId, file);
+                googleBucketCloudService.uploadImageToCloudStorage(imageId, file);
 
                 // 리뷰 이미지 삽입
                 Map<String, Object> reviewPhotoMap = new HashMap<>();
                 reviewPhotoMap.put("reviewId", reviewId); // 삽입된 리뷰 ID
-                reviewPhotoMap.put("photoUrl", googleImageCloudService.getGOOGLE_IMAGE_CLOUD_URL() + imageId);
+                reviewPhotoMap.put("photoUrl", googleBucketCloudService.getGOOGLE_IMAGE_CLOUD_URL() + imageId);
 
                 reviewPhotoMapper.insertReviewPhoto(reviewPhotoMap); // 리뷰 사진 삽입
             }
@@ -79,8 +79,8 @@ public class ReviewServiceImpl implements ReviewService {
 
         // 리뷰 이미지 삭제 (클라우드에서 삭제)
         for (String photoUrl : reviewPhotosURL) {
-            String photoId = photoUrl.replace(googleImageCloudService.getGOOGLE_IMAGE_CLOUD_URL(), "");
-            googleImageCloudService.deleteImageFromCloudStorage(photoId);
+            String photoId = photoUrl.replace(googleBucketCloudService.getGOOGLE_IMAGE_CLOUD_URL(), "");
+            googleBucketCloudService.deleteImageFromCloudStorage(photoId);
         }
 
         // 리뷰 이미지 삭제 (DB에서 삭제)

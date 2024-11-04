@@ -8,39 +8,31 @@ import com.everypet.support.model.dto.SellerInquiryReplyDto.CreateSellerInquiryR
 import com.everypet.support.model.dto.SellerInquiryReplyDto.UpdateSellerInquiryReply;
 import com.everypet.support.model.entity.SellerInquiryReply;
 import com.everypet.support.service.SellerInquiryReplyService;
+import com.everypet.support.service.SellerInquiryService;
 import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class SellerInquiryReplyServiceImpl implements SellerInquiryReplyService {
 
-    private static final Logger log = LogManager.getLogger(SellerInquiryReplyServiceImpl.class);
     private final SellerInquiryReplyMapper sellerInquiryReplyMapper;
     private final SellerInquiryMapper sellerInquiryMapper;
 
+    private final SellerInquiryService sellerInquiryService;
     private final ProductService productService;
 
     @Override
-    public Long createSellerInquiryReply(CreateSellerInquiryReply reply, Member member) {
+    public void createSellerInquiryReply(CreateSellerInquiryReply reply, Member member) {
 
-        if(sellerInquiryMapper.isReplyExist(reply.getSellerInquiryId())) {
-            throw new RuntimeException("이미 답변이 작성된 문의입니다.");
-        }
-
-        if(!sellerInquiryMapper.isSellerInquiryExist(reply.getSellerInquiryId())) {
-            throw new RuntimeException("존재하지 않는 문의입니다.");
-        }
-
-        if(!productService.selectProductByProductId(reply.getProductId()).getMemberId().equals(member.getMemberId())) {
-            throw new RuntimeException("상품 판매자만 문의 답변을 작성할 수 있습니다.");
-        }
+        validateSellerInquiry(reply, member);
 
         reply.setMemberId(member.getMemberId());
 
-        return sellerInquiryReplyMapper.insertSellerInquiryReply(reply);
+        sellerInquiryReplyMapper.insertSellerInquiryReply(reply);
+
+        sellerInquiryService.completeSellerInquiry(reply.getSellerInquiryId(), reply.getSellerInquiryReplyId());
+
     }
 
     @Override
@@ -56,5 +48,22 @@ public class SellerInquiryReplyServiceImpl implements SellerInquiryReplyService 
         sellerInquiryReplyMapper.deleteSellerInquiryReply(replyId, member.getMemberId());
     }
 
+    private void validateSellerInquiry(CreateSellerInquiryReply reply, Member member) {
+
+        if (sellerInquiryMapper.isReplyExist(reply.getSellerInquiryId())) {
+            throw new RuntimeException("이미 답변이 작성된 문의입니다.");
+        }
+
+        if (!sellerInquiryMapper.isSellerInquiryExist(reply.getSellerInquiryId())) {
+            throw new RuntimeException("존재하지 않는 문의입니다.");
+        }
+
+        String sellerID = productService.selectProductByProductId(reply.getProductId()).getMemberId();
+
+        if (!sellerID.equals(member.getMemberId())) {
+            throw new RuntimeException("상품 판매자만 문의 답변을 작성할 수 있습니다.");
+        }
+
+    }
 
 }

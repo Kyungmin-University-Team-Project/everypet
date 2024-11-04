@@ -4,7 +4,6 @@ import com.everypet.member.model.vo.Member;
 import com.everypet.support.model.dto.SellerInquiryReplyDto.CreateSellerInquiryReply;
 import com.everypet.support.model.dto.SellerInquiryReplyDto.UpdateSellerInquiryReply;
 import com.everypet.support.service.SellerInquiryReplyService;
-import com.everypet.support.service.SellerInquiryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -22,17 +21,12 @@ public class SellerInquiryReplyController {
 
     private static final Logger log = LogManager.getLogger(SellerInquiryReplyController.class);
     private final SellerInquiryReplyService sellerInquiryReplyService;
-    private final SellerInquiryService sellerInquiryService;
 
     @PostMapping
     @ApiOperation(value = "판매자 문의 답변 작성", notes = "판매자 문의에 대한 답변을 작성합니다.")
     public ResponseEntity<String> createSellerInquiryReply(@RequestBody CreateSellerInquiryReply reply, @AuthenticationPrincipal Member member) {
 
-        // 판매자 문의 답변 작성
         sellerInquiryReplyService.createSellerInquiryReply(reply, member);
-
-        // 판매자 문의 답변 완료 처리
-        sellerInquiryService.completeSellerInquiry(reply.getSellerInquiryId(), reply.getSellerInquiryReplyId());
 
         return ResponseEntity.ok("success");
 

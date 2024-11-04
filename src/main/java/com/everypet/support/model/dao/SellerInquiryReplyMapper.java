@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface SellerInquiryReplyMapper {
 
-    Long insertSellerInquiryReply(CreateSellerInquiryReply reply);
+    void insertSellerInquiryReply(CreateSellerInquiryReply reply);
 
     void updateSellerInquiryReply(SellerInquiryReply reply);
 
