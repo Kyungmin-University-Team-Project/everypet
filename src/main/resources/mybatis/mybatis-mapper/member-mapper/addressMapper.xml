@@ -25,4 +25,10 @@
         WHERE ADDRESS_ID = #{addressId} AND MEMBER_ID = #{memberId}
     </delete>
 
+    <select id="findAddressCountByMemberId" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM TBL_ADDRESS
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+
 </mapper>

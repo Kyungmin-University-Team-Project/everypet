@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.everypet.support.model.dao.SellerInquiryReplyMapper">
+    
+    <insert id="insertSellerInquiryReply" parameterType="com.everypet.support.model.dto.SellerInquiryReplyDto$CreateSellerInquiryReply" useGeneratedKeys="true" keyProperty="sellerInquiryReplyId">
+        INSERT INTO TBL_SELLER_INQUIRY_REPLY (MEMBER_ID, REPLY_CONTENTS)
+        VALUES (#{memberId}, #{replyContents})
+    </insert>
+
+    <update id="updateSellerInquiryReply" parameterType="com.everypet.support.model.entity.SellerInquiryReply">
+        UPDATE TBL_SELLER_INQUIRY_REPLY
+        SET REPLY_CONTENTS = #{replyContents}
+        WHERE SELLER_INQUIRY_REPLY_ID = #{sellerInquiryReplyId} AND MEMBER_ID = #{memberId}
+    </update>
+
+    <delete id="deleteSellerInquiryReply" parameterType="map">
+        DELETE
+        FROM TBL_SELLER_INQUIRY_REPLY
+        WHERE SELLER_INQUIRY_REPLY_ID = #{sellerInquiryReplyId} AND MEMBER_ID = #{memberId}
+    </delete>
+
+</mapper>
