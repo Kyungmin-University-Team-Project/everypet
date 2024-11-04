@@ -6,7 +6,7 @@ import com.everypet.support.model.dto.SellerInquiryReplyDto.UpdateSellerInquiryR
 
 public interface SellerInquiryReplyService {
 
-    Long createSellerInquiryReply(CreateSellerInquiryReply reply, Member member);
+    void createSellerInquiryReply(CreateSellerInquiryReply reply, Member member);
 
     void updateSellerInquiryReply(Long replyId, UpdateSellerInquiryReply reply, Member member);
 
