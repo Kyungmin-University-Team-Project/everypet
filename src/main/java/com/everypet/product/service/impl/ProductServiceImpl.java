@@ -1,6 +1,6 @@
 package com.everypet.product.service.impl;
 
-import com.everypet.global.util.GoogleImageCloudService;
+import com.everypet.clound.service.impl.GoogleBucketCloudService;
 import com.everypet.global.util.IpUtil;
 import com.everypet.keyword.service.KeywordLogService;
 import com.everypet.keyword.service.KeywordRankService;
@@ -25,7 +25,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
-    private final GoogleImageCloudService imageCloudService;
+    private final GoogleBucketCloudService imageCloudService;
     private final ProductMapper productMapper;
 
     private final KeywordRankService keywordRankService;
