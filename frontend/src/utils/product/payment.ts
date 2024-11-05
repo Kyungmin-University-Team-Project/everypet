@@ -50,9 +50,9 @@ export const handleKaKaoPaymentRequest = async (
             console.log(notified)
 
             if (notified.status === 200) {
-                if (window.confirm('결제가 성공적으로 완료되었습니다. 확인을 누르시면 홈으로 이동합니다.')) {
-                    window.location.href = '/';  // 홈 경로로 리디렉션
-                }
+                // if (window.confirm('결제가 성공적으로 완료되었습니다. 확인을 누르시면 홈으로 이동합니다.')) {
+                //     window.location.href = '/';  // 홈 경로로 리디렉션
+                // }
             } else {
                 alert('결제 정보 전송에 실패했습니다.');
             }
