@@ -67,6 +67,7 @@ const Item: React.FC<ItemProps> = ({
                 <span className={styles.tag}>New</span>
                 <div className={styles.icon__wrap}>
                     <FaShoppingCart
+                        size={30}
                         className={styles.cartIcon} // CSS 모듈에서 정의된 클래스명 사용
                         onClick={handleAddToCart}
                     />

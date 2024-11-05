@@ -28,11 +28,11 @@ const RealtimekeywordModal: React.FC<ModalProps> = ({isOpen, onClose, rankings})
     // 순위 변동 아이콘 렌더링
     const renderTrendIcon = (rankingGap: number) => {
         if (rankingGap > 0) {
-            return <FaLongArrowAltUp className={styles.upArrow}/>
+            return <FaLongArrowAltUp size={15} className={styles.upArrow}/>
         } else if ((rankingGap < 0)) {
-            return <FaLongArrowAltDown className={styles.downArrow}/>
+            return <FaLongArrowAltDown size={10} className={styles.downArrow}/>
         } else {
-            return <CgBorderStyleSolid className={styles.steady}/>;
+            return <CgBorderStyleSolid size={10} className={styles.steady}/>;
         }
     };
 
@@ -45,7 +45,7 @@ const RealtimekeywordModal: React.FC<ModalProps> = ({isOpen, onClose, rankings})
     return (
         <div className={styles.modal}>
             <div className={styles.modalContent}>
-                <IoIosArrowUp className={styles.closeButton} onClick={onClose}/>
+                <IoIosArrowUp size={20} className={styles.closeButton} onClick={onClose}/>
                 <div className={styles.modalHeader}>
                     실시간 쇼핑 검색어
                     <div className={styles.modalDate}>{formattedDate} 기준</div>
