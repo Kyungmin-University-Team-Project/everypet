@@ -25,6 +25,7 @@
     "@types/react-redux": "^7.1.33",
     "@types/sockjs-client": "^1.5.4",
     "axios": "^1.6.8",
+    "classnames": "^2.5.1",
     "crypto-js": "^4.2.0",
     "date-fns": "^3.6.0",
     "debug": "^4.3.4",

@@ -1,33 +1,122 @@
 .section {
-    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.table {
-    width: 100%;
-    border-collapse: collapse;
+.title {
+    font-weight: bold;
+    font-size: 28px;
+    color: #333;
+}
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+
     margin-top: 10px;
 }
 
-.table th,
-.table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #ddd;
+.card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.table th {
-    background-color: #f2f2f2;
-    text-align: left;
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.button {
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.inquiryId {
+    font-size: 14px;
+    color: #555;
+    font-weight: bold;
+}
+
+.status {
+    font-size: 14px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    color: #fff;
+}
+
+.completed {
+    background-color: #28a745;
+}
+
+.inProgress {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.cardBody {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.cardTitle {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.date {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #777;
+}
+
+.iconContainer {
+    bottom: 15px;
+    right: 15px;
     cursor: pointer;
+
+    transition: all 0.2s ease;
 }
 
-.button:hover {
-    background-color: #0056b3;
+.iconContainer__active{
+    transform: rotate(45deg);
+}
+
+.icon {
+    font-size: 24px;
+    color: #007BFF;
+}
+
+.answer {
+    width: 210px;
+    margin: 20px auto 0 auto;
+
+    padding: 10px;
+    background-color: #fdfdfd;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    animation: slideDown 0.3s ease-in-out;
+}
+
+@keyframes slideDown {
+    from {
+        max-height: 0;
+        opacity: 0;
+    }
+    to {
+        max-height: 500px;
+        opacity: 1;
+    }
 }

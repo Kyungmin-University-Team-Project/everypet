@@ -2,35 +2,13 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
-    margin: 40px 0;
+    margin: 60px 0 40px 0;
     padding: 0 10px;
     overflow-x: auto;
-}
-
-.container::-webkit-scrollbar {
-
-    height: 16px; /* 가로 스크롤바의 높이 */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 
 }
-
-.container::-webkit-scrollbar-track {
-    background: #f1f1f1; /* 트랙 배경색 */
-    border-radius: 10px; /* 둥근 모서리 추가 */
-}
-
-.container::-webkit-scrollbar-thumb {
-    background-color: #669AFF; /* 스크롤바 핸들 색상 */
-    border-radius: 10px; /* 둥근 모서리 */
-    border: 2px solid #f1f1f1; /* 스크롤바 핸들과 트랙 사이의 경계 */
-
-    transition: hover 1000ms ease-in;
-}
-
-.container::-webkit-scrollbar-thumb:hover {
-    background-color: #0056b3; /* 호버 시 핸들 색상 변경 */
-}
-
-
 
 .item {
     background-color: #ffffff;
