@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import styles from './MobileSearchModal.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { FiArrowLeft } from "react-icons/fi";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
+import {FiArrowLeft} from "../../icons/Icons";
 
 interface MobileSearchModalProps {
     isOpen: boolean;
     onClose: () => void;
 }
 
-const MobileSearchModal: React.FC<MobileSearchModalProps> = ({ isOpen, onClose }) => {
+const MobileSearchModal: React.FC<MobileSearchModalProps> = ({isOpen, onClose}) => {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -33,7 +33,7 @@ const MobileSearchModal: React.FC<MobileSearchModalProps> = ({ isOpen, onClose }
         <div className={styles.modal}>
             <div className={styles.modalHeader}>
                 <button className={styles.backButton} onClick={onClose}>
-                    <FiArrowLeft />
+                    <FiArrowLeft/>
                 </button>
                 <div className={styles.searchContainer}>
                     <input
@@ -45,7 +45,7 @@ const MobileSearchModal: React.FC<MobileSearchModalProps> = ({ isOpen, onClose }
                         onKeyDown={handleKeyPress}
                     />
                     <button className={styles.searchButton} onClick={handleSearchClick}>
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                        <FontAwesomeIcon icon={faMagnifyingGlass}/>
                     </button>
                 </div>
             </div>

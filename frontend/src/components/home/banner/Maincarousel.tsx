@@ -1,9 +1,9 @@
 import React, {useRef} from 'react';
 import Slider from 'react-slick';
-import {AiOutlineLeft, AiOutlineRight} from 'react-icons/ai';
 import styles from './Maincarousel.module.css';
 import './slick-theme.css';
 import './slick.css';
+import {AiOutlineLeft, AiOutlineRight} from "../../../icons/Icons";
 
 // 배너와 상품 정보를 담아놓은 데이터셋 필요
 const bannerUrls = [

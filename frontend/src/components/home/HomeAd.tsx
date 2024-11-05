@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './HomeAd.module.css';
-import {FaChevronRight} from 'react-icons/fa6';
 import HomeItemList from "./HomeItemList";
+import {FaChevronRight} from "../../icons/Icons";
 
 interface HomeAdProps {
     title: string,
@@ -23,7 +23,7 @@ const HomeAd = ({imageUrl, brandName}: HomeAdProps) => {
                     {/*여기는 검색으로 바꾸기*/}
                     <span className={styles.view__all}>
             전체보기
-            <FaChevronRight/>
+            <FaChevronRight size={30}/>
           </span>
                 </div>
                 <HomeItemList brandName={brandName}/>

@@ -1,13 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Outlet, useLocation} from 'react-router-dom';
-import {FaAngleRight} from 'react-icons/fa';
-import {IoIosInformationCircleOutline} from 'react-icons/io';
 import styles from './moreInformation.module.css';
 import Review from "./review";
 import ProductInquiry from "./ProductInquiry";
 import SellerInformation from "./SellerInformation";
 import axios from "axios";
 import {addToCart} from "../../utils/product/cart";
+import {FaAngleRight, IoIosInformationCircleOutline} from "../../icons/Icons";
 
 //  productRatingAvg 별점
 //  productViews 클릭 수
@@ -68,7 +67,6 @@ const MoreInformation: React.FC = () => {
     }, []);
 
 
-
     const handlePlus = (e: React.MouseEvent<HTMLButtonElement>) => {
         setNumberOfProduct(prevState => prevState + 1);
         setFinalPrice(finalPrice + originalPrice)
@@ -124,14 +122,19 @@ const MoreInformation: React.FC = () => {
                             <div className={styles.breadcrumb}>
                                 <span className={styles.headingText}>{productList?.productMainCategory}</span>
                                 <strong>{productList?.name}</strong>
-                                <FaAngleRight className={styles.icon}/>
+                                <FaAngleRight
+                                    size={30}
+                                    className={styles.icon}/>
                             </div>
                             <h2></h2>
                             <div className={styles.reviews}>
                                 <span className={styles.review_count}>
                                     <strong></strong> 리뷰 보기
                                 </span>
-                                <FaAngleRight className={styles.icon}/>
+                                <FaAngleRight
+                                    size={30
+                                    }
+                                    className={styles.icon}/>
                             </div>
                             <p className={styles.price_original}>{productList?.productPrice.toLocaleString()}원</p>
                             <p className={styles.dynamic_price}>
@@ -181,7 +184,7 @@ const MoreInformation: React.FC = () => {
                         <Review/>
                     </div>
                     <div ref={reviewsRef}>
-                        <ProductInquiry productId={productList?.productId ?? null} />
+                        <ProductInquiry productId={productList?.productId ?? null}/>
                     </div>
                     <div ref={productInquiryRef}>
                         <SellerInformation/>
