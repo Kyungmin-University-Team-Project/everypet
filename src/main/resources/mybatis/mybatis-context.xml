@@ -39,7 +39,7 @@
 
         <typeAlias type="com.everypet.review.model.dto.ReviewDTO$ProductReviewDTO" alias="ProductReviewDTO"/>
 
-        <typeAlias type="com.everypet.support.model.vo.SellerInquiry" alias="SellerInquiry"/>
+        <typeAlias type="com.everypet.support.model.entity.SellerInquiry" alias="SellerInquiry"/>
 
         <typeAlias type="com.everypet.global.util.PageableList" alias="PageableList"/>
 

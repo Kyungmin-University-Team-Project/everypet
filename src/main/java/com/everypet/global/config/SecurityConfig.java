@@ -1,18 +1,19 @@
 package com.everypet.global.config;
 
+import com.everypet.auth.jwt.JWTManager;
 import com.everypet.auth.jwt.filter.CustomLogoutFilter;
 import com.everypet.auth.jwt.filter.JWTFilter;
 import com.everypet.auth.jwt.filter.LoginFilter;
-import com.everypet.auth.repository.RefreshTokenRepository;
 import com.everypet.auth.oauth2.config.CustomClientRegistrationRepo;
 import com.everypet.auth.oauth2.handler.CustomSuccessHandler;
 import com.everypet.auth.oauth2.service.CustomOAuth2UserService;
+import com.everypet.auth.repository.RefreshTokenRepository;
 import com.everypet.global.util.CookieManager;
-import com.everypet.auth.jwt.JWTManager;
 import com.everypet.member.service.UserLoginFailHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,6 +28,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -80,6 +82,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/user").hasRole("USER")
                 .antMatchers("/reissue").permitAll()
+                .antMatchers(HttpMethod.POST, "/support/seller/inquiry").authenticated()
+                .antMatchers(HttpMethod.PATCH, "/support/seller/inquiry/*").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/support/seller/inquiry/*").authenticated()
+                .antMatchers(HttpMethod.POST, "/support/seller/inquiry/reply").hasRole("ADMIN") // ADMIN 권한만 접근 가능
                 .anyRequest().permitAll();
 
         http // 필터 위치
@@ -108,7 +114,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 예외처리
         http
                 .exceptionHandling()
-                .accessDeniedPage("/");
+                .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Access Token 요청하세요 (Access Token 보내!!!!!!!)"))
+                .accessDeniedHandler((request, response, accessDeniedException) -> response.sendError(HttpServletResponse.SC_FORBIDDEN, "권한이 없습니다 (너의 권한이 USER 라서 권한이 없어!!!!!!!)"));
+                //.accessDeniedPage("/");
 
         // 세션 설정
         http

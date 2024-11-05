@@ -7,8 +7,14 @@ import java.util.List;
 
 @Mapper
 public interface AddressMapper {
+
     int insertAddress(Address address);
+
     int updateAddress(Address address);
+
     int deleteAddress(Address address);
+
     List<Address> selectAddressByMemberId(String memberId);
+
+    int findAddressCountByMemberId(String memberId);
 }
