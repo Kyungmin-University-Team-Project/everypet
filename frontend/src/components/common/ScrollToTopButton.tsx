@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './ScrollToTopButton.module.css';
-import { FaArrowUp } from 'react-icons/fa';
 import useScrollPosition from "../../hooks/useScrollPosition";
+import {FaArrowUp} from "../../icons/Icons";
 
 const ScrollToTopButton: React.FC = () => {
     const isVisible = useScrollPosition(300); // 300px 이상 스크롤 시 버튼 표시

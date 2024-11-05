@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from "./NotFoundProduct.module.css";
-import {VscSearchStop} from "react-icons/vsc";
+import {VscSearchStop} from "../../icons/Icons";
 
 const NotFoundProduct = () => {
     return (

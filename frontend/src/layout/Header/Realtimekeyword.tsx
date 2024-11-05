@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import styles from './Realtimekeyword.module.css';
 import RealtimekeywordModal from './RealtimekeywordModal';
-import { Ranking } from '../../typings/layout';
-import { IoIosArrowDown } from 'react-icons/io';
-import { useNavigate } from 'react-router-dom';
+import {Ranking} from '../../typings/layout';
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import {IoIosArrowDown} from "../../icons/Icons";
 
 const Realtimekeyword = () => {
     const [rankings, setRankings] = useState<Ranking[]>([]);
@@ -80,7 +80,7 @@ const Realtimekeyword = () => {
                     <span className={styles.keyword}>{currentRanking.keyword}</span>
                 </div>
             )}
-            <IoIosArrowDown onClick={openRankModal} className={styles.open} />
+            <IoIosArrowDown onClick={openRankModal} className={styles.open}/>
 
             {isModalOpen && (
                 <div className={styles.modalWrapper} ref={modalRef}>
