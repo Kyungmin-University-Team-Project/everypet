@@ -1,23 +1,15 @@
 import React from 'react';
 
 // item, review page
-interface FaShoppingCartProps {
+interface itemProps {
     size?: number;
     className?: string; // optional
     onClick?: (event: React.MouseEvent<SVGElement>) => void; // onClick 이벤트 핸들러
 }
 
-interface FaArrowUpProps {
-    className: string;
-}
 
 
-// item 페이지
-interface Item {
-    size?: number;
-}
-
-export const FaRegStar: React.FC<Item> = ({size = 15}) => (
+export const FaRegStar: React.FC<itemProps> = ({size = 15}) => (
     <svg
         height={size}
         width={size}
@@ -29,7 +21,7 @@ export const FaRegStar: React.FC<Item> = ({size = 15}) => (
             d="M6.839,137.02l46.417,47.774l-8.028,68.045l-0.045,0.619c-0.33,8.836,2.138,16.25,7.129,21.429 c7.104,7.374,18.707,8.866,30.214,3.677l61.621-33.545l61.099,33.281l0.518,0.264c4.637,2.087,9.201,3.148,13.579,3.148 c6.484,0,12.39-2.428,16.63-6.825c4.991-5.179,7.46-12.593,7.13-21.429l-8.079-68.664l45.793-47.05l0.624-0.724 c6.398-8.417,8.415-18.073,5.535-26.482c-2.884-8.409-10.395-14.8-20.611-17.524l-68.781-11.09l-29.99-60.339l-0.452-0.792 c-5.916-9.052-14.594-14.247-23.811-14.247c-8.861,0-17.113,4.634-23.247,13.035l-35.47,62.327L22.495,92.344l-0.853,0.193 c-10.141,2.895-17.575,9.422-20.398,17.912C-1.58,118.935,0.456,128.624,6.839,137.02z M16.046,115.378 c1.163-3.483,4.524-6.218,9.496-7.721l68.969-11.59l38.435-67.629c6.271-8.305,15.056-8.097,20.901,0.531l33.342,67.083 l75.515,12.131c4.986,1.409,8.358,4.03,9.521,7.414c1.152,3.362,0.106,7.48-2.931,11.629l-50.632,52.014l8.86,75.093 c0.112,4.297-0.873,7.739-2.782,9.72c-2.503,2.6-7.089,2.691-12.309,0.396l-68.289-37.201l-68.294,37.201 c-5.23,2.291-9.815,2.194-12.304-0.386c-1.914-1.99-2.899-5.433-2.788-9.729l8.861-75.093l-50.622-52.009 C15.934,123.048,14.888,118.858,16.046,115.378z"></path> </g> </g> </g></svg>
 );
 
-export const FaStar: React.FC<Item> = ({size = 15}) => (
+export const FaStar: React.FC<itemProps> = ({size = 15}) => (
     <svg
         height={size}
         width={size}
@@ -43,7 +35,7 @@ export const FaStar: React.FC<Item> = ({size = 15}) => (
     </svg>
 );
 
-export const FaShoppingCart: React.FC<FaShoppingCartProps> = ({size = 30, className, onClick}) => (
+export const FaShoppingCart: React.FC<itemProps> = ({size = 30, className, onClick}) => (
     <svg
         className={className}
         height={size}
@@ -61,7 +53,7 @@ export const FaShoppingCart: React.FC<FaShoppingCartProps> = ({size = 30, classN
 
 // 스크롤 top 페이지
 
-export const FaArrowUp: React.FC<FaArrowUpProps> = ({className}) => (
+export const FaArrowUp: React.FC<itemProps> = ({className}) => (
     <svg
         className={className}
         xmlns="http://www.w3.org/2000/svg"
@@ -74,11 +66,9 @@ export const FaArrowUp: React.FC<FaArrowUpProps> = ({className}) => (
 );
 
 // 서치아이템, 낫파운드 페이지
-interface VscSearchStopProps {
-    className?: string; // optional
-}
 
-export const VscSearchStop: React.FC<VscSearchStopProps> = ({className}) => (
+
+export const VscSearchStop: React.FC<itemProps> = ({className}) => (
     <svg
         className={className}
         xmlns="http://www.w3.org/2000/svg"
@@ -93,11 +83,9 @@ export const VscSearchStop: React.FC<VscSearchStopProps> = ({className}) => (
 );
 
 // 메인캐러셀 페이지
-interface IconProps {
-    size?: number; // optional, default size
-}
 
-export const AiOutlineLeft: React.FC<IconProps> = ({size = 30}) => (
+
+export const AiOutlineLeft: React.FC<itemProps> = ({size = 30}) => (
     <svg
         height={size}
         width={size}
@@ -111,7 +99,7 @@ export const AiOutlineLeft: React.FC<IconProps> = ({size = 30}) => (
     </svg>
 );
 
-export const AiOutlineRight: React.FC<IconProps> = ({size = 30}) => (
+export const AiOutlineRight: React.FC<itemProps> = ({size = 30}) => (
     <svg
         height={size}
         width={size}
@@ -126,12 +114,8 @@ export const AiOutlineRight: React.FC<IconProps> = ({size = 30}) => (
 );
 
 // Footer Page
-interface Footer {
-    className?: string;
-    size?: number;
-}
 
-export const FaUniversity: React.FC<Footer> = ({className, size = 25}) => (
+export const FaUniversity: React.FC<itemProps> = ({className, size = 25}) => (
     <svg
         className={className}
         height={size}
@@ -146,7 +130,7 @@ export const FaUniversity: React.FC<Footer> = ({className, size = 25}) => (
     </svg>
 );
 
-export const FaEnvelope: React.FC<Footer> = ({className, size = 25}) => (
+export const FaEnvelope: React.FC<itemProps> = ({className, size = 25}) => (
     <svg
         height={size}
         widths={size}
@@ -165,7 +149,7 @@ export const FaEnvelope: React.FC<Footer> = ({className, size = 25}) => (
     </svg>
 );
 
-export const FaGithub: React.FC<Footer> = ({className, size = 25}) => (
+export const FaGithub: React.FC<itemProps> = ({className, size = 25}) => (
     <svg
         className={className}
         height={size}
@@ -192,11 +176,9 @@ export const FaGithub: React.FC<Footer> = ({className, size = 25}) => (
 
 // HOME AD PAGE
 
-interface HomeAd {
-    size?: number;
-}
 
-export const FaChevronRight: React.FC<HomeAd> = ({size = 30}) => (
+
+export const FaChevronRight: React.FC<itemProps> = ({size = 30}) => (
     <svg
         widths={size}
         height={size}
@@ -209,11 +191,9 @@ export const FaChevronRight: React.FC<HomeAd> = ({size = 30}) => (
 );
 
 // 카테고리 페이지
-interface IconProps {
-    size?: number;
-}
 
-export const RxHamburgerMenu: React.FC<IconProps> = ({size = 28}) => (
+
+export const RxHamburgerMenu: React.FC<itemProps> = ({size = 28}) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -226,13 +206,9 @@ export const RxHamburgerMenu: React.FC<IconProps> = ({size = 28}) => (
 );
 
 // 리얼타임 키워드 페이지
-interface IconProps {
-    size?: number; // optional, default size
-    className?: string; // optional
-    onClick?: (event: React.MouseEvent<SVGElement>) => void; // optional click handler
-}
 
-export const IoIosArrowDown: React.FC<IconProps> = ({size = 24, className, onClick}) => (
+
+export const IoIosArrowDown: React.FC<itemProps> = ({size = 24, className, onClick}) => (
     <svg
         className={className}
         onClick={onClick}
@@ -249,20 +225,10 @@ export const IoIosArrowDown: React.FC<IconProps> = ({size = 24, className, onCli
     </svg>
 );
 
-interface IconProps {
-    size?: number; // optional, default size
-    className?: string; // optional
-    onClick?: (event: React.MouseEvent<SVGElement>) => void; // optional click handler
-}
 
 // 리얼타임 키워드모델 페이지
-interface RealKeywordModal {
-    className?: string;
-    size?: number;
-    onClick?: (event: React.MouseEvent<SVGElement>) => void;
-}
 
-export const FaLongArrowAltUp: React.FC<RealKeywordModal> = ({className, size = 30}) => (
+export const FaLongArrowAltUp: React.FC<itemProps> = ({className, size = 30}) => (
     <svg
         height={size}
         width={size}
@@ -278,7 +244,7 @@ export const FaLongArrowAltUp: React.FC<RealKeywordModal> = ({className, size = 
     </svg>
 );
 
-export const FaLongArrowAltDown: React.FC<RealKeywordModal> = ({className, size=30}) => (
+export const FaLongArrowAltDown: React.FC<itemProps> = ({className, size=30}) => (
     <svg
         height={size}
         width={size}
@@ -294,7 +260,7 @@ export const FaLongArrowAltDown: React.FC<RealKeywordModal> = ({className, size=
     </svg>
 );
 
-export const CgBorderStyleSolid: React.FC<RealKeywordModal> = ({className, size=30}) => (
+export const CgBorderStyleSolid: React.FC<itemProps> = ({className, size=30}) => (
     <svg
         height={size}
         width={size}
@@ -310,7 +276,7 @@ export const CgBorderStyleSolid: React.FC<RealKeywordModal> = ({className, size=
     </svg>
 );
 
-export const IoIosArrowUp: React.FC<RealKeywordModal> = ({size=20,onClick, className}) => (
+export const IoIosArrowUp: React.FC<itemProps> = ({size=20,onClick, className}) => (
     <svg
         height={size}
         width={size}
@@ -334,11 +300,8 @@ export const IoIosArrowUp: React.FC<RealKeywordModal> = ({size=20,onClick, class
 
 
 // 유저메뉴 페이지
-interface Usermenu {
-    size: number;
-}
 
-export const BsCart: React.FC<Usermenu> = ({size = 15}) => (
+export const BsCart: React.FC<itemProps> = ({size = 15}) => (
     <svg
         height={size}
         width={size}
@@ -352,7 +315,7 @@ export const BsCart: React.FC<Usermenu> = ({size = 15}) => (
     </svg>
 );
 
-export const LiaShippingFastSolid: React.FC<Usermenu> = ({size = 15}) => (
+export const LiaShippingFastSolid: React.FC<itemProps> = ({size = 15}) => (
     <svg
         height={size}
         width={size}
@@ -379,7 +342,7 @@ export const LiaShippingFastSolid: React.FC<Usermenu> = ({size = 15}) => (
 
 )
 
-export const AiOutlineUser: React.FC<Usermenu> = ({size = 15}) => (
+export const AiOutlineUser: React.FC<itemProps> = ({size = 15}) => (
     <svg
         height={size}
         widths={size}
@@ -402,12 +365,9 @@ export const FiArrowLeft = () => (
 )
 
 // MoreInformation Page
-interface MoreInformation {
-    className?: string,
-    size?: number,
-}
 
-export const FaAngleRight: React.FC<MoreInformation> = ({className, size = 30}) => (
+
+export const FaAngleRight: React.FC<itemProps> = ({className, size = 30}) => (
     <svg
         widths={size}
         height={size}
@@ -417,7 +377,7 @@ export const FaAngleRight: React.FC<MoreInformation> = ({className, size = 30}) 
     </svg>
 )
 
-export const IoIosInformationCircleOutline: React.FC<MoreInformation> = ({className, size = 30}) => (
+export const IoIosInformationCircleOutline: React.FC<itemProps> = ({className, size = 30}) => (
     <svg
         widths={size}
         height={size}
@@ -428,11 +388,6 @@ export const IoIosInformationCircleOutline: React.FC<MoreInformation> = ({classN
 )
 
 // 카트 페이지
-interface Cart {
-    size?: number
-    className?: string;
-    onClick?: (event: React.MouseEvent<SVGElement>) => void;
-}
 
 export const FaMinus = () => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -447,7 +402,7 @@ export const FaPlus = () => (
     </svg>
 )
 
-export const FaTrashAlt: React.FC<Cart> = ({className, onClick, size=30}) => (
+export const FaTrashAlt: React.FC<itemProps> = ({className, onClick, size=30}) => (
     <svg
         height={size}
         width={size}
@@ -488,11 +443,9 @@ export const FaMagnifyingGlass = () => (
 );
 
 //  InquiryHistory page
-interface IoIosAdd {
-    className?: string
-}
 
-export const IoIosAdd: React.FC<IoIosAdd> = ({className}) => (
+
+export const IoIosAdd: React.FC<itemProps> = ({className}) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         className={className}
