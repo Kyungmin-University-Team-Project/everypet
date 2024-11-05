@@ -360,5 +360,18 @@ export const FaTrashAlt: React.FC<Cart> = ({className, onClick}) => (
 
 )
 
+export const FaMagnifyingGlass = () => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 512 512"
+        width="24"
+        height="24"
+        fill="currentColor"
+    >
+        <path
+            d="M500.3 444.5L405.7 349.9c28.3-34.1 45.4-78.4 45.4-126.3 0-111.6-90.4-202-202-202S47 112 47 223.6 137.4 425.6 249 425.6c47.9 0 92.2-17.1 126.3-45.4l94.6 94.6c6.6 6.6 17.4 6.6 24 0l6.3-6.3c6.5-6.7 6.5-17.5-.1-24.1zM249 383.6c-88.3 0-160-71.7-160-160s71.7-160 160-160 160 71.7 160 160-71.7 160-160 160z"
+        />
+    </svg>
+);
 
 

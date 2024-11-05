@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import styles from './MobileSearchModal.module.css';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
-import {FiArrowLeft} from "../../icons/Icons";
+import {FaMagnifyingGlass, FiArrowLeft} from "../../icons/Icons";
 
 interface MobileSearchModalProps {
     isOpen: boolean;
@@ -45,7 +43,7 @@ const MobileSearchModal: React.FC<MobileSearchModalProps> = ({isOpen, onClose}) 
                         onKeyDown={handleKeyPress}
                     />
                     <button className={styles.searchButton} onClick={handleSearchClick}>
-                        <FontAwesomeIcon icon={faMagnifyingGlass}/>
+                        <FaMagnifyingGlass/>
                     </button>
                 </div>
             </div>
