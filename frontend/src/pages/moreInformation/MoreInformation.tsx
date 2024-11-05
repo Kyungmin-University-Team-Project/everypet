@@ -143,13 +143,12 @@ const MoreInformation: React.FC = () => {
                                 <span className={styles.discount_info_one}>{finalPrice.toLocaleString()}원</span>
                             </p>
                             <p>
-                                <strong>적립혜택</strong>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;최대 <strong className={styles.score_text}>2,270점 +
+                                <strong>적립혜택:</strong>
+                                &nbsp;최대 <strong className={styles.score_text}>2,270점 +
                                 2p</strong> 적립
                             </p>
                             <p>
-                                <strong>배송정보</strong>
-                                <IoIosInformationCircleOutline className={styles.icon}/>
+                                <strong>배송정보:</strong>
                                 &nbsp;배송비 3,000원(30,000원 이상 무료배송)
                                 <br/>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;제주도/도서산간 추가배송비 별도

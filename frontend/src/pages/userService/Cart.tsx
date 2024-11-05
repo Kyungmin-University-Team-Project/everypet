@@ -143,6 +143,7 @@ const Cart: React.FC = () => {
                         <div className={styles.item__wrap} key={item.cartId}>
                             <div className={styles.icon__btn}>
                                 <FaTrashAlt
+                                    size={30}
                                     className={styles.removeItemButton}
                                     onClick={() => handleDeleteItem(item.productId)}
                                 />

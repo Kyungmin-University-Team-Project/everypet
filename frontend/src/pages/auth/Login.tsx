@@ -7,7 +7,6 @@ import styles from './Login.module.css';
 import Signup from './Signup';
 import IdFind from './IdFind';
 import Agreement from './Agreement';
-import '@fortawesome/fontawesome-free/css/all.css';
 import {login} from "../../utils/auth/AuthAPI";
 import {encryptToken} from "../../utils/auth/token";
 import {LoginData} from "../../typings/login";

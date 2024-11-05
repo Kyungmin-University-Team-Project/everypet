@@ -1,11 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
 import styles from './SearchInput.module.css';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../redux/store/store';
 import {setSearchInput} from '../../redux/features/searchSlice';
+import {FaMagnifyingGlass} from "../../icons/Icons";
 
 const SearchInput = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -88,7 +87,7 @@ const SearchInput = () => {
                 placeholder="검색어를 입력해 주세요"
             />
             <button className={styles.search__btn} onClick={handleSearchClick}>
-                <FontAwesomeIcon icon={faMagnifyingGlass}/>
+               <FaMagnifyingGlass/>
             </button>
 
             {isInputClicked && (
@@ -104,7 +103,7 @@ const SearchInput = () => {
                                 {filteredSearches.map((search) => (
                                     <li key={search} className={styles.historyItem}
                                         onClick={() => handleSearchItemClick(search)}>
-                                        <FontAwesomeIcon icon={faMagnifyingGlass}/>
+                                        <FaMagnifyingGlass/>
                                         {search}
                                     </li>
                                 ))}

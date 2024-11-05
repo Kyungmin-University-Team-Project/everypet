@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {IoIosAdd} from 'react-icons/io';
 import classNames from 'classnames';
 import styles from './InquiryHistory.module.css';
+import {IoIosAdd} from "../../../icons/Icons";
 
 const inquiries = [
     {id: '123456', title: '배송 문의', date: '2024-07-15', status: '답변 완료', answer: '배송은 2~3일 내에 완료될 예정입니다.'},

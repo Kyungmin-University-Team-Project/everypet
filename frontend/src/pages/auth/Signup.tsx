@@ -3,7 +3,6 @@ import {useLocation, useNavigate} from "react-router-dom";
 import Postcode from "./Postcode";
 import styles from "./Signup.module.css";
 
-import "@fortawesome/fontawesome-free/css/all.css";
 import axios from "axios";
 import {Code, Join} from "../../typings/signup";
 import {sendVerificationEmail, signUpLogin, verifyCode} from "../../utils/auth/AuthAPI";
