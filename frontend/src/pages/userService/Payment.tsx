@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 import styles from './Payment.module.css';
-import { handleKaKaoPaymentRequest } from "../../utils/product/payment";
+import {handleKaKaoPaymentRequest} from "../../utils/product/payment";
 import axiosInstance from "../../utils/error/axiosInstance";
-import { CartItem } from "../../typings/product";
-import { formatPrice } from "../../utils/product/product";
+import {CartItem} from "../../typings/product";
+import {formatPrice} from "../../utils/product/product";
+import PaymentSuccess from "./PaymentSuccess";
 
 const shippingFee = 3000;
 
 const Payment: React.FC = () => {
     const location = useLocation();
-    const { selectedProducts, totalPrice } = location.state || { selectedProducts: [], totalPrice: 0 };
-
-    console.log(selectedProducts)
-
+    const navigate = useNavigate()
+    const {selectedProducts, totalPrice} = location.state || {selectedProducts: [], totalPrice: 0};
     const [orderInfo, setOrderInfo] = useState({
         recipient: '',
         postalCode: '',
@@ -25,6 +24,15 @@ const Payment: React.FC = () => {
         safeNumber: false,
         request: '',
     });
+    const [isPaymentSuccess, setIsPaymentSuccess] = useState(false)
+
+    // 결제 금액이 없다면 부적절한 경로로 들어온것으로 판단
+    useEffect(() => {
+        if (totalPrice === 0) {
+            navigate('/')
+        }
+    }, []);
+
 
     const handleOrderInfoChange = (field: string, value: string | boolean) => {
         setOrderInfo(prevState => ({
@@ -55,8 +63,6 @@ const Payment: React.FC = () => {
         };
 
         try {
-            console.log(orderInsertDTO);
-
             // 주문 정보를 서버로 전송
             const orderResponse = await axiosInstance.post('/order/insert', orderInsertDTO, {
                 headers: {
@@ -65,8 +71,6 @@ const Payment: React.FC = () => {
             });
 
             if (orderResponse.status === 200) {
-                console.log('주문 정보가 성공적으로 전송되었습니다.');
-
                 // 카카오페이 결제 요청
                 await handleKaKaoPaymentRequest(
                     selectedProducts.length > 1
@@ -75,6 +79,8 @@ const Payment: React.FC = () => {
                     totalPrice,
                     orderId,
                 );
+
+                setIsPaymentSuccess(true)
             } else {
                 alert('주문 정보 전송에 실패했습니다.');
             }
@@ -244,7 +250,7 @@ const Payment: React.FC = () => {
                             <span>{formatPrice(shippingFee)}</span>
                         </div>
                         <div className={styles.summaryTotal}>
-                        <span>합계:</span>
+                            <span>합계:</span>
                             <span>{formatPrice(totalPrice)}</span>
                         </div>
                         <button
@@ -255,6 +261,10 @@ const Payment: React.FC = () => {
                     </div>
                 </div>
             </div>
+
+            {
+                isPaymentSuccess && <PaymentSuccess/>
+            }
         </div>
     );
 };

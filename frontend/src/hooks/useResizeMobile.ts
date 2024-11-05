@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
  * @returns {boolean} 모바일 상태 표시 여부
  */
 
-const useResizeMobile = () => {
+const useResizeMobile = (): boolean => {
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {

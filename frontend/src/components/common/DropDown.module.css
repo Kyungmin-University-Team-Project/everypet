@@ -1,12 +1,13 @@
 .selectContainer {
     display: flex;
-    width: 100%;
+    width: 95%;
     justify-content: end;
     margin-bottom: 30px;
+
 }
 
 .select {
-    width: 180px; /* 드롭다운 너비 */
+    width: 150px; /* 드롭다운 너비 */
     padding: 12px 16px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -39,6 +40,7 @@
 }
 
 @media screen and (min-width: 769px) {
-    .selectContainer{
+    .selectContainer {
+        width: 100%
     }
 }

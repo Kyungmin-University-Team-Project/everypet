@@ -1,11 +1,11 @@
 :root {
   /* Primary Colors */
-  --color-primary: #3d86f7; /* 메인 색상 */
+  --color-primary: #309eff; /* 메인 색상 */
   --color-primary-light: #82b1ff; /* 밝은 메인 색상 */
   --color-primary-dark: #0d47a1; /* 어두운 메인 색상 */
 
   /* Secondary Colors */
-  --color-secondary: #ff6f61; /* 보조 색상 */
+  --color-saleprice: #ff4231; /* 할인률 색상 */
   --color-secondary-light: #ffa094; /* 밝은 보조 색상 */
   --color-secondary-dark: #c43e30; /* 어두운 보조 색상 */
 
