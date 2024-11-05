@@ -8,7 +8,7 @@ const navItems = [
     { path: 'userInfo', label: '회원 정보' },
     { path: 'orderManagement', label: '배송조회' },
     { path: 'addressManagement', label: '배송지 관리' },
-    { path: 'pointsAndCoupons', label: '포인트 및 쿠폰' },
+    { path: 'pointsAndCoupons', label: '쿠폰' },
     { path: 'inquiryHistory', label: '문의 내역' },
 ];
 
@@ -40,8 +40,6 @@ const MyPage = () => {
                         <Outlet/>
                     </div>
                 </div>
-            <Footer/>
-
         </div>
     );
 };

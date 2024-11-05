@@ -8,7 +8,7 @@
 }
 
 .noResultsContainer {
-    grid-template-columns: 1fr !important; /* 상품이 없을 때 전체 너비를 차지하도록 */
+    display: flex;
 }
 
 .noResults {
@@ -31,7 +31,7 @@
     font-size: 48px;
 }
 
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 768px) {
     .container {
         grid-template-columns: repeat(4, 1fr); /* 노트북에서 4개씩 보여줌 */
         gap: 40px 0;

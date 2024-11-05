@@ -16,7 +16,7 @@ const SearchInput = () => {
     const inputContainerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        dispatch(setSearchInput('')); // Reset input value
+        dispatch(setSearchInput(''));
     }, [location, dispatch]);
 
     useEffect(() => {
@@ -75,7 +75,7 @@ const SearchInput = () => {
             className={`${isInputClicked ? styles.search__container__write : styles.search__container}`}
             ref={inputContainerRef}
             onBlur={handleBlur}
-            tabIndex={-1} // div 요소가 블러 이벤트를 받을 수 있도록
+            tabIndex={-1}
         >
             <input
                 type='text'

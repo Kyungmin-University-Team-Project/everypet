@@ -12,20 +12,22 @@
 
 .gridContainer {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 15px;
 
     margin-top: 10px;
 }
 
 .card {
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 15px;
     display: flex;
     flex-direction: column;
     position: relative;
+
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -49,18 +51,19 @@
 
 .status {
     font-size: 14px;
-    padding: 3px 8px;
-    border-radius: 12px;
-    color: #fff;
+    padding: 5px 20px;
+    border-radius: 50px;
+    font-weight: bold;
 }
 
 .completed {
-    background-color: #28a745;
+    background-color: #0fb733;
+    color: #fff;
 }
 
 .inProgress {
-    background-color: #ffc107;
-    color: #333;
+    background-color: #2f2f2f;
+    color: #ffffff;
 }
 
 .cardBody {
@@ -83,8 +86,6 @@
 }
 
 .iconContainer {
-    bottom: 15px;
-    right: 15px;
     cursor: pointer;
 
     transition: all 0.2s ease;
@@ -95,19 +96,25 @@
 }
 
 .icon {
-    width: 20px;
+    width: 30px;
     color: #007BFF;
 }
 
 .answer {
-    width: 210px;
-    margin: 20px auto 0 auto;
+    max-width: 787px;
+    padding: 20px;
 
-    padding: 10px;
     background-color: #fdfdfd;
     border-radius: 8px;
     border: 1px solid #ddd;
+
     animation: slideDown 0.3s ease-in-out;
+}
+
+{
+
+    width: 90%;
+    height: 100%;
 }
 
 @keyframes slideDown {
