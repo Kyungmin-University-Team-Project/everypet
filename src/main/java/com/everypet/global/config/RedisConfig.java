@@ -30,9 +30,14 @@ public class RedisConfig {
     @Value("${redis.port}")
     private int port;
 
+    @Value("${redis.database}")
+    private int database;
+
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
-        return new LettuceConnectionFactory(host, port);
+        LettuceConnectionFactory factory = new LettuceConnectionFactory(host, port);
+        factory.setDatabase(database);
+        return factory;
     }
 
     @Bean

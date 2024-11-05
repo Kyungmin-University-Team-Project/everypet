@@ -1,5 +1,6 @@
-package com.everypet.global.util;
+package com.everypet.clound.service.impl;
 
+import com.everypet.clound.service.CloudBucketService;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
@@ -7,14 +8,14 @@ import com.google.cloud.storage.StorageException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-@Component
+@Service
 @RequiredArgsConstructor
-public class GoogleImageCloudService {
+public class GoogleBucketCloudService implements CloudBucketService {
 
     @Value("${spring.cloud.gcp.bucket}")
     private String bucketName;

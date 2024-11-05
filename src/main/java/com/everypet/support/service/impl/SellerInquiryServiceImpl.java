@@ -1,12 +1,11 @@
 package com.everypet.support.service.impl;
 
 import com.everypet.global.util.PageableList;
-import com.everypet.member.exception.MemberIdNotFoundException;
 import com.everypet.member.model.vo.Member;
 import com.everypet.support.model.dao.SellerInquiryMapper;
 import com.everypet.support.model.dto.SellerInquirtyDTO.InsertSellerInquiry;
 import com.everypet.support.model.dto.SellerInquirtyDTO.UpdateSellerInquiry;
-import com.everypet.support.model.vo.SellerInquiry;
+import com.everypet.support.model.entity.SellerInquiry;
 import com.everypet.support.service.SellerInquiryService;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
@@ -27,11 +26,6 @@ public class SellerInquiryServiceImpl implements SellerInquiryService {
 
     @Override
     public void createSellerInquiry(InsertSellerInquiry insertSellerInquiry, Member member) {
-
-        if(member == null) {
-            throw new MemberIdNotFoundException("로그인이 필요합니다.");
-        }
-
         insertSellerInquiry.setMemberId(member.getMemberId());
         sellerInquiryMapper.insertSellerInquiry(insertSellerInquiry);
     }
@@ -60,22 +54,17 @@ public class SellerInquiryServiceImpl implements SellerInquiryService {
 
     @Override
     public void deleteSellerInquiry(Long inquiryId, Member member) {
-
-        if(member == null) {
-            throw new MemberIdNotFoundException("로그인이 필요합니다.");
-        }
-
         sellerInquiryMapper.deleteSellerInquiry(inquiryId, member.getMemberId());
     }
 
     @Override
     public void updateSellerInquiry(Long inquiryId, UpdateSellerInquiry updateSellerInquiry, Member member) {
-
-        if(member == null) {
-            throw new MemberIdNotFoundException("로그인이 필요합니다.");
-        }
-
         sellerInquiryMapper.updateSellerInquiry(inquiryId, updateSellerInquiry, member.getMemberId());
+    }
+
+    @Override
+    public void completeSellerInquiry(Long sellerInquiryId, Long sellerInquiryReplyId) {
+        sellerInquiryMapper.completeSellerInquiry(sellerInquiryId, sellerInquiryReplyId);
     }
 
 }
