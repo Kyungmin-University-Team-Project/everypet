@@ -75,7 +75,6 @@ const Item: React.FC<ItemProps> = ({
                     {discount > 0 && (
                         <>
                             <span className={styles.discount}>{discount}%</span>
-                            <span className={styles.un__discount}>{price}</span>
                             <span className={styles.price}>{formatPrice(discountedPrice)}</span>
                         </>
                     )}

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
  * @param offsetY 스크롤 위치 기준
  * @returns {boolean} 스크롤 버튼 표시 여부
  */
-const useScrollPosition = (offsetY : number) => {
+const useScrollPosition = (offsetY : number) : boolean => {
     const [isVisible, setIsVisible] = useState(false);
     const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
 

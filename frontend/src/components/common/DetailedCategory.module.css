@@ -2,25 +2,22 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
-    margin-bottom: 40px;
+    margin: 40px 0;
+    padding: 0 10px;
     overflow-x: auto;
-    padding:20px;
-
 }
 
-/* 전체 스크롤바 영역 스타일 */
 .container::-webkit-scrollbar {
+
     height: 16px; /* 가로 스크롤바의 높이 */
 
 }
 
-/* 스크롤바의 트랙(배경) */
 .container::-webkit-scrollbar-track {
     background: #f1f1f1; /* 트랙 배경색 */
     border-radius: 10px; /* 둥근 모서리 추가 */
 }
 
-/* 스크롤바의 움직이는 핸들 */
 .container::-webkit-scrollbar-thumb {
     background-color: #669AFF; /* 스크롤바 핸들 색상 */
     border-radius: 10px; /* 둥근 모서리 */
@@ -29,7 +26,6 @@
     transition: hover 1000ms ease-in;
 }
 
-/* 스크롤바 핸들에 호버 효과 */
 .container::-webkit-scrollbar-thumb:hover {
     background-color: #0056b3; /* 호버 시 핸들 색상 변경 */
 }
@@ -39,7 +35,7 @@
 .item {
     background-color: #ffffff;
     border: 1px solid #ccc;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
     min-width: 120px;
     transition: all 0.2s ease;
@@ -71,5 +67,11 @@
         gap: 1px;
         overflow-x: visible;
         padding: 0;
+
+        margin: 20px 0
+    }
+
+    .item{
+        padding: 20px;
     }
 }
