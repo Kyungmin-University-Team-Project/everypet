@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import Item from './Item';
 import styles from './SearchItemList.module.css';
 import LoadingSpinner from '../../utils/reactQuery/LoadingSpinner';
 import ErrorComponent from '../../utils/reactQuery/ErrorComponent';
 import {Product} from '../../typings/product';
-import {VscSearchStop} from 'react-icons/vsc';
 import DropDown from "./DropDown";
 import {decryptToken} from "../../utils/auth/token";
+import {VscSearchStop} from "../../icons/Icons";
 
 interface SearchItemListProps {
     searchQuery: string;

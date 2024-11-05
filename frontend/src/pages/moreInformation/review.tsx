@@ -1,7 +1,7 @@
 import React, {JSX, useEffect, useRef, useState} from 'react';
 import axiosInstance from "../../utils/error/axiosInstance";
 import styles from "./productInqulry.module.css";
-import {FaRegStar, FaStar} from "react-icons/fa";
+import {FaRegStar, FaStar} from "../../icons/Icons";
 
 // 1. 리뷰 상세
 // 2. 리뷰 한줄
@@ -47,20 +47,24 @@ const Review = () => {
     }
 
     useEffect(() => {
-        const stars: JSX.Element[] = [];
+        const newStars: JSX.Element[] = [];
         for (let i = 1; i <= 5; i++) {
-            stars.push(
-                <span onClick={() => handleOnStarClick(i)} >
-                    {i < rating ? <FaStar/>: <FaRegStar/>}
+            newStars.push(
+                <span
+                    key={i} // 각 별에 고유한 키를 추가합니다.
+                    onClick={() => handleOnStarClick(i)}
+                    style={{cursor: 'pointer'}}
+                >
+                    {i <= rating ? <FaStar/> : <FaRegStar key={i}/>}
                 </span>
-            )
+            );
         }
-        setStar(stars);
+        setStar(newStars);
     }, [rating]);
 
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const value = e.target.value;
-        if (value.length <=MAX_CHARS) {
+        if (value.length <= MAX_CHARS) {
             setText(value)
         }
     }
@@ -73,7 +77,7 @@ const Review = () => {
     }
 
     const handleOnStarClick = (index: number) => {
-        setRating(index + 1)
+        setRating(index)
     }
 
 

@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-import {FaTrashAlt} from 'react-icons/fa';
 import styles from './Cart.module.css';
 import {deleteCartItem, fetchCartItems} from '../../utils/product/cart';
 import {handleAxiosError} from '../../utils/error/errorHandler';
 import {AxiosError} from 'axios';
 import {formatPrice} from "../../utils/product/product";
 import {CartItem} from "../../typings/product";
-import {FaMinus, FaPlus} from "react-icons/fa6";
 import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
+import {FaMinus, FaPlus, FaTrashAlt} from "../../icons/Icons";
 
 const shippingFee = 3000;
 
@@ -32,7 +31,7 @@ const Cart: React.FC = () => {
         } catch (error) {
             handleAxiosError(error as AxiosError);
 
-        }finally {
+        } finally {
             setIsLoading(true)
         }
     };
@@ -70,7 +69,7 @@ const Cart: React.FC = () => {
             calculateTotalPrice(newCartItems, newSelectedItems);
         } catch (error) {
             handleAxiosError(error as AxiosError);
-        }finally {
+        } finally {
             setIsLoading(true)
         }
     };
@@ -198,7 +197,7 @@ const Cart: React.FC = () => {
                 <div className={styles.summaryContainer}>
                     <div className={styles.summary}>
                         <div className={styles.shippingFee}>
-                        <span>배송비:</span>
+                            <span>배송비:</span>
                             <span>{formatPrice(shippingFee)}</span>
                         </div>
 

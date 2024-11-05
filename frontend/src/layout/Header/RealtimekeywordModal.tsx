@@ -2,11 +2,9 @@ import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import styles from './RealtimekeywordModal.module.css';
 import {Ranking} from '../../typings/layout';
-import {format, addMinutes} from 'date-fns';
+import {addMinutes, format} from 'date-fns';
 import {ko} from 'date-fns/locale';
-import {IoIosArrowUp} from 'react-icons/io';
-import {FaLongArrowAltUp, FaLongArrowAltDown} from 'react-icons/fa';
-import {CgBorderStyleSolid} from 'react-icons/cg';
+import {CgBorderStyleSolid, FaLongArrowAltDown, FaLongArrowAltUp, IoIosArrowUp} from "../../icons/Icons";
 
 interface ModalProps {
     isOpen: boolean;
