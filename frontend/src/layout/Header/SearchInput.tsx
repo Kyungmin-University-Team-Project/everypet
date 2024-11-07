@@ -6,6 +6,7 @@ import {AppDispatch, RootState} from '../../redux/store/store';
 import {setSearchInput} from '../../redux/features/searchSlice';
 import {FaMagnifyingGlass} from "../../icons/Icons";
 
+// TODO: 최근검색어 구현하기
 const SearchInput = () => {
     const dispatch = useDispatch<AppDispatch>();
     const inputValue = useSelector((state: RootState) => state.search.input);

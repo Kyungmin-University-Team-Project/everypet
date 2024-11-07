@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import styles from './ExhibitionItem.module.css';
 import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
+import {Link} from "react-router-dom";
 
 interface ExhibitionItemProps {
     imageSrc: string;
@@ -22,7 +23,7 @@ const ExhibitionItem: React.FC<ExhibitionItemProps> = ({imageSrc, title, subTitl
 
     return (
         <div className={styles.item}>
-            <a href={link} className={styles.link}>
+            <Link to={link} className={styles.link}>
                 <div className={styles.image__wrap}>
                     {!isLoaded ? (
                         <LoadingSpinner/>
@@ -30,13 +31,7 @@ const ExhibitionItem: React.FC<ExhibitionItemProps> = ({imageSrc, title, subTitl
                         <img src={imageSrc} alt={title} className={styles.image}/> // 이미지 로드 완료 시 이미지 표시
                     )}
                 </div>
-                <div className={styles.overlay}>
-                    <div className={styles.text}>
-                        <h1>{title}</h1>
-                        <p>{subTitle}</p>
-                    </div>
-                </div>
-            </a>
+            </Link>
         </div>
     );
 };

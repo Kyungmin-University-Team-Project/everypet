@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import styles from './MobileSearchModal.module.css';
 import {FaMagnifyingGlass, FiArrowLeft} from "../../icons/Icons";
@@ -11,6 +11,13 @@ interface MobileSearchModalProps {
 const MobileSearchModal: React.FC<MobileSearchModalProps> = ({isOpen, onClose}) => {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState('');
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (isOpen && inputRef.current) {
+            inputRef.current.focus(); // 모달이 열리면 인풋에 포커스
+        }
+    }, [isOpen]);
 
     if (!isOpen) return null;
 
@@ -36,6 +43,7 @@ const MobileSearchModal: React.FC<MobileSearchModalProps> = ({isOpen, onClose}) 
                 <div className={styles.searchContainer}>
                     <input
                         type="text"
+                        ref={inputRef} // 인풋 요소에 ref 추가
                         className={styles.searchInput}
                         placeholder="검색어를 입력해 주세요."
                         value={searchQuery}

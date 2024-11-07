@@ -126,6 +126,8 @@
     list-style: none;
 
     padding: 20px 0;
+    margin-top: 50px;
+
 }
 
 .slick-dots li {
@@ -152,6 +154,7 @@
     border: 0;
     outline: none;
     background: transparent;
+
 }
 
 .slick-dots li button:before {
@@ -172,6 +175,6 @@
 }
 
 .slick-dots li.slick-active button:before {
-    opacity: 0.75;
-    color: #5689e7;
+    opacity: 0.9;
+    color: #000000;
 }
