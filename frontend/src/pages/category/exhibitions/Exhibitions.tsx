@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import styles from './Exhibitions.module.css';
-import ExhibitionsBanner from "../../components/exhibitions/ExhibitionsBanner";
+import ExhibitionsBanner from "./ExhibitionsBanner";
 
 
 const Exhibitions = ({category}: any) => {

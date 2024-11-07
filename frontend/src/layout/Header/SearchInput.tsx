@@ -6,17 +6,19 @@ import {AppDispatch, RootState} from '../../redux/store/store';
 import {setSearchInput} from '../../redux/features/searchSlice';
 import {FaMagnifyingGlass} from "../../icons/Icons";
 
+// TODO: 최근검색어 구현하기
 const SearchInput = () => {
     const dispatch = useDispatch<AppDispatch>();
-    const inputValue = useSelector((state: RootState) => state.search.input);
     const location = useLocation();
     const navigate = useNavigate();
-    const [isInputClicked, setIsInputClicked] = useState<boolean>(false);
-    const recentSearches: string[] = ['검색어1', '검색어2', '검색어3']; // 예시 데이터
     const inputContainerRef = useRef<HTMLDivElement>(null);
+    const inputValue = useSelector((state: RootState) => state.search.input);
+    const [isInputClicked, setIsInputClicked] = useState<boolean>(false);
+    // TODO: 로컬스토리지에 최근 검색어 저장하기 (최대 10개 최신순으로)
+    const recentSearches: string[] = ['검색어1', '검색어2', '검색어3'];
 
     useEffect(() => {
-        dispatch(setSearchInput('')); // Reset input value
+        dispatch(setSearchInput(''));
     }, [location, dispatch]);
 
     useEffect(() => {
@@ -30,11 +32,6 @@ const SearchInput = () => {
         dispatch(setSearchInput(e.target.value));
     };
 
-    const handleSearchClick = () => {
-        navigateToSearchResults(inputValue);
-        setIsInputClicked(false); // 검색 버튼 클릭 시 닫기
-    };
-
     const handleInputToggle = () => {
         setIsInputClicked(prevState => !prevState);
     };
@@ -43,6 +40,15 @@ const SearchInput = () => {
         if (inputContainerRef.current && !inputContainerRef.current.contains(e.relatedTarget as Node)) {
             setIsInputClicked(false);
         }
+    };
+
+    const navigateToSearchResults = (query: string) => {
+        navigate(`/search?query=${encodeURIComponent(query)}`);
+    };
+
+    const handleSearchClick = () => {
+        navigateToSearchResults(inputValue);
+        setIsInputClicked(false);
     };
 
     const handleOutsideClick = (e: MouseEvent) => {
@@ -63,10 +69,6 @@ const SearchInput = () => {
         }
     };
 
-    const navigateToSearchResults = (query: string) => {
-        navigate(`/search?query=${encodeURIComponent(query)}`);
-    };
-
     // 빈 문자열을 제외한 검색어 필터링
     const filteredSearches = recentSearches.filter(search => search.trim() !== '');
 
@@ -75,7 +77,7 @@ const SearchInput = () => {
             className={`${isInputClicked ? styles.search__container__write : styles.search__container}`}
             ref={inputContainerRef}
             onBlur={handleBlur}
-            tabIndex={-1} // div 요소가 블러 이벤트를 받을 수 있도록
+            tabIndex={-1}
         >
             <input
                 type='text'
@@ -99,9 +101,9 @@ const SearchInput = () => {
                                 <button className={styles.close__btn} onClick={handleInputToggle}>전체삭제</button>
                             </div>
                             <div className={styles.historyItem__container}>
-
-                                {filteredSearches.map((search) => (
-                                    <li key={search} className={styles.historyItem}
+                                {filteredSearches.map((search, _index) => (
+                                    <li key={search}
+                                        className={styles.historyItem}
                                         onClick={() => handleSearchItemClick(search)}>
                                         <FaMagnifyingGlass/>
                                         {search}

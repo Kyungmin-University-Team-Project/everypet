@@ -4,11 +4,10 @@
     gap: 20px;
 }
 
-/* 노트북 스타일 */
-@media (min-width: 1400px) {
+@media screen and (min-width: 789px) {
     .banner {
         display: grid;
         grid-template-columns: repeat(2, 1fr); /* 2열 그리드 */
-        gap: 60px 20px;
+        gap: 40px;
     }
 }

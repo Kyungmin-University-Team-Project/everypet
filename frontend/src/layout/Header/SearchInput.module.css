@@ -1,24 +1,21 @@
 .search__container {
     display: flex;
 
-    width: 85vw;
+    width: 100%;
     height: 40px;
     font-size: 16px;
 
-    border: solid 2px #4a8cf0;
-
-    border-radius: 20px;
     padding: 0 15px;
 }
 
 .search__input {
     width: 100%;
 
+
     border: none;
     outline: none;
 
-    font-size: 14px; /* 폰트 크기 조정 */
-
+    font-size: 18px; /* 폰트 크기 조정 */
 }
 
 .search__input::placeholder {
@@ -42,6 +39,9 @@
 @media screen and (min-width: 769px) {
     .search__container {
         width: 40%;
+
+        border: solid 2px #4a8cf0;
+        border-radius: 20px;
     }
 
     .search__container__write {

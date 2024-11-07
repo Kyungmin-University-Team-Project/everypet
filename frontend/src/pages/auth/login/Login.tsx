@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
-import {loginState} from '../../redux/auth/authSlice';
+import {loginState} from '../../../redux/auth/authSlice';
 
 import styles from './Login.module.css';
-import Signup from './Signup';
-import IdFind from './IdFind';
-import Agreement from './Agreement';
-import {login} from "../../utils/auth/AuthAPI";
-import {encryptToken} from "../../utils/auth/token";
-import {LoginData} from "../../typings/login";
+import Signup from '../signup/Signup';
+import IdFind from '../find/IdFind';
+import Agreement from '../signup/Agreement';
+import {login} from "../../../utils/auth/AuthAPI";
+import {encryptToken} from "../../../utils/auth/token";
+import {LoginData} from "../../../typings/login";
 
 
 const Login = () => {

@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import styles from "./Agreement.module.css";
-import {AgreementJoin} from "../../typings/signup";
+import {AgreementJoin} from "../../../typings/signup";
 import axios from "axios";
 
 const Agreement: React.FC = () => {

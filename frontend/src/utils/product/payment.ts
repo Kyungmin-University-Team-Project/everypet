@@ -22,7 +22,6 @@ export const handleKaKaoPaymentRequest = async (
         currency: "CURRENCY_KRW",
         payMethod: "EASY_PAY",
         isTestChannel: true,
-        // 아래 부분은 사용자의 정보를 넘겨주기
         customer: {
             email: "customer@example.com",
             phoneNumber: '010-6662-8752',
@@ -30,14 +29,11 @@ export const handleKaKaoPaymentRequest = async (
         }
     });
 
-    if (response && response.paymentId) {
+    if (response?.paymentId) {
         try {
-            const token = decryptToken(); // 로컬 스토리지에서 토큰 복호화
+            const token = decryptToken();
 
-            console.log(response.paymentId,orderId)
-
-            // 서버로 결제 및 주문 정보 전송
-            const notified = await axiosInstance.post('/payment/complete', {
+            await axiosInstance.post('/payment/complete', {
                 orderId: orderId,
                 paymentId: response.paymentId,
             }, {
@@ -47,18 +43,8 @@ export const handleKaKaoPaymentRequest = async (
                 }
             });
 
-            console.log(notified)
-
-            if (notified.status === 200) {
-                // if (window.confirm('결제가 성공적으로 완료되었습니다. 확인을 누르시면 홈으로 이동합니다.')) {
-                //     window.location.href = '/';  // 홈 경로로 리디렉션
-                // }
-            } else {
-                alert('결제 정보 전송에 실패했습니다.');
-            }
         } catch (error) {
             console.error('결제 정보 전송 중 오류 발생:', error);
-            alert('결제 정보 전송에 실패했습니다.');
         }
     } else {
         alert('결제 요청에 실패했습니다.');
@@ -66,6 +52,7 @@ export const handleKaKaoPaymentRequest = async (
 };
 
 // 토스 결제
+// 우선 미사용
 export const handleTossPaymentRequest = async (
     orderName: string,
     totalAmount: number,
@@ -84,11 +71,9 @@ export const handleTossPaymentRequest = async (
         payMethod: "EASY_PAY",
     });
 
-    if (response && response.paymentId) {
+    if (response?.paymentId) {
         try {
-            const token = decryptToken(); // 로컬 스토리지에서 토큰 복호화
-
-            // 서버로 결제 및 주문 정보 전송
+            const token = decryptToken();
             const notified = await axios.post('http://localhost:8080/payment/complete', {
                 paymentId: response.paymentId,
                 orderId: orderId,

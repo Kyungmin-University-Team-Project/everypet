@@ -18,13 +18,9 @@ export interface Product {
     salesCount: number;
 }
 
-export const shippingFee = 3000;
-
-
 export interface CategoryProductList {
     productMainCategory: string,
     productSubCategory: string,
-    // 임시 나중에 string 변경후 변수화
     orderBy: string,
     page: number,
     pageSize: 10

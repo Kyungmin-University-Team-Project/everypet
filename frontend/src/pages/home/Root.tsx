@@ -3,7 +3,7 @@ import style from "./Root.module.css"
 import {Outlet, useLocation} from 'react-router-dom';
 import Home from './Home';
 import Header from '../../layout/Header/Header';
-import Footer from "../../components/home/Footer";
+import Footer from "../../components/common/Footer";
 import ScrollToTopButton from "../../components/common/ScrollToTopButton";
 
 const Root = () => {

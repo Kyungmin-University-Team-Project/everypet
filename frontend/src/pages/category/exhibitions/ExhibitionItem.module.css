@@ -1,0 +1,41 @@
+.item {
+
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.link {
+    display: flex;
+    justify-self: center;
+    width: 90%;
+
+    position: relative;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+
+}
+
+
+@media screen and (min-width: 789px) {
+    .link{
+        width: 100%;
+    }
+
+    .image__wrap {
+        height: 200px;
+    }
+
+    .image{
+        transition: all 0.2s ease;
+    }
+
+    .image:hover{
+        transform: scale(1.2);
+    }
+}

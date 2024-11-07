@@ -20,7 +20,6 @@ const Maincarousel = () => {
 
     const settings = {
         dots: true,
-        arrows: false,
         infinite: true,
         speed: 500,
         slidesToShow: 1,
@@ -42,20 +41,6 @@ const Maincarousel = () => {
                     </div>
                 ))}
             </Slider>
-            <div className={styles.controls}>
-                <button
-                    onClick={() => sliderRef.current.slickPrev()}
-                    className={styles.left__arrow}
-                >
-                    <AiOutlineLeft size={30}/>
-                </button>
-                <button
-                    onClick={() => sliderRef.current.slickNext()}
-                    className={styles.right__arrow}
-                >
-                    <AiOutlineRight size={30}/>
-                </button>
-            </div>
         </div>
     );
 };

@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import styles from "./Findauth.module.css";
-import {passwordFind, sendVerificationEmail} from "../../utils/auth/AuthAPI";
-import {Code} from "../../typings/signup";
+import {passwordFind, sendVerificationEmail} from "../../../utils/auth/AuthAPI";
+import {Code} from "../../../typings/signup";
 
 interface IdFind {
     email: string;
