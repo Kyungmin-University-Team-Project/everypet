@@ -2,7 +2,7 @@ import React from 'react';
 import {Product} from "../../typings/product";
 import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
 import ErrorComponent from "../../utils/reactQuery/ErrorComponent";
-import Item from "../header/Item";
+import Item from "../product/Item";
 import axios from "axios";
 import NotFoundProduct from "../../utils/reactQuery/NotFoundProduct";
 import {useQuery} from "@tanstack/react-query";

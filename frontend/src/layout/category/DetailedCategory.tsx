@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './DetailedCategory.module.css';
-import ItemList from "./ItemList";
+import ItemList from "../../components/product/ItemList";
 import { DetailedCategoryList } from "../../typings/product";
 
 interface DetailedCategoryProps {

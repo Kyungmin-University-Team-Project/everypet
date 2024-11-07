@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './ProductPage.module.css';
 
-import DetailedCategory from '../../components/header/DetailedCategory';
+import DetailedCategory from '../../layout/category/DetailedCategory';
 import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
 import { DetailedCategoryList } from "../../typings/product";
 import {fetchCategoryDetails} from "../../utils/product/category";
