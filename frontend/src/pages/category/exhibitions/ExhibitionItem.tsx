@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styles from './ExhibitionItem.module.css';
-import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
+import LoadingSpinner from "../../../utils/reactQuery/LoadingSpinner";
 import {Link} from "react-router-dom";
 
 interface ExhibitionItemProps {
