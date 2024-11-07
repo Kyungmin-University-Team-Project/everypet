@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import styles from './TimeDeal.module.css';
-import TimeItemList from '../../components/timedeal/TimeItemList';
+import TimeItemList from '../../../components/timedeal/TimeItemList';
 
 const TimeDeal = ({category}: any) => {
     useEffect(() => {

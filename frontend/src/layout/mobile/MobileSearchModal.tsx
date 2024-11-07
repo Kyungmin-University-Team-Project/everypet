@@ -15,7 +15,7 @@ const MobileSearchModal: React.FC<MobileSearchModalProps> = ({isOpen, onClose}) 
 
     useEffect(() => {
         if (isOpen && inputRef.current) {
-            inputRef.current.focus(); // 모달이 열리면 인풋에 포커스
+            inputRef.current.focus();
         }
     }, [isOpen]);
 
@@ -24,10 +24,11 @@ const MobileSearchModal: React.FC<MobileSearchModalProps> = ({isOpen, onClose}) 
     const handleSearchClick = () => {
         if (searchQuery.trim()) {
             navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
-            onClose(); // 모달 닫기
+            onClose();
         }
     };
 
+    // TODO: onKeyDown 에서 직접 분기문 작성해서 handleSearchClick 호출하도록 수정
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             handleSearchClick();

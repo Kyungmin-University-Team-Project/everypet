@@ -1,7 +1,7 @@
 import React from 'react';
 import {useLocation} from 'react-router-dom';
 import styles from './SearchPage.module.css';
-import SearchItemList from "../../components/common/SearchItemList";
+import SearchItemList from "../../components/header/SearchItemList";
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);

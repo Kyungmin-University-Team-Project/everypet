@@ -4,8 +4,8 @@ import Postcode from "./Postcode";
 import styles from "./Signup.module.css";
 
 import axios from "axios";
-import {Code, Join} from "../../typings/signup";
-import {sendVerificationEmail, signUpLogin, verifyCode} from "../../utils/auth/AuthAPI";
+import {Code, Join} from "../../../typings/signup";
+import {sendVerificationEmail, signUpLogin, verifyCode} from "../../../utils/auth/AuthAPI";
 
 const validateInput = (value: string, allowKorean: boolean, allowEnglish: boolean) => {
     const hasKorean = /[ㄱ-ㅎ|ㅏ-ㅣ가-힣]/.test(value);

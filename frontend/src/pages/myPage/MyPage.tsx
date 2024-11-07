@@ -2,7 +2,7 @@ import React from 'react';
 import {Outlet, NavLink} from 'react-router-dom';
 import styles from './MyPage.module.css';
 import Header from "../../layout/Header/Header";
-import Footer from "../../components/home/Footer";
+import Footer from "../../components/common/Footer";
 
 const navItems = [
     { path: 'userInfo', label: '회원 정보' },
