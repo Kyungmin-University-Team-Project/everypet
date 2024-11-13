@@ -210,10 +210,10 @@ export const RxHamburgerMenu: React.FC<itemProps> = ({size = 28}) => (
 
 export const IoIosArrowDown: React.FC<itemProps> = ({size = 24, className, onClick}) => (
     <svg
-        className={className}
-        onClick={onClick}
-        width={size}
         height={size}
+        width={size}
+        onClick={onClick}
+        className={className}
         viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -228,39 +228,35 @@ export const IoIosArrowDown: React.FC<itemProps> = ({size = 24, className, onCli
 
 // 리얼타임 키워드모델 페이지
 
-export const FaLongArrowAltUp: React.FC<itemProps> = ({className, size = 30}) => (
+export const FaLongArrowAltUp: React.FC<itemProps> = ({size = 30}) => (
     <svg
-        height={size}
         width={size}
-        className={className}
-        fill="currentColor"
-        viewBox="0 0 16.00 16.00" xmlns="http://www.w3.org/2000/svg" stroke="#000000"
-        stroke-width="0.00016">
+
+        fill="#ff5c33" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 512 512" enable-background="new 0 0 512 512"
+    >
         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
         <g id="SVGRepo_iconCarrier">
-            <path d="M6 8L2 8L2 6L8 5.24536e-07L14 6L14 8L10 8L10 16L6 16L6 8Z" fill="#000000"></path>
+            <polygon
+                points="245,0 74.3,213.3 202.3,213.3 202.3,512 287.7,512 287.7,213.3 415.7,213.3 "></polygon>
         </g>
     </svg>
 );
 
-export const FaLongArrowAltDown: React.FC<itemProps> = ({className, size=30}) => (
+export const FaLongArrowAltDown: React.FC<itemProps> = ({ size = 30}) => (
     <svg
         height={size}
         width={size}
-        className={className}
-        viewBox="0 0 16 16"
-         fill="currentColor"
-         xmlns="http://www.w3.org/2000/svg">
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        fill="#477eff" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 512 512" enable-background="new 0 0 512 512"
+          transform="rotate(180)" stroke="#477eff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g>
         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-        <g id="SVGRepo_iconCarrier">
-            <path d="M10 8L14 8V10L8 16L2 10V8H6V0L10 4.76995e-08V8Z" fill="#000000"></path>
-        </g>
-    </svg>
+        <g id="SVGRepo_iconCarrier"> <polygon
+            points="245,0 74.3,213.3 202.3,213.3 202.3,512 287.7,512 287.7,213.3 415.7,213.3 "></polygon> </g></svg>
 );
 
-export const CgBorderStyleSolid: React.FC<itemProps> = ({className, size=30}) => (
+export const CgBorderStyleSolid: React.FC<itemProps> = ({className, size = 30}) => (
     <svg
         height={size}
         width={size}
@@ -278,24 +274,21 @@ export const CgBorderStyleSolid: React.FC<itemProps> = ({className, size=30}) =>
 
 export const IoIosArrowUp: React.FC<itemProps> = ({size=20,onClick, className}) => (
     <svg
+        className={className}
         height={size}
         width={size}
-        className={className}
         onClick={onClick}
-        viewBox="0 0 48.00 48.00" xmlns="http://www.w3.org/2000/svg" stroke="#000000"
-         stroke-width="0.00048000000000000007" transform="rotate(0)matrix(1, 0, 0, 1, 0, 0)">
+        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+         transform="rotate(180)matrix(1, 0, 0, 1, 0, 0)">
         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
         <g id="SVGRepo_iconCarrier">
-            <path d="M0 0h48v48H0z" fill="none"></path>
-            <g id="Shopicon">
-                <g>
-                    <polygon
-                        points="6.586,30.585 9.414,33.413 24,18.827 38.586,33.413 41.414,30.585 24,13.171 "></polygon>
-                </g>
-            </g>
+            <path
+                d="M5.70711 9.71069C5.31658 10.1012 5.31658 10.7344 5.70711 11.1249L10.5993 16.0123C11.3805 16.7927 12.6463 16.7924 13.4271 16.0117L18.3174 11.1213C18.708 10.7308 18.708 10.0976 18.3174 9.70708C17.9269 9.31655 17.2937 9.31655 16.9032 9.70708L12.7176 13.8927C12.3271 14.2833 11.6939 14.2832 11.3034 13.8927L7.12132 9.71069C6.7308 9.32016 6.09763 9.32016 5.70711 9.71069Z"
+                fill="#0F0F0F"></path>
         </g>
-    </svg>
+    </svg
+        >
 );
 
 
@@ -310,36 +303,28 @@ export const BsCart: React.FC<itemProps> = ({size = 15}) => (
         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
         <g id="SVGRepo_iconCarrier">
             <path
-                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1
+                .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5
+                0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313
+                7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4
+                2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1
+                0 0 1 0-2z"></path>
         </g>
     </svg>
 );
 
-export const LiaShippingFastSolid: React.FC<itemProps> = ({size = 15}) => (
+export const LiaShippingFastSolid: React.FC<itemProps> = ({size = 40}) => (
     <svg
         height={size}
-        width={size}
-        viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#000000">
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-        <g id="SVGRepo_iconCarrier">
-            <g id="Layer_2" data-name="Layer 2">
-                <g id="invisible_box" data-name="invisible box">
-                    <rect width="48" height="48" fill="none"></rect>
-                </g>
-                <g id="Health_Icons" data-name="Health Icons">
-                    <g>
-                        <path
-                            d="M37.7,11.1A3,3,0,0,0,35.4,10H34.2l.3-1.7A3.1,3.1,0,0,0,33.9,6a3.2,3.2,0,0,0-2.2-1H7.8a2,2,0,0,0,0,4H30.3l-4,22.9a6.8,6.8,0,0,0-1,2.1H20.7A7,7,0,0,0,7.3,34H6.2l.5-2.9a2,2,0,0,0-1.6-2.3,2,2,0,0,0-2.3,1.6L2,34.7A2.8,2.8,0,0,0,2.7,37a2.8,2.8,0,0,0,2.1,1H7.3a7,7,0,0,0,13.4,0h4.6a7,7,0,0,0,13.4,0h2a3.2,3.2,0,0,0,3.1-2.7L46,22.5ZM14,39a3,3,0,0,1-3-3,3,3,0,0,1,6,0A3,3,0,0,1,14,39ZM33.5,14h1.3l5.9,8H32.1ZM32,39a3,3,0,0,1-3-3,3,3,0,0,1,6,0A3,3,0,0,1,32,39Zm8-5H38.7A7,7,0,0,0,32,29H30.9l.5-3.1h9.9Z"></path>
-                        <path d="M4,15H14a2,2,0,0,0,0-4H4a2,2,0,0,0,0,4Z"></path>
-                        <path d="M15,19a2,2,0,0,0-2-2H5a2,2,0,0,0,0,4h8A2,2,0,0,0,15,19Z"></path>
-                        <path d="M6,23a2,2,0,0,0,0,4h6a2,2,0,0,0,0-4Z"></path>
-                    </g>
-                </g>
-            </g>
-        </g>
+        widths={size}
+        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-truck">
+        <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/>
+        <path d="M15 18H9"/>
+        <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/>
+        <circle cx="17" cy="18" r="2"/>
+        <circle cx="7" cy="18" r="2"/>
     </svg>
-
 )
 
 export const AiOutlineUser: React.FC<itemProps> = ({size = 15}) => (
@@ -367,13 +352,12 @@ export const FiArrowLeft = () => (
 // MoreInformation Page
 
 
-export const FaAngleRight: React.FC<itemProps> = ({className, size = 30}) => (
+export const FaAngleRight: React.FC<itemProps> = () => (
     <svg
-        widths={size}
-        height={size}
-        className={className}
-        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M10.3 16.3l-1.4-1.4 4.3-4.3H2v-2h6.9l-4.3-4.3 1.4-1.4 7.3 7.3c.4.4.4 1.1 0 1.5l-7.3 7.3z"/>
+
+        xmlns="http://www.w3.org/2000/svg" width="32px" height="21px"  viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-chevron-right">
+        <path d="m9 18 6-6-6-6"/>
     </svg>
 )
 
@@ -389,15 +373,21 @@ export const IoIosInformationCircleOutline: React.FC<itemProps> = ({className, s
 
 // 카트 페이지
 
-export const FaMinus = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+export const FaMinus:React.FC<itemProps> = ({size=30}) => (
+    <svg
+        height={size}
+        width={size}
+        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
         <path d="M19 13H5v-2h14v2z"/>
     </svg>
 
 )
 
-export const FaPlus = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+export const FaPlus:React.FC<itemProps> = ({size=30}) => (
+    <svg
+        height={size}
+        width={size}
+        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
         <path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
     </svg>
 )
