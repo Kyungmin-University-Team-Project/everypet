@@ -80,7 +80,7 @@ const Realtimekeyword = () => {
                     <span className={styles.keyword}>{currentRanking.keyword}</span>
                 </div>
             )}
-            <IoIosArrowDown onClick={openRankModal} className={styles.open}/>
+            <IoIosArrowDown onClick={openRankModal} size={25} className={styles.open}/>
 
             {isModalOpen && (
                 <div className={styles.modalWrapper} ref={modalRef}>

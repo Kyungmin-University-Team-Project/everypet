@@ -171,7 +171,7 @@ const Cart: React.FC = () => {
                                             className={styles.quantityButton}
                                             onClick={() => handleQuantityChange(item.cartId, -1)}
                                         >
-                                            <FaMinus/>
+                                            <FaMinus size={20}/>
                                         </button>
                                         <input type="number" value={item.cartQuantity} readOnly
                                                className={styles.quantityInput}/>
@@ -179,7 +179,7 @@ const Cart: React.FC = () => {
                                             className={styles.quantityButton}
                                             onClick={() => handleQuantityChange(item.cartId, 1)}
                                         >
-                                            <FaPlus/>
+                                            <FaPlus size={20}/>
                                         </button>
                                     </div>
                                     <div className={styles.total}>
