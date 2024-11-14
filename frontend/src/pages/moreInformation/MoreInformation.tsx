@@ -7,6 +7,7 @@ import SellerInformation from "./SellerInformation";
 import axios from "axios";
 import {addToCart} from "../../utils/product/cart";
 import {FaAngleRight, IoIosInformationCircleOutline} from "../../icons/Icons";
+import {API_URL} from "../../api/api";
 
 //  productRatingAvg 별점
 //  productViews 클릭 수
@@ -56,7 +57,7 @@ const MoreInformation: React.FC = () => {
     useEffect(() => {
         const productAsync = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/product/${productData.item.productId}`);
+                const response = await axios.get(`${API_URL}/product/${productData.item.productId}`);
                 const data = response.data;
                 setProductList(data);
             } catch (e) {

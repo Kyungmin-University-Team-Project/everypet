@@ -4,6 +4,7 @@ import axiosInstance from "../../utils/error/axiosInstance";
 import axios from "axios";
 import Pagination from 'react-js-pagination';
 import "./Paging.css"
+import {API_URL} from "../../api/api";
 
 interface ProductInquiryProps {
     productId: string | null;
@@ -53,7 +54,7 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
                 const page = currentPage; // 페이지가 0부터 시작하도록 조정
                 const size = itemsPerPage;
                 const sort = 'createdDate,desc';
-                const url = `http://localhost:8080/support/seller/inquiry/list/${productId}?${page}&${size}&${sort}`;
+                const url = `${API_URL}/support/seller/inquiry/list/${productId}?${page}&${size}&${sort}`;
                 const response = await axios.get(url);
                 setListType(response.data.content); // API 응답에서 항목 설정
             } catch (e) {
@@ -94,7 +95,7 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
     const handleOnSubmitClick = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await axiosInstance.post('/support/seller/inquiry', {...text});
+            const response = await axiosInstance.post(`${API_URL}/support/seller/inquiry`, {...text});
             console.log(response);
             setText({content: '', productId: productId || '', title: ''});
             setModalOpen(false);

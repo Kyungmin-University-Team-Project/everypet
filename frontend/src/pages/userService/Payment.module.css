@@ -308,7 +308,7 @@
 
 .checkoutButton {
     padding: 10px 20px;
-    background-color: #679aff;
+    background-color: var(--color-primary);
     color: white;
     border: none;
     cursor: pointer;

@@ -6,6 +6,7 @@ import Item from "../product/Item";
 import axios from "axios";
 import NotFoundProduct from "../../utils/reactQuery/NotFoundProduct";
 import {useQuery} from "@tanstack/react-query";
+import {API_URL} from "../../api/api";
 
 const HomeItemList = ({brandName}: { brandName: string }) => {
     const orderBy = 'popularity';
@@ -13,7 +14,7 @@ const HomeItemList = ({brandName}: { brandName: string }) => {
     const pageSize = 8;
 
     const fetchItems = async (): Promise<Product[]> => {
-        const response = await axios.get(`/product/search/${brandName}/${orderBy}/${page}/${pageSize}`);
+        const response = await axios.get(`${API_URL}/product/search/${brandName}/${orderBy}/${page}/${pageSize}`);
         return response.data;
     };
 

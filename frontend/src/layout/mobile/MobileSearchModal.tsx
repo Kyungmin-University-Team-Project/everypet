@@ -2,6 +2,7 @@ import React, {useState, useRef, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import styles from './MobileSearchModal.module.css';
 import {FaMagnifyingGlass, FiArrowLeft} from "../../icons/Icons";
+import {API_URL} from "../../api/api";
 
 interface MobileSearchModalProps {
     isOpen: boolean;
@@ -23,7 +24,7 @@ const MobileSearchModal: React.FC<MobileSearchModalProps> = ({isOpen, onClose}) 
 
     const handleSearchClick = () => {
         if (searchQuery.trim()) {
-            navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
+            navigate(`${API_URL}/search?query=${encodeURIComponent(searchQuery)}`);
             onClose();
         }
     };
