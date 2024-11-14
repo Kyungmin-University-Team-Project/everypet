@@ -4,13 +4,14 @@ import {LoginData} from "../../typings/login";
 // jwt 4.0 이상
 import {jwtDecode} from 'jwt-decode';
 import axiosInstance from "../error/axiosInstance";
+import {API_URL} from "../../api/api";
 
 
 export const login = async ({memberId, memberPwd}: LoginData): Promise<any> => {
     const data = {memberId, memberPwd};
 
     try {
-        const response: AxiosResponse<any> = await axiosInstance.post('/signin', data);
+        const response: AxiosResponse<any> = await axiosInstance.post(`${API_URL}/signin`, data);
 
         const access = response.headers['access'];
 
@@ -37,7 +38,7 @@ export const login = async ({memberId, memberPwd}: LoginData): Promise<any> => {
 export const signUpLogin = async (user: Join): Promise<any> => {
     console.log("Payload sent to server:", JSON.stringify(user, null, 2));
     try {
-        const response: AxiosResponse<any> = await axiosInstance.post('/member/signup', user);
+        const response: AxiosResponse<any> = await axiosInstance.post(`${API_URL}/member/signup`, user);
         console.log("Server response:", response.data);
         return response.data;
     } catch (error) {
@@ -56,7 +57,7 @@ export const sendVerificationEmail = async ({purpose, to}: { purpose: string; to
     success: boolean
 }> => {
     const data = {purpose, to};
-    const response = await axiosInstance.post('/send-mail/code', data, {
+    const response = await axiosInstance.post(`${API_URL}/send-mail/code`, data, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -69,7 +70,7 @@ export const verifyCode = async ({purpose, code}: { purpose: string; code: strin
     success: boolean
 }> => {
     const data = {purpose, code};
-    const response = await axiosInstance.post('/send-mail/code/verify', data, {
+    const response = await axiosInstance.post(`${API_URL}/send-mail/code/verify`, data, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -81,7 +82,7 @@ export const verifyCode = async ({purpose, code}: { purpose: string; code: strin
 
 export const passwordFind = async ({email, memberId}: { email: string, memberId: string }) => {
     const data = {email, memberId};
-    const response = await axiosInstance.post('/member/password/reset', data, {
+    const response = await axiosInstance.post(`${API_URL}/member/password/reset`, data, {
         headers: {
             'Content-Type': 'application/json'
         }

@@ -5,6 +5,7 @@ import {Ranking} from '../../typings/layout';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import {IoIosArrowDown} from "../../icons/Icons";
+import {API_URL} from "../../api/api";
 
 const Realtimekeyword = () => {
     const [rankings, setRankings] = useState<Ranking[]>([]);
@@ -18,7 +19,7 @@ const Realtimekeyword = () => {
         // 실시간 순위 데이터를 불러오는 함수
         const fetchRankings = async () => {
             try {
-                const response = await axios.post('/keyword-rank/real-time-rank');
+                const response = await axios.post(`${API_URL}/keyword-rank/real-time-rank`);
                 setRankings(response.data);  // 응답 데이터에 맞게 상태 업데이트
             } catch (error) {
                 console.error('Error fetching real-time keyword rankings:', error);
@@ -68,7 +69,7 @@ const Realtimekeyword = () => {
     // 실시간 검색어 누르면 해당 키워드로 검색
     const searchKeyword = () => {
         if (currentRanking) {
-            navigate(`/search?query=${encodeURIComponent(currentRanking.keyword)}`);
+            navigate(`${API_URL}/search?query=${encodeURIComponent(currentRanking.keyword)}`);
         }
     };
 

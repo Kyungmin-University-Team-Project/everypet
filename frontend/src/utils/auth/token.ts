@@ -1,5 +1,6 @@
 import CryptoJS from 'crypto-js';
 import axios from "axios";
+import {API_URL} from "../../api/api";
 
 const secretKey: string | undefined = process.env.REACT_APP_CRYPTOJS_KEY;
 
@@ -24,7 +25,7 @@ export const decryptToken = (): string | null => {
 
 export const reissueToken = async () => {
     try {
-        const response = await axios.post('/reissue', {}, {withCredentials: true});
+        const response = await axios.post(`${API_URL}/reissue`, {}, {withCredentials: true});
         const newToken = response.headers['access'];
         if (newToken) {
             const encryptedToken = encryptToken(newToken);

@@ -2,6 +2,7 @@ import React, {JSX, useEffect, useRef, useState} from 'react';
 import axiosInstance from "../../utils/error/axiosInstance";
 import styles from "./productInqulry.module.css";
 import {FaRegStar, FaStar} from "../../icons/Icons";
+import {API_URL} from "../../api/api";
 
 // 1. 리뷰 상세
 // 2. 리뷰 한줄
@@ -34,7 +35,7 @@ const Review = () => {
     useEffect(() => {
         const handleInsertOnClick = async () => {
             try {
-                const response = await axiosInstance.post('/product-review/insert', data)
+                const response = await axiosInstance.post(`${API_URL}/product-review/insert`, data)
                 console.log(response.data);
             } catch (e) {
                 console.log(e)

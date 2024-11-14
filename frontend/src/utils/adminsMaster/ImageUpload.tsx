@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './ImageUpload.module.css';
+import {API_URL} from "../../api/api";
 
 const ImageUpload: React.FC = () => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -61,7 +62,7 @@ const ImageUpload: React.FC = () => {
         });
 
         try {
-            const response = await fetch('http://localhost:3000/insert-product', {
+            const response = await fetch(`${API_URL}/insert-product`, {
                 method: 'POST',
                 body: formData,
             });

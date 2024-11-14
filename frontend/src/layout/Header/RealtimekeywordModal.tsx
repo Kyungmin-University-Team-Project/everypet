@@ -5,6 +5,7 @@ import {Ranking} from '../../typings/layout';
 import {addMinutes, format} from 'date-fns';
 import {ko} from 'date-fns/locale';
 import {CgBorderStyleSolid, FaLongArrowAltDown, FaLongArrowAltUp, IoIosArrowUp} from "../../icons/Icons";
+import {API_URL} from "../../api/api";
 
 interface ModalProps {
     isOpen: boolean;
@@ -38,7 +39,7 @@ const RealtimekeywordModal: React.FC<ModalProps> = ({isOpen, onClose, rankings})
 
     // 검색 페이지로 이동
     const navigateToSearchResults = (query: string) => {
-        navigate(`/search?query=${encodeURIComponent(query)}`);
+        navigate(`${API_URL}/search?query=${encodeURIComponent(query)}`);
         onClose(); // 모달 닫기
     };
 

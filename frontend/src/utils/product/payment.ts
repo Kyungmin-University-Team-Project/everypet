@@ -2,6 +2,7 @@ import * as PortOne from "@portone/browser-sdk/v2";
 import axios from "axios";
 import {decryptToken} from "../auth/token";
 import axiosInstance from "../error/axiosInstance";
+import {API_URL} from "../../api/api";
 
 interface Product {
     productId: string;
@@ -33,7 +34,7 @@ export const handleKaKaoPaymentRequest = async (
         try {
             const token = decryptToken();
 
-            await axiosInstance.post('/payment/complete', {
+            await axiosInstance.post(`${API_URL}/payment/complete`, {
                 orderId: orderId,
                 paymentId: response.paymentId,
             }, {
@@ -74,7 +75,7 @@ export const handleTossPaymentRequest = async (
     if (response?.paymentId) {
         try {
             const token = decryptToken();
-            const notified = await axios.post('http://localhost:8080/payment/complete', {
+            const notified = await axios.post(`${API_URL}/payment/complete`, {
                 paymentId: response.paymentId,
                 orderId: orderId,
                 addressId: addressId,

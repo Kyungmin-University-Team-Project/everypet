@@ -8,6 +8,7 @@ import {Product} from '../../typings/product';
 import DropDown from "./DropDown";
 import {decryptToken} from "../../utils/auth/token";
 import {VscSearchStop} from "../../icons/Icons";
+import {API_URL} from "../../api/api";
 
 interface SearchItemListProps {
     searchQuery: string;
@@ -27,14 +28,14 @@ const SearchItemList: React.FC<SearchItemListProps> = ({searchQuery}) => {
         try {
             if (localStorage.getItem("access")) {
                 const token = decryptToken();
-                const response = await axios.get(`/product/search/${searchQuery}/${orderBy}/${page}/${pageSize}`, {
+                const response = await axios.get(`${API_URL}/product/search/${searchQuery}/${orderBy}/${page}/${pageSize}`, {
                     headers: {
                         access: token
                     }
                 },);
                 setData(response.data);
             } else {
-                const response = await axios.get(`/product/search/${searchQuery}/${orderBy}/${page}/${pageSize}`);
+                const response = await axios.get(`${API_URL}/product/search/${searchQuery}/${orderBy}/${page}/${pageSize}`);
                 setData(response.data);
             }
         } catch (err) {

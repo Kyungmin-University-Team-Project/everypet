@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styles from './OrderManagement.module.css';
 import axiosInstance from "../../../utils/error/axiosInstance";
+import {API_URL} from "../../../api/api";
 
 interface OrderList {
     deliveryAmount: number;
@@ -29,7 +30,7 @@ const OrderManagement = () => {
     useEffect(() => {
         const orderList = async (page: number) => {
             try {
-                const response = await axiosInstance.post('/order/list/my', {
+                const response = await axiosInstance.post(`${API_URL}/order/list/my`, {
                     page,
                     pageSize: PAGE_SIZE,
                 })

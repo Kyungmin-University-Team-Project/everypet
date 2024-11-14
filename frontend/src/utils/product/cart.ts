@@ -1,9 +1,10 @@
 import axiosInstance from "../error/axiosInstance";
 import {CartItem} from "../../typings/product";
+import {API_URL} from "../../api/api";
 
 export const addToCart = async (productId: string, quantity: number = 1) => {
     try {
-        await axiosInstance.post('/cart/add', {
+        await axiosInstance.post(`${API_URL}/cart/add`, {
             productId: productId,
             cartQuantity: quantity
         });
@@ -16,7 +17,7 @@ export const addToCart = async (productId: string, quantity: number = 1) => {
 
 export const fetchCartItems = async (): Promise<CartItem[]> => {
     try {
-        const response = await axiosInstance.post<CartItem[]>('/cart/list', {});
+        const response = await axiosInstance.post<CartItem[]>(`${API_URL}/cart/list`, {});
         return response.data;
     } catch (error) {
         throw error;
@@ -25,7 +26,7 @@ export const fetchCartItems = async (): Promise<CartItem[]> => {
 
 export const deleteCartItem = async (productId: string) => {
     try {
-        await axiosInstance.delete(`/cart/delete?productId=${productId}`);
+        await axiosInstance.delete(`${API_URL}/cart/delete?productId=${productId}`);
     } catch (error) {
         throw error;
     }

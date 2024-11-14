@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import styles from "./Findauth.module.css";
 import axios from "axios";
 import {Link} from "react-router-dom";
+import {API_URL} from "../../../api/api";
 
 
 interface IdFind {
@@ -19,7 +20,7 @@ const IdFind = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8080/member/id/find', user)
+            const response = await axios.post(`${API_URL}/member/id/find`, user)
             const data = response.data;
             setId(data);
         } catch (e) {

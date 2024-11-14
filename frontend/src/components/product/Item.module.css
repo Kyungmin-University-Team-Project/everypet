@@ -1,10 +1,10 @@
 .item {
     display: flex;
     flex-direction: column;
-    align-items: center; /* 아이템 중앙 정렬 */
+    align-items: center;
     width: 90%;
     background-color: white;
-    margin: auto; /* 수평 중앙 정렬 */
+    margin: auto;
     border-radius: 5px;
     cursor: pointer;
 
@@ -22,7 +22,7 @@
 }
 
 .img {
-    width: 100%; /* 이미지 너비 조정 */
+    width: 100%;
     transform: scale(0.8);
     transition: transform 0.3s ease;
 
@@ -42,11 +42,11 @@
 
     font-weight: bold;
     transition: all 0.2s ease-in;
-    text-align: left; /* 텍스트 왼쪽 정렬 */
+    text-align: left;
 
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* 최대 2줄로 제한 */
+    -webkit-line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -61,8 +61,8 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding: 5px; /* 상하 여백 */
-    align-items: flex-start; /* 정보 왼쪽 정렬 */
+    padding: 5px;
+    align-items: flex-start;
 }
 
 .price__wrap {
@@ -80,13 +80,13 @@
 
 .un__discount {
     text-decoration: line-through;
-    color: #888; /* 일반적으로 회색을 사용 */
+    color: #888;
 }
 
 .price {
     color: rgb(0, 0, 0);
     font-weight: bold;
-    font-size: 16px; /* 모바일에서의 크기 */
+    font-size: 16px;
 }
 
 .tagAndIcons {
@@ -101,7 +101,7 @@
 
 .cartIcon,
 .likeIcon {
-    font-size: 1.2em; /* 모바일에서의 크기 */
+    font-size: 1.2em;
     margin-right: 10px;
     color: #8f8f8f;
     transition: all 0.2s ease;

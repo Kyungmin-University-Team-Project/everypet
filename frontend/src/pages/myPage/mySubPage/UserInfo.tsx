@@ -5,6 +5,7 @@ import { handleAxiosError } from "../../../utils/error/errorHandler";
 import { AxiosError } from "axios";
 import LoadingSpinner from "../../../utils/reactQuery/LoadingSpinner";
 import Footer from "../../../components/common/Footer";
+import {API_URL} from "../../../api/api";
 
 interface Authority {
     authority: string;
@@ -47,7 +48,7 @@ const UserInfo = () => {
 
     const loadUserInfo = async () => {
         try {
-            const response = await axiosInstance.get<UserInfoType>('/member/info');
+            const response = await axiosInstance.get<UserInfoType>(`${API_URL}/member/info`);
             setUserInfo(response.data);
         } catch (error) {
             handleAxiosError(error as AxiosError);
