@@ -9,7 +9,7 @@ import {RootState} from '../../redux/store/rootReducer';
 import Categorymodal from './CategoryModal';
 import useToggle from '../../utils/common/ToggleUtil';
 import Categorybarbtn from './Categorybarbtn';
-import Realtimekeyword from '../Header/Realtimekeyword';
+import RealtimeKeyword from '../Header/RealtimeKeyword';
 import useResizeMobile from "../../hooks/useResizeMobile";
 
 const categories = [
@@ -87,7 +87,7 @@ const ProductCategory = () => {
                             />
                         ))}
                     </ul>
-                    {!isMobile && <Realtimekeyword/>}
+                    {!isMobile && <RealtimeKeyword/>}
                 </div>
             </nav>
             <Categorymodal isOpen={isOpen} setOpen={toggleOn} setClose={toggleOff}/>

@@ -13,19 +13,20 @@ const Footer = () => {
                     <div className={styles.infoItem}>
                         <FaUniversity
                             size={25}
-                            className={styles.icon}/>
+                        />
                         <span className={styles.infoText}>경민대학교</span>
                     </div>
                     <div className={styles.infoItem}>
                         <FaEnvelope
                             size={25}
-                            className={styles.icon}/>
+                        />
                         <span className={styles.infoText}>gksktl111@naver.com</span>
                     </div>
                     <div className={styles.infoItem}>
                         <FaGithub
                             size={25}
-                            className={styles.icon}/>
+                            className={styles.icon}
+                        />
                         <a
                             href='https://github.com/Kyungmin-University-Team-Project/everypet'
                             target='_blank'

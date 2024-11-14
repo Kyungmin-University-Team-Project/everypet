@@ -123,14 +123,28 @@
     font-size: 0.8em;
 }
 
+.FaShoppingCart{
+    color: gray;
+
+    transition: all 0.2s ease-in;
+}
+
+.FaShoppingCart:hover{
+    color: black;
+}
+
 .recommendationAndReviews {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.stars {
+.FaStar{
     color: #ff8a00;
+}
+
+.FaRegStar{
+    color: #cccccc;
 }
 
 .reviewCount {

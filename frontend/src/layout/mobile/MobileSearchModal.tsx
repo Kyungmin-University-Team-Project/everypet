@@ -24,7 +24,7 @@ const MobileSearchModal: React.FC<MobileSearchModalProps> = ({isOpen, onClose}) 
 
     const handleSearchClick = () => {
         if (searchQuery.trim()) {
-            navigate(`${API_URL}/search?query=${encodeURIComponent(searchQuery)}`);
+            navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
             onClose();
         }
     };

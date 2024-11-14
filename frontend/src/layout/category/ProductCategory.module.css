@@ -11,7 +11,6 @@
     box-shadow: rgba(0, 0, 0, 0.04) 0 3px 5px;
     gap: 20px;
     border-bottom: solid 1px rgb(205, 205, 205);
-
 }
 
 .inner {
@@ -30,11 +29,11 @@
     white-space: nowrap;
     gap: 20px;
 
-    padding: 0 20px;
+    padding: 0 10px;
 }
 
 .category__menu::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for WebKit browsers */
+    display: none;
 }
 
 .category__menu li {
@@ -48,6 +47,7 @@
 
     .category__menu {
         gap: 24px;
-        padding: 0 0 0 40px;
+
+        margin-left: 160px;
     }
 }

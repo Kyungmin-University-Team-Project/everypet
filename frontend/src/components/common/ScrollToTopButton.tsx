@@ -20,7 +20,7 @@ const ScrollToTopButton: React.FC = () => {
                     onClick={scrollToTop}
                     className={`${styles.scrollButton} ${isVisible ? styles.enter : ""}`}
                 >
-                    <FaArrowUp className={styles.icon} />
+                    <FaArrowUp size={15}/>
                 </button>
             )}
         </div>

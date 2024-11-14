@@ -50,7 +50,8 @@ const Item: React.FC<ItemProps> = ({
     const renderStars = () => {
         let stars = [];
         for (let i = 0; i < 5; i++) {
-            stars.push(i < recommended ? <FaStar size={15} key={i}/> : <FaRegStar size={15} key={i}/>);
+            stars.push(i < recommended ? <FaStar className={styles.FaStar} size={15} key={i}/> :
+                <FaRegStar className={styles.FaRegStar} size={15} key={i}/>);
         }
         return stars;
     };
@@ -66,13 +67,13 @@ const Item: React.FC<ItemProps> = ({
                     tag 는 나중에 db에 옵션으로 넣어서 해당하는 카테고리를 넣어주도록 변경
                 */}
                 <span className={styles.tag}>New</span>
-                <div className={styles.icon__wrap}>
-                    <FaShoppingCart
-                        size={30}
-                        className={styles.cartIcon} // CSS 모듈에서 정의된 클래스명 사용
-                        onClick={handleAddToCart}
-                    />
-                </div>
+
+                <FaShoppingCart
+                    size={30}
+                    onClick={handleAddToCart}
+                    className={styles.FaShoppingCart}
+                />
+
             </div>
             <div className={styles.item__info}>
                 <span className={styles.title}>{name}</span>
@@ -88,7 +89,7 @@ const Item: React.FC<ItemProps> = ({
                     )}
                 </div>
                 <div className={styles.recommendationAndReviews}>
-                    <div className={styles.stars}>{renderStars()}</div>
+                    <div>{renderStars()}</div>
                     <span className={styles.reviewCount}>({reviewCount})</span>
                 </div>
             </div>

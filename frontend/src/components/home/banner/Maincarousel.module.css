@@ -14,11 +14,7 @@
 
 
 @media screen and (min-width: 769px) {
-    .container {
-        height: 400px;
-    }
     .img {
-        width: 100%;
         height: 350px;
     }
 }

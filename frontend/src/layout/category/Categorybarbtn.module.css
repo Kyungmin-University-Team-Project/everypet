@@ -1,5 +1,5 @@
 .categorybar {
-    display: flex;
+    display: none;
 
     /* background: rgb(95, 144, 188); */
 
@@ -13,8 +13,9 @@
 
 }
 
-@media screen and (max-width: 769px) {
+@media screen and (min-width: 769px) {
     .categorybar {
+        display: block;
         height: 30px;
         font-size: 18px;
     }
