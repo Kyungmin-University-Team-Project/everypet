@@ -36,6 +36,10 @@
     gap: 5px;
 }
 
+.icon{
+    color: black;
+}
+
 .infoText {
     font-size: 14px;
 }

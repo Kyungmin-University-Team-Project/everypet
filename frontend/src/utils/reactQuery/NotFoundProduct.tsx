@@ -6,7 +6,7 @@ const NotFoundProduct = () => {
     return (
         <div className={styles.container}>
             <div className={styles.noResults}>
-                <VscSearchStop className={styles.noResults__icon}/>
+                <VscSearchStop className={styles.VscSearchStop} size={100}/>
                 <span className={styles.noResults__text}>검색 결과가 없습니다.</span>
             </div>
         </div>

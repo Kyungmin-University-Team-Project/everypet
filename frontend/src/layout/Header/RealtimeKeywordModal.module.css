@@ -1,4 +1,5 @@
 .modal {
+    display: none;
     position: absolute;
     top: -40px;
     left: -100px;
@@ -23,19 +24,11 @@
 
 }
 
-.closeButton {
-    background: none;
-    border: none;
-    font-size: 18px;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-    color: #000000;
-}
+.modalContent__wrap{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 
-.closeButton:hover {
-    color: #333;
 }
 
 .modalHeader {
@@ -45,6 +38,11 @@
     font-weight: bold;
     margin-bottom: 10px;
 }
+
+.IoIosArrowUp:hover{
+    cursor: pointer;
+}
+
 
 .modalDate {
     font-size: 14px;
@@ -106,14 +104,21 @@
     margin-left: auto;
 }
 
-.upArrow {
+.FaLongArrowAltUp{
     color: red;
 }
 
-.downArrow {
+.FaLongArrowAltDown{
     color: blue;
 }
 
-.steady {
-    color: black;
+.CgBorderStyleSolid{
+    color: gray;
+}
+
+
+@media screen and (min-width: 769px){
+    .modal{
+        display: block;
+    }
 }

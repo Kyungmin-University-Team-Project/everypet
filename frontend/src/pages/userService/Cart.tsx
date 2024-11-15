@@ -7,7 +7,7 @@ import {AxiosError} from 'axios';
 import {formatPrice} from "../../utils/product/product";
 import {CartItem} from "../../typings/product";
 import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
-import {FaMinus, FaPlus, FaTrashAlt} from "../../icons/Icons";
+import {DeleteIcon, FaMinus, FaPlus} from "../../icons/Icons";
 
 const shippingFee = 3000;
 
@@ -142,9 +142,9 @@ const Cart: React.FC = () => {
                     {cartItems.map((item) => (
                         <div className={styles.item__wrap} key={item.cartId}>
                             <div className={styles.icon__btn}>
-                                <FaTrashAlt
-                                    size={30}
-                                    className={styles.removeItemButton}
+                                <DeleteIcon
+                                    size={40}
+                                    className={styles.DeleteIcon}
                                     onClick={() => handleDeleteItem(item.productId)}
                                 />
                                 <input

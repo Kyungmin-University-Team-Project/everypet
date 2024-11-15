@@ -127,7 +127,7 @@ const MoreInformation: React.FC = () => {
                                 <strong>{productList?.name}</strong>
                                 <FaAngleRight
 
-                                    className={styles.icon}/>
+                                />
                             </div>
                             <h2></h2>
                             <div className={styles.reviews}>
@@ -136,7 +136,7 @@ const MoreInformation: React.FC = () => {
                                 </span>
                                 <FaAngleRight
 
-                                    className={styles.icon}/>
+/>
                             </div>
                             <p className={styles.price_original}>{productList?.productPrice.toLocaleString()}원</p>
                             <p className={styles.dynamic_price}>

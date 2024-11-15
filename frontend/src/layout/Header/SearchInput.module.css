@@ -5,17 +5,16 @@
     height: 40px;
     font-size: 16px;
 
-    padding: 0 15px;
+    padding: 0 10px;
 }
 
 .search__input {
     width: 100%;
 
-
     border: none;
     outline: none;
 
-    font-size: 18px; /* 폰트 크기 조정 */
+    font-size: 16px;
 }
 
 .search__input::placeholder {
@@ -42,23 +41,22 @@
 
         border: solid 2px #4a8cf0;
         border-radius: 20px;
+
+        padding: 0 20px;
     }
 
     .search__container__write {
         display: flex;
-        position: relative; /* 상대 위치 지정 */
+        position: relative;
+
         width: 40%;
-        height: 40px; /* 높이 복원 */
+        height: 44px;
 
         font-size: 16px;
-        padding: 0 15px;
+        padding: 0 20px;
 
         border-radius: 20px 20px 0 0;
         box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
-    }
-
-    .search__input {
-        font-size: 16px; /* 폰트 크기 복원 */
     }
 
     .historyContainer {
@@ -78,7 +76,6 @@
     .historyList {
         list-style: none;
         padding: 0 25px;
-
     }
 
     .historyList__header,

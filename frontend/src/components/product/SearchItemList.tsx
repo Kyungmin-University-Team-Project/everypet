@@ -86,7 +86,7 @@ const SearchItemList: React.FC<SearchItemListProps> = ({searchQuery}) => {
                     ))
                 ) : (
                     <div className={styles.noResults}>
-                        <VscSearchStop className={styles.noResults__icon}/>
+                        <VscSearchStop />
                         <span className={styles.noResults__text}>검색 결과가 없습니다.</span>
                     </div>
                 )}

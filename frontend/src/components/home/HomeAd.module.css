@@ -13,16 +13,13 @@
     display: block;
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 4rem;
-    margin-top: 4rem;
 }
 
 .main__img {
     width: 100%;
 
     object-fit: cover;
-    margin-top: 4rem;
-    margin-bottom: 4rem;
+
 }
 
 .rightAlign {

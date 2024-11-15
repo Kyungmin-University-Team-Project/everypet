@@ -3,7 +3,6 @@
     position: relative;
     height: 60px;
 
-
     border: none;
     background: none;
 
@@ -34,7 +33,7 @@
 }
 
 .active {
-    color: #4a8cf0;
-    border-bottom: 3px solid #4a8cf0; /* 활성화된 상태일 때 보더의 색상과 두께 변경 */
+    color: var(--color-primary);
+    border-bottom: 3px solid var(--color-primary); /* 활성화된 상태일 때 보더의 색상과 두께 변경 */
     font-weight: bold;
 }

@@ -101,20 +101,22 @@
     border-radius: 20px;
 }
 
-.removeItemButton {
-    cursor: pointer;
-    font-size: 20px;
+.DeleteIcon{
     color: black;
+    cursor: pointer;
 
-    margin-left: 20px;
+    transition: all 0.1s ease-in;
 }
 
+.DeleteIcon:hover{
+    color: #e73939;
+}
 
 .item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 20px;
+    padding: 20px 10px;
     box-sizing: border-box;
     position: relative;
 
@@ -303,7 +305,6 @@
     .cartItems {
         width: 70%;
         margin: 0;
-
     }
 
     .cartHeader {

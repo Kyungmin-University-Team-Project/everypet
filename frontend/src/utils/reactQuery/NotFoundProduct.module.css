@@ -15,8 +15,8 @@
     color: #8f8f8f;
 }
 
-.noResults__icon {
-    font-size: 100px;
+.VscSearchStop{
+    color: gray;
 }
 
 .noResults__text {

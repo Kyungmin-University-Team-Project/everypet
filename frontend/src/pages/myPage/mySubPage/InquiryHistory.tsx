@@ -53,7 +53,7 @@ const InquiryHistory = () => {
                                     })}
                                     onClick={() => handleIconClick(inquiry.id)}
                                 >
-                                    <IoIosAdd className={styles.icon}/>
+                                    <IoIosAdd />
                                 </div>
                             </p>
                         </div>

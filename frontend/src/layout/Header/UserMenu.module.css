@@ -1,0 +1,21 @@
+.user {
+    display: flex;
+
+    list-style-type: none;
+    justify-content: end;
+    gap: 40px;
+
+}
+
+.user__li {
+    cursor: pointer;
+}
+
+.icon{
+    transition: color 0.2s ease-in;
+}
+
+.icon:hover{
+    color: #4a8cf0;
+}
+

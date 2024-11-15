@@ -1,13 +1,13 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import styles from './Realtimekeyword.module.css';
-import RealtimekeywordModal from './RealtimekeywordModal';
+import styles from './RealtimeKeyword.module.css';
+import RealtimeKeywordModal from './RealtimeKeywordModal';
 import {Ranking} from '../../typings/layout';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import {IoIosArrowDown} from "../../icons/Icons";
 import {API_URL} from "../../api/api";
 
-const Realtimekeyword = () => {
+const RealtimeKeyword = () => {
     const [rankings, setRankings] = useState<Ranking[]>([]);
     const [currentRank, setCurrentRank] = useState(1);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,7 +20,7 @@ const Realtimekeyword = () => {
         const fetchRankings = async () => {
             try {
                 const response = await axios.post(`${API_URL}/keyword-rank/real-time-rank`);
-                setRankings(response.data);  // 응답 데이터에 맞게 상태 업데이트
+                setRankings(response.data);
             } catch (error) {
                 console.error('Error fetching real-time keyword rankings:', error);
             }
@@ -69,7 +69,7 @@ const Realtimekeyword = () => {
     // 실시간 검색어 누르면 해당 키워드로 검색
     const searchKeyword = () => {
         if (currentRanking) {
-            navigate(`${API_URL}/search?query=${encodeURIComponent(currentRanking.keyword)}`);
+            navigate(`/search?query=${encodeURIComponent(currentRanking.keyword)}`);
         }
     };
 
@@ -81,11 +81,13 @@ const Realtimekeyword = () => {
                     <span className={styles.keyword}>{currentRanking.keyword}</span>
                 </div>
             )}
-            <IoIosArrowDown onClick={openRankModal} size={25} className={styles.open}/>
+            <div className={styles.icon__wrap}>
+                <IoIosArrowDown onClick={openRankModal} size={25}/>
+            </div>
 
             {isModalOpen && (
                 <div className={styles.modalWrapper} ref={modalRef}>
-                    <RealtimekeywordModal
+                    <RealtimeKeywordModal
                         isOpen={isModalOpen}
                         onClose={closeRankModal}
                         rankings={rankings}
@@ -96,4 +98,4 @@ const Realtimekeyword = () => {
     );
 };
 
-export default Realtimekeyword;
+export default RealtimeKeyword;
