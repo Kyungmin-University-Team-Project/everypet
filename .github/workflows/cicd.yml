@@ -56,6 +56,7 @@ jobs:
           
           echo "redis.host=localhost" >> src/main/resources/database.properties
           echo "redis.port=6379" >> src/main/resources/database.properties
+          echo "redis.database=1" >> src/main/resources/database.properties
           
           echo "spring.jwt.secret=${{ secrets.JWT_SECRET }}" >> src/main/resources/database.properties
 
