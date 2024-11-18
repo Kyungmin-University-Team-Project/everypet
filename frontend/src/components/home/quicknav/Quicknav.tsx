@@ -11,15 +11,14 @@ interface Category {
 }
 
 const categories: Category[] = [
-    {name: '기획전', image: require('../../../assets/img/quicknav/Exhibitions.png'), link: '/exhibitions'},
-    {name: '타임딜', image: require('../../../assets/img/quicknav/imminent.gif'), link: '/timeDeal'},
-    {name: '강아지', image: require('../../../assets/img/quicknav/dog.png'), link: '/dog'},
-    {name: '고양이', image: require('../../../assets/img/quicknav/cat.png'), link: '/cat'},
-    {name: '설치류', image: require('../../../assets/img/quicknav/hamster.png'), link: '/rat'},
-    {name: '조류', image: require('../../../assets/img/quicknav/bird.png'), link: '/bird'},
-    {name: '파충류', image: require('../../../assets/img/quicknav/retail.png'), link: '/reptiles'},
+    {name: '기획전', image: '/img/quicknav/Exhibitions.webp', link: '/exhibitions'},
+    {name: '타임딜', image: '/img/quicknav/imminent.gif', link: '/timeDeal'},
+    {name: '강아지', image: '/img/quicknav/dog.webp', link: '/dog'},
+    {name: '고양이', image: '/img/quicknav/cat.webp', link: '/cat'},
+    {name: '설치류', image: '/img/quicknav/hamster.webp', link: '/rat'},
+    {name: '조류', image: '/img/quicknav/bird.webp', link: '/bird'},
+    {name: '파충류', image: '/img/quicknav/retail.webp', link: '/reptiles'},
 ];
-
 const Quicknav: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
