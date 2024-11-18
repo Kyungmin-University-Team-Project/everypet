@@ -1,19 +1,25 @@
 package com.everypet.global.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisKeyValueAdapter;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
+import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 //@EnableRedisRepositories(basePackages = "com.everypet.global.auth.jwt.data.repository", enableKeyspaceEvents =
 //        RedisKeyValueAdapter.EnableKeyspaceEvents.ON_STARTUP)
 @Configuration
+@EnableCaching // 캐시 사용을 위한 어노테이션
 @EnableRedisRepositories(basePackages = "com.everypet", enableKeyspaceEvents =
         RedisKeyValueAdapter.EnableKeyspaceEvents.ON_STARTUP)
 public class RedisConfig {
@@ -24,9 +30,14 @@ public class RedisConfig {
     @Value("${redis.port}")
     private int port;
 
+    @Value("${redis.database}")
+    private int database;
+
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
-        return new LettuceConnectionFactory(host, port);
+        LettuceConnectionFactory factory = new LettuceConnectionFactory(host, port);
+        factory.setDatabase(database);
+        return factory;
     }
 
     @Bean
@@ -51,5 +62,14 @@ public class RedisConfig {
         redisTemplate.setDefaultSerializer(new StringRedisSerializer());
 
         return redisTemplate;
+    }
+
+    @Bean
+    public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
+        RedisCacheManager cacheManager = RedisCacheManager.builder(redisConnectionFactory)
+                .cacheDefaults(RedisCacheConfiguration.defaultCacheConfig()
+                        .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer())))
+                .build();
+        return cacheManager;
     }
 }

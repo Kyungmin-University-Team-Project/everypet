@@ -14,6 +14,10 @@ https://velog.io/@jiheon/Git-Commit-message-규칙
 
 ### ⚡️ <span style="color:#FF6347; font-family: 'Comic Sans MS', cursive, sans-serif;">[Front end] 대표 박민규</span>
 
+## 🌐 **Every-Pet 사이트 링크**
+[✨ **우리들의 Every-Pet 바로가기**](https://everypet.netlify.app/)
+
+
 ## 🚀 프로젝트 실행 방법
 
 알아서 실행하세요
@@ -38,9 +42,11 @@ docker-compose up --build
 docker-compose down
 ```
 
-## 🧬 스웨거
+## 🧬 Every-pet 스웨거
 
-[스웨거 링크](http://localhost:8080/swagger-ui/index.html)
+[💼 **[Localhost]스웨거 링크 바로가기**](http://localhost:8080/swagger-ui/index.html)
+<br>
+[🌍 **[AWS]스웨거 링크 바로가기**](https://everypet.netlify.app/swagger-ui/index.html)
 
 ## 🛠️ 기술스택
 
@@ -62,8 +68,8 @@ docker-compose down
 ```
 👨‍👨‍👧 회원 : 로그인 | 회원가입 | 메일 인증 | 회원정보 수정 | 비밀번호 변경 | 비밀번호 찾기 | 아이디 찾기 | 임시 비밀번호 발급
 🏡 마이페이지 : 회원정보 수정 | 회원탈퇴
-🛍️ 상품: 상품 조회 | 장바구니 | 상품 리뷰
-📊 검색: 실시간 검색어 순위, 상품 검색
+🛍️ 상품: 상품 조회 | 장바구니 | 상품 리뷰 | 판매자 문의
+📊 검색: 실시간 검색어 순위 | 상품 검색
 ```
 
 <details>
@@ -86,10 +92,10 @@ docker-compose down
 </div>
 </details>
 
-## 📖 문제가 많은 ERD
+## 📖 ERD 다이어그램
 
-🚧 공사중
+![EveryPet](https://github.com/user-attachments/assets/03bb1e70-ae8e-4a3e-a37a-b64465dc505b)
 
-## 😇 프로젝트의 정상화 과정
+## 😇 쁘띠 창섭
 
-![image](https://image.fmkorea.com/files/attach/new4/20240808/7338495769_6775339301_e7d40bafd4fba74fe0f98d74c84c0650.jpg )
+![image](https://cnqnq6x1162u.objectstorage.ap-seoul-1.oci.customer-oci.com/p/4d_DJXYmI0ejd8avuhAILIIpyZqnmHvpQPxB3i9g9MKd65-abwpaD-tq-jraNd1k/n/cnqnq6x1162u/b/machugi-image/o/c009638f-cdb9-48fe-bf71-bbf42ef3ccaf.webp)

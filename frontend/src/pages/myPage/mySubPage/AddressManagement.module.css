@@ -1,0 +1,75 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #ffffff;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 28px;
+    color: #333;
+
+    margin-bottom: 20px;
+}
+
+.gridWrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.addressCard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
+
+.addressField {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+}
+
+.value {
+    font-size: 15px;
+    color: #333;
+    text-align: right;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.button__edit,
+.button__delete {
+    background-color: #dadada;
+    color: #ffffff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button__edit:hover {
+    background-color: #7c7c7c;
+}
+
+.button__delete:hover {
+    background-color: #f54f4f;
+}

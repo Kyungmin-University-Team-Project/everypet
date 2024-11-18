@@ -20,8 +20,6 @@ public interface KeywordRankService {
 
     KeywordRankDTO findKeywordRank(String keyword);
 
-    void updateRanking();
-
     void saveKeyword(String keyword);
 
     void updateKeywordRank();

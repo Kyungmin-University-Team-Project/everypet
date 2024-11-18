@@ -3,6 +3,7 @@ package com.everypet.auth.jwt.filter;
 import com.everypet.auth.jwt.JWTManager;
 import com.everypet.global.util.CookieManager;
 import com.everypet.auth.jwt.TokenExpirationTime;
+import com.everypet.global.util.IpUtil;
 import com.everypet.member.model.dto.member.SignupDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -69,8 +70,11 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String access = jwtManager.createJwt("access", memberId, roles, accessTime);
         String refresh = jwtManager.createJwt("refresh", memberId, roles, refreshTime);
 
+        // ip 생성
+        String ip = IpUtil.getClientIpAddress(request);
+
         // Refresh token 저장
-        jwtManager.addRefreshToken(memberId, refresh, refreshTime);
+        jwtManager.addRefreshToken(memberId, refresh, refreshTime, ip);
 
         // 응답 설정
         response.setHeader("access", access);

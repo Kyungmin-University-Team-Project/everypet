@@ -1,6 +1,3 @@
-/**
- *  상품에 대한 정보
- * */
 export interface Product {
     memberId: string;
     name: string;
@@ -21,11 +18,9 @@ export interface Product {
     salesCount: number;
 }
 
-
 export interface CategoryProductList {
     productMainCategory: string,
     productSubCategory: string,
-    // 임시 나중에 string 변경후 변수화
     orderBy: string,
     page: number,
     pageSize: 10
@@ -35,4 +30,14 @@ export interface DetailedCategoryList {
     name: string;
     tag: string;
     link:string;
+}
+
+export interface CartItem {
+    cartId: string;
+    productId:string;
+    cartQuantity: number;
+    productDiscountRate: number;
+    productPrice: number;
+    productImg: string;
+    productName: string;
 }

@@ -22,12 +22,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 15px;
 }
 
 .logo {
-    color: #75acff;
+    color: var(--color-primary);
     font-family: 'WAGURI', sans-serif;
+    font-size: 36px;
+
+    margin-left: 10px;
 }
 
 .section {
@@ -37,7 +39,6 @@
 }
 
 .paymentItems {
-    height: auto;
     width: 100%;
 }
 
@@ -45,22 +46,22 @@
     position: sticky;
     top: 0;
     display: flex;
-    padding: 15px;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #b6b6b6;
     background-color: white;
     z-index: 999;
+
+    padding: 15px;
 }
 
 .paymentHeader h2 {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 24px;
 }
 
 .orderInfo {
     padding: 0 15px;
-    margin-bottom: 30px;
 
     border-bottom: 1px solid #757575;
 }
@@ -307,7 +308,7 @@
 
 .checkoutButton {
     padding: 10px 20px;
-    background-color: #679aff;
+    background-color: var(--color-primary);
     color: white;
     border: none;
     cursor: pointer;
@@ -318,14 +319,13 @@
     font-weight: bold;
 }
 
-/* 노트북 및 데스크탑 환경 */
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 768px) {
     .inner {
         width: 1100px;
     }
 
-    .logo {
-        font-size: 32px;
+    .logo{
+        margin-left: 0;
     }
 
     .section {
@@ -373,28 +373,5 @@
 
     .checkoutButton {
         align-self: stretch;
-    }
-}
-
-/* 데스크탑 환경 */
-@media screen and (min-width: 1600px) {
-    .inner {
-        width: 1250px;
-    }
-
-    .logo {
-        font-size: 36px;
-        width: 1250px;
-    }
-
-    .section {
-        width: 1250px;
-        margin: auto;
-        padding-bottom: 20px;
-    }
-
-    .productImage {
-        width: 140px;
-        height: 140px;
     }
 }

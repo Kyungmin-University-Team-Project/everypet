@@ -9,7 +9,6 @@
     font-size: 16px;
 
     cursor: pointer;
-
 }
 
 .category:hover {
@@ -24,7 +23,7 @@
     bottom: 0; /* 부모 요소 하단에 배치 */
     transform: translateX(-50%); /* 가로로 -50%만큼 이동하여 중앙에 정렬 */
     width: 0; /* 보더의 초기 너비는 0 */
-    height: 2.5px; /* 보더의 두께 */
+    height: 3px; /* 보더의 두께 */
     background-color: #4a8cf0; /* 보더의 색상 */
     transition: width 0.3s ease; /* 너비에 트랜지션 효과 적용 */
 }
@@ -34,8 +33,7 @@
 }
 
 .active {
-    color: #4a8cf0;
-    border-bottom: 3px solid #4a8cf0; /* 활성화된 상태일 때 보더의 색상과 두께 변경 */
-    padding-top: 4px; /* 보더의 두께만큼 아래쪽에 여백 추가 */
+    color: var(--color-primary);
+    border-bottom: 3px solid var(--color-primary); /* 활성화된 상태일 때 보더의 색상과 두께 변경 */
     font-weight: bold;
 }

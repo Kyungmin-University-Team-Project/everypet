@@ -1,7 +1,9 @@
 package com.everypet.product.controller;
 
 import com.everypet.member.model.vo.Member;
-import com.everypet.product.model.dto.*;
+import com.everypet.product.model.dto.ProductDTO;
+import com.everypet.product.model.dto.ProductKeywordDTO;
+import com.everypet.product.model.dto.ProductListDTO;
 import com.everypet.product.service.ProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,17 +28,18 @@ public class ProductController {
 
     @ApiOperation(value = "상품 추가", notes = "새로운 상품을 추가합니다.")
     @PostMapping("/insert")
-    public ResponseEntity<String> insertProductInfo(@RequestBody ProductDTO.ProductInsertDTO productDTO) throws UnsupportedEncodingException {
+    public ResponseEntity<String> insertProductInfo(@ModelAttribute ProductDTO.ProductInsertDTO productDTO) throws UnsupportedEncodingException {
         try {
             productDTO.setProductMainCategory(new String(productDTO.getProductMainCategory().getBytes("8859_1"), "UTF-8"));
             productDTO.setProductSubCategory(new String(productDTO.getProductSubCategory().getBytes("8859_1"), "UTF-8"));
             productDTO.setProductName(new String(productDTO.getProductName().getBytes("8859_1"), "UTF-8"));
 
-            //String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
+            String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
 
-            productService.insertProduct(productDTO, productDTO.getMemberId());
+            productService.insertProduct(productDTO, memberId);
             return ResponseEntity.ok().body("상품 추가 완료");
         }catch (RuntimeException e){
+            System.err.println("상품 추가 에러 : " + e.getMessage());
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
@@ -58,7 +61,7 @@ public class ProductController {
             "대분류 : dog, cat, bird\n소분류 : all, snack, sand, feed, cage, health, toy, restroom\n" +
             "정렬 : popularity(인기순), sales_high(판매량 높은 순), sales_low(판매량 낮은 순), price_high(가격 높은 순), price_low(가격 낮은 순), latest(최신순), oldest(오래된순)")
     @GetMapping("/list/{productMainCategory}/{productSubCategory}/{orderBy}/{page}/{pageSize}")
-    public ResponseEntity<List<ProductListDTO>> selectProduct(
+    public ResponseEntity<List<ProductListDTO>> selectProductCategory(
             @PathVariable String orderBy,
             @PathVariable int page,
             @PathVariable int pageSize,
@@ -67,6 +70,21 @@ public class ProductController {
         try {
 
             return ResponseEntity.ok().body(productService.selectProductList(productMainCategory, productSubCategory, orderBy, page, pageSize));
+        }catch (RuntimeException e){
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+    @ApiOperation(value = "브랜드 별 상품 리스트 출력", notes = "브랜드, 정렬 기준, 페이지 번호, 페이지 사이즈를 경로로 받아서 상품 리스트를 출력합니다.\n" +
+            "정렬 : popularity(인기순), sales_high(판매량 높은 순), sales_low(판매량 낮은 순), price_high(가격 높은 순), price_low(가격 낮은 순), latest(최신순), oldest(오래된순)")
+    @GetMapping("/list/{brand}/{orderBy}/{page}/{pageSize}")
+    public ResponseEntity<List<ProductListDTO>> selectProductBrand(
+            @PathVariable String orderBy,
+            @PathVariable int page,
+            @PathVariable int pageSize,
+            @PathVariable String brand){
+        try {
+            return ResponseEntity.ok().body(productService.selectProductBrandList(brand, orderBy, page, pageSize));
         }catch (RuntimeException e){
             return ResponseEntity.badRequest().body(null);
         }
@@ -84,15 +102,15 @@ public class ProductController {
 
     @ApiOperation(value = "상품 정보 수정", notes = "상품의 정보를 수정합니다.")
     @PostMapping("/update")
-    public ResponseEntity<String> updateProductInfo(@RequestBody ProductDTO.ProductInsertDTO productInsertDTO) throws UnsupportedEncodingException {
+    public ResponseEntity<String> updateProductInfo(@RequestBody ProductDTO.ProductUpdateDTO productUpdateDTO) throws UnsupportedEncodingException {
         try {
-            productInsertDTO.setProductMainCategory(new String(productInsertDTO.getProductMainCategory().getBytes("8859_1"), "UTF-8"));
-            productInsertDTO.setProductSubCategory(new String(productInsertDTO.getProductSubCategory().getBytes("8859_1"), "UTF-8"));
-            productInsertDTO.setProductName(new String(productInsertDTO.getProductName().getBytes("8859_1"), "UTF-8"));
+            productUpdateDTO.setProductMainCategory(new String(productUpdateDTO.getProductMainCategory().getBytes("8859_1"), "UTF-8"));
+            productUpdateDTO.setProductSubCategory(new String(productUpdateDTO.getProductSubCategory().getBytes("8859_1"), "UTF-8"));
+            productUpdateDTO.setProductName(new String(productUpdateDTO.getProductName().getBytes("8859_1"), "UTF-8"));
 
             String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
 
-            productService.updateProduct(productInsertDTO, memberId);
+            productService.updateProduct(productUpdateDTO, memberId);
             return ResponseEntity.ok().body("상품 수정 완료");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

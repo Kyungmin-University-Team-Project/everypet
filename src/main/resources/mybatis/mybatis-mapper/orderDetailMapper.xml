@@ -43,4 +43,51 @@
         WHERE r.REVIEW_ID = #{reviewId}
     </update>
 
+    <!-- 판매자 확인 쿼리 -->
+    <select id="checkSeller" resultType="int" parameterType="Map">
+        SELECT COUNT(*)
+        FROM TBL_PRODUCT p
+                 JOIN TBL_ORDER_DETAIL od ON p.PRODUCT_ID = od.PRODUCT_ID
+        WHERE p.MEMBER_ID = #{memberId}
+          AND od.ORDER_DETAIL_ID = #{orderDetailId};
+    </select>
+
+    <!-- 운송장 번호 업데이트 쿼리 -->
+    <update id="updateTrackingNumber" parameterType="Map">
+        UPDATE TBL_ORDER_DETAIL
+        SET TRACKING_NUMBER = #{trackingNumber}
+        WHERE ORDER_DETAIL_ID = #{orderDetailId};
+    </update>
+
+    <!-- orderDetailId로 OrderDetailDTO 조회 -->
+    <select id="getOrderDetailByOrderDetailId" parameterType="Long" resultType="com.everypet.order.model.dto.OrderDTO$OrderDetailDTO">
+        SELECT
+            o.ORDER_ID,
+            o.MEMBER_ID,
+            o.ORDER_DATE,
+            o.TOTAL_AMOUNT,
+            o.PRODUCT_AMOUNT,
+            o.DELIVERY_AMOUNT,
+            o.POSTAL_CODE,
+            o.ADDRESS,
+            o.ADDRESS_DETAIL,
+            o.RECEIVER,
+            o.PHONE,
+            o.REQUEST,
+            o.ORDER_STATUS,
+            od.ORDER_DETAIL_ID,
+            od.PRODUCT_ID,
+            od.PRODUCT_PRICE,
+            od.QUANTITY,
+            od.DISCOUNT_RATE,
+            od.TRACKING_NUMBER,
+            od.PARCEL_COMPANY,
+            od.REVIEW_STATUS_YN
+        FROM
+            TBL_ORDER o
+                INNER JOIN
+            TBL_ORDER_DETAIL od ON o.ORDER_ID = od.ORDER_ID
+        WHERE
+            od.ORDER_DETAIL_ID = #{orderDetailId}
+    </select>
 </mapper>

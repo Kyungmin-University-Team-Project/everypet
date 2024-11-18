@@ -1,0 +1,55 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 60px 0 40px 0;
+    padding: 0 10px;
+    overflow-x: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+
+}
+
+.item {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    min-width: 120px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.item:hover {
+    background-color: #669AFF;
+    color: white;
+}
+
+.active{
+    background-color: #669AFF;
+    color: white;
+
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    min-width: 120px;
+
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 769px) {
+    .container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1px;
+        overflow-x: visible;
+        padding: 0;
+
+        margin: 20px 0
+    }
+
+    .item{
+        padding: 20px;
+    }
+}

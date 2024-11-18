@@ -1,0 +1,188 @@
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    background-color: white;
+    margin: auto;
+    border-radius: 5px;
+    cursor: pointer;
+
+    transition: transform 0.3s ease;
+}
+
+.img__wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 5px;
+
+    margin-bottom: 10px;
+}
+
+.img {
+    width: 100%;
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+
+    border-radius: 10px;
+}
+
+.item:hover .img {
+    transform: scale(0.9);
+}
+
+.title {
+    color: #333;
+    font-size: 14px;
+    height: 40px;
+
+    margin-bottom: 5px;
+
+    font-weight: bold;
+    transition: all 0.2s ease-in;
+    text-align: left;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.item:hover .title {
+    color: #75acff;
+}
+
+.item__info {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 5px;
+    align-items: flex-start;
+}
+
+.price__wrap {
+    display: flex;
+    align-items: end;
+    gap: 8px;
+
+}
+
+.discount {
+    color: var(--color-saleprice);
+    font-size: 24px;
+
+}
+
+.un__discount {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.price {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.tagAndIcons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    height: 100%;
+    padding-bottom: 10px;
+    border-bottom: solid rgb(199, 199, 199) 1px;
+}
+
+.cartIcon,
+.likeIcon {
+    font-size: 1.2em;
+    margin-right: 10px;
+    color: #8f8f8f;
+    transition: all 0.2s ease;
+}
+
+.cartIcon:hover {
+    color: black;
+}
+
+.likeIcon:hover {
+    color: rgb(255, 55, 55);
+}
+
+.tag {
+    background-color: #ff8a00;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 0.8em;
+}
+
+.FaShoppingCart{
+    color: gray;
+
+    transition: all 0.2s ease-in;
+}
+
+.FaShoppingCart:hover{
+    color: black;
+}
+
+.recommendationAndReviews {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.FaStar{
+    color: #ff8a00;
+}
+
+.FaRegStar{
+    color: #cccccc;
+}
+
+.reviewCount {
+    color: rgb(122, 122, 122);
+    font-size: 0.8em;
+}
+
+@media screen and (min-width: 768px) {
+    .item {
+        padding: 0;
+        margin: 0;
+        max-width: none;
+    }
+
+    .title {
+        font-size: 18px;
+        height: 50px;
+
+    }
+
+    .discount {
+        font-size: 32px;
+    }
+
+    .price {
+        font-size: 22px;
+    }
+
+    .cartIcon,
+    .likeIcon {
+        font-size: 24px;
+    }
+
+    .tag {
+        font-size: 14px;
+    }
+
+    .reviewCount {
+        font-size: 13px;
+    }
+}

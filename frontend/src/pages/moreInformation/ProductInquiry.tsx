@@ -1,22 +1,131 @@
-import React, { useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from '../moreInformation/productInqulry.module.css';
+import axiosInstance from "../../utils/error/axiosInstance";
+import axios from "axios";
+import Pagination from 'react-js-pagination';
+import "./Paging.css"
+import {API_URL} from "../../api/api";
 
-const ProductInquiry: React.FC = () => {
+interface ProductInquiryProps {
+    productId: string | null;
+}
+
+interface Inquiry {
+    content: string;
+    productId: string;
+    title: string;
+}
+
+interface List {
+    inquiryContents: string;
+    inquiryDate: string;
+    inquiryDeleteDate: string;
+    inquiryStatus: string;
+    inquiryTitle: string;
+    inquiryUpdateDate: string;
+    memberId: string;
+    productId: string;
+    sellerInquiryId: number;
+}
+
+const MAX = 500;
+const TITLE = 30;
+
+const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
     const [modalOpen, setModalOpen] = useState(false);
-    const [text, setText] = useState('');
+    const [text, setText] = useState<Inquiry>({
+        content: '',
+        productId: productId || '',
+        title: '',
+    });
     const modalBackground = useRef<HTMLDivElement>(null);
+    const [contentLength, setContentLength] = useState<number>(0);
+    const [titleLength, setTitleLength] = useState<number>(0);
+    const [listType, setListType] = useState<List[]>([]);
+    // slice 보여줄 리스트
+    const [currentPage, setCurrentPage] = useState(1);
+    // slice 담을 데이터
+    const [currentList, setCurrentList] = useState<List[]>([]);
+    const itemsPerPage = 10; // 페이지당 항목 수
 
-    const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setText(e.target.value);
+    useEffect(() => {
+        const fetchList = async () => {
+            try {
+                const page = currentPage; // 페이지가 0부터 시작하도록 조정
+                const size = itemsPerPage;
+                const sort = 'createdDate,desc';
+                const url = `${API_URL}/support/seller/inquiry/list/${productId}?${page}&${size}&${sort}`;
+                const response = await axios.get(url);
+                setListType(response.data.content); // API 응답에서 항목 설정
+            } catch (e) {
+                console.error(e);
+            }
+        };
+        if (productId) { // productId가 유효할 때만 데이터 가져오기
+            fetchList();
+        }
+    }, [productId, modalOpen]); // productId 또는 currentPage가 변경될 때 데이터 가져오기
+
+    // slice할 index에 범위
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+    // 페이지 이동
+    const handleChangePage = (page: number) => {
+        setCurrentPage(page);
+    }
+    // 페이지 네이션
+    useEffect(() => {
+        setCurrentList(listType.slice(indexOfFirstItem, indexOfLastItem));
+    }, [listType, currentPage, itemsPerPage]);
+
+    const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        const {value, name} = e.target;
+        setText((prev) => ({
+            ...prev,
+            productId: productId || '',
+            [name]: value,
+        }));
+        setContentLength(value.length);
+        if (name === 'title') {
+            setTitleLength(value.length);
+        }
     };
 
-    const closeModal = () => {
-        setText(''); // Reset the text when the modal is closed
-        setModalOpen(false);
+    const handleOnSubmitClick = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            const response = await axiosInstance.post(`${API_URL}/support/seller/inquiry`, {...text});
+            console.log(response);
+            setText({content: '', productId: productId || '', title: ''});
+            setModalOpen(false);
+        } catch (e) {
+            console.error(e);
+        }
     };
 
     return (
         <div>
+            <div>
+                {currentList.map((item) => (
+                    <ul className={styles.seller_box}>
+                        <li key={item.sellerInquiryId} className={styles.seller_box}>
+                            <p className={styles.date}>{item.inquiryDate}</p>
+                            <p className={styles.title}>제목: {item.inquiryTitle}</p>
+                            <p>내용: {item.inquiryContents}</p>
+                        </li>
+                    </ul>
+                ))}
+                <Pagination
+                    activePage={currentPage}
+                    itemsCountPerPage={itemsPerPage}
+                    totalItemsCount={listType.length}
+                    pageRangeDisplayed={10}
+                    prevPageText={"<"}
+                    nextPageText={">"}
+                    onChange={handleChangePage}
+                />
+            </div>
             <div className={styles.btn_wrapper}>
                 <p className={styles.modal_text}>상품문의</p>
                 <button className={styles.modal_open_button} onClick={() => setModalOpen(true)}>
@@ -37,38 +146,42 @@ const ProductInquiry: React.FC = () => {
                     }
                 }}>
                     <div className={styles.modal_content}>
-                        <div className={styles.modal_close_btn} >
-                            <p >상품문의</p>
-                            <button onClick={() => setModalOpen(false)} >
+                        <div className={styles.modal_close_btn}>
+                            <p className={styles.modal_close_text}>상품문의</p>
+                            <button className={styles.modal_close_x} onClick={() => setModalOpen(false)}>
                                 X
                             </button>
                         </div>
-                        <form>
-                            <textarea className={styles.modal_textarea}
-                                      placeholder="문의하실 내용을 입력하세요"
-                                      cols={30}
-                                      rows={5}
-                                      maxLength={1000}
-                                      value={text}
-                                      onChange={handleTextChange}></textarea>
-                            <div className={styles.character_count}>{text.length}/1000</div>
-                            <p>문의하신 내용에 대한 답변은 해당 상품의 상세페이지 또는 '쇼핑MY 상품Q&A'에서 확인하실 수 있습니다.</p>
-                            <button onClick={closeModal} className={styles.modal_form_btn}>
-                                취소하기
-                            </button>
+                        <form onSubmit={handleOnSubmitClick}>
                             <div>
-                                <p className={styles.modal_form_text}>상품 Q&A 작성 유의사항</p>
-                                <div className={styles.modal_form_qa}>
-                                    <p>* 개인정보(주민번호, 연락처, 주소, 계좌번호, 카드번호 등)가 포함되지 않도록 유의해주세요.</p>
-                                    <p>상품 Q&A는 상품 및 상품 구매 과정(배송, 반품/취소, 교환/변경)에 대해 판매자에게 문의하는 ​게시판입니다.</p>
-                                    <p>상품 및 상품 구매 과정과 관련 없는 비방/욕설/명예훼손성 게시글 및 상품과 관련 없는 광고글 등 부적절한 게시글 등록 시 글쓰기 제한 및
-                                        게시글이 삭제
-                                        조치
-                                        될 수 있습니다</p>
-                                    <p>전화번호, 이메일 등 개인 정보가 포함된 글 작성이 필요한 경우 판매자만 볼 수 있도록 비밀글로 문의해 주시기 바랍니다.</p>
-                                    <p>상품에 대한 이용 후기는 리뷰에 남겨 주세요.</p>
-                                </div>
+                                <label>
+                                    <p className={styles.modal_input_text}>제목</p>
+                                    <input
+                                        className={styles.modal_input}
+                                        placeholder='예)수량 5개 주문이 가능한가요?'
+                                        name='title'
+                                        value={text.title}
+                                        onChange={handleTextChange}
+                                        maxLength={30}
+                                    />
+                                    <div className={styles.character_count}>{titleLength}/{TITLE}</div>
+                                </label>
                             </div>
+                            <p className={styles.modal_textarea_p}>문의 내용</p>
+                            <textarea
+                                className={styles.modal_textarea}
+                                placeholder="문의하실 내용을 입력하세요"
+                                cols={30}
+                                rows={5}
+                                name="content"
+                                maxLength={500}
+                                value={text.content}
+                                onChange={handleTextChange}
+                            />
+                            <div className={styles.character_count}>{contentLength}/{MAX}</div>
+                            <p className={styles.modal_p_text}>문의하신 내용에 대한 답변은 해당 상품의 상세페이지 또는 '쇼핑MY 상품Q&A'에서 확인하실 수
+                                있습니다.</p>
+                            <button className={styles.modal_form_btn}>완료</button>
                         </form>
                     </div>
                 </div>

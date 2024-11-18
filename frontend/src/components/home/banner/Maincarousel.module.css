@@ -1,8 +1,6 @@
-/* 기본 스타일 - 모바일 환경에 적용 */
 .container {
     position: relative;
     width: 100%;
-    height: 250px; /* 높이를 모바일 환경에 맞춰 조정 */
 }
 
 .item {
@@ -10,83 +8,13 @@
 }
 
 .img {
-    display: flex;
-    margin: auto;
-    width: 100%; /* 이미지 크기를 컨테이너 너비에 맞춤 */
-    height: auto; /* 높이는 자동으로 조정 */
-}
-
-.controls {
-    position: absolute;
-    top: 0;
     width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    pointer-events: none; /* 컨트롤이 아닌 영역은 클릭 불가능하게 설정 */
-}
-
-.left__arrow,
-.right__arrow {
-    display: none;
-    pointer-events: auto; /* 컨트롤은 클릭 가능하게 설정 */
-    border: none;
-    cursor: pointer;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    padding: 10px;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.left__arrow {
-    margin-left: 10px;
-}
-
-.right__arrow {
-    margin-right: 10px;
-}
-
-.container:hover .left__arrow,
-.container:hover .right__arrow {
-    opacity: 1;
-}
-
-.left__arrow:hover,
-.right__arrow:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+    height: 200px;
 }
 
 
-/* 노트북 환경에 적용 */
-@media screen and (min-width: 1400px) {
-    .left__arrow,
-    .right__arrow {
-        display: block;
-    }
-
-    .container {
-        height: 400px; /* 높이를 노트북 환경에 맞춰 조정 */
-        margin-bottom: 80px;
-    }
-
+@media screen and (min-width: 769px) {
     .img {
-        width: 100%; /* 이미지 크기를 컨테이너 너비에 맞춤 */
-        height: 400px; /* 높이는 자동으로 조정 */
-    }
-}
-
-/* 데스크탑 환경에 적용 */
-@media screen and (min-width: 1600px) {
-    .container {
-        height: 500px; /* 높이를 데스크탑 환경에 맞춰 조정 */
-        margin-bottom: 70px;
-    }
-
-    .img {
-        max-width: 100%; /* 이미지 크기를 컨테이너 너비에 맞춤 */
-        height: 500px;
+        height: 350px;
     }
 }

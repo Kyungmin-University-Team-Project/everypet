@@ -119,4 +119,30 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.selectOrderListByMember(params);
     }
 
+    @Override
+    public void updateTrackingNumber(String memberId, int orderDetailId, int trackingNumber) {
+        // 1. 해당 상품의 판매자가 맞는지 확인
+        Map<String, Object> checkParams = new HashMap<>();
+        checkParams.put("memberId", memberId);
+        checkParams.put("orderDetailId", orderDetailId);
+        int isSeller = orderDetailMapper.checkSeller(checkParams);
+
+        // 2. 판매자가 맞으면 운송장 번호 업데이트
+        if (isSeller > 0) {
+            Map<String, Object> updateParams = new HashMap<>();
+            updateParams.put("orderDetailId", orderDetailId);
+            updateParams.put("trackingNumber", trackingNumber);
+
+            orderDetailMapper.updateTrackingNumber(updateParams);
+        } else {
+            throw new IllegalArgumentException("해당 상품의 판매자가 아닙니다.");
+        }
+    }
+
+    @Override
+    public OrderDTO.OrderDetailDTO getOrderDetail(OrderDTO.OrderDetailId orderDetailId) {
+        return orderDetailMapper.getOrderDetailByOrderDetailId(orderDetailId.getOrderDetailId());
+    }
+
+
 }

@@ -1,47 +1,46 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-import {FaTrashAlt} from 'react-icons/fa';
 import styles from './Cart.module.css';
-import {CartItem, deleteCartItem, fetchCartItems} from '../../utils/product/cart';
+import {deleteCartItem, fetchCartItems} from '../../utils/product/cart';
 import {handleAxiosError} from '../../utils/error/errorHandler';
 import {AxiosError} from 'axios';
+import {formatPrice} from "../../utils/product/product";
+import {CartItem} from "../../typings/product";
+import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
+import {DeleteIcon, FaMinus, FaPlus} from "../../icons/Icons";
 
 const shippingFee = 3000;
 
 const Cart: React.FC = () => {
+    const navigate = useNavigate();
 
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
-    const [selectAll, setSelectAll] = useState(false);
-    const [deleteTrigger, setDeleteTrigger] = useState(false);
+    const [selectAll, setSelectAll] = useState(true);
     const [totalPrice, setTotalPrice] = useState(0);
-    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
 
     const loadCartItems = async () => {
         try {
+            setIsLoading(false)
+
             const items: CartItem[] = await fetchCartItems();
             setCartItems(items);
             setSelectedItems(items.map((item: CartItem) => item.cartId));
             calculateTotalPrice(items, items.map((item: CartItem) => item.cartId));
         } catch (error) {
             handleAxiosError(error as AxiosError);
+
+        } finally {
+            setIsLoading(true)
         }
     };
 
     useEffect(() => {
         loadCartItems();
+        console.log(cartItems)
     }, []);
 
-    useEffect(() => {
-        if (deleteTrigger) {
-            loadCartItems();
-            setDeleteTrigger(false);
-        }
-    }, [deleteTrigger]);
-
-    const formatPrice = (price: number) => {
-        return price.toLocaleString() + '원';
-    };
 
     const calculateTotalPrice = (items: CartItem[], selected: string[]) => {
         if (items && items.length > 0) {
@@ -49,8 +48,11 @@ const Cart: React.FC = () => {
                 .filter(item => selected.includes(item.cartId))
                 .reduce((total, item) => {
                     const productPrice = item.productPrice ?? 0;
-                    return total + productPrice * item.cartQuantity;
+                    const discountRate = item.productDiscountRate ? item.productDiscountRate / 100 : 0;
+                    const discountedPrice = productPrice * (1 - discountRate);
+                    return total + discountedPrice * item.cartQuantity;
                 }, 0);
+
             const totalPrice = selectedProductPrice + (selectedProductPrice > 0 ? shippingFee : 0);
             setTotalPrice(totalPrice);
         }
@@ -58,15 +60,17 @@ const Cart: React.FC = () => {
 
     const handleDeleteItem = async (productId: string) => {
         try {
+            setIsLoading(false)
             await deleteCartItem(productId);
             const newCartItems = cartItems.filter(item => item.productId !== productId);
             const newSelectedItems = selectedItems.filter(id => id !== productId);
             setCartItems(newCartItems);
             setSelectedItems(newSelectedItems);
             calculateTotalPrice(newCartItems, newSelectedItems);
-            setDeleteTrigger(true);
         } catch (error) {
             handleAxiosError(error as AxiosError);
+        } finally {
+            setIsLoading(true)
         }
     };
 
@@ -107,6 +111,11 @@ const Cart: React.FC = () => {
         navigate('/payment', {state: {selectedProducts, totalPrice}}); // 결제 페이지로 이동하면서 상태 전달
     };
 
+    if (!isLoading) {
+        return <LoadingSpinner/>
+    }
+
+
     return (
         <div className={styles.container}>
             <header className={styles.header}>
@@ -133,15 +142,16 @@ const Cart: React.FC = () => {
                     {cartItems.map((item) => (
                         <div className={styles.item__wrap} key={item.cartId}>
                             <div className={styles.icon__btn}>
+                                <DeleteIcon
+                                    size={40}
+                                    className={styles.DeleteIcon}
+                                    onClick={() => handleDeleteItem(item.productId)}
+                                />
                                 <input
                                     type="checkbox"
                                     checked={selectedItems.includes(item.cartId)}
                                     onChange={() => handleItemSelectChange(item.cartId)}
                                     className={styles.checkboxInput}
-                                />
-                                <FaTrashAlt
-                                    className={styles.removeItemButton}
-                                    onClick={() => handleDeleteItem(item.productId)}
                                 />
                             </div>
                             <div className={styles.item}>
@@ -160,19 +170,24 @@ const Cart: React.FC = () => {
                                         <button
                                             className={styles.quantityButton}
                                             onClick={() => handleQuantityChange(item.cartId, -1)}
-                                        >-
+                                        >
+                                            <FaMinus size={20}/>
                                         </button>
                                         <input type="number" value={item.cartQuantity} readOnly
                                                className={styles.quantityInput}/>
                                         <button
                                             className={styles.quantityButton}
                                             onClick={() => handleQuantityChange(item.cartId, 1)}
-                                        >+
+                                        >
+                                            <FaPlus size={20}/>
                                         </button>
                                     </div>
                                     <div className={styles.total}>
                                         <p className={styles.price}>
-                                            {item.productPrice ? formatPrice(item.productPrice * item.cartQuantity) : '0원'}
+                                            {item.productDiscountRate
+                                                ? formatPrice(Math.round((item.productPrice * item.cartQuantity) * (1 - item.productDiscountRate / 100)))
+                                                : formatPrice(item.productPrice * item.cartQuantity)
+                                            }
                                         </p>
                                     </div>
                                 </div>
@@ -186,12 +201,15 @@ const Cart: React.FC = () => {
                             <span>배송비:</span>
                             <span>{formatPrice(shippingFee)}</span>
                         </div>
+
                         <div className={styles.summaryTotal}>
                             <span>합계:</span>
                             <span>{formatPrice(totalPrice)}</span>
                         </div>
+
                         <button
                             className={styles.checkoutButton}
+                            disabled={selectedItems.length === 0}
                             onClick={handleCheckout}
                         >주문하기
                         </button>

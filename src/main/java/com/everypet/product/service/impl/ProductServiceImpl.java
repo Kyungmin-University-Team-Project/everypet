@@ -1,6 +1,6 @@
 package com.everypet.product.service.impl;
 
-import com.everypet.global.util.GoogleImageCloudService;
+import com.everypet.clound.service.impl.GoogleBucketCloudService;
 import com.everypet.global.util.IpUtil;
 import com.everypet.keyword.service.KeywordLogService;
 import com.everypet.keyword.service.KeywordRankService;
@@ -25,7 +25,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
-    private final GoogleImageCloudService imageCloudService;
+    private final GoogleBucketCloudService imageCloudService;
     private final ProductMapper productMapper;
 
     private final KeywordRankService keywordRankService;
@@ -33,7 +33,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void insertProduct(ProductDTO.ProductInsertDTO productInsertDTO, String memberId){
-
         // 이미지 업로드 관련 부분
         String productId = UUID.randomUUID().toString(); // UUID 생성
 
@@ -46,9 +45,9 @@ public class ProductServiceImpl implements ProductService {
         productInsertMap.put("productName", productInsertDTO.getProductName());
         productInsertMap.put("productImg",  imageCloudService.getGOOGLE_IMAGE_CLOUD_URL()+ productId);
         productInsertMap.put("productDescriptionImg", imageCloudService.getGOOGLE_IMAGE_CLOUD_URL() + productId + "-description");
-        productInsertMap.put("productPrice", productInsertDTO.getProductPrice());
-        productInsertMap.put("productDiscountRate", productInsertDTO.getProductDiscountRate());
-        productInsertMap.put("numberOfProduct", productInsertDTO.getNumberOfProduct());
+        productInsertMap.put("productPrice", Integer.parseInt(productInsertDTO.getProductPrice()));
+        productInsertMap.put("productDiscountRate", Integer.parseInt(productInsertDTO.getProductDiscountRate()));
+        productInsertMap.put("numberOfProduct", Integer.parseInt(productInsertDTO.getNumberOfProduct()));
         productInsertMap.put("productSalesStatusYN", productInsertDTO.getProductSalesStatusYN());
         productInsertMap.put("productMainCategory", productInsertDTO.getProductMainCategory());
         productInsertMap.put("productSubCategory", productInsertDTO.getProductSubCategory());
@@ -112,7 +111,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void updateProduct(ProductDTO.ProductInsertDTO productUpdateDTO, String memberId) {
+    public void updateProduct(ProductDTO.ProductUpdateDTO productUpdateDTO, String memberId) {
 
         // 수정 권한을 확인하는 메서드
         validateProductDeletionPermission(productUpdateDTO.getProductId(), memberId);
@@ -202,6 +201,21 @@ public class ProductServiceImpl implements ProductService {
         if (result == 0) {
             throw new RuntimeException("DB에 키워드 삭제 실패");
         }
+    }
+
+    @Override
+    public List<ProductListDTO> selectProductBrandList(String brand, String orderBy, int page, int pageSize) {
+
+        // 페이지 번호와 페이지 크기를 이용하여 페이지의 시작 인덱스를 계산
+        int pageStart = (page - 1) * pageSize;
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("brand", brand);
+        params.put("orderBy", convertOrderByKeywordToQuery(orderBy));
+        params.put("pageStart", pageStart);
+        params.put("pageSize", pageSize);
+
+        return productMapper.selectProductListByBrand(params);
     }
 
     // 상품 권한 확인

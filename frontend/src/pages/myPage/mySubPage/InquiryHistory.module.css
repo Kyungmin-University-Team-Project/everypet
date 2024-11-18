@@ -1,0 +1,129 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 28px;
+    color: #333;
+}
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+
+    margin-top: 10px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.inquiryId {
+    font-size: 14px;
+    color: #555;
+    font-weight: bold;
+}
+
+.status {
+    font-size: 14px;
+    padding: 5px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+}
+
+.completed {
+    background-color: #0fb733;
+    color: #fff;
+}
+
+.inProgress {
+    background-color: #2f2f2f;
+    color: #ffffff;
+}
+
+.cardBody {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.cardTitle {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.date {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #777;
+}
+
+.iconContainer {
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.iconContainer__active{
+    transform: rotate(45deg);
+}
+
+.icon {
+    width: 30px;
+    color: #007BFF;
+}
+
+.answer {
+    max-width: 787px;
+    padding: 20px;
+
+    background-color: #fdfdfd;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+
+    animation: slideDown 0.3s ease-in-out;
+}
+
+{
+
+    width: 90%;
+    height: 100%;
+}
+
+@keyframes slideDown {
+    from {
+        max-height: 0;
+        opacity: 0;
+    }
+    to {
+        max-height: 500px;
+        opacity: 1;
+    }
+}

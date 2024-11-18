@@ -8,19 +8,12 @@
 
 .inner {
     width: 100%;
-    margin: 40px 0 40px 0;
 }
 
-/* 노트북 환경 */
-@media screen and (min-width: 1024px) and (max-width: 1599px) {
+
+@media screen and (min-width: 769px){
     .inner {
         width: 1100px;
-    }
-}
-
-/* 데스크탑 환경 */
-@media screen and (min-width: 1600px) {
-    .inner {
-        width: 1250px;
+        margin: 40px 0 40px 0;
     }
 }

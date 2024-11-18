@@ -21,4 +21,5 @@ public interface ProductMapper {
     int insertProductKeyword(Map<String, Object> map);
     int deleteProductKeyword(Map<String, Object> map);
     int selectDiscountedProductPriceByProductId(String productId);
+    List<ProductListDTO> selectProductListByBrand(Map<String, Object> map);
 }

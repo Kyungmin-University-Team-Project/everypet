@@ -1,10 +1,9 @@
 import React, {useEffect} from 'react';
+import style from "./Root.module.css"
 import {Outlet, useLocation} from 'react-router-dom';
-import Productcategory from '../../layout/category/ProductCategory';
 import Home from './Home';
 import Header from '../../layout/Header/Header';
-import Fixedheader from '../../layout/Header/Fixedheader';
-import Footer from "../../components/home/Footer";
+import Footer from "../../components/common/Footer";
 import ScrollToTopButton from "../../components/common/ScrollToTopButton";
 
 const Root = () => {
@@ -31,14 +30,14 @@ const Root = () => {
     }, []);
 
     return (
-        <>
-            <Fixedheader/>
-            <Header/>
-            <Productcategory/>
-            {location.pathname === '/' ? <Home/> : <Outlet/>}
-            <ScrollToTopButton/>
+        <div className={style.rootContainer}>
+            <div>
+                <Header/>
+                {location.pathname === '/' ? <Home/> : <Outlet/>}
+                <ScrollToTopButton/>
+            </div>
             <Footer/>
-        </>
+        </div>
     );
 };
 

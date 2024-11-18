@@ -38,7 +38,7 @@
     </delete>
 
     <update id="resetOneHourScore">
-        UPDATE TBL_RANKING,
+        UPDATE TBL_RANKING
         SET ONE_HOUR_SCORE = 0
     </update>
 

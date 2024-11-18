@@ -5,6 +5,7 @@ import com.everypet.auth.vo.RefreshToken;
 import com.everypet.global.util.CookieManager;
 import com.everypet.auth.jwt.TokenExpirationTime;
 import com.everypet.auth.jwt.JWTManager;
+import com.everypet.global.util.IpUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -83,9 +84,12 @@ public class ReissueService {
         String newAccess = jwtManager.createJwt("access", memberId, roles, accessTime);
         String newRefresh = jwtManager.createJwt("refresh", memberId, roles, refreshTime);
 
+        // 로컬 IP 가져오기
+        String ip = IpUtil.getClientIpAddress(request);
+
         //Refresh 토큰 저장 DB에 기존의 Refresh 토큰 삭제 후 새 Refresh 토큰 저장
         refreshTokenRepository.delete(refreshToken);
-        jwtManager.addRefreshToken(memberId, newRefresh, refreshTime);
+        jwtManager.addRefreshToken(memberId, newRefresh, refreshTime, ip);
 
         //response
         response.setHeader("access", newAccess);

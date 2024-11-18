@@ -1,3 +1,39 @@
+p {
+    padding: 0;
+    margin: 0;
+}
+
+.seller_box {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.seller_box li {
+    font-size: 15px;
+    border: 1px solid #eee;
+    border-radius: 4px; /* 모서리 둥글게 */
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 15px;
+}
+
+
+.itemContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.seller_box .date {
+    font-weight: bold; /* 날짜 강조 */
+    margin-bottom: 5px; /* 아래 여백 추가 */
+}
+
+.seller_box .title {
+    margin-bottom: 5px; /* 아래 여백 추가 */
+}
+
+
 .btn_wrapper {
     display: flex;
     justify-content: space-between;
@@ -8,10 +44,14 @@
     font-weight: bold;
 }
 
+.modal_close_box {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .modal_open_button {
     text-align: center;
     width: 10%;
-    border-radius: 5px;
     color: white;
     height: 2.5rem;
     background-color: #5a99fa;
@@ -21,6 +61,7 @@
     box-shadow: 1px 4px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
 }
+
 .modal_close_btn {
     display: flex;
     justify-content: space-between;
@@ -44,9 +85,24 @@
 .modal_content {
     background-color: #ffffff;
     width: 500px;
-    height: 700px;
+    height: 550px;
     padding: 15px;
+    border-radius: 4px;
 }
+
+.modal_close_x {
+    border: 1px solid #ccc; /* 테두리를 연하게 설정 */
+    outline: none;
+    cursor: pointer;
+    background-color: black;
+    color: #fff; /* 글자색을 흰색으로 */
+    font-size: 16px; /* 폰트 크기 */
+    font-weight: bold;
+    width: 30px; /* 버튼 크기 */
+    height: 30px;
+    border-radius: 4px; /* 둥근 버튼 */
+}
+
 
 .modal_textarea {
     width: 100%;
@@ -55,21 +111,47 @@
     border-radius: 4px;
     resize: none;
     box-sizing: border-box;
-    margin-top: 1rem;
+    margin-top: 10px;
+    outline: none;
+}
+
+.modal_textarea_p {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.modal_input {
+    width: 100%;
+    margin-top: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    border-radius: 4px;
+    resize: none;
+    box-sizing: border-box;
+}
+
+.modal_input_text {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.modal_close_text {
+    margin-bottom: 10px;
 }
 
 .modal_form_btn {
     text-align: center;
     width: 100%;
-    margin-top: 1rem;
+    margin-top: 10px;
     border-radius: 5px;
     color: white;
-    height: 2.5rem;
-    background-color: #5a99fa;
+    padding: 1rem;
+    background-color: black;
     cursor: pointer;
     border: none;
     outline: none;
-    box-shadow: 1px 4px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
 
 }
@@ -84,6 +166,57 @@
     font-size: 14px;
     color: #8f8f8f;
 }
+
+.form_textMain {
+    margin-top: 10px;
+}
+
+
+.form_star {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #ff8a00;
+}
+
+.form_starText {
+    color: black;
+    font-size: 14px;
+}
+
+
+.character_count {
+    margin-bottom: 10px;
+}
+
+.file_box {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.file_box div {
+    margin-top: 10px;
+}
+
+.file_box input {
+    width: 98%;
+    outline: none;
+    border: 1px solid #cccccc;
+}
+
+.file_box-text {
+    font-size: 14px;
+}
+
+.form_text {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.modal_p_text {
+    font-size: 14px;
+}
+
 
 ul {
     padding: 0;

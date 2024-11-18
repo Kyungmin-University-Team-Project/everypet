@@ -31,51 +31,9 @@ public class KeywordRankServiceImpl implements KeywordRankService {
 
         Set<String> keys = scanRedisKeys("search:*");
 
-        for (String key : keys) {
+        updateRanking(keys);
 
-            String keyword = redisTemplate.opsForValue().get(key);
-
-            KeywordRankDTO keywordRankDTO = findKeywordRank(keyword); // 검색어 랭킹 조회
-            if (keywordRankDTO != null) {
-                updateTotalScore(keywordRankDTO); // 검색어 랭킹 업데이트
-            } else {
-                saveKeyword(keyword); // 존재하지 않다면 검색어 랭킹 저장
-            }
-
-        }
-
-        updateRanking();
         deleteRedisKeys(keys);
-    }
-
-    @Override
-    public void updateRanking() {
-        List<KeywordRankDTO> keywordList = keywordRankMapper.findAllKeywordRank();
-
-        // 우선순위 큐를 사용해서 점수 기준으로 정렬
-        Queue<KeywordRankDTO> rankingQueue = new PriorityQueue<>(
-                Comparator.comparingDouble(KeywordRankDTO::getTotalScore).reversed()
-        );
-
-        rankingQueue.addAll(keywordList);
-
-        for (int i = 1; !rankingQueue.isEmpty(); i++) {
-            KeywordRankDTO keywordRankDTO = rankingQueue.poll();
-
-            keywordRankDTO.setRanking(i);
-
-            if (keywordRankDTO.getPreviousRank() == 0) {
-                keywordRankDTO.setPreviousRank(i);
-            }
-
-            // 이전 순위와 현재 순위의 차이를 계산
-            keywordRankDTO.setRankingGap(keywordRankDTO.getPreviousRank() - keywordRankDTO.getRanking());
-
-            keywordRankDTO.setPreviousRank(i);
-
-            keywordRankMapper.updateRanking(keywordRankDTO);
-
-        }
     }
 
     @Override
@@ -125,6 +83,54 @@ public class KeywordRankServiceImpl implements KeywordRankService {
     @Override
     public void resetWeeklyScore() {
         keywordRankMapper.resetWeeklyScore();
+    }
+
+    private void updateRanking(Set<String> keys) {
+
+        //  랭킹을 부여 받기전에 검색어의 점수를 업데이트
+        updateTotalScore(keys);
+
+        List<KeywordRankDTO> keywordList = keywordRankMapper.findAllKeywordRank();
+
+        // 우선순위 큐를 사용해서 점수 기준으로 정렬
+        Queue<KeywordRankDTO> rankingQueue = new PriorityQueue<>(
+                Comparator.comparingDouble(KeywordRankDTO::getTotalScore).reversed()
+        );
+
+        rankingQueue.addAll(keywordList);
+
+        for (int i = 1; !rankingQueue.isEmpty(); i++) {
+            KeywordRankDTO keywordRankDTO = rankingQueue.poll();
+
+            keywordRankDTO.setRanking(i);
+
+            if (keywordRankDTO.getPreviousRank() == 0) {
+                keywordRankDTO.setPreviousRank(i);
+            }
+
+            // 이전 순위와 현재 순위의 차이를 계산
+            keywordRankDTO.setRankingGap(keywordRankDTO.getPreviousRank() - keywordRankDTO.getRanking());
+
+            keywordRankDTO.setPreviousRank(i);
+
+            keywordRankMapper.updateRanking(keywordRankDTO);
+
+        }
+    }
+
+    private void updateTotalScore(Set<String> keys) {
+        for (String key : keys) {
+
+            String keyword = redisTemplate.opsForValue().get(key);
+
+            KeywordRankDTO keywordRankDTO = findKeywordRank(keyword); // 검색어 랭킹 조회
+            if (keywordRankDTO != null) {
+                updateTotalScore(keywordRankDTO); // 검색어 랭킹 업데이트
+            } else {
+                saveKeyword(keyword); // 존재하지 않다면 검색어 랭킹 저장
+            }
+
+        }
     }
 
     private void updateExistingSearchRecord(KeywordRankDTO keywordRankDTO) {

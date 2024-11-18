@@ -12,7 +12,6 @@
     background-color: white;
 
     z-index: 1000;
-
 }
 
 .modalHeader {
@@ -61,7 +60,7 @@
     border: none;
     outline: none;
     padding: 10px;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .searchButton {

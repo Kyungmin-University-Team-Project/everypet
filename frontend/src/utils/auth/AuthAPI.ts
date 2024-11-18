@@ -1,69 +1,28 @@
-import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios';
+import axios, {AxiosResponse} from 'axios';
 import {Join} from "../../typings/signup";
 import {LoginData} from "../../typings/login";
 // jwt 4.0 이상
 import {jwtDecode} from 'jwt-decode';
+import axiosInstance from "../error/axiosInstance";
+import {API_URL} from "../../api/api";
 
-export interface ResponseData {
-    access: string;
-    user: string;
-}
-
-const api = axios.create({baseURL: 'http://localhost:8080'});
-
-// 401 에러 처리
-api.interceptors.request.use(
-    function (request) {
-        return request;
-    },
-    async function (error: AxiosError) {
-        if (error.response && error.response.status === 401) {
-            try {
-                let errorConfig: AxiosRequestConfig = error.config || {}; // errorConfig가 undefined인 경우 빈 객체로 설정
-                const {data} = await axios.post('access/refresh'); // axios로 요청 보내기
-                if (data) {
-                    const {access} = data;
-                    localStorage.removeItem('access');
-                    localStorage.setItem('access', access);
-                    if (errorConfig.headers) {
-                        errorConfig.headers['Authorization'] = `Bearer ${access}`; // 새로운 토큰으로 헤더 업데이트
-                    } else {
-                        errorConfig.headers = {Authorization: `Bearer ${access}`}; // 헤더가 없는 경우 새로 생성
-                    }
-                    return axios.request(errorConfig); // 기존 요청 재시도
-                }
-            } catch (e) {
-                localStorage.removeItem('access');
-                console.log(e);
-                throw e;
-            }
-        }
-        return Promise.reject(error);
-    }
-);
 
 export const login = async ({memberId, memberPwd}: LoginData): Promise<any> => {
     const data = {memberId, memberPwd};
 
-    console.log("Payload sent to server:", JSON.stringify(data, null, 2));
     try {
-        const response: AxiosResponse<any> = await api.post('/signin', data);
-
-        console.log("Server response:", response.data);
+        const response: AxiosResponse<any> = await axiosInstance.post(`${API_URL}/signin`, data);
 
         const access = response.headers['access'];
 
         const decodedToken: any = jwtDecode(access);
         const username = decodedToken.username;
 
-        const responseData: ResponseData = {
+        return {
             access: access,
             user: username
         };
 
-        console.log('Parsed Server Response Data:', responseData);
-
-        return responseData;
     } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
             console.error("Error response data:", error.response.data);
@@ -79,7 +38,7 @@ export const login = async ({memberId, memberPwd}: LoginData): Promise<any> => {
 export const signUpLogin = async (user: Join): Promise<any> => {
     console.log("Payload sent to server:", JSON.stringify(user, null, 2));
     try {
-        const response: AxiosResponse<any> = await api.post('/member/signup', user);
+        const response: AxiosResponse<any> = await axiosInstance.post(`${API_URL}/member/signup`, user);
         console.log("Server response:", response.data);
         return response.data;
     } catch (error) {
@@ -98,7 +57,7 @@ export const sendVerificationEmail = async ({purpose, to}: { purpose: string; to
     success: boolean
 }> => {
     const data = {purpose, to};
-    const response = await api.post('/send-mail/code', data, {
+    const response = await axiosInstance.post(`${API_URL}/send-mail/code`, data, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -111,7 +70,7 @@ export const verifyCode = async ({purpose, code}: { purpose: string; code: strin
     success: boolean
 }> => {
     const data = {purpose, code};
-    const response = await api.post('/send-mail/code/verify', data, {
+    const response = await axiosInstance.post(`${API_URL}/send-mail/code/verify`, data, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -123,7 +82,7 @@ export const verifyCode = async ({purpose, code}: { purpose: string; code: strin
 
 export const passwordFind = async ({email, memberId}: { email: string, memberId: string }) => {
     const data = {email, memberId};
-    const response = await api.post('/member/password/reset', data, {
+    const response = await axiosInstance.post(`${API_URL}/member/password/reset`, data, {
         headers: {
             'Content-Type': 'application/json'
         }
