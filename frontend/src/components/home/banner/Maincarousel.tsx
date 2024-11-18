@@ -7,12 +7,12 @@ import {AiOutlineLeft, AiOutlineRight} from "../../../icons/Icons";
 
 // 배너와 상품 정보를 담아놓은 데이터셋 필요
 const bannerUrls = [
-    {url: require('../../../assets/img/banner/banner_1.jpg'), name: '배너 1'},
-    {url: require('../../../assets/img/banner/banner_2.jpg'), name: '배너 2'},
-    {url: require('../../../assets/img/banner/banner_3.jpg'), name: '배너 3'},
-    {url: require('../../../assets/img/banner/banner_4.jpg'), name: '배너 4'},
-    {url: require('../../../assets/img/banner/banner_5.jpg'), name: '배너 5'},
-    {url: require('../../../assets/img/banner/banner_6.jpg'), name: '배너 6'},
+    {url: '/img/banner/banner_1.webp', name: '배너 1'},
+    {url: '/img/banner/banner_2.webp', name: '배너 2'},
+    {url: '/img/banner/banner_3.webp', name: '배너 3'},
+    {url: '/img/banner/banner_4.webp', name: '배너 4'},
+    {url: '/img/banner/banner_5.webp', name: '배너 5'},
+    {url: '/img/banner/banner_6.webp', name: '배너 6'},
 ];
 
 const Maincarousel = () => {

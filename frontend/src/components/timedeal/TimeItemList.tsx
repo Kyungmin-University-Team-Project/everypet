@@ -7,7 +7,7 @@ const TimeItemList = () => {
         {
             productId: '1',
             timeLeft: 12540,
-            imageUrl: require('../../assets/img/product_image/dog_food_1.png'),
+            imageUrl: '/img/product_image/dog_food_1.webp',
             price: 20500,
             discount: 22,
             description: '잘먹잘싸 강아지 사료 10kg',
@@ -20,7 +20,7 @@ const TimeItemList = () => {
         {
             productId: '2',
             timeLeft: 10500,
-            imageUrl: require('../../assets/img/product_image/dog_food_2.png'),
+            imageUrl: '/img/product_image/dog_food_2.webp',
             price: 18500,
             discount: 25,
             description: '[DOG FOOD 특별할인] 강아지 사료 5kg',
@@ -33,7 +33,7 @@ const TimeItemList = () => {
         {
             productId: '3',
             timeLeft: 86400,
-            imageUrl: require('../../assets/img/product_image/dog_food_3.png'),
+            imageUrl: '/img/product_image/dog_food_3.webp',
             price: 16500,
             discount: 22,
             description: '드림독 특가! 강아지 사료 7kg',
@@ -46,7 +46,7 @@ const TimeItemList = () => {
         {
             productId: '4',
             timeLeft: 5400,
-            imageUrl: require('../../assets/img/product_image/dog_food_4.png'),
+            imageUrl: '/img/product_image/dog_food_4.webp',
             price: 14500,
             discount: 32,
             description: 'DOG FOOD 연어맛 3KG',
@@ -59,7 +59,7 @@ const TimeItemList = () => {
         {
             productId: '5',
             timeLeft: 72000,
-            imageUrl: require('../../assets/img/product_image/dog_food_6.png'),
+            imageUrl: '/img/product_image/dog_food_6.webp',
             price: 25500,
             discount: 22,
             description: '강아지 사료 8kg',
@@ -70,6 +70,7 @@ const TimeItemList = () => {
             couponDescription: '강아지 사료 중복 쿠폰',
         },
     ];
+
 
     return (
         <div className={styles.timeItemList}>
