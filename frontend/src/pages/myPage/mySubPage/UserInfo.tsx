@@ -4,7 +4,6 @@ import axiosInstance from "../../../utils/error/axiosInstance";
 import { handleAxiosError } from "../../../utils/error/errorHandler";
 import { AxiosError } from "axios";
 import LoadingSpinner from "../../../utils/reactQuery/LoadingSpinner";
-import Footer from "../../../components/common/Footer";
 import {API_URL} from "../../../api/api";
 
 interface Authority {

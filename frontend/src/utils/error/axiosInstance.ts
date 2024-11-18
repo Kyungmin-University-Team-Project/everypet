@@ -1,7 +1,9 @@
 import axios from 'axios';
 import {decryptToken, reissueToken} from '../auth/token';
+import {API_URL} from "../../api/api";
 
 const axiosInstance = axios.create({
+    baseURL: API_URL,
     headers: {
         'Content-Type': 'application/json',
     },
