@@ -14,7 +14,7 @@ const HomeItemList = ({brandName}: { brandName: string }) => {
     const pageSize = 8;
 
     const fetchItems = async (): Promise<Product[]> => {
-        const response = await axios.get(`${API_URL}/product/search/${brandName}/${orderBy}/${page}/${pageSize}`);
+        const response = await axios.get(`/${API_URL}/product/search/${brandName}/${orderBy}/${page}/${pageSize}`);
         return response.data;
     };
 
