@@ -25,7 +25,7 @@ public class ReviewController {
 
     @ApiOperation(value = "상품 리뷰 추가", notes = "새로운 상품 리뷰를 추가합니다.")
     @PostMapping("/insert")
-    public ResponseEntity<String> insertProductInfo(@RequestBody ReviewDTO.InsertProductReviewDTO insertProductReviewDTO ) throws UnsupportedEncodingException {
+    public ResponseEntity<String> insertProductInfo(@ModelAttribute ReviewDTO.InsertProductReviewDTO insertProductReviewDTO ) throws UnsupportedEncodingException {
         try {
 
             insertProductReviewDTO.setOneLineProductReviewContents(new String(insertProductReviewDTO.getOneLineProductReviewContents().getBytes("8859_1"), "UTF-8"));
