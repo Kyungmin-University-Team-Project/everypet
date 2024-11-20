@@ -41,7 +41,11 @@ public class MemberApiController {
     @PostMapping("/password/change")
     public ResponseEntity<String> changePassword(@ApiIgnore @AuthenticationPrincipal Member member, @Valid @RequestBody PasswordChageDTO passwordChage, @ApiIgnore HttpServletRequest request) {
 
-        memberService.changePassword(member, passwordChage, request);
+        try {
+            memberService.changePassword(member, passwordChage, request);
+        } catch (IllegalArgumentException e) {
+            ResponseEntity.status(401).body("비밀번호가 일치하지 않습니다.");
+        }
 
         return ResponseEntity.ok("password change success");
     }
