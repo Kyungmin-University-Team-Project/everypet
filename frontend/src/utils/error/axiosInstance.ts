@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {decryptToken, reissueToken} from '../auth/token';
-import {API_URL} from "../../api/api";
 
 const axiosInstance = axios.create({
     headers: {
@@ -14,7 +13,7 @@ axiosInstance.interceptors.request.use(
     async (config) => {
         let token = decryptToken();
         if (token) {
-            config.headers['every-pet-client-access'] = token;
+            config.headers['access'] = token;
         }
         return config;
     },
@@ -35,9 +34,7 @@ axiosInstance.interceptors.response.use(
             originalRequest._retry = true;
             const newToken = await reissueToken();
             if (newToken) {
-                originalRequest.headers['every-pet-client-access'] = newToken;
-                // console.log('토큰 재발급 성공:', newToken);
-                // 원래 요청을 재실행
+                originalRequest.headers['access'] = newToken;
                 return axiosInstance(originalRequest);
             }
         }

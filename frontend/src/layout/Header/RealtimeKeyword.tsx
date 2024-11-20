@@ -55,7 +55,6 @@ const RealtimeKeyword = () => {
         };
     }, [isModalOpen, handleClickOutside]);
 
-    // 실시간 검색어 모달창 열기
     const openRankModal = () => {
         setIsModalOpen(true);
     };
@@ -66,7 +65,6 @@ const RealtimeKeyword = () => {
 
     const currentRanking = rankings.find((item) => item.ranking === currentRank);
 
-    // 실시간 검색어 누르면 해당 키워드로 검색
     const searchKeyword = () => {
         if (currentRanking) {
             navigate(`/search?query=${encodeURIComponent(currentRanking.keyword)}`);
