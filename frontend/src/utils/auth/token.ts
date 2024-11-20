@@ -14,7 +14,7 @@ export const encryptToken = (token: string) => {
 
 
 export const decryptToken = (): string | null => {
-    const encryptedToken = localStorage.getItem('access');
+    const encryptedToken = localStorage.getItem('every-pet-client-access');
     if (!encryptedToken) {
         return null;
     }
@@ -29,8 +29,7 @@ export const reissueToken = async () => {
         const newToken = response.headers['access'];
         if (newToken) {
             const encryptedToken = encryptToken(newToken);
-            // console.log('토큰 암호화', encryptedToken)
-            localStorage.setItem('access', encryptedToken);
+            localStorage.setItem('every-pet-client-access', encryptedToken);
         }
         return newToken;
     } catch (error) {

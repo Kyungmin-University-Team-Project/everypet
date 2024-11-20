@@ -37,7 +37,7 @@ const Login = () => {
             }
 
             const encryptedAccess = encryptToken(response.access);
-            localStorage.setItem('access', encryptedAccess);
+            localStorage.setItem('every-pet-client-access', encryptedAccess);
             dispatch(loginState({username: response.user, accessToken: encryptedAccess}));
 
             navigate('/');

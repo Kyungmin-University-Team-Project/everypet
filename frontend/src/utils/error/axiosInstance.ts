@@ -14,7 +14,7 @@ axiosInstance.interceptors.request.use(
     async (config) => {
         let token = decryptToken();
         if (token) {
-            config.headers['access'] = token;
+            config.headers['every-pet-client-access'] = token;
         }
         return config;
     },
@@ -35,7 +35,7 @@ axiosInstance.interceptors.response.use(
             originalRequest._retry = true;
             const newToken = await reissueToken();
             if (newToken) {
-                originalRequest.headers['access'] = newToken;
+                originalRequest.headers['every-pet-client-access'] = newToken;
                 // console.log('토큰 재발급 성공:', newToken);
                 // 원래 요청을 재실행
                 return axiosInstance(originalRequest);
