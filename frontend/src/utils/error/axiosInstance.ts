@@ -1,9 +1,7 @@
 import axios from 'axios';
 import {decryptToken, reissueToken} from '../auth/token';
-import {API_URL} from "../../api/api";
 
 const axiosInstance = axios.create({
-    baseURL: API_URL,
     headers: {
         'Content-Type': 'application/json',
     },
@@ -37,8 +35,6 @@ axiosInstance.interceptors.response.use(
             const newToken = await reissueToken();
             if (newToken) {
                 originalRequest.headers['access'] = newToken;
-                // console.log('토큰 재발급 성공:', newToken);
-                // 원래 요청을 재실행
                 return axiosInstance(originalRequest);
             }
         }
