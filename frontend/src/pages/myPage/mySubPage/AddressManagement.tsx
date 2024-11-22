@@ -5,18 +5,9 @@ import axiosInstance from "../../../utils/error/axiosInstance";
 import LoadingSpinner from "../../../utils/reactQuery/LoadingSpinner";
 import DaumPostcodeEmbed from 'react-daum-postcode';
 import {CheckIcon} from "../../../icons/Icons";
+import {Address} from "../../../typings/myPage";
 
-// Address 타입 정의
-interface Address {
-    address: string;
-    addressId: number;
-    defaultYn: string;
-    detailAddress: string;
-    memberId: string;
-    phone: string;
-    receiver: string;
-    request: string;
-}
+
 
 const AddressManagement = () => {
     const [addressList, setAddressList] = useState<Address[]>([]);
