@@ -92,11 +92,6 @@
     animation: fadeIn 0.3s ease;
 }
 
-.title {
-    font-size: 24px;
-    font-weight: bold;
-}
-
 @keyframes fadeIn {
     from {
         opacity: 0;

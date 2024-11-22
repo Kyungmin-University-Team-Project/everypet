@@ -23,10 +23,14 @@ interface OrderList {
 const OrderManagement = () => {
     const [orderList, setOrderList] = React.useState<OrderList[]>([]);
     const [list, setList] = useState(1);
+
     //  pageSize 고정
+
     const PAGE_SIZE = 5;
+
     // page가 몇 번째 페이지인지
     // pageSize 한 페이지에 몇 개씩 보여줄건지
+
     useEffect(() => {
         const orderList = async (page: number) => {
             try {
@@ -35,7 +39,6 @@ const OrderManagement = () => {
                     pageSize: PAGE_SIZE,
                 })
                 setOrderList(response.data);
-                console.log(response.data, 'asdas');
             } catch (e) {
                 console.error(e);
             }
@@ -56,7 +59,7 @@ const OrderManagement = () => {
     return (
         <section className={styles.section}>
             <div className={styles.header}>
-                <h3>주문목록</h3>
+                <span className={styles.title}>주문목록</span>
                 <input placeholder="주문한 상품을 검색할 수 있어요!" className={styles.searchBox}/>
             </div>
             <div className={styles.filterContainer}>
