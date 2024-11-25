@@ -131,14 +131,14 @@ const MoreInformation = () => {
 
                                 />
                             </div>
-                            <h2></h2>
+                            <h4>{productList?.productName}</h4>
                             <div className={styles.reviews}>
                                 <span onClick={() => scrollToSection(reviewsRef)} className={styles.review_count}>
                                 리뷰 보기
                                 </span>
                                 <FaAngleRight
 
-/>
+                                />
                             </div>
                             <p className={styles.price_original}>{productList?.productPrice.toLocaleString()}원</p>
                             <p className={styles.dynamic_price}>
