@@ -15,7 +15,7 @@ public interface MsAddressMapper {
 
     Address toVo(AddressRegisterDTO dto, String memberId);
 
-    Address toVo(SignupAddressDTO dto, String memberId, String receiver, String phone, String request);
+    Address toVo(SignupAddressDTO dto, String memberId, String receiver, String phone, String request, char defaultYn);
 
     Address toVo(AddressUpdateDTO dto, String memberId);
 }
