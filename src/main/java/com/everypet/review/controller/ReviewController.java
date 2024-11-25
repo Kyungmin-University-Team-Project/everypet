@@ -38,7 +38,7 @@ public class ReviewController {
 
             log.info("{} {} 리뷰 등록 완료", memberId, insertProductReviewDTO.getProductId());
             return ResponseEntity.ok("리뷰 등록 완료");
-        }catch (RuntimeException e){
+        }catch (Exception e){
             log.error("{} {} 리뷰 등록 실패: {}", memberId, insertProductReviewDTO.getProductId()  ,e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("리뷰 등록 실패: " + e.getMessage());
         }
