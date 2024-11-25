@@ -10,5 +10,5 @@ public interface AddressService {
     List<Address> getAddressByMemberId(String memberId);
     void addressRegister(AddressRegisterDTO address, String memberId);
     void addressUpdate(AddressUpdateDTO address, String memberId);
-    void addressDelete(String addressId, String memberId);
+    void addressDelete(Long addressId, String memberId);
 }

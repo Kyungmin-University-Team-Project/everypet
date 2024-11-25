@@ -46,7 +46,7 @@ public class AddressApiController {
 
     @ApiOperation(value = "주소 삭제", notes = "회원의 주소를 삭제합니다.")
     @DeleteMapping("/delete")
-    public ResponseEntity<String> addressDelete(@RequestBody String addressId, @ApiIgnore @AuthenticationPrincipal Member member) {
+    public ResponseEntity<String> addressDelete(@RequestBody Long addressId, @ApiIgnore @AuthenticationPrincipal Member member) {
         addressService.addressDelete(addressId, member.getMemberId());
         return ResponseEntity.ok("address delete success");
     }
