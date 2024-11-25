@@ -1,16 +1,15 @@
-import React, {useState, useEffect, useRef} from 'react';
-import {useLocation} from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import Item from './Item';
 import styles from './ItemList.module.css';
 import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
-import ErrorComponent from "../../utils/reactQuery/ErrorComponent";
-import {fetchProductList} from "../../utils/product/fetchProductList";
-import {CategoryProductList, Product} from "../../typings/product";
+import { fetchProductList } from "../../utils/product/fetchProductList";
+import { CategoryProductList, Product } from "../../typings/product";
 import DropDown from "./DropDown";
 import NotFoundProduct from "../../utils/reactQuery/NotFoundProduct";
 
 const ItemList: React.FC = () => {
-    const {pathname} = useLocation();
+    const { pathname } = useLocation();
     const [orderBy, setOrderBy] = useState<string>('popularity');
     const [products, setProducts] = useState<Product[]>([]);
     const [page, setPage] = useState<number>(1);
@@ -19,11 +18,21 @@ const ItemList: React.FC = () => {
 
     const observerRef = useRef<HTMLDivElement | null>(null);
 
+    // URL 변경 시 상태 초기화
+    useEffect(() => {
+        setProducts([]);
+        setPage(1);
+        setHasMore(true);
+    }, [pathname]);
+
+
     // 카테고리 추출
-    const [productMainCategory, productSubCategory] = (() => {
+    const getCategories = () => {
         const params = pathname.split('/');
         return [params[1], params[2] || 'all'];
-    })();
+    };
+
+    const [productMainCategory, productSubCategory] = getCategories();
 
     // 드롭다운 변경 핸들러
     const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -33,14 +42,8 @@ const ItemList: React.FC = () => {
         setHasMore(true);
     };
 
-    // pathname이 변경되었을 때 상태 초기화
-    useEffect(() => {
-        setProducts([]); // 기존 데이터 초기화
-        setPage(1); // 페이지 초기화
-        setHasMore(true); // 더 불러오기 활성화
-    }, [pathname, productMainCategory, productSubCategory]);
 
-    // 데이터 fetch
+    // 데이터 fetch 함수
     const fetchItems = async (params: CategoryProductList): Promise<Product[]> => {
         return await fetchProductList(params);
     };
@@ -48,8 +51,6 @@ const ItemList: React.FC = () => {
     // 데이터 로드 useEffect
     useEffect(() => {
         const loadProducts = async () => {
-            if (isLoading || !hasMore) return;
-
             setIsLoading(true);
 
             try {
@@ -82,7 +83,7 @@ const ItemList: React.FC = () => {
                     setPage((prevPage) => prevPage + 1);
                 }
             },
-            {threshold: 1.0}
+            { threshold: 1.0 }
         );
 
         if (observerRef.current) {
@@ -95,16 +96,16 @@ const ItemList: React.FC = () => {
     }, [hasMore, isLoading]);
 
     // 로딩 상태 처리
-    if (isLoading && page === 1) return <LoadingSpinner/>;
-    if (!isLoading && products.length === 0) return <NotFoundProduct/>;
+    if (isLoading && page === 1) return <LoadingSpinner />;
+    if (!isLoading && products.length === 0) return <NotFoundProduct />;
 
     return (
         <div className={styles.wrapper}>
-            <DropDown orderBy={orderBy} handleSortChange={handleSortChange}/>
+            <DropDown orderBy={orderBy} handleSortChange={handleSortChange} />
             <div className={styles.container}>
                 {products.map((product, index) => (
                     <Item
-                        key={`${product.productId}-${index}`} // 고유한 키 생성
+                        key={`${product.productId}-${index}`}
                         productId={product.productId}
                         name={product.productName}
                         price={product.productPrice}
@@ -116,7 +117,7 @@ const ItemList: React.FC = () => {
                 ))}
                 <div ref={observerRef} className={styles.observer}></div>
             </div>
-            {isLoading && <LoadingSpinner/>}
+            {isLoading && <LoadingSpinner />}
         </div>
     );
 };
