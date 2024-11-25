@@ -29,46 +29,50 @@ public class ReviewServiceImpl implements ReviewService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void insertProductReview(String memberId, ReviewDTO.InsertProductReviewDTO dto) {
-        // 이미지 개수 제한
-        if (dto.getProductReviewImages().size() > 10) {
-            throw new RuntimeException("이미지 개수는 10개 이하로만 가능합니다.");
-        }
-
-        // 1. 리뷰 정보 삽입
-        Map<String, Object> reviewMap = new HashMap<>();
-        reviewMap.put("orderDetailId", dto.getOrderDetailId());
-        reviewMap.put("memberId", memberId);
-        reviewMap.put("productId", dto.getProductId());
-        reviewMap.put("detailedProductReviewContents", dto.getDetailedProductReviewContents());
-        reviewMap.put("oneLineProductReviewContents", dto.getOneLineProductReviewContents());
-        reviewMap.put("productRating", Integer.parseInt(dto.getProductRating()));
-
-        // 리뷰 삽입 후 reviewId 생성
-        reviewMapper.insertReview(reviewMap);
-        Long reviewId = (Long) reviewMap.get("reviewId"); // 삽입된 reviewId 가져오기
-
-        // 2. 리뷰 이미지 삽입
-        if (dto.getProductReviewImages() != null && !dto.getProductReviewImages().isEmpty()) {
-            int imageNumber = 0;
-
-            for (MultipartFile file : dto.getProductReviewImages()) {
-                imageNumber++;
-                String imageId = reviewId + "-" + imageNumber; // UUID 생성
-
-                // 클라우드에 이미지 업로드
-                googleBucketCloudService.uploadImageToCloudStorage(imageId, file);
-
-                // 리뷰 이미지 삽입
-                Map<String, Object> reviewPhotoMap = new HashMap<>();
-                reviewPhotoMap.put("reviewId", reviewId); // 삽입된 리뷰 ID
-                reviewPhotoMap.put("photoUrl", googleBucketCloudService.getGOOGLE_IMAGE_CLOUD_URL() + imageId);
-
-                reviewPhotoMapper.insertReviewPhoto(reviewPhotoMap); // 리뷰 사진 삽입
+        try {
+            // 이미지 개수 제한
+            if (dto.getProductReviewImages().size() > 10) {
+                throw new RuntimeException("이미지 개수는 10개 이하로만 가능합니다.");
             }
-        }
 
-        // 3. 주문 상세 리뷰 상태 Y로 변경
-        orderDetailMapper.updateReviewStatusToY(dto.getOrderDetailId());
+            // 1. 리뷰 정보 삽입
+            Map<String, Object> reviewMap = new HashMap<>();
+            reviewMap.put("orderDetailId", dto.getOrderDetailId());
+            reviewMap.put("memberId", memberId);
+            reviewMap.put("productId", dto.getProductId());
+            reviewMap.put("detailedProductReviewContents", dto.getDetailedProductReviewContents());
+            reviewMap.put("oneLineProductReviewContents", dto.getOneLineProductReviewContents());
+            reviewMap.put("productRating", Integer.parseInt(dto.getProductRating()));
+
+            // 리뷰 삽입 후 reviewId 생성
+            reviewMapper.insertReview(reviewMap);
+            Long reviewId = (Long) reviewMap.get("reviewId"); // 삽입된 reviewId 가져오기
+
+            // 2. 리뷰 이미지 삽입
+            if (dto.getProductReviewImages() != null && !dto.getProductReviewImages().isEmpty()) {
+                int imageNumber = 0;
+
+                for (MultipartFile file : dto.getProductReviewImages()) {
+                    imageNumber++;
+                    String imageId = reviewId + "-" + imageNumber; // UUID 생성
+
+                    // 클라우드에 이미지 업로드
+                    googleBucketCloudService.uploadImageToCloudStorage(imageId, file);
+
+                    // 리뷰 이미지 삽입
+                    Map<String, Object> reviewPhotoMap = new HashMap<>();
+                    reviewPhotoMap.put("reviewId", reviewId); // 삽입된 리뷰 ID
+                    reviewPhotoMap.put("photoUrl", googleBucketCloudService.getGOOGLE_IMAGE_CLOUD_URL() + imageId);
+
+                    reviewPhotoMapper.insertReviewPhoto(reviewPhotoMap); // 리뷰 사진 삽입
+                }
+            }
+
+            // 3. 주문 상세 리뷰 상태 Y로 변경
+            orderDetailMapper.updateReviewStatusToY(dto.getOrderDetailId());
+        }catch (Exception e){
+            throw new RuntimeException("리뷰 등록 실패: " + e.getMessage());
+        }
     }
 
     @Transactional(rollbackFor = Exception.class)
