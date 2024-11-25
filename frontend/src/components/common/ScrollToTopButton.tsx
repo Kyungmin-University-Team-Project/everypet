@@ -4,12 +4,12 @@ import useScrollPosition from "../../hooks/useScrollPosition";
 import {FaArrowUp} from "../../icons/Icons";
 
 const ScrollToTopButton: React.FC = () => {
-    const isVisible = useScrollPosition(300); // 300px 이상 스크롤 시 버튼 표시
+    const isVisible = useScrollPosition(300);
 
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
-            behavior: 'smooth'
+            behavior: 'auto'
         });
     };
 
@@ -20,7 +20,7 @@ const ScrollToTopButton: React.FC = () => {
                     onClick={scrollToTop}
                     className={`${styles.scrollButton} ${isVisible ? styles.enter : ""}`}
                 >
-                    <FaArrowUp size={15}/>
+                    <FaArrowUp size={30} className={styles.icon}/>
                 </button>
             )}
         </div>

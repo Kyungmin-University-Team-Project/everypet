@@ -18,17 +18,17 @@ const authSlice = createSlice({
             state.username = action.payload.username;
             state.accessToken = action.payload.accessToken;
             localStorage.setItem('username', action.payload.username);
-            localStorage.setItem('access', action.payload.accessToken);
+            localStorage.setItem('every-pet-client-access', action.payload.accessToken);
         },
         logoutState: (state) => {
             state.username = null;
             state.accessToken = null;
             localStorage.removeItem('username');
-            localStorage.removeItem('access');
+            localStorage.removeItem('every-pet-client-access');
         },
         setUsernameFromLocalStorageState: (state) => {
             state.username = localStorage.getItem('username');
-            state.accessToken = localStorage.getItem('access');
+            state.accessToken = localStorage.getItem('every-pet-client-access');
         },
     },
 });
