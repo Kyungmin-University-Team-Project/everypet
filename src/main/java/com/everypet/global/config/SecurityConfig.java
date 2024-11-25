@@ -132,7 +132,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                         CorsConfiguration configuration = new CorsConfiguration();
 
-                        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://everypet.netlify.app"));  // 허용할 도메인
+                        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://everypet.netlify.app", "https://everypet-admin.netlify.app"));  // 허용할 도메인
                         configuration.setAllowedMethods(Collections.singletonList("*")); // 모든 post, get, put, delete, patch 요청을 허용
                         configuration.setAllowCredentials(true);    // 내 서버에 json응답을 자바스크립가 처리할수 있게 설정
                         configuration.setAllowedHeaders(Collections.singletonList("*")); // 모든 header에 응답을 허용
