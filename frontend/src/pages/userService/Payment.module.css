@@ -79,11 +79,25 @@
 }
 
 .orderSearch__btn {
-    height: 50%;
+    height: 30px;
+
     background-color: white;
+
     border: 1px solid #b8b8b8;
+    border-radius: 5px;
+
     font-size: 16px;
     margin-left: 20px;
+
+    cursor: pointer;
+
+    transition: all 0.1s ease-in;
+}
+
+.orderSearch__btn:hover{
+    background-color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    color: white;
 }
 
 .inputForm {
@@ -307,7 +321,7 @@
 }
 
 .checkoutButton {
-    padding: 10px 20px;
+    padding: 10px;
     background-color: var(--color-primary);
     color: white;
     border: none;
@@ -318,6 +332,95 @@
     border-radius: 10px;
     font-weight: bold;
 }
+
+.modalBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+
+    width: 400px;
+    height: 500px;
+
+    overflow-y: auto;
+    position: relative;
+}
+
+.modalClose {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+
+.modalContent {
+    margin-top: 20px;
+
+    height: 90%;
+
+}
+
+.addressList {
+    list-style: none;
+
+    height: 100%;
+
+}
+
+.addressItem {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.addressItem:hover {
+    background-color: #f5f5f5;
+}
+
+.addressItem {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.addressItem:hover, .addressItem.selected {
+    background-color: #f0f8ff;
+}
+
+.modal__footer{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.confirmButton {
+    padding: 10px 20px;
+    background-color: #007bff; /* 버튼의 기본 색상 (블루) */
+    color: white; /* 텍스트 색상 */
+    border: none; /* 테두리 제거 */
+    border-radius: 4px; /* 약간 둥근 모서리 */
+    font-size: 14px; /* 텍스트 크기 */
+    font-weight: 600; /* 텍스트 두께 */
+    cursor: pointer; /* 마우스 커서 변경 */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* 호버 및 클릭 효과 부드럽게 */
+}
+
+.confirmButton:hover {
+    background-color: #0056b3; /* 호버 시 어두운 블루 색상 */
+}
+
 
 @media screen and (min-width: 768px) {
     .inner {

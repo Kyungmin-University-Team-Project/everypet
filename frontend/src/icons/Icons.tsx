@@ -79,19 +79,29 @@ export const FaShoppingCart: React.FC<IconProps> = ({size = 15, className, onCli
     </svg>
 );
 
-export const FaArrowUp: React.FC<IconProps> = ({size = 15, className, onClick}) => (
+export const FaArrowUp: React.FC<IconProps> = ({
+                                                   size = 15,
+                                                   className,
+                                                   onClick,
+                                               }) => (
     <svg
         className={className}
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 256 256"
+        viewBox="0 0 24 24"
         height={size}
         width={size}
-        fill="currentColor" // CSS의 color 속성 반영
+        fill="currentColor"
         onClick={onClick}
     >
-        <path d="M128,24l80,80H160v72H96V104H48Z"/>
+        <path
+            d="M18.2929 15.2893C18.6834 14.8988 18.6834 14.2656 18.2929 13.8751L13.4007 8.98766C12.6195 8.20726 11.3537 8.20757 10.5729 8.98835L5.68257 13.8787C5.29205 14.2692 5.29205 14.9024 5.68257 15.2929C6.0731 15.6835 6.70626 15.6835 7.09679 15.2929L11.2824 11.1073C11.673 10.7168 12.3061 10.7168 12.6966 11.1073L16.8787 15.2893C17.2692 15.6798 17.9024 15.6798 18.2929 15.2893Z"
+            stroke="currentColor"
+            strokeWidth="2" // 두께 강조
+            fill="currentColor"
+        />
     </svg>
 );
+
 
 export const VscSearchStop: React.FC<IconProps> = ({size = 15, className, onClick}) => (
     <svg
@@ -446,7 +456,7 @@ export const FaPlus: React.FC<IconProps> = ({size = 15, className, onClick}) => 
     </svg>
 );
 
-export const DeleteIcon: React.FC<IconProps> = ({ size = 15, className, onClick }) => (
+export const DeleteIcon: React.FC<IconProps> = ({size = 15, className, onClick}) => (
     <svg
         className={className}
         width={size}
@@ -503,4 +513,40 @@ export const IoIosAdd: React.FC<IconProps> = ({size = 15, className, onClick}) =
     </svg>
 );
 
+export const CheckIcon: React.FC<IconProps> = ({ size = 15, className, onClick}) => (
+    <svg
+        className={className}
+        width={size}
+        height={size}
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        onClick={onClick}
+    >
+        <path d="M4 12.6111L8.92308 17.5L20 6.5" />
+    </svg>
+);
+
+export const CloseIcon: React.FC<IconProps> = ({ size = 15, className, onClick }) => (
+    <svg
+        className={className}
+        width={size}
+        height={size}
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="-0.5 0 25 25"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        onClick={onClick}
+    >
+        <path d="M3 21.32L21 3.32001" />
+        <path d="M3 3.32001L21 21.32" />
+    </svg>
+);
 

@@ -6,6 +6,9 @@ import axiosInstance from "../../utils/error/axiosInstance";
 import {CartItem} from "../../typings/product";
 import {formatPrice} from "../../utils/product/product";
 import PaymentSuccess from "./PaymentSuccess";
+import {Address} from "../../typings/myPage";
+import {CloseIcon} from "../../icons/Icons";
+import {API_URL} from "../../api/api";
 
 const shippingFee = 3000;
 
@@ -26,6 +29,12 @@ const Payment: React.FC = () => {
     });
     const [isPaymentSuccess, setIsPaymentSuccess] = useState(false)
 
+    const [showAddressModal, setShowAddressModal] = useState(false);
+
+    const [addresses, setAddresses] = useState<Address[]>([]); // 배송지 목록
+    const [selectedAddress, setSelectedAddress] = useState<Address | null>();
+
+
     // 결제 금액이 없다면 부적절한 경로로 들어온것으로 판단
     useEffect(() => {
         if (totalPrice === 0) {
@@ -33,19 +42,10 @@ const Payment: React.FC = () => {
         }
     }, []);
 
-
-    const handleOrderInfoChange = (field: string, value: string | boolean) => {
-        setOrderInfo(prevState => ({
-            ...prevState,
-            [field]: value,
-        }));
-    };
-
     const handlePayment = async () => {
         const orderId = crypto.randomUUID();
         const addressId = '1';
 
-        // 주문 정보를 서버에 전송하기 위한 DTO 구성
         const orderInsertDTO = {
             orderId: orderId,
             addressId: addressId,
@@ -63,7 +63,6 @@ const Payment: React.FC = () => {
         };
 
         try {
-            // 주문 정보를 서버로 전송
             const orderResponse = await axiosInstance.post('/order/insert', orderInsertDTO, {
                 headers: {
                     "Content-Type": "application/json",
@@ -71,7 +70,6 @@ const Payment: React.FC = () => {
             });
 
             if (orderResponse.status === 200) {
-                // 카카오페이 결제 요청
                 await handleKaKaoPaymentRequest(
                     selectedProducts.length > 1
                         ? `${selectedProducts[0].productName} 외 ${selectedProducts.length - 1}건`
@@ -80,7 +78,7 @@ const Payment: React.FC = () => {
                     orderId,
                 );
 
-                setIsPaymentSuccess(true)
+                setIsPaymentSuccess(true);
             } else {
                 alert('주문 정보 전송에 실패했습니다.');
             }
@@ -88,6 +86,52 @@ const Payment: React.FC = () => {
             console.error('주문 정보 전송 중 오류 발생:', error);
             alert('주문 정보 전송에 실패했습니다.');
         }
+    };
+
+    // 배송지 모달 열기
+    const openAddressModal = async () => {
+
+        try {
+            const response = await axiosInstance.post(`${API_URL}/address/list`);
+
+            console.log(response.data)
+
+            setAddresses(response.data);
+            setShowAddressModal(true);
+        } catch (error) {
+            console.error("배송지 목록을 불러오는 중 오류 발생:", error);
+        }
+    };
+
+    const closeAddressModal = () => {
+        setShowAddressModal(false);
+    };
+
+    const selectAddress = (address: Address) => {
+        setSelectedAddress(address); // 올바른 타입으로 저장
+    };
+
+    const confirmAddress = () => {
+        if (selectedAddress) {
+            setOrderInfo(prevState => ({
+                ...prevState,
+                recipient: selectedAddress.receiver,
+                address: selectedAddress.address,
+                detailedAddress: selectedAddress.detailAddress,
+                phonePrefix: selectedAddress.phone.slice(0, 3),
+                phoneNumber1: selectedAddress.phone.slice(3, 7),
+                phoneNumber2: selectedAddress.phone.slice(7, 11),
+            }));
+        }
+        closeAddressModal();
+    };
+
+
+    const handleOrderInfoChange = (field: string, value: string | boolean) => {
+        setOrderInfo(prevState => ({
+            ...prevState,
+            [field]: value,
+        }));
     };
 
     return (
@@ -107,7 +151,9 @@ const Payment: React.FC = () => {
                     <section className={styles.orderInfo}>
                         <div className={styles.orderHeader}>
                             <h2 className={styles.orderTitle}>배송정보</h2>
-                            <button className={styles.orderSearch__btn}>배송지목록</button>
+                            <button className={styles.orderSearch__btn} onClick={openAddressModal}>
+                                배송지 목록
+                            </button>
                         </div>
                         <div className={styles.inputForm}>
                             <div className={styles.inputGroup}>
@@ -117,16 +163,6 @@ const Payment: React.FC = () => {
                                     className={styles.inputField}
                                     value={orderInfo.recipient}
                                     onChange={(e) => handleOrderInfoChange('recipient', e.target.value)}
-                                />
-                            </div>
-                            <div className={styles.inputGroup__address}>
-                                <button className={styles.addressSearch__btn}>주소찾기</button>
-                                <input
-                                    type="text"
-                                    placeholder="우편번호"
-                                    className={styles.inputField}
-                                    value={orderInfo.postalCode}
-                                    onChange={(e) => handleOrderInfoChange('postalCode', e.target.value)}
                                 />
                             </div>
                             <div className={styles.inputGroup}>
@@ -261,6 +297,36 @@ const Payment: React.FC = () => {
                     </div>
                 </div>
             </div>
+
+
+            {showAddressModal && (
+                <div className={styles.modalBackground} onClick={closeAddressModal}>
+                    <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+                        <div className={styles.modalClose} onClick={closeAddressModal}>
+                            <CloseIcon size={20}/>
+                        </div>
+                        <div className={styles.modalContent}>
+                            <h3>배송지 목록</h3>
+                            <ul className={styles.addressList}>
+                                {addresses.map((address) => (
+                                    <li
+                                        key={address.addressId}
+                                        className={`${styles.addressItem} ${selectedAddress?.addressId === address.addressId ? styles.selected : ''}`}
+                                        onClick={() => selectAddress(address)}
+                                    >
+                                        {`${address.address} ${address.detailAddress} (${address.receiver})`}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <footer className={styles.modal__footer}>
+                            <button className={styles.confirmButton} onClick={confirmAddress}>
+                                확인
+                            </button>
+                        </footer>
+                    </div>
+                </div>
+            )}
 
             {
                 isPaymentSuccess && <PaymentSuccess/>

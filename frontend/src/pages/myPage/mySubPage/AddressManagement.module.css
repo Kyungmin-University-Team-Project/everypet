@@ -4,6 +4,31 @@
     gap: 20px;
     background-color: #ffffff;
 }
+.header {
+    display: flex;
+    justify-content: space-between; /* 버튼과 제목의 공간 분리 */
+    align-items: center;
+}
+
+.buttonContainer {
+    display: flex;
+    gap: 10px; /* 버튼 간 간격 */
+}
+
+.button__add{
+    background-color: var(--color-primary-light); /* 기본 색상 */
+    color: #ffffff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button__add:hover {
+    background-color: var(--color-primary);
+}
+
 
 .title {
     font-weight: bold;
@@ -37,6 +62,10 @@
     border-bottom: 1px solid #ddd;
 }
 
+.check__icon{
+    color: #29a229;
+}
+
 .label {
     font-size: 16px;
     font-weight: bold;
@@ -53,11 +82,42 @@
     display: flex;
     gap: 10px;
     justify-content: flex-end;
+;
 }
+
+.button__default {
+    background-color: #007BFF; /* 기본 버튼 색상 */
+    color: #ffffff; /* 텍스트 색상 */
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.button__default:hover {
+    background-color: #0056b3; /* 호버 시 색상 */
+}
+
+.button__default:disabled {
+    background-color: #cccccc; /* 비활성화 상태 색상 */
+    cursor: not-allowed;
+    opacity: 0.7; /* 비활성화 시 불투명도 */
+}
+
+
+
+.button__wrap{
+    display: flex;
+    gap: 8px;
+}
+
 
 .button__edit,
 .button__delete {
-    background-color: #dadada;
+    background-color: #8f8f8f;
     color: #ffffff;
     padding: 8px 16px;
     border: none;
@@ -67,9 +127,92 @@
 }
 
 .button__edit:hover {
-    background-color: #7c7c7c;
+    background-color: #3d3d3d;
 }
 
 .button__delete:hover {
     background-color: #f54f4f;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1100;
+}
+
+.modalTitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.modalContent {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modalInput {
+
+    padding: 10px 5px;
+
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.modalActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modalButton {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modalButtonClose {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.postcodeWrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 500px;
+
+    z-index: 1500;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }

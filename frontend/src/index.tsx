@@ -96,14 +96,11 @@ const container = document.getElementById('root');
 const root = createRoot(container!);
 
 root.render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <QueryClientProvider client={queryClient}>
-                <RouterProvider router={router}/>
-                <ReactQueryDevtools/>
-            </QueryClientProvider>
-        </Provider>
-    </React.StrictMode>
+    <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router}/>
+        </QueryClientProvider>
+    </Provider>
 );
 
 reportWebVitals();

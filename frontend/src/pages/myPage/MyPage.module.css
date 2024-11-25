@@ -2,7 +2,7 @@
     display: flex;
 
     margin: 0 auto;
-    padding: 40px 0 100px 0;
+    padding: 60px 0;
 }
 
 .sidebar {
@@ -24,7 +24,7 @@
 .sidebar__item {
     padding: 10px 0;
     cursor: pointer;
-    transition: all 0.3s ease, color 0.3s ease;
+    transition: all 0.1s ease, color 0.1s ease;
 }
 
 
@@ -32,7 +32,7 @@
     display: flex;
     text-decoration: none;
     color: inherit;
-    transition: all 0.3s ease, color 0.3s ease;
+    transition: all 0.1s ease, color 0.1s ease;
 }
 
 .sidebar__item a:hover,
