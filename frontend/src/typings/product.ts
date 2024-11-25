@@ -23,7 +23,7 @@ export interface CategoryProductList {
     productSubCategory: string,
     orderBy: string,
     page: number,
-    pageSize: 10
+    pageSize: 16
 }
 
 export interface DetailedCategoryList {
