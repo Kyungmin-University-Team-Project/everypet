@@ -33,6 +33,8 @@ const AddressManagement = () => {
                 setLoading(true);
                 const response = await axiosInstance.post(`${API_URL}/address/list`);
                 setAddressList(response.data);
+                console.log(response.data)
+
                 setLoading(false);
             } catch (err) {
                 console.error(err);
@@ -95,6 +97,7 @@ const AddressManagement = () => {
     // 주소 삭제 처리
     const handleDeleteAddress = async (addressId: number) => {
         try {
+            console.log(addressId)
             setLoading(true); // 로딩 상태 활성화
             await axiosInstance.delete(`${API_URL}/address/delete`, {
                 data: { addressId }, // DELETE 요청의 body로 addressId 전달
