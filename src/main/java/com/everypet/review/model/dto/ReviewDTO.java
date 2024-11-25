@@ -1,8 +1,10 @@
 package com.everypet.review.model.dto;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
-import org.springframework.web.multipart.MultipartFile;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
@@ -38,9 +40,6 @@ public class ReviewDTO {
         @ApiModelProperty(example = "5", notes = "리뷰한 상품의 평점, 1~5 사이의 숫자를 넣어주세요")
         private String ProductRating; // 상품 평점
 
-        @NotBlank
-        @ApiModelProperty(example = "상품의 리뷰 이미지 삽입", notes = "리뷰한 상품의 이미지를 List로 넣어주세요, 10개 이하로 넣어주세요")
-        private List<MultipartFile> productReviewImages; // 리뷰한 상품의 이미지 파일
     }
 
     @Data
