@@ -67,7 +67,7 @@ h2 {
 }
 
 .review_count {
-    margin-left: 10px;
+    cursor: pointer;
 }
 
 .price_original {
