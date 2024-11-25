@@ -6,7 +6,7 @@ import ProductInquiry from "./ProductInquiry";
 import SellerInformation from "./SellerInformation";
 import axios from "axios";
 import {addToCart} from "../../utils/product/cart";
-import {FaAngleRight, IoIosInformationCircleOutline} from "../../icons/Icons";
+import {FaAngleRight} from "../../icons/Icons";
 import {API_URL} from "../../api/api";
 
 //  productRatingAvg 별점
@@ -37,7 +37,9 @@ interface Product {
     salesCount: number;
 }
 
-const MoreInformation: React.FC = () => {
+
+
+const MoreInformation = () => {
     const location = useLocation();
     const productData = location.state;
     const [productList, setProductList] = useState<Product | null>(null);
@@ -131,8 +133,8 @@ const MoreInformation: React.FC = () => {
                             </div>
                             <h2></h2>
                             <div className={styles.reviews}>
-                                <span className={styles.review_count}>
-                                    <strong></strong> 리뷰 보기
+                                <span onClick={() => scrollToSection(reviewsRef)} className={styles.review_count}>
+                                리뷰 보기
                                 </span>
                                 <FaAngleRight
 
@@ -152,8 +154,7 @@ const MoreInformation: React.FC = () => {
                             <p>
                                 <strong>배송정보:</strong>
                                 &nbsp;배송비 3,000원(30,000원 이상 무료배송)
-                                <br/>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;제주도/도서산간 추가배송비 별도
+                                <br/>제주도/도서산간 추가배송비 별도
                             </p>
                             <div className={styles.purchase_options}>
                                 <div className={styles.quantity_control}>
@@ -171,7 +172,7 @@ const MoreInformation: React.FC = () => {
                 <article className={styles.information}>
                     <div className={styles.information_box}>
                         <button className={styles.tab_btn} onClick={() => scrollToSection(informationRef)}>상세정보</button>
-                        <button className={styles.tab_btn} onClick={() => scrollToSection(purchaseInfoRef)}>리뷰</button>
+                        <button className={styles.tab_btn} onClick={() => scrollToSection(reviewsRef)}>리뷰</button>
                         <button className={styles.tab_btn} onClick={() => scrollToSection(reviewsRef)}>상품문의</button>
                         <button className={styles.tab_btn} onClick={() => scrollToSection(productInquiryRef)}>배송 정보
                         </button>
@@ -184,7 +185,7 @@ const MoreInformation: React.FC = () => {
                              className={styles.moreInformation_imgTab}
                         />
                     </div>
-                    <div ref={purchaseInfoRef}>
+                    <div ref={reviewsRef}>
                         <Review/>
                     </div>
                     <div ref={reviewsRef}>
