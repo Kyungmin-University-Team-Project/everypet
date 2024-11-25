@@ -14,8 +14,8 @@ public class AppConfig {
     @Bean
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
-        commonsMultipartResolver.setMaxUploadSize(100000000);
-        commonsMultipartResolver.setMaxInMemorySize(100000000);
+        commonsMultipartResolver.setMaxUploadSize(2147483648L); // 2GB
+        commonsMultipartResolver.setMaxInMemorySize(1073741824); // 1GB
         return commonsMultipartResolver;
     }
 
