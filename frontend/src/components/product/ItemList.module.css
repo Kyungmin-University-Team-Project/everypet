@@ -10,6 +10,8 @@
     justify-content: center;
 
     margin-bottom: 100px;
+
+
 }
 
 
@@ -18,6 +20,5 @@
     .container {
         grid-template-columns: repeat(4, 1fr); /* 기본적으로 2개씩 보여줌 */
         grid-gap: 40px 0;
-
     }
 }
