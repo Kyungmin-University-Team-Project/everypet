@@ -9,7 +9,7 @@ import {addToCart} from "../../utils/product/cart";
 import {FaAngleRight} from "../../icons/Icons";
 import {API_URL} from "../../api/api";
 
-//  productRatingAvg 별점
+//  productRatingAvg 별점 !
 //  productViews 클릭 수
 //  reviewCount 리뷰 수
 //  salesCount 판매량
