@@ -8,6 +8,7 @@ import {formatPrice} from "../../utils/product/product";
 import PaymentSuccess from "./PaymentSuccess";
 import {Address} from "../../typings/myPage";
 import {CloseIcon} from "../../icons/Icons";
+import {API_URL} from "../../api/api";
 
 const shippingFee = 3000;
 
@@ -90,9 +91,8 @@ const Payment: React.FC = () => {
     // 배송지 모달 열기
     const openAddressModal = async () => {
 
-        console.log("ss")
         try {
-            const response = await axiosInstance.post('/address/list');
+            const response = await axiosInstance.post(`${API_URL}/address/list`);
 
             console.log(response.data)
 
