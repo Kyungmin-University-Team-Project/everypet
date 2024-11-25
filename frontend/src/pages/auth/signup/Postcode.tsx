@@ -44,7 +44,7 @@ const Postcode: React.FC<PostcodeProps> = ({ onAddressChange }) => {
   };
 
   return (
-      <div>
+      <div onClick={toggle}>
         <label className={styles.label_container}>
           <input
               value={roadAddress || zipCode ? `${roadAddress} ${zipCode}` : ""}
@@ -55,14 +55,13 @@ const Postcode: React.FC<PostcodeProps> = ({ onAddressChange }) => {
               className={styles.input_value}
           />
         </label>
-        <br />
+        <br/>
         <Modal isOpen={isOpen} ariaHideApp={false} style={customStyles}>
           <div>
-            <DaumPostcode onComplete={completeHandler} />
-            <button onClick={toggle}>닫기</button>
+            <DaumPostcode onComplete={completeHandler}/>
           </div>
         </Modal>
-        <br />
+        <br/>
         <label className={styles.label_container}>
           <input
               id="detailAddress"
@@ -72,9 +71,9 @@ const Postcode: React.FC<PostcodeProps> = ({ onAddressChange }) => {
               placeholder="상세주소"
               className={styles.input_value}
           />
-          <br />
+          <br/>
         </label>
-        <br />
+        <br/>
       </div>
   );
 };

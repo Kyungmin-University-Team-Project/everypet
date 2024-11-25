@@ -45,13 +45,14 @@
 .input_checkbox:checked {
     border-color: #4a8cf0;
     background-color: #4a8cf0;
+
 }
 
 .input_checkbox::before {
     content: '';
     position: absolute;
-    top: 2px;
-    left: 6px;
+    top: -1px;
+    left: 4px;
     width: 6px;
     height: 10px;
     border: solid white;
