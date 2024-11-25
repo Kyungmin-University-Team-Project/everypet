@@ -49,13 +49,13 @@ const Review = () => {
         </span>
         ));
         setStars(updatedStars);
-    }, [rating]); // This effect runs whenever the rating changes
+    }, [rating]);
 
     const handleStarClick = (index: number) => {
-        setRating(index); // Set the selected rating
+        setRating(index);
         setData((prevData) => ({
             ...prevData,
-            productRating: index.toString(), // Update the rating in the review data
+            productRating: index.toString(),
         }));
     };
 
