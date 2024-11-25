@@ -56,7 +56,7 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
                 const sort = 'createdDate,desc';
                 const url = `${API_URL}/support/seller/inquiry/list/${productId}?${page}&${size}&${sort}`;
                 const response = await axios.get(url);
-                setListType(response.data.content); // API 응답에서 항목 설정
+                setListType(response.data.content); // API 응답에서 항목 설정12
             } catch (e) {
                 console.error(e);
             }
