@@ -23,8 +23,6 @@ const HomeItemList = ({brandName}: { brandName: string }) => {
         error,
         isPending
     } = useQuery<Product[], Error>({
-        // 동일한 키로 요청시 재호출 하지 않음(캐싱값 사용)
-        // 브랜드가 변경되지 않는이상 캐싱값 사용
         queryKey: [brandName],
         queryFn: fetchItems,
     });
