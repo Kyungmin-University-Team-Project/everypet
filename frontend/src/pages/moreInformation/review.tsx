@@ -4,7 +4,8 @@ import styles from "./productInqulry.module.css";
 import { FaRegStar, FaStar } from "../../icons/Icons";
 import { useLocation } from "react-router-dom";
 import {API_URL} from "../../api/api";
-import {decryptToken} from "../../utils/auth/token";
+import {log} from "node:util";
+
 
 interface InsertReview {
     detailedProductReviewContents: string;
@@ -12,7 +13,7 @@ interface InsertReview {
     orderDetailId: number;
     productId: string;
     productRating: string;
-    productReviewImages: File | null;
+    productReviewImages: File[];
 }
 
 const Review = () => {
@@ -24,7 +25,7 @@ const Review = () => {
         orderDetailId: 1,
         productId: productData.item.productId,
         productRating: "",
-        productReviewImages: null,
+        productReviewImages: [],
     });
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const modalBackground = useRef<HTMLDivElement>(null);
@@ -48,32 +49,41 @@ const Review = () => {
         </span>
         ));
         setStars(updatedStars);
-    }, [rating]); // This effect runs whenever the rating changes
+    }, [rating]);
 
     const handleStarClick = (index: number) => {
-        setRating(index); // Set the selected rating
+        setRating(index);
         setData((prevData) => ({
             ...prevData,
-            productRating: index.toString(), // Update the rating in the review data
+            productRating: index.toString(),
         }));
     };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData();
-        Object.entries(data).forEach(([key, value]) => {
-            if (value !== null) formData.append(key, value.toString());
-        });
 
-        formData.forEach((value, key) => {
-            console.log(key, value, '12312');
-        });
+        formData.append('detailedProductReviewContents', data.detailedProductReviewContents);
+        formData.append('oneLineProductReviewContents', data.oneLineProductReviewContents);
+        formData.append('orderDetailId', data.orderDetailId.toString()); // Convert number to string
+        formData.append('productId', data.productId);
+        formData.append('productRating', data.productRating);
+
+        if (data.productReviewImages && Array.isArray(data.productReviewImages)) {
+            data.productReviewImages.forEach((file, index) => {
+                formData.append(`productReviewImages[${index}]`, file);
+            });
+        } else if (data.productReviewImages) {
+            formData.append('productReviewImages', data.productReviewImages);
+        } else {
+            console.log('No image available');
+            return;
+        }
+
         try {
-            let token = decryptToken();
-            console.log(token)
             const response = await axiosInstance.post(`${API_URL}/product-review/insert`, formData, {
-                headers: { "Content-Type": "multipart/form-data", access: token }
-                ,
+                headers: {
+                },
             });
             console.log(response.data);
         } catch (e) {
@@ -82,15 +92,24 @@ const Review = () => {
     };
 
 
+
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, type, value, files } = e.target as HTMLInputElement;
 
         if (type === "file" && files) {
             const maxSize = 5 * 1024 * 1024;
-            const isImage = files[0].type.startsWith('image/');
 
-            if (isImage && files[0].size <= maxSize) {
-                setData((prev) => ({ ...prev, [name]: files[0] }));
+
+            const validFiles = Array.from(files).filter(file => {
+                const isImage = file.type.startsWith('image/');
+                return isImage && file.size <= maxSize;
+            });
+
+            if (validFiles.length > 0) {
+                setData((prev) => ({
+                    ...prev,
+                    productReviewImages: [...prev.productReviewImages, ...validFiles] // Append new files
+                }));
             } else {
                 alert("파일은 5MB 이하의 이미지 파일이어야 합니다.");
             }
@@ -100,6 +119,7 @@ const Review = () => {
             setData((prev) => ({ ...prev, [name]: value }));
         }
     };
+
 
     return (
         <div>

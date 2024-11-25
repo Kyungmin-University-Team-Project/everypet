@@ -11,11 +11,11 @@ import org.mapstruct.factory.Mappers;
 public interface MsAddressMapper {
     MsAddressMapper INSTANCE = Mappers.getMapper(MsAddressMapper.class);
 
-    Address toVo(String addressId, String memberId);
+    Address toVo(Long addressId, String memberId);
 
     Address toVo(AddressRegisterDTO dto, String memberId);
 
-    Address toVo(SignupAddressDTO dto, String memberId, String receiver, String phone, String request);
+    Address toVo(SignupAddressDTO dto, String memberId, String receiver, String phone, String request, char defaultYn);
 
     Address toVo(AddressUpdateDTO dto, String memberId);
 }

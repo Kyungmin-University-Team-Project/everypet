@@ -35,6 +35,16 @@ public class AddressServiceImpl implements AddressService {
 
         Address addressEntity = MsAddressMapper.INSTANCE.toVo(address, memberId);
 
+        List<Address> addressList = addressMapper.selectAddressByMemberId(memberId);
+
+        // 기본 배송지가 Y인 경우, 기존 기본 배송지를 N으로 변경
+        if (address.getDefaultYn() == 'Y') {
+            for (Address a : addressList) {
+                a.setDefaultYn('N');
+                addressMapper.updateAddress(a);
+            }
+        }
+
         int rowAffected = addressMapper.insertAddress(addressEntity);
 
         if (rowAffected == 0)
@@ -65,7 +75,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public void addressDelete(String addressId, String memberId) {
+    public void addressDelete(Long addressId, String memberId) {
 
         Address address = MsAddressMapper.INSTANCE.toVo(addressId, memberId);
 
