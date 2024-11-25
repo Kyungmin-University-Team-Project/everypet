@@ -56,7 +56,7 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
                 const sort = 'createdDate,desc';
                 const url = `${API_URL}/support/seller/inquiry/list/${productId}?${page}&${size}&${sort}`;
                 const response = await axios.get(url);
-                setListType(response.data.content); // API 응답에서 항목 설정
+                setListType(response.data.content); // API 응답에서 항목 설정12
             } catch (e) {
                 console.error(e);
             }
@@ -64,7 +64,7 @@ const ProductInquiry: React.FC<ProductInquiryProps> = ({productId}) => {
         if (productId) { // productId가 유효할 때만 데이터 가져오기
             fetchList();
         }
-    }, [productId, modalOpen]); // productId 또는 currentPage가 변경될 때 데이터 가져오기
+    }, [productId, modalOpen]); // productId 또는 currentPage가 변경될 때 데이터 가져오기 111
 
     // slice할 index에 범위
     const indexOfLastItem = currentPage * itemsPerPage;

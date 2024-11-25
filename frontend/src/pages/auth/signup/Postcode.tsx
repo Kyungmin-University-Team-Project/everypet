@@ -37,31 +37,33 @@ const Postcode: React.FC<PostcodeProps> = ({ onAddressChange }) => {
   const toggle = () => {
     setIsOpen(!isOpen);
   };
-
+  // 123
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDetailAddress(e.target.value);
     onAddressChange(roadAddress, e.target.value);
   };
 
   return (
-      <div onClick={toggle}>
-        <label className={styles.label_container}>
-          <input
-              value={roadAddress || zipCode ? `${roadAddress} ${zipCode}` : ""}
-              readOnly
-              id="address"
-              placeholder="우편번호 및 도로명 주소"
-              onClick={toggle}
-              className={styles.input_value}
-          />
-        </label>
-        <br/>
-        <Modal isOpen={isOpen} ariaHideApp={false} style={customStyles}>
-          <div>
-            <DaumPostcode onComplete={completeHandler}/>
-          </div>
-        </Modal>
-        <br/>
+      <div>
+        <div onClick={toggle}>
+          <label className={styles.label_container}>
+            <input
+                value={roadAddress || zipCode ? `${roadAddress} ${zipCode}` : ""}
+                readOnly
+                id="address"
+                placeholder="우편번호 및 도로명 주소"
+                onClick={toggle}
+                className={styles.input_value}
+            />
+          </label>
+          <br/>
+          <Modal isOpen={isOpen} ariaHideApp={false} style={customStyles}>
+            <div>
+              <DaumPostcode onComplete={completeHandler}/>
+            </div>
+          </Modal>
+          <br/>
+        </div>
         <label className={styles.label_container}>
           <input
               id="detailAddress"
