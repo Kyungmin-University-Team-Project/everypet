@@ -63,7 +63,7 @@ const Payment: React.FC = () => {
         };
 
         try {
-            const orderResponse = await axiosInstance.post('/order/insert', orderInsertDTO, {
+            const orderResponse = await axiosInstance.post(`${API_URL}/order/insert`, orderInsertDTO, {
                 headers: {
                     "Content-Type": "application/json",
                 }
