@@ -16,6 +16,11 @@
       "link": "/cat/house"
     },
     {
+      "name": "고양이 간식",
+      "tag": "snack",
+      "link": "/cat/snack"
+    },
+    {
       "name": "고양이 옷",
       "tag": "clothes",
       "link": "/cat/clothes"
