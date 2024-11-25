@@ -65,7 +65,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public void addressDelete(String addressId, String memberId) {
+    public void addressDelete(Long addressId, String memberId) {
 
         Address address = MsAddressMapper.INSTANCE.toVo(addressId, memberId);
 

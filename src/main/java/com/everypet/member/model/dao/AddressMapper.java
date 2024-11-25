@@ -12,7 +12,7 @@ public interface AddressMapper {
 
     int updateAddress(Address address);
 
-    int deleteAddress(Address address);
+    int deleteAddress(Address addressId);
 
     List<Address> selectAddressByMemberId(String memberId);
 
