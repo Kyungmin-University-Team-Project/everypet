@@ -54,7 +54,7 @@ public class MemberServiceImpl implements MemberService {
     public void register(SignupDTO signupDTO) {
 
         Member member = MsSignupMapper.INSTANCE.toVo(signupDTO);
-        Address address = MsAddressMapper.INSTANCE.toVo(signupDTO.getAddress(), member.getMemberId(), member.getName(), member.getPhone(), "문 앞");
+        Address address = MsAddressMapper.INSTANCE.toVo(signupDTO.getAddress(), member.getMemberId(), member.getName(), member.getPhone(), "문 앞", 'Y');
 
         String memberId = member.getMemberId();
         String memberPwd = member.getMemberPwd();
