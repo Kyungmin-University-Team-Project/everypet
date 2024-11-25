@@ -11,9 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Slf4j
@@ -27,19 +27,16 @@ public class ReviewController {
 
     @ApiOperation(value = "상품 리뷰 추가", notes = "새로운 상품 리뷰를 추가합니다.")
     @PostMapping("/insert")
-    public ResponseEntity<String> insertProductInfo(@ModelAttribute ReviewDTO.InsertProductReviewDTO insertProductReviewDTO ) throws UnsupportedEncodingException {
+    public ResponseEntity<String> insertProductInfo(@ModelAttribute ReviewDTO.InsertProductReviewDTO insertProductReviewDTO,
+                                                    @RequestParam("productReviewImages") List<MultipartFile> productReviewImages) {
         String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
         try {
-
-            insertProductReviewDTO.setOneLineProductReviewContents(new String(insertProductReviewDTO.getOneLineProductReviewContents().getBytes("8859_1"), "UTF-8"));
-            insertProductReviewDTO.setDetailedProductReviewContents(new String(insertProductReviewDTO.getDetailedProductReviewContents().getBytes("8859_1"), "UTF-8"));
-
-            reviewService.insertProductReview(memberId, insertProductReviewDTO);
+            reviewService.insertProductReview(memberId, insertProductReviewDTO, productReviewImages);
 
             log.info("{} {} 리뷰 등록 완료", memberId, insertProductReviewDTO.getProductId());
             return ResponseEntity.ok("리뷰 등록 완료");
         }catch (Exception e){
-            log.error("{} {} 리뷰 등록 실패: {}", memberId, insertProductReviewDTO.getProductId()  ,e.getMessage());
+            log.error("{} {} 리뷰 등록 실패", memberId, insertProductReviewDTO.getProductId(), e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("리뷰 등록 실패: " + e.getMessage());
         }
     }
