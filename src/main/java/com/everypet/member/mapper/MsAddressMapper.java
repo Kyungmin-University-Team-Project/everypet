@@ -11,7 +11,7 @@ import org.mapstruct.factory.Mappers;
 public interface MsAddressMapper {
     MsAddressMapper INSTANCE = Mappers.getMapper(MsAddressMapper.class);
 
-    Address toVo(String addressId, String memberId);
+    Address toVo(Long addressId, String memberId);
 
     Address toVo(AddressRegisterDTO dto, String memberId);
 
