@@ -1,145 +1,171 @@
-import React, {JSX, useEffect, useRef, useState} from 'react';
+import React, { JSX, useEffect, useRef, useState } from 'react';
 import axiosInstance from "../../utils/error/axiosInstance";
 import styles from "./productInqulry.module.css";
-import {FaRegStar, FaStar} from "../../icons/Icons";
+import { FaRegStar, FaStar } from "../../icons/Icons";
+import { useLocation } from "react-router-dom";
 import {API_URL} from "../../api/api";
+import {decryptToken} from "../../utils/auth/token";
 
-// 1. 리뷰 상세
-// 2. 리뷰 한줄
-// 3. 상세주문 아이디
-// 4.상품아이디
-// 5. 별점
-// 6. 리뷰 이미지
-
-interface insertReview {
-    detailedProductReviewContents: string
-    oneLineProductReviewContents: string
-    orderDetailId: string
-    productId: string
-    productRating: string
-    productReviewImages: string
+interface InsertReview {
+    detailedProductReviewContents: string;
+    oneLineProductReviewContents: string;
+    orderDetailId: number;
+    productId: string;
+    productRating: string;
+    productReviewImages: File | null;
 }
 
-
 const Review = () => {
-    const [data, setData] = useState<insertReview[]>([]);
-    const [trueAnFalse, setTrueAnFalse] = useState<boolean>(false);
+    const location = useLocation();
+    const productData = location.state;
+    const [data, setData] = useState<InsertReview>({
+        detailedProductReviewContents: "",
+        oneLineProductReviewContents: "",
+        orderDetailId: 1,
+        productId: productData.item.productId,
+        productRating: "",
+        productReviewImages: null,
+    });
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const modalBackground = useRef<HTMLDivElement>(null);
-    const [star, setStar] = useState<JSX.Element[]>([]);
+    const [stars, setStars] = useState<JSX.Element[]>([]);
     const [rating, setRating] = useState<number>(0);
-    const [text, setText] = useState("");
-    const [oneLine, setOneLine] = useState<string>("");
     const MAX_CHARS = 500;
     const ONE_MAX_CHARS = 30;
 
-    useEffect(() => {
-        const handleInsertOnClick = async () => {
-            try {
-                const response = await axiosInstance.post(`${API_URL}/product-review/insert`, data)
-                console.log(response.data);
-            } catch (e) {
-                console.log(e)
-            }
-        }
-    }, []);
-
-    const handleModal = (e: React.MouseEvent<HTMLButtonElement>) => {
-        setTrueAnFalse(prev => !prev);
-    }
+    const handleModalToggle = () => {
+        setIsModalOpen((prev) => !prev);
+    };
 
     useEffect(() => {
-        const newStars: JSX.Element[] = [];
-        for (let i = 1; i <= 5; i++) {
-            newStars.push(
-                <span
-                    key={i} // 각 별에 고유한 키를 추가합니다.
-                    onClick={() => handleOnStarClick(i)}
-                    style={{cursor: 'pointer'}}
-                >
-                    {i <= rating ? <FaStar/> : <FaRegStar key={i}/>}
-                </span>
-            );
-        }
-        setStar(newStars);
-    }, [rating]);
+        const updatedStars = Array.from({ length: 5 }, (_, i) => (
+            <span
+                key={i + 1}
+                onClick={() => handleStarClick(i + 1)}
+                style={{ cursor: 'pointer' }}
+            >
+            {i + 1 <= rating ? <FaStar className={styles.FaStar}/> : <FaRegStar className={styles.form_star}/>}
+        </span>
+        ));
+        setStars(updatedStars);
+    }, [rating]); // This effect runs whenever the rating changes
 
-    const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const value = e.target.value;
-        if (value.length <= MAX_CHARS) {
-            setText(value)
-        }
-    }
+    const handleStarClick = (index: number) => {
+        setRating(index); // Set the selected rating
+        setData((prevData) => ({
+            ...prevData,
+            productRating: index.toString(), // Update the rating in the review data
+        }));
+    };
 
-    const handleOneTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        if (value.length <= ONE_MAX_CHARS) {
-            setOneLine(value)
-        }
-    }
-
-    const handleOnStarClick = (index: number) => {
-        setRating(index)
-    }
-
-
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-    }
+        const formData = new FormData();
+        Object.entries(data).forEach(([key, value]) => {
+            if (value !== null) formData.append(key, value.toString());
+        });
 
+        formData.forEach((value, key) => {
+            console.log(key, value, '12312');
+        });
+        try {
+            let token = decryptToken();
+            console.log(token)
+            const response = await axiosInstance.post(`${API_URL}/product-review/insert`, formData, {
+                headers: { "Content-Type": "multipart/form-data", access: token }
+                ,
+            });
+            console.log(response.data);
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+
+    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, type, value, files } = e.target as HTMLInputElement;
+
+        if (type === "file" && files) {
+            const maxSize = 5 * 1024 * 1024;
+            const isImage = files[0].type.startsWith('image/');
+
+            if (isImage && files[0].size <= maxSize) {
+                setData((prev) => ({ ...prev, [name]: files[0] }));
+            } else {
+                alert("파일은 5MB 이하의 이미지 파일이어야 합니다.");
+            }
+        } else if (name === "oneLineProductReviewContents" && value.length <= ONE_MAX_CHARS) {
+            setData((prev) => ({ ...prev, [name]: value }));
+        } else if (name === "detailedProductReviewContents" && value.length <= MAX_CHARS) {
+            setData((prev) => ({ ...prev, [name]: value }));
+        }
+    };
 
     return (
         <div>
-            Review
-            {trueAnFalse && (
-                <div className={styles.modal_container} ref={modalBackground} onClick={(e) => {
-                    if (e.target === modalBackground.current) {
-                        setTrueAnFalse(false);
-                    }
-                }}>
+            {isModalOpen && (
+                <div
+                    className={styles.modal_container}
+                    ref={modalBackground}
+                    onClick={(e) => e.target === modalBackground.current && setIsModalOpen(false)}
+                >
                     <div className={styles.modal_content}>
                         <div className={styles.modal_close_btn}>
                             <div className={styles.modal_close_box}>
                                 <p>상품 품질 리뷰</p>
                             </div>
-                            <button onClick={() => setTrueAnFalse(false)}>
-                                X
-                            </button>
+                            <button onClick={() => setIsModalOpen(false)}>X</button>
                         </div>
                         <form onSubmit={handleSubmit}>
                             <p className={styles.form_textMain}>상세리뷰</p>
-                            <textarea className={styles.modal_textarea}
-                                      placeholder="문의하실 내용을 입력하세요"
-                                      cols={30}
-                                      rows={5}
-                                      maxLength={500}
-                                      onChange={handleTextChange}
+                            <textarea
+                                className={styles.modal_textarea}
+                                placeholder="문의하실 내용을 입력하세요"
+                                name="detailedProductReviewContents"
+                                value={data.detailedProductReviewContents}
+                                onChange={handleOnChange}
+                                cols={30}
+                                rows={5}
+                                maxLength={MAX_CHARS}
                             ></textarea>
-                            <div className={styles.character_count}>{text.length}/{MAX_CHARS}</div>
+                            <div className={styles.character_count}>
+                                {data.detailedProductReviewContents.length}/{MAX_CHARS}
+                            </div>
                             <div className={styles.form_star}>
                                 <span className={styles.form_starText}>별점: </span>
-                                {star}
+                                {stars}
                             </div>
-                            <p className={styles.form_text}>문의하신 내용에 대한 답변은 해당 상품의 상세페이지 또는 '마이페이지 문의내역'에서 확인하실 수
-                                있습니다.</p>
-                            <label htmlFor="" className={styles.file_boxText}>
-                                사진 첨부하기 :
-                                <input type="file" accept="image/*"/>
+                            <label className={styles.file_boxText}>
+                                사진 첨부하기:
+                                <input
+                                    type="file"
+                                    name="productReviewImages"
+                                    onChange={handleOnChange}
+                                    accept=".jpg, .jpeg, .png"
+                                />
                             </label>
-                            <label htmlFor="" className={styles.file_box}>
+                            <label>
                                 <p className={styles.file_box}>한줄요약</p>
-                                <input type="text" placeholder='한 줄 요약을 입력해주세요'
-                                       onChange={handleOneTextChange} maxLength={30}/>
-                                <div className={styles.character_count}>{oneLine.length}/{ONE_MAX_CHARS}</div>
+                                <input
+                                    type="text"
+                                    name="oneLineProductReviewContents"
+                                    value={data.oneLineProductReviewContents}
+                                    placeholder="한 줄 요약을 입력해주세요"
+                                    onChange={handleOnChange}
+                                    maxLength={ONE_MAX_CHARS}
+                                />
+                                <div className={styles.character_count}>
+                                    {data.oneLineProductReviewContents.length}/{ONE_MAX_CHARS}
+                                </div>
                             </label>
-
-                            <button onClick={handleModal} className={styles.modal_form_btn}>
+                            <button type="submit" className={styles.modal_form_btn}>
                                 등록하기
                             </button>
                         </form>
                     </div>
                 </div>
             )}
-            <button onClick={handleModal}>리뷰 달기</button>
+            <button onClick={handleModalToggle}>리뷰 달기</button>
         </div>
     );
 };
