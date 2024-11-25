@@ -1,24 +1,21 @@
 package com.everypet.review.model.dto;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Data
-@Builder
-@AllArgsConstructor
 public class ReviewDTO {
 
 
 
-    @Data
+    @Getter
     @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class InsertProductReviewDTO {
 
         @NotBlank
@@ -46,8 +43,10 @@ public class ReviewDTO {
         private List<MultipartFile> productReviewImages; // 리뷰한 상품의 이미지 파일
     }
 
-    @Data
+    @Getter
     @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class ProductReviewDTO {
         private Long reviewId;
         private String memberId;
