@@ -8,14 +8,14 @@ import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
 public class ReviewDTO {
 
 
-
-    @Getter
-    @Builder
-    @AllArgsConstructor
+    @Data
     @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
     public static class InsertProductReviewDTO {
 
         @NotBlank
@@ -43,10 +43,10 @@ public class ReviewDTO {
         private List<MultipartFile> productReviewImages; // 리뷰한 상품의 이미지 파일
     }
 
-    @Getter
-    @Builder
-    @AllArgsConstructor
+    @Data
     @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
     public static class ProductReviewDTO {
         private Long reviewId;
         private String memberId;
