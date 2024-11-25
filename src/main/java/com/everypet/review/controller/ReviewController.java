@@ -6,6 +6,7 @@ import com.everypet.review.service.ReviewService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +16,7 @@ import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+@Slf4j
 @Api(tags = "상품 리뷰 Api")
 @RestController
 @RequiredArgsConstructor
@@ -26,16 +28,18 @@ public class ReviewController {
     @ApiOperation(value = "상품 리뷰 추가", notes = "새로운 상품 리뷰를 추가합니다.")
     @PostMapping("/insert")
     public ResponseEntity<String> insertProductInfo(@ModelAttribute ReviewDTO.InsertProductReviewDTO insertProductReviewDTO ) throws UnsupportedEncodingException {
+        String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
         try {
 
             insertProductReviewDTO.setOneLineProductReviewContents(new String(insertProductReviewDTO.getOneLineProductReviewContents().getBytes("8859_1"), "UTF-8"));
             insertProductReviewDTO.setDetailedProductReviewContents(new String(insertProductReviewDTO.getDetailedProductReviewContents().getBytes("8859_1"), "UTF-8"));
 
-            String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
-
             reviewService.insertProductReview(memberId, insertProductReviewDTO);
+
+            log.info("{} {} 리뷰 등록 완료", memberId, insertProductReviewDTO.getProductId());
             return ResponseEntity.ok("리뷰 등록 완료");
         }catch (RuntimeException e){
+            log.error("{} {} 리뷰 등록 실패: {}", memberId, insertProductReviewDTO.getProductId()  ,e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("리뷰 등록 실패: " + e.getMessage());
         }
     }
@@ -58,10 +62,14 @@ public class ReviewController {
             @PathVariable String orderBy,
             @PathVariable int page,
             @PathVariable int pageSize){  // DTO로 요청 처리
+        try {
+            List<ReviewDTO.ProductReviewDTO> reviews = reviewService.getReviewsByProductIdWithHelpful(productId, orderBy, page, pageSize);
 
-        List<ReviewDTO.ProductReviewDTO> reviews = reviewService.getReviewsByProductIdWithHelpful(productId, orderBy, page, pageSize);
-
-        return reviews;
+            return reviews;
+        } catch (Exception e) {
+            log.error("리뷰 조회 실패: {}", e.getMessage());
+            return null;
+        }
     }
 
     @ApiOperation(value = "리뷰 단건 조회", notes = "리뷰 ID로 단건 리뷰 상세 정보를 조회합니다.")
