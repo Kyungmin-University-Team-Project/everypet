@@ -1,91 +1,124 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import Item from './Item';
 import styles from './ItemList.module.css';
 import LoadingSpinner from "../../utils/reactQuery/LoadingSpinner";
-import ErrorComponent from "../../utils/reactQuery/ErrorComponent";
 import { fetchProductList } from "../../utils/product/fetchProductList";
 import { CategoryProductList, Product } from "../../typings/product";
 import DropDown from "./DropDown";
 import NotFoundProduct from "../../utils/reactQuery/NotFoundProduct";
-import {useQuery} from "@tanstack/react-query";
 
-const ItemList = () => {
+const ItemList: React.FC = () => {
     const { pathname } = useLocation();
-    const params = pathname.split('/'); // URL에서 카테고리 추출
-    const productMainCategory = params[1]; // 첫 번째 값이 메인 카테고리
-    const productSubCategory = params[2] || 'all'; // 두 번째 값이 없으면 'all'로 설정
+    const [orderBy, setOrderBy] = useState<string>('popularity');
+    const [products, setProducts] = useState<Product[]>([]);
+    const [page, setPage] = useState<number>(1);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [hasMore, setHasMore] = useState<boolean>(true);
 
-    const [orderBy, setOrderBy] = useState<string>('popularity'); // 초기 정렬 기준을 인기순으로 설정
+    const observerRef = useRef<HTMLDivElement | null>(null);
 
-    const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setOrderBy(event.target.value); // 드롭다운에서 선택한 정렬 기준을 업데이트
+    // URL 변경 시 상태 초기화
+    useEffect(() => {
+        setProducts([]);
+        setPage(1);
+        setHasMore(true);
+    }, [pathname]);
+
+
+    // 카테고리 추출
+    const getCategories = () => {
+        const params = pathname.split('/');
+        return [params[1], params[2] || 'all'];
     };
 
-    const fetchItems = async ({
-                                  productMainCategory,
-                                  productSubCategory = 'all',
-                                  orderBy = 'popularity',
-                                  page,
-                                  pageSize = 10
-                              }: CategoryProductList): Promise<Product[]> => {
-        const params = {
-            productMainCategory: productMainCategory,
-            productSubCategory: productSubCategory,
-            orderBy: orderBy,
-            page: page,
-            pageSize: pageSize,
-        };
+    const [productMainCategory, productSubCategory] = getCategories();
+
+    // 드롭다운 변경 핸들러
+    const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setOrderBy(event.target.value);
+        setPage(1);
+        setProducts([]);
+        setHasMore(true);
+    };
+
+
+    // 데이터 fetch 함수
+    const fetchItems = async (params: CategoryProductList): Promise<Product[]> => {
         return await fetchProductList(params);
     };
 
-    const { data: product, isPending, isError, error } = useQuery<Product[]>({
-        queryKey: ['products', productMainCategory, productSubCategory, orderBy],
-        queryFn: (() =>
-            fetchItems({
-                productMainCategory: productMainCategory, // URL에서 추출한 메인 카테고리
-                productSubCategory: productSubCategory, // URL에서 추출한 서브 카테고리 (없으면 'all')
-                orderBy: orderBy, // 정렬 기준에 따라 데이터를 다시 불러옴
-                page: 1,
-                pageSize: 10
+    // 데이터 로드 useEffect
+    useEffect(() => {
+        const loadProducts = async () => {
+            setIsLoading(true);
+
+            try {
+                const newProducts = await fetchItems({
+                    productMainCategory,
+                    productSubCategory,
+                    orderBy,
+                    page,
+                    pageSize: 16,
+                });
+
+                setProducts((prev) => [...prev, ...newProducts]);
+                setHasMore(newProducts.length === 16); // 한 번 요청에 16개 데이터라면 더 로드 가능
+            } catch (error) {
+                console.error("Failed to load products:", error);
+                setHasMore(false);
+            } finally {
+                setIsLoading(false);
             }
-    ))
+        };
 
-    });
+        loadProducts();
+    }, [page, productMainCategory, productSubCategory, orderBy]);
 
-    if (isPending) {
-        return <LoadingSpinner />;
-    }
-
-    if (isError) {
-        return <ErrorComponent message={error.message} />;
-    }
-
-    if (!product || product.length === 0) {
-        return (
-            <NotFoundProduct/>
+    // 옵저버로 마지막 아이템 감지
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting && hasMore && !isLoading) {
+                    setPage((prevPage) => prevPage + 1);
+                }
+            },
+            { threshold: 1.0 }
         );
-    }
+
+        if (observerRef.current) {
+            observer.observe(observerRef.current);
+        }
+
+        return () => {
+            if (observerRef.current) observer.unobserve(observerRef.current);
+        };
+    }, [hasMore, isLoading]);
+
+    // 로딩 상태 처리
+    if (isLoading && page === 1) return <LoadingSpinner />;
+    if (!isLoading && products.length === 0) return <NotFoundProduct />;
 
     return (
-        <>
-            <DropDown orderBy={orderBy} handleSortChange={handleSortChange}/>
-
+        <div className={styles.wrapper}>
+            <DropDown orderBy={orderBy} handleSortChange={handleSortChange} />
             <div className={styles.container}>
-                {product?.map((item) => (
+                {products.map((product, index) => (
                     <Item
-                        key={item.productId}
-                        productId={item.productId}
-                        name={item.productName}
-                        price={item.productPrice}
-                        discount={item.productDiscountRate}
-                        recommended={item.productViews}
-                        reviewCount={item.numberOfProduct}
-                        imageUrl={item.productImg}
+                        key={`${product.productId}-${index}`}
+                        productId={product.productId}
+                        name={product.productName}
+                        price={product.productPrice}
+                        discount={product.productDiscountRate}
+                        recommended={product.productViews}
+                        reviewCount={product.numberOfProduct}
+                        imageUrl={product.productImg}
                     />
                 ))}
+                <div ref={observerRef} className={styles.observer}></div>
             </div>
-        </>
+            {isLoading && <LoadingSpinner />}
+        </div>
     );
 };
 

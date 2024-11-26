@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,14 +27,16 @@ public class ReviewServiceImpl implements ReviewService {
     private final GoogleBucketCloudService googleBucketCloudService;
     private final OrderDetailMapper orderDetailMapper;
     private final ReviewHelpfulMapper reviewHelpfulMapper;
+
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void insertProductReview(String memberId, ReviewDTO.InsertProductReviewDTO dto) {
+    public void insertProductReview(String memberId, ReviewDTO.InsertProductReviewDTO dto, List<MultipartFile> productReviewImages) {
         try {
             // 이미지 개수 제한
-            if (dto.getProductReviewImages().size() > 10) {
+            if (productReviewImages == null || productReviewImages.size() > 10) {
                 throw new RuntimeException("이미지 개수는 10개 이하로만 가능합니다.");
             }
+
 
             // 1. 리뷰 정보 삽입
             Map<String, Object> reviewMap = new HashMap<>();
@@ -42,17 +45,17 @@ public class ReviewServiceImpl implements ReviewService {
             reviewMap.put("productId", dto.getProductId());
             reviewMap.put("detailedProductReviewContents", dto.getDetailedProductReviewContents());
             reviewMap.put("oneLineProductReviewContents", dto.getOneLineProductReviewContents());
-            reviewMap.put("productRating", Integer.parseInt(dto.getProductRating()));
+            reviewMap.put("productRating", dto.getProductRating() != null ? Integer.parseInt(dto.getProductRating()) : 0);
 
             // 리뷰 삽입 후 reviewId 생성
             reviewMapper.insertReview(reviewMap);
-            Long reviewId = (Long) reviewMap.get("reviewId"); // 삽입된 reviewId 가져오기
+            Long reviewId = ((BigInteger) reviewMap.get("reviewId")).longValue();// 삽입된 reviewId 가져오기
 
             // 2. 리뷰 이미지 삽입
-            if (dto.getProductReviewImages() != null && !dto.getProductReviewImages().isEmpty()) {
+            if (productReviewImages != null && !productReviewImages.isEmpty()) {
                 int imageNumber = 0;
 
-                for (MultipartFile file : dto.getProductReviewImages()) {
+                for (MultipartFile file : productReviewImages) {
                     imageNumber++;
                     String imageId = reviewId + "-" + imageNumber; // UUID 생성
 

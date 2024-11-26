@@ -31,7 +31,7 @@
     <!-- 리뷰 했음으로 변경 -->
     <update id="updateReviewStatusToY" parameterType="Long">
         UPDATE TBL_ORDER_DETAIL
-        SET REVIEW_STATUS = 'Y'
+        SET REVIEW_STATUS_YN = 'Y'
         WHERE ORDER_DETAIL_ID = #{orderDetailId}
     </update>
 

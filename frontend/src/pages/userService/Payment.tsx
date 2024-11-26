@@ -44,14 +44,12 @@ const Payment: React.FC = () => {
 
     const handlePayment = async () => {
         const orderId = crypto.randomUUID();
-        const addressId = '1';
 
         const orderInsertDTO = {
             orderId: orderId,
-            addressId: addressId,
             products: selectedProducts.map((item: CartItem) => ({
                 productId: item.productId,
-                quantity: item.cartQuantity
+                quantity: item.cartQuantity,
             })),
             delivery: shippingFee,
             postalCode: orderInfo.postalCode,
@@ -59,18 +57,14 @@ const Payment: React.FC = () => {
             addressDetail: orderInfo.detailedAddress,
             receiver: orderInfo.recipient,
             phone: `${orderInfo.phonePrefix}${orderInfo.phoneNumber1}${orderInfo.phoneNumber2}`,
-            request: orderInfo.request
+            request: orderInfo.request,
         };
 
         try {
-            const orderResponse = await axiosInstance.post(`${API_URL}/order/insert`, orderInsertDTO, {
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            });
+            const orderResponse = await axiosInstance.post(`${API_URL}/order/insert`, orderInsertDTO);
 
             if (orderResponse.status === 200) {
-                await handleKaKaoPaymentRequest(
+                const paymentResponse = await handleKaKaoPaymentRequest(
                     selectedProducts.length > 1
                         ? `${selectedProducts[0].productName} 외 ${selectedProducts.length - 1}건`
                         : selectedProducts[0]?.productName || '주문상품',
@@ -78,7 +72,14 @@ const Payment: React.FC = () => {
                     orderId,
                 );
 
-                setIsPaymentSuccess(true);
+                if (paymentResponse.status === 'success') {
+                    setIsPaymentSuccess(true);
+                    alert('결제가 성공적으로 완료되었습니다!');
+                } else if (paymentResponse.status === 'cancel') {
+                    alert('결제가 취소되었습니다.');
+                } else {
+                    alert(`결제가 실패했습니다: ${paymentResponse.message}`);
+                }
             } else {
                 alert('주문 정보 전송에 실패했습니다.');
             }
@@ -87,6 +88,7 @@ const Payment: React.FC = () => {
             alert('주문 정보 전송에 실패했습니다.');
         }
     };
+
 
     // 배송지 모달 열기
     const openAddressModal = async () => {

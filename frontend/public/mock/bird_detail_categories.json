@@ -16,11 +16,6 @@
       "link": "/bird/house"
     },
     {
-      "name": "새 미용",
-      "tag": "beauty",
-      "link": "/bird/beauty"
-    },
-    {
       "name": "새 건강",
       "tag": "health",
       "link": "/bird/health"

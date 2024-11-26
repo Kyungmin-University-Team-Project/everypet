@@ -16,16 +16,6 @@
       "link": "/rat/house"
     },
     {
-      "name": "설치류 옷",
-      "tag": "clothes",
-      "link": "/rat/clothes"
-    },
-    {
-      "name": "설치류 미용",
-      "tag": "beauty",
-      "link": "/rat/beauty"
-    },
-    {
       "name": "설치류 간식",
       "tag": "snack",
       "link": "/rat/snack"
