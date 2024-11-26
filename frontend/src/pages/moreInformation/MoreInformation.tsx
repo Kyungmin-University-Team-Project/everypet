@@ -129,7 +129,7 @@ const MoreInformation = () => {
                                     {/*<span onClick={() => scrollToSection(reviewsRef)} className={styles.review_count}>*/}
                                     {/*    리뷰 보기*/}
                                     {/*</span>*/}
-                                    <div className={styles.stars}>{renderStars()} ({productList?.reviewCount})</div>
+                                    <div className={styles.stars}>{renderStars()} ({productData.item.reviewCount})</div>
                                 </div>
                             </div>
                             <div className={styles.price__wrap}>
