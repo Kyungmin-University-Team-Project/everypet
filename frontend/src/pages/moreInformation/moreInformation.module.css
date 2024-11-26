@@ -17,13 +17,13 @@
 .moreInformation_img {
     width: 45%;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .moreInformation_imgTab {
     object-fit: cover;
     width: 100%;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 0.5rem;
 }
 
@@ -35,6 +35,7 @@
 .breadcrumb {
     display: flex;
     align-items: center;
+
     margin-bottom: 1rem;
 }
 
@@ -58,7 +59,7 @@ h2 {
 
 .reviews {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     margin-bottom: 1rem;
 }
 
@@ -66,8 +67,15 @@ h2 {
     color: #FFD700;
 }
 
+.price__wrap {
+
+    margin-bottom: 30px;
+}
+
 .review_count {
     cursor: pointer;
+
+    margin-bottom: 5px;
 }
 
 .price_original {
@@ -89,6 +97,11 @@ h2 {
 
 .discount_info_one {
     font-size: 1.5rem;
+}
+
+.product__info {
+
+    margin-bottom: 40px;
 }
 
 .currency {
