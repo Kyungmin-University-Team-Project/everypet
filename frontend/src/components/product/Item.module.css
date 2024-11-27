@@ -4,7 +4,7 @@
     align-items: center;
 
     width: 90%;
-    height: 350px;
+    min-height: 350px;
 
 
     background-color: white;
@@ -21,7 +21,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 60%;
+    min-height: 60%;
 
     border-radius: 5px;
 
@@ -169,9 +169,7 @@
     .item {
         padding: 0;
         margin: 0;
-        max-width: none;
-
-        height: 450px;
+        min-height: 450px;
     }
 
     .title {
