@@ -4,8 +4,6 @@
     align-items: center;
 
     width: 90%;
-    min-height: 350px;
-
 
     background-color: white;
     margin: auto;
@@ -21,7 +19,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 60%;
+    min-height: 300px;
 
     border-radius: 5px;
 
@@ -169,7 +167,6 @@
     .item {
         padding: 0;
         margin: 0;
-        min-height: 450px;
     }
 
     .title {
@@ -180,6 +177,7 @@
     .discount {
         font-size: 32px;
     }
+
 
     .price {
         font-size: 22px;
